@@ -55,8 +55,38 @@
         <main class="flex-grow flex flex-col md:flex-row overflow-hidden">
             <aside class="w-full md:w-1/4 bg-white border-r border-slate-200 p-4 flex flex-col overflow-y-auto">
                 <div class="mb-4">
-                    <h2 class="text-lg font-semibold mb-3 border-b pb-2">Tables in Database</h2>
-                    <ul id="tables-list" class="space-y-2 text-sm"></ul>
+                    <details>
+                        <summary>Database Schema</summary>
+                        <div class="text-xs mt-2 p-3 bg-slate-50 rounded-lg font-mono text-slate-600 space-y-3">
+                            <div>
+                                <p class="font-semibold text-slate-800">students</p>
+                                <ul class="list-disc list-inside pl-2">
+                                    <li><span class="font-semibold">student_id</span> INTEGER PRIMARY KEY</li>
+                                    <li><span class="font-semibold">class</span> TEXT</li>
+                                    <li><span class="font-semibold">no</span> INTEGER</li>
+                                    <li><span class="font-semibold">last_name</span> TEXT</li>
+                                    <li><span class="font-semibold">first_name</span> TEXT</li>
+                                    <li><span class="font-semibold">gender</span> TEXT</li>
+                                    <li><span class="font-semibold">dob</span> DATE</li>
+                                    <li><span class="font-semibold">district</span> TEXT</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800">exams</p>
+                                <ul class="list-disc list-inside pl-2">
+                                    <li><span class="font-semibold">student_id</span> INTEGER</li>
+                                    <li><span class="font-semibold">subject</span> TEXT</li>
+                                    <li><span class="font-semibold">score</span> INTEGER</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                <div class="mb-4">
+                    <details open>
+                        <summary>Tables in Database</summary>
+                        <ul id="tables-list" class="space-y-2 text-sm mt-2"></ul>
+                    </details>
                 </div>
                 <div class="flex-grow">
                     <h2 class="text-lg font-semibold mb-2 border-b pb-2">SQL Challenges</h2>
@@ -170,35 +200,6 @@
                 </div>
             </aside>
             <div class="w-full md:w-3/4 flex flex-col p-4 gap-4 bg-slate-50 overflow-y-auto">
-                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                    <details>
-                        <summary class="text-slate-700 bg-slate-100 hover:bg-slate-200">Database Schema</summary>
-                        <div class="text-xs mt-3 p-3 bg-slate-50 rounded-lg font-mono text-slate-600 space-y-3 flex gap-6">
-                            <div>
-                                <p class="font-semibold text-slate-800">students</p>
-                                <ul class="list-disc list-inside pl-2">
-                                    <li><span class="font-semibold">student_id</span> INTEGER PRIMARY KEY</li>
-                                    <li><span class="font-semibold">class</span> TEXT</li>
-                                    <li><span class="font-semibold">no</span> INTEGER</li>
-                                    <li><span class="font-semibold">last_name</span> TEXT</li>
-                                    <li><span class="font-semibold">first_name</span> TEXT</li>
-                                    <li><span class="font-semibold">gender</span> TEXT</li>
-                                    <li><span class="font-semibold">dob</span> DATE</li>
-                                    <li><span class="font-semibold">district</span> TEXT</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-slate-800">exams</p>
-                                <ul class="list-disc list-inside pl-2">
-                                    <li><span class="font-semibold">student_id</span> INTEGER</li>
-                                    <li><span class="font-semibold">subject</span> TEXT</li>
-                                    <li><span class="font-semibold">score</span> INTEGER</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </details>
-                </div>
-
                 <div class="flex flex-col bg-white p-4 rounded-xl shadow-sm border border-slate-200">
                     <label for="sql-editor" class="text-lg font-semibold mb-2 text-slate-700">SQL Command Editor</label>
                     <textarea id="sql-editor" class="sql-editor w-full h-32 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="-- Click a question from the 'SQL Challenges' list to get started!"></textarea>
@@ -487,4 +488,6 @@
     </script>
 </body>
 </html>
+
+
 
