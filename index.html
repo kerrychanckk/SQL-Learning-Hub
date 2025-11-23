@@ -1,16 +1,523 @@
-// This function processes SQL queries and registers custom date functions.
-function registerCustomDateFunctions(db) {
-    db.create_function('YEAR', function(date) {
-        return new Date(date).getFullYear();
-    });
-    db.create_function('MONTH', function(date) {
-        return new Date(date).getMonth() + 1; // Months are zero-indexed
-    });
-    db.create_function('DAY', function(date) {
-        return new Date(date).getDate();
-    });
-    // Additional custom function examples can be added here
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple SQL Sandbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .sql-editor { font-family: 'Courier New', Courier, monospace; font-size: 14px; }
+        #results-container th, #results-container td { white-space: nowrap; }
+        /* Styles for the accordion */
+        details > summary {
+            cursor: pointer;
+            padding: 0.5rem 0.75rem;
+            background-color: #f1f5f9;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        details > summary:hover {
+            background-color: #e2e8f0;
+        }
+        details[open] > summary {
+            background-color: #e2e8f0;
+        }
+        .question-list {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+        }
+        .question-list li {
+            padding: 0.3rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+        }
+        .question-list li:hover {
+            background-color: #f0f9ff;
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
 
-// Usage of the function
-registerCustomDateFunctions(yourSqlJsDatabase);
+    <!-- Main Application UI -->
+    <div id="app-container" class="h-screen flex flex-col">
+        <header class="bg-white border-b border-slate-200 p-3 flex justify-between items-center shadow-sm">
+            <h1 class="text-xl font-bold text-slate-800"><span class="text-sky-500">SQL</span> Sandbox for Students</h1>
+            <button id="reset-db-btn" class="bg-red-500 text-white font-semibold text-sm py-2 px-4 rounded-lg hover:bg-red-600 transition shadow">Reset Database</button>
+        </header>
+        
+        <main class="flex-grow flex flex-col md:flex-row overflow-hidden">
+            <aside class="w-full md:w-1/4 bg-white border-r border-slate-200 p-4 flex flex-col overflow-y-auto">
+                <div class="mb-4">
+                    <details>
+                        <summary>Database Schema</summary>
+                        <div class="text-xs mt-2 p-3 bg-slate-50 rounded-lg font-mono text-slate-600 space-y-3">
+                            <div>
+                                <p class="font-semibold text-slate-800">students</p>
+                                <ul class="list-disc list-inside pl-2">
+                                    <li><span class="font-semibold">student_id</span> INTEGER PRIMARY KEY</li>
+                                    <li><span class="font-semibold">class</span> TEXT</li>
+                                    <li><span class="font-semibold">no</span> INTEGER</li>
+                                    <li><span class="font-semibold">last_name</span> TEXT</li>
+                                    <li><span class="font-semibold">first_name</span> TEXT</li>
+                                    <li><span class="font-semibold">gender</span> TEXT</li>
+                                    <li><span class="font-semibold">dob</span> DATE</li>
+                                    <li><span class="font-semibold">district</span> TEXT</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800">exams</p>
+                                <ul class="list-disc list-inside pl-2">
+                                    <li><span class="font-semibold">student_id</span> INTEGER</li>
+                                    <li><span class="font-semibold">subject</span> TEXT</li>
+                                    <li><span class="font-semibold">score</span> INTEGER</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                <div class="mb-4">
+                    <details open>
+                        <summary>Tables in Database</summary>
+                        <ul id="tables-list" class="space-y-2 text-sm mt-2"></ul>
+                    </details>
+                </div>
+                <div class="flex-grow">
+                    <h2 class="text-lg font-semibold mb-2 border-b pb-2">SQL Challenges</h2>
+                    
+                    <!-- Level 1 -->
+                    <details id="level-1">
+                        <summary class="text-green-700 bg-green-100 hover:bg-green-200">Level 1: Beginner</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <!-- Select -->
+                            <li data-sql="-- Show all columns and all records from the 'students' table.">List all students.</li>
+                            <li data-sql="-- Show all columns and all records from the 'exams' table.">List all exams.</li>
+                            <li data-sql="-- Display only the first name, last name, and class for every student.">Show student names and class.</li>
+                            <li data-sql="-- Display only the subject and score for every exam.">Show exam subjects and scores.</li>
+                            <li data-sql="-- List all the unique districts students are from.">List all student districts.</li>
+                            <!-- Where -->
+                            <li data-sql="-- Find all students who are in class 'A'.">Find all students in class '4A'.</li>
+                            <li data-sql="-- List all exams with a score greater than 95.">Find exams with scores > 95.</li>
+                            <li data-sql="-- Find all students who are NOT in class '5D'.">Find students not in class '5D'.</li>
+                            <li data-sql="-- List all exam scores that are less than 50.">Find exams with scores < 50.</li>
+                            <li data-sql="-- List all male students ('M').">List all male students.</li>
+                            <li data-sql="-- Find all exam records for the 'Math' subject.">Find all 'Math' exams.</li>
+                            <li data-sql="-- Find the student with class number 15 in class '4C'.">Find student #15 in 4C.</li>
+                            <li data-sql="-- List all students who do not live in the 'Sha Tin' district.">Find students not from 'Sha Tin'.</li>
+                            <!-- Order By -->
+                            <li data-sql="-- List all students ordered by their last name alphabetically (A-Z).">List students by last name.</li>
+                            <li data-sql="-- Show all exam scores, from the highest to the lowest.">List scores from highest to lowest.</li>
+                            <li data-sql="-- List students from class '4A', ordered by their class number.">List '4A' students by number.</li>
+                            <li data-sql="-- Display all 'English' exam results, ordered by score from lowest to highest.">Order 'English' scores ascending.</li>
+                            <li data-sql="-- List all students ordered by their date of birth (oldest first).">Order students by birthday.</li>
+                        </ol>
+                    </details>
+
+                    <!-- Level 2 -->
+                    <details id="level-2">
+                        <summary class="text-yellow-700 bg-yellow-100 hover:bg-yellow-200">Level 2: Intermediate</summary>
+                         <ol class="question-list list-decimal list-inside">
+                            <!-- Select -->
+                            <li data-sql="-- Using a JOIN, list each student's first name, last name, the subject they took, and their score.">Show student names with their exam scores.</li>
+                            <li data-sql="-- Show the full name, class, and district for every student.">Show student name, class, and district.</li>
+                            <li data-sql="-- For every exam, show the student's class, number, subject, and score.">Show student class/no. with exam details.</li>
+                            <!-- Where with AND/OR/NOT -->
+                            <li data-sql="-- Find all students in class '4C' who are female ('F').">Find female students in '4C'.</li>
+                            <li data-sql="-- List all exams in 'Math' OR 'Physics'.">Find 'Math' or 'Physics' exams.</li>
+                            <li data-sql="-- Find all students who are NOT male.">Find all non-male students.</li>
+                            <li data-sql="-- List exam scores between 80 and 85 (inclusive).">Find scores between 80 and 85.</li>
+                            <li data-sql="-- Find all male students in class '4A' OR '4C'.">Find male students in '4A' or '4C'.</li>
+                            <li data-sql="-- List all 'English' exam scores that are below 60.">Find 'English' scores < 60.</li>
+                            <li data-sql="-- Find all students who live in 'Tuen Mun' or 'Yuen Long' district.">Find students from 'Tuen Mun' or 'Yuen Long'.</li>
+                            <li data-sql="-- List all exam records that are NOT for the 'ICT' subject.">Find all non-'ICT' exams.</li>
+                            <!-- Where ... Order By -->
+                            <li data-sql="-- Find all students in class '5D' and order them by last name alphabetically.">Order '5D' students by last name.</li>
+                            <li data-sql="-- List all 'Physics' exam scores greater than 75, ordered from highest to lowest.">Order 'Physics' scores > 75 descending.</li>
+                            <li data-sql="-- Find all female students, ordered by their date of birth (youngest first).">Order female students by birthday (desc).</li>
+                            <li data-sql="-- List scores for 'Bio' or 'Econ' that are 80 or higher, ordered by subject then by score.">Order 'Bio'/'Econ' scores >= 80.</li>
+                            <li data-sql="-- Find students not living in 'Kowloon City', ordered by district.">Order students not from 'Kowloon City'.</li>
+                            <!-- Group By -->
+                            <li data-sql="-- Count the number of students in each class.">Count students in each class.</li>
+                            <li data-sql="-- Find the average score for each subject across all classes.">Find the average score per subject.</li>
+                            <li data-sql="-- Find the highest score achieved in each subject.">Find the max score per subject.</li>
+                            <li data-sql="-- Find the lowest score achieved in each subject.">Find the min score per subject.</li>
+                            <li data-sql="-- For each class, find the average score in 'Math'.">Find the avg 'Math' score per class.</li>
+                            <!-- Group By ... Having -->
+                            <li data-sql="-- Find districts that have more than 5 students.">Districts with more than 5 students.</li>
+                            <li data-sql="-- List subjects where the average score is less than 70.">Subjects with an avg score &lt; 70.</li>
+                            <li data-sql="-- Find classes where the maximum 'English' score is less than 100.">Classes with max 'English' score &lt; 100.</li>
+                            <li data-sql="-- Find subjects where the minimum score is above 45.">Subjects with min score &gt; 45.</li>
+                            <li data-sql="-- List students who took more than 4 subjects.">Students who took &gt; 4 subjects.</li>
+                        </ol>
+                    </details>
+                    
+                    <!-- Level 3 -->
+                    <details id="level-3">
+                        <summary class="text-red-700 bg-red-100 hover:bg-red-200">Level 3: Advanced</summary>
+                         <ol class="question-list list-decimal list-inside">
+                             <!-- Select -->
+                            <li data-sql="-- For every exam, show the student's full name, class, subject, and score.">List student names for every exam record.</li>
+                            <li data-sql="-- List the full name and date of birth for all students taking the 'ICT' exam.">Find 'ICT' students' names and birthdays.</li>
+                            <li data-sql="-- Show the class, number, full name, and district for all students.">Show student details and district.</li>
+                             <!-- Where -->
+                            <li data-sql="-- Find male students from class '4A' born after June 1st, 2009.">Find '4A' males born after 2009-06-01.</li>
+                            <li data-sql="-- Find exam scores in 'Math' or 'English' that are below 50 OR above 95.">Find extreme 'Math'/'English' scores.</li>
+                            <li data-sql="-- List students whose last name is 'Lee' or 'Chan' AND live in the 'Sha Tin' district.">'Lee'/'Chan' students in 'Sha Tin'.</li>
+                            <li data-sql="-- Find students whose first name starts with 'Ka'.">Find students with first name starting 'Ka'.</li>
+                            <li data-sql="-- List all 'Physics' or 'Bio' exams where the score is NOT between 60 and 80.">'Physics'/'Bio' scores not in 60-80 range.</li>
+                            <li data-sql="-- Find students in class '4A', '4C', or '4D' using the IN operator.">Find students in 4A, 4C, or 4D.</li>
+                            <li data-sql="-- Find exam records for students whose student_id is between 2000 and 2500.">Find exams for student IDs 2000-2500.</li>
+                            <li data-sql="-- List all students who do not take the 'Econ' exam. (Hint: Use a subquery with NOT IN)">Find students who don't take 'Econ'.</li>
+                             <!-- Where ... Order By -->
+                            <li data-sql="-- List female students from '4D', ordered by date of birth (oldest first).">Order '4D' female students by birthday.</li>
+                            <li data-sql="-- Find 'Math' scores > 80 and 'English' scores > 85. Order by subject, then score descending.">Find top 'Math' & 'English' scores.</li>
+                            <li data-sql="-- List students whose last name starts with 'W', ordered by class then last name.">Order students with 'W' last names.</li>
+                            <li data-sql="-- Find students NOT in class '5D' and NOT male, ordered by class and number.">Find non-'5D' female students, ordered.</li>
+                            <li data-sql="-- List exam scores that are exactly 50, 60, 70, 80, or 90. Order by score descending.">Find specific scores, order descending.</li>
+                             <!-- Where ... Group By ... Order By -->
+                            <li data-sql="-- Find the average exam score for each subject for students in class '4A'. Order by average score descending.">Avg score per subject in '4A'.</li>
+                            <li data-sql="-- Count male and female students in each class. Order by class.">Count gender per class.</li>
+                            <li data-sql="-- Find the highest score in 'Math' for each class. Order by class.">Find max 'Math' score per class.</li>
+                            <li data-sql="-- Calculate the average score for each student in class '5D'. Order by average score descending.">Avg score per student in '5D'.</li>
+                            <li data-sql="-- Count how many students live in each district. Order by the count descending.">Count students per district.</li>
+                             <!-- High-Level Thinking with HAVING -->
+                            <li data-sql="-- Find the average score for each subject, but only show subjects with an average score > 75. Order the results.">Subjects with avg score > 75.</li>
+                            <li data-sql="-- List classes where the average 'Math' score is above 72.">Classes with avg 'Math' score > 72.</li>
+                            <li data-sql="-- List student IDs and their average scores, but only for students with an average score > 85. Order by average score.">Students with avg score > 85.</li>
+                            <li data-sql="-- Find the number of students taking each elective subject. Only show subjects taken by more than 55 students.">Electives taken by > 55 students.</li>
+                            <li data-sql="-- List districts where the average 'English' score of students from there is below 70.">Districts with low 'English' avg.</li>
+                            <li data-sql="-- List student IDs and the number of subjects they failed (score < 50). Only show students who failed at least one subject. Order by the count of failed subjects descending.">Students with failed subjects.</li>
+                            <li data-sql="-- List subjects where the difference between the MAX and MIN score is more than 60 points.">Subjects with a large score range.</li>
+                            <li data-sql="-- Find classes where the lowest 'Physics' score is higher than 50.">Classes with no failing 'Physics' scores.</li>
+                         </ol>
+                    </details>
+                </div>
+            </aside>
+            <div class="w-full md:w-3/4 flex flex-col p-4 gap-4 bg-slate-50 overflow-y-auto">
+                <div class="flex flex-col bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                    <label for="sql-editor" class="text-lg font-semibold mb-2 text-slate-700">SQL Command Editor</label>
+                    <textarea id="sql-editor" class="sql-editor w-full h-32 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="-- Click a question from the 'SQL Challenges' list to get started!"></textarea>
+                    <div class="flex items-center justify-between mt-3">
+                        <p class="text-xs text-slate-500">Tip: Use <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Ctrl+Enter</kbd> or <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Cmd+Enter</kbd> to run.</p>
+                        <div>
+                            <button id="save-db-btn" class="bg-emerald-500 text-white font-semibold py-2 px-5 rounded-lg hover:bg-emerald-600 shadow-sm">Save to Browser</button>
+                            <button id="run-sql-btn" class="bg-sky-500 text-white font-bold py-2 px-8 rounded-lg hover:bg-sky-600 shadow-sm">Run SQL</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow flex flex-col bg-white p-4 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <h2 class="text-lg font-semibold mb-2 text-slate-700">Results</h2>
+                    <div id="message-area" class="mb-2 text-sm h-5"></div>
+                    <div id="results-container" class="flex-grow overflow-auto"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // DOM Elements
+        const runSqlBtn = document.getElementById('run-sql-btn');
+        const saveDbBtn = document.getElementById('save-db-btn');
+        const resetDbBtn = document.getElementById('reset-db-btn');
+        const tablesList = document.getElementById('tables-list');
+        const sqlEditor = document.getElementById('sql-editor');
+        const messageArea = document.getElementById('message-area');
+        const resultsContainer = document.getElementById('results-container');
+        
+        // App State
+        let db;
+        let SQL;
+        const dbKey = 'sql_sandbox_local_db';
+
+        // --- Database Initialization ---
+        async function main() {
+            try {
+                SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}` });
+                loadDatabase();
+                setupQuestionListeners();
+            } catch (err) {
+                console.error("Failed to initialize SQL.js:", err);
+                displayMessage("error", "Error: Could not load database engine. Check internet and refresh.");
+            }
+        }
+
+        function registerCustomFunctions(database) {
+            // Register YEAR(date_string)
+            database.create_function("YEAR", (dateStr) => {
+                if (!dateStr) return null;
+                const d = new Date(dateStr);
+                return isNaN(d.getTime()) ? null : d.getFullYear();
+            });
+
+            // Register MONTH(date_string)
+            database.create_function("MONTH", (dateStr) => {
+                if (!dateStr) return null;
+                const d = new Date(dateStr);
+                return isNaN(d.getTime()) ? null : d.getMonth() + 1;
+            });
+
+            // Register MONTHNAME(date_string)
+            database.create_function("MONTHNAME", (dateStr) => {
+                if (!dateStr) return null;
+                const d = new Date(dateStr);
+                if (isNaN(d.getTime())) return null;
+                return d.toLocaleString('default', { month: 'long' });
+            });
+
+            // Register WEEKDAY(date_string) - Returns 0=Sunday, 1=Monday...
+            database.create_function("WEEKDAY", (dateStr) => {
+                if (!dateStr) return null;
+                const d = new Date(dateStr);
+                return isNaN(d.getTime()) ? null : d.getDay();
+            });
+        }
+
+        function loadDatabase() {
+            const savedDb = localStorage.getItem(dbKey);
+            if (savedDb) {
+                try {
+                    const dbArray = savedDb.split(',').map(Number);
+                    db = new SQL.Database(new Uint8Array(dbArray));
+                    registerCustomFunctions(db); // Register functions on load
+                    displayMessage("success", "Loaded saved database from your browser.");
+                } catch (e) {
+                    console.error("Error loading DB from localStorage:", e);
+                    localStorage.removeItem(dbKey); // Clear corrupted data
+                    createNewDatabase();
+                }
+            } else {
+                createNewDatabase();
+            }
+            updateTablesList();
+        }
+        
+        function createNewDatabase() {
+            db = new SQL.Database();
+            registerCustomFunctions(db); // Register functions on create
+            createSampleTables(db);
+            displayMessage("success", "A new database with sample tables ('students', 'exams') has been created.");
+        }
+
+        function createSampleTables(database) {
+            try {
+                // Drop old tables if they exist for a clean reset
+                database.run(`DROP TABLE IF EXISTS students;`);
+                database.run(`DROP TABLE IF EXISTS exams;`);
+
+                // Create new students table
+                database.run(`
+                    CREATE TABLE students (
+                        student_id INTEGER PRIMARY KEY,
+                        class TEXT,
+                        no INTEGER,
+                        last_name TEXT,
+                        first_name TEXT,
+                        gender TEXT,
+                        dob DATE,
+                        district TEXT
+                    );
+                `);
+
+                // Create new exams table
+                database.run(`
+                    CREATE TABLE exams (
+                        student_id INTEGER,
+                        subject TEXT,
+                        score INTEGER,
+                        FOREIGN KEY(student_id) REFERENCES students(student_id)
+                    );
+                `);
+                
+                // Data for generation
+                const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Mak', 'Yip', 'Ng', 'Lam', 'Poon', 'Tang'];
+                const maleFirstNames = ['Ka-Chun', 'Lok-Hang', 'Chi-Kin', 'Siu-Ming', 'Wai-Ho', 'Tsz-Fung', 'Man-Hin', 'Pak-Hei', 'Chun-Kit', 'Yat-Long'];
+                const femaleFirstNames = ['Wing-Yan', 'Tsz-Ching', 'Hiu-Lam', 'Ka-Man', 'Pui-Sze', 'Lok-Yee', 'Sze-Wing', 'Ka-Po', 'Mei-Ling', 'Yee-Ting'];
+                const districts = ['Central & Western', 'Wan Chai', 'Eastern', 'Southern', 'Yau Tsim Mong', 'Sham Shui Po', 'Kowloon City', 'Wong Tai Sin', 'Kwun Tong', 'Kwai Tsing', 'Tsuen Wan', 'Tuen Mun', 'Yuen Long', 'North', 'Tai Po', 'Sha Tin', 'Sai Kung', 'Islands'];
+                const classes = ['4A', '4C', '4D', '5D'];
+
+                let studentInserts = [];
+                const studentIds = [];
+                const usedStudentIds = new Set();
+
+                // Generate 120 students
+                for (const className of classes) {
+                    for (let i = 1; i <= 30; i++) {
+                        let studentId;
+                        do {
+                            studentId = Math.floor(1000 + Math.random() * 9000);
+                        } while (usedStudentIds.has(studentId));
+                        usedStudentIds.add(studentId);
+                        studentIds.push(studentId);
+                        
+                        const gender = Math.random() > 0.5 ? 'M' : 'F';
+                        const firstName = gender === 'M' ? maleFirstNames[Math.floor(Math.random() * maleFirstNames.length)] : femaleFirstNames[Math.floor(Math.random() * femaleFirstNames.length)];
+                        const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+                        const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+                        const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+                        const dob = `2009-${month}-${day}`;
+                        const district = districts[Math.floor(Math.random() * districts.length)];
+                        studentInserts.push(`(${studentId}, '${className}', ${i}, '${lastName}', '${firstName}', '${gender}', '${dob}', '${district}')`);
+                    }
+                }
+                database.run(`INSERT INTO students (student_id, class, no, last_name, first_name, gender, dob, district) VALUES ${studentInserts.join(', ')};`);
+                
+                // Generate exam results for 120 students
+                const mandatorySubjects = ['Chinese', 'English', 'Math'];
+                const electiveSubjects = ['ICT', 'Physics', 'Bio', 'Econ'];
+                let examInserts = [];
+                
+                for (const sId of studentIds) {
+                    // Mandatory subjects
+                    mandatorySubjects.forEach(subject => {
+                        const score = Math.floor(Math.random() * 61) + 40; // 40-100
+                        examInserts.push(`(${sId}, '${subject}', ${score})`);
+                    });
+
+                    // Elective subjects
+                    const numElectives = Math.random() > 0.5 ? 3 : 2;
+                    const shuffledElectives = [...electiveSubjects].sort(() => 0.5 - Math.random());
+                    const takenElectives = shuffledElectives.slice(0, numElectives);
+                    
+                    takenElectives.forEach(subject => {
+                        const score = Math.floor(Math.random() * 61) + 40; // 40-100
+                        examInserts.push(`(${sId}, '${subject}', ${score})`);
+                    });
+                }
+                database.run(`INSERT INTO exams (student_id, subject, score) VALUES ${examInserts.join(', ')};`);
+
+            } catch (err) {
+                console.error("Error creating sample tables:", err);
+                displayMessage("error", "Could not create the initial sample tables.");
+            }
+        }
+
+        function saveDatabase() {
+            if (!db) return;
+            try {
+                const data = db.export();
+                localStorage.setItem(dbKey, Array.from(data).toString());
+                displayMessage("success", "Database saved successfully to this browser.");
+            } catch (err) {
+                console.error("Error saving database:", err);
+                displayMessage("error", "Failed to save the database.");
+            }
+        }
+        
+        function resetDatabase() {
+            // No confirmation for faster classroom use
+            localStorage.removeItem(dbKey);
+            createNewDatabase();
+            updateTablesList();
+        }
+
+        // --- SQL Execution & Display ---
+        function runSql() {
+            if (!db) { displayMessage("error", "Database not loaded."); return; }
+            const sqlCode = sqlEditor.value;
+            clearResults();
+            try {
+                const statements = sqlCode.split(';').filter(s => s.trim() !== '');
+                statements.forEach(statement => {
+                     const results = db.exec(statement.trim());
+                     results.forEach((result) => displayTable(result));
+                });
+                displayMessage("success", "Query executed successfully.");
+                updateTablesList();
+            } catch (err) {
+                displayMessage("error", `Error: ${err.message}`);
+            }
+        }
+        
+        function updateTablesList() {
+             if (!db) return;
+             tablesList.innerHTML = '';
+             try {
+                const res = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';");
+                if (res.length > 0 && res[0].values.length > 0) {
+                    res[0].values.forEach(row => {
+                        const li = document.createElement('li');
+                        li.textContent = row[0];
+                        li.className = 'px-3 py-2 bg-slate-100 rounded-md cursor-pointer hover:bg-sky-100';
+                        li.onclick = () => { sqlEditor.value = `SELECT * FROM ${row[0]};`; runSql(); };
+                        tablesList.appendChild(li);
+                    });
+                } else {
+                    tablesList.innerHTML = '<li class="text-slate-500 italic">No tables found.</li>';
+                }
+             } catch (e) { console.error(e); }
+        }
+
+        function displayTable(result) {
+            if (!result || (result.values.length === 0 && result.columns.length === 0)) return;
+            const table = document.createElement('table');
+            table.className = "w-full text-sm text-left text-slate-500 border-collapse mb-4";
+            const thead = document.createElement('thead');
+            thead.className = "text-xs text-slate-700 uppercase bg-slate-100";
+            const headerRow = document.createElement('tr');
+            result.columns.forEach(colName => {
+                const th = document.createElement('th');
+                th.className = "px-4 py-3 border border-slate-200";
+                th.textContent = colName;
+                headerRow.appendChild(th);
+});
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            const tbody = document.createElement('tbody');
+            result.values.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = "bg-white border-b hover:bg-slate-50";
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.className = "px-4 py-2 border border-slate-200";
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+            resultsContainer.appendChild(table);
+        }
+
+        function displayMessage(type, text) {
+            messageArea.textContent = text;
+            messageArea.className = 'mb-2 text-sm h-5 ';
+            switch(type) {
+                case "success": messageArea.classList.add('text-green-600'); break;
+                case "error": messageArea.classList.add('text-red-600'); break;
+                case "warning": messageArea.classList.add('text-amber-600'); break;
+            }
+        }
+        function clearResults() { resultsContainer.innerHTML = ''; messageArea.innerHTML = ''; }
+
+        // --- Event Listeners ---
+        function setupQuestionListeners() {
+            document.querySelectorAll('.question-list li').forEach(item => {
+                item.addEventListener('click', event => {
+                    const sql = event.target.getAttribute('data-sql');
+                    sqlEditor.value = `${sql}\n\n`;
+                    sqlEditor.focus();
+                });
+            });
+        }
+        
+        runSqlBtn.addEventListener('click', runSql);
+        saveDbBtn.addEventListener('click', saveDatabase);
+        resetDbBtn.addEventListener('click', resetDatabase);
+        sqlEditor.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                runSql();
+            }
+        });
+
+        // Start the application
+        main();
+    </script>
+</body>
+</html>
