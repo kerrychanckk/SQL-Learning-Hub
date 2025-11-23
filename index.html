@@ -64,7 +64,7 @@
         <main class="flex-grow flex flex-col md:flex-row overflow-hidden">
             <aside class="w-full md:w-1/4 bg-white border-r border-slate-200 p-4 flex flex-col overflow-y-auto">
                 <div class="mb-4">
-                    <details>
+                    <details id="db-schema-details">
                         <summary>Database Schema</summary>
                         <div class="text-xs mt-2 p-3 bg-slate-50 rounded-lg font-mono text-slate-600 space-y-3">
                             <div>
@@ -99,7 +99,7 @@
                     </details>
                 </div>
                 <div class="mb-4">
-                    <details open>
+                    <details open id="db-tables-details">
                         <summary>Tables in Database</summary>
                         <ul id="tables-list" class="space-y-2 text-sm mt-2"></ul>
                     </details>
@@ -113,7 +113,7 @@
                     </div>
                     
                     <!-- Level 1 -->
-                    <details id="level-1">
+                    <details id="level-1" class="challenge-level">
                         <summary class="text-green-700 bg-green-100 hover:bg-green-200">Level 1: Beginner</summary>
                         <ol class="question-list list-decimal list-inside">
                             <!-- Select -->
@@ -133,7 +133,7 @@
                     </details>
 
                     <!-- Level 2 -->
-                    <details id="level-2">
+                    <details id="level-2" class="challenge-level">
                         <summary class="text-yellow-700 bg-yellow-100 hover:bg-yellow-200">Level 2: Intermediate</summary>
                          <ol class="question-list list-decimal list-inside">
                             <!-- Joins (Updated for new schema) -->
@@ -155,7 +155,7 @@
                     </details>
                     
                     <!-- Level 3 -->
-                    <details id="level-3">
+                    <details id="level-3" class="challenge-level">
                         <summary class="text-red-700 bg-red-100 hover:bg-red-200">Level 3: Advanced</summary>
                          <ol class="question-list list-decimal list-inside">
                              <!-- Advanced Joins & Filtering -->
@@ -230,6 +230,7 @@
                 SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}` });
                 loadDatabase();
                 setupQuestionListeners();
+                setupAccordionBehavior(); // <--- Initialize accordion logic
             } catch (err) {
                 console.error("Failed to initialize SQL.js:", err);
                 displayMessage("error", "Error: Could not load database engine. Check internet and refresh.");
@@ -554,11 +555,30 @@
 
         function showAnswer() {
             if (currentAnswer) {
-                sqlEditor.value = currentAnswer;
-                sqlEditor.focus();
+                hintArea.textContent = "Answer: " + currentAnswer;
+                hintArea.classList.remove('hidden');
             } else {
                 alert("Please select a challenge first!");
             }
+        }
+
+        // --- Accordion Behavior ---
+        function setupAccordionBehavior() {
+            const levels = document.querySelectorAll('.challenge-level');
+            
+            levels.forEach(level => {
+                level.addEventListener('toggle', function() {
+                    // If this level is being opened
+                    if (this.open) {
+                        // Close all other levels
+                        levels.forEach(otherLevel => {
+                            if (otherLevel !== this && otherLevel.open) {
+                                otherLevel.open = false;
+                            }
+                        });
+                    }
+                });
+            });
         }
 
         // --- Event Listeners ---
