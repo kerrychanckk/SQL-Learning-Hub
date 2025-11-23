@@ -72,10 +72,17 @@
                                 </ul>
                             </div>
                             <div>
+                                <p class="font-semibold text-slate-800">subjects</p>
+                                <ul class="list-disc list-inside pl-2">
+                                    <li><span class="font-semibold">subject_code</span> TEXT PK</li>
+                                    <li><span class="font-semibold">subject_name</span> TEXT</li>
+                                </ul>
+                            </div>
+                            <div>
                                 <p class="font-semibold text-slate-800">exams</p>
                                 <ul class="list-disc list-inside pl-2">
                                     <li><span class="font-semibold">student_id</span> INTEGER</li>
-                                    <li><span class="font-semibold">subject</span> TEXT</li>
+                                    <li><span class="font-semibold">subject_code</span> TEXT FK</li>
                                     <li><span class="font-semibold">score</span> INTEGER</li>
                                 </ul>
                             </div>
@@ -97,24 +104,16 @@
                         <ol class="question-list list-decimal list-inside">
                             <!-- Select -->
                             <li data-sql="-- Show all columns and all records from the 'students' table.">List all students.</li>
-                            <li data-sql="-- Show all columns and all records from the 'exams' table.">List all exams.</li>
+                            <li data-sql="-- Show all subjects available.">List all subjects.</li>
                             <li data-sql="-- Display only the first name, last name, and class for every student.">Show student names and class.</li>
-                            <li data-sql="-- Display only the subject and score for every exam.">Show exam subjects and scores.</li>
-                            <li data-sql="-- List all the unique districts students are from.">List all student districts.</li>
                             <!-- Where -->
-                            <li data-sql="-- Find all students who are in class 'A'.">Find all students in class '4A'.</li>
+                            <li data-sql="-- Find all students who are in class '4A'.">Find all students in class '4A'.</li>
                             <li data-sql="-- List all exams with a score greater than 95.">Find exams with scores > 95.</li>
-                            <li data-sql="-- Find all students who are NOT in class '5D'.">Find students not in class '5D'.</li>
-                            <li data-sql="-- List all exam scores that are less than 50.">Find exams with scores < 50.</li>
                             <li data-sql="-- List all male students ('M').">List all male students.</li>
-                            <li data-sql="-- Find all exam records for the 'Math' subject.">Find all 'Math' exams.</li>
                             <li data-sql="-- Find the student with class number 15 in class '4C'.">Find student #15 in 4C.</li>
-                            <li data-sql="-- List all students who do not live in the 'Sha Tin' district.">Find students not from 'Sha Tin'.</li>
                             <!-- Order By -->
                             <li data-sql="-- List all students ordered by their last name alphabetically (A-Z).">List students by last name.</li>
                             <li data-sql="-- Show all exam scores, from the highest to the lowest.">List scores from highest to lowest.</li>
-                            <li data-sql="-- List students from class '4A', ordered by their class number.">List '4A' students by number.</li>
-                            <li data-sql="-- Display all 'English' exam results, ordered by score from lowest to highest.">Order 'English' scores ascending.</li>
                             <li data-sql="-- List all students ordered by their date of birth (oldest first).">Order students by birthday.</li>
                         </ol>
                     </details>
@@ -123,37 +122,21 @@
                     <details id="level-2">
                         <summary class="text-yellow-700 bg-yellow-100 hover:bg-yellow-200">Level 2: Intermediate</summary>
                          <ol class="question-list list-decimal list-inside">
-                            <!-- Select -->
-                            <li data-sql="-- Using a JOIN, list each student's first name, last name, the subject they took, and their score.">Show student names with their exam scores.</li>
-                            <li data-sql="-- Show the full name, class, and district for every student.">Show student name, class, and district.</li>
-                            <li data-sql="-- For every exam, show the student's class, number, subject, and score.">Show student class/no. with exam details.</li>
+                            <!-- Joins (Updated for new schema) -->
+                            <li data-sql="-- JOIN students and exams to show names and scores.&#10;SELECT s.first_name, s.last_name, e.score &#10;FROM students s &#10;JOIN exams e ON s.student_id = e.student_id;">Show student scores (Basic Join).</li>
+                            <li data-sql="-- JOIN exams and subjects to show Subject Name instead of Code.&#10;SELECT sub.subject_name, e.score &#10;FROM exams e &#10;JOIN subjects sub ON e.subject_code = sub.subject_code;">Show scores with Subject Names.</li>
+                            <li data-sql="-- Triple Join: Student Name, Subject Name, and Score.&#10;SELECT s.first_name, sub.subject_name, e.score&#10;FROM students s&#10;JOIN exams e ON s.student_id = e.student_id&#10;JOIN subjects sub ON e.subject_code = sub.subject_code;">Full Report (Triple Join).</li>
+                            
                             <!-- Where with AND/OR/NOT -->
                             <li data-sql="-- Find all students in class '4C' who are female ('F').">Find female students in '4C'.</li>
-                            <li data-sql="-- List all exams in 'Math' OR 'Physics'.">Find 'Math' or 'Physics' exams.</li>
-                            <li data-sql="-- Find all students who are NOT male.">Find all non-male students.</li>
+                            <li data-sql="-- List all exams for Subject Code 'MATH' OR 'PHY'.">Find 'MATH' or 'PHY' exams.</li>
                             <li data-sql="-- List exam scores between 80 and 85 (inclusive).">Find scores between 80 and 85.</li>
                             <li data-sql="-- Find all male students in class '4A' OR '4C'.">Find male students in '4A' or '4C'.</li>
-                            <li data-sql="-- List all 'English' exam scores that are below 60.">Find 'English' scores < 60.</li>
-                            <li data-sql="-- Find all students who live in 'Tuen Mun' or 'Yuen Long' district.">Find students from 'Tuen Mun' or 'Yuen Long'.</li>
-                            <li data-sql="-- List all exam records that are NOT for the 'ICT' subject.">Find all non-'ICT' exams.</li>
-                            <!-- Where ... Order By -->
-                            <li data-sql="-- Find all students in class '5D' and order them by last name alphabetically.">Order '5D' students by last name.</li>
-                            <li data-sql="-- List all 'Physics' exam scores greater than 75, ordered from highest to lowest.">Order 'Physics' scores > 75 descending.</li>
-                            <li data-sql="-- Find all female students, ordered by their date of birth (youngest first).">Order female students by birthday (desc).</li>
-                            <li data-sql="-- List scores for 'Bio' or 'Econ' that are 80 or higher, ordered by subject then by score.">Order 'Bio'/'Econ' scores >= 80.</li>
-                            <li data-sql="-- Find students not living in 'Kowloon City', ordered by district.">Order students not from 'Kowloon City'.</li>
+                            
                             <!-- Group By -->
                             <li data-sql="-- Count the number of students in each class.">Count students in each class.</li>
-                            <li data-sql="-- Find the average score for each subject across all classes.">Find the average score per subject.</li>
-                            <li data-sql="-- Find the highest score achieved in each subject.">Find the max score per subject.</li>
-                            <li data-sql="-- Find the lowest score achieved in each subject.">Find the min score per subject.</li>
-                            <li data-sql="-- For each class, find the average score in 'Math'.">Find the avg 'Math' score per class.</li>
-                            <!-- Group By ... Having -->
-                            <li data-sql="-- Find districts that have more than 5 students.">Districts with more than 5 students.</li>
-                            <li data-sql="-- List subjects where the average score is less than 70.">Subjects with an avg score &lt; 70.</li>
-                            <li data-sql="-- Find classes where the maximum 'English' score is less than 100.">Classes with max 'English' score &lt; 100.</li>
-                            <li data-sql="-- Find subjects where the minimum score is above 45.">Subjects with min score &gt; 45.</li>
-                            <li data-sql="-- List students who took more than 4 subjects.">Students who took &gt; 4 subjects.</li>
+                            <li data-sql="-- Find the average score for each subject code.">Find the avg score per subject code.</li>
+                            <li data-sql="-- Find the highest score achieved in each subject code.">Find the max score per subject.</li>
                         </ol>
                     </details>
                     
@@ -161,40 +144,22 @@
                     <details id="level-3">
                         <summary class="text-red-700 bg-red-100 hover:bg-red-200">Level 3: Advanced</summary>
                          <ol class="question-list list-decimal list-inside">
-                             <!-- Select -->
-                            <li data-sql="-- For every exam, show the student's full name, class, subject, and score.">List student names for every exam record.</li>
-                            <li data-sql="-- List the full name and date of birth for all students taking the 'ICT' exam.">Find 'ICT' students' names and birthdays.</li>
-                            <li data-sql="-- Show the class, number, full name, and district for all students.">Show student details and district.</li>
-                             <!-- Where -->
-                            <li data-sql="-- Find male students from class '4A' born after June 1st, 2009.">Find '4A' males born after 2009-06-01.</li>
-                            <li data-sql="-- Find exam scores in 'Math' or 'English' that are below 50 OR above 95.">Find extreme 'Math'/'English' scores.</li>
+                             <!-- Advanced Joins & Filtering -->
+                            <li data-sql="-- List the full name and date of birth for all students taking the 'ICT' exam (Subject Code 'ICT').">Find 'ICT' students' details.</li>
+                            <li data-sql="-- Find male students from class '4A' born after June 1st, 2008.">Find '4A' males born after 2008-06-01.</li>
+                            <li data-sql="-- Find exam scores in 'MATH' or 'ENG' that are below 50 OR above 95.">Find extreme 'MATH'/'ENG' scores.</li>
                             <li data-sql="-- List students whose last name is 'Lee' or 'Chan' AND live in the 'Sha Tin' district.">'Lee'/'Chan' students in 'Sha Tin'.</li>
-                            <li data-sql="-- Find students whose first name starts with 'Ka'.">Find students with first name starting 'Ka'.</li>
-                            <li data-sql="-- List all 'Physics' or 'Bio' exams where the score is NOT between 60 and 80.">'Physics'/'Bio' scores not in 60-80 range.</li>
+                            
+                            <!-- Subqueries -->
                             <li data-sql="-- Find students in class '4A', '4C', or '4D' using the IN operator.">Find students in 4A, 4C, or 4D.</li>
-                            <li data-sql="-- Find exam records for students whose student_id is between 2000 and 2500.">Find exams for student IDs 2000-2500.</li>
-                            <li data-sql="-- List all students who do not take the 'Econ' exam. (Hint: Use a subquery with NOT IN)">Find students who don't take 'Econ'.</li>
-                             <!-- Where ... Order By -->
-                            <li data-sql="-- List female students from '4D', ordered by date of birth (oldest first).">Order '4D' female students by birthday.</li>
-                            <li data-sql="-- Find 'Math' scores > 80 and 'English' scores > 85. Order by subject, then score descending.">Find top 'Math' & 'English' scores.</li>
-                            <li data-sql="-- List students whose last name starts with 'W', ordered by class then last name.">Order students with 'W' last names.</li>
-                            <li data-sql="-- Find students NOT in class '5D' and NOT male, ordered by class and number.">Find non-'5D' female students, ordered.</li>
-                            <li data-sql="-- List exam scores that are exactly 50, 60, 70, 80, or 90. Order by score descending.">Find specific scores, order descending.</li>
-                             <!-- Where ... Group By ... Order By -->
-                            <li data-sql="-- Find the average exam score for each subject for students in class '4A'. Order by average score descending.">Avg score per subject in '4A'.</li>
-                            <li data-sql="-- Count male and female students in each class. Order by class.">Count gender per class.</li>
-                            <li data-sql="-- Find the highest score in 'Math' for each class. Order by class.">Find max 'Math' score per class.</li>
-                            <li data-sql="-- Calculate the average score for each student in class '5D'. Order by average score descending.">Avg score per student in '5D'.</li>
-                            <li data-sql="-- Count how many students live in each district. Order by the count descending.">Count students per district.</li>
-                             <!-- High-Level Thinking with HAVING -->
-                            <li data-sql="-- Find the average score for each subject, but only show subjects with an average score > 75. Order the results.">Subjects with avg score > 75.</li>
-                            <li data-sql="-- List classes where the average 'Math' score is above 72.">Classes with avg 'Math' score > 72.</li>
-                            <li data-sql="-- List student IDs and their average scores, but only for students with an average score > 85. Order by average score.">Students with avg score > 85.</li>
-                            <li data-sql="-- Find the number of students taking each elective subject. Only show subjects taken by more than 55 students.">Electives taken by > 55 students.</li>
-                            <li data-sql="-- List districts where the average 'English' score of students from there is below 70.">Districts with low 'English' avg.</li>
-                            <li data-sql="-- List student IDs and the number of subjects they failed (score < 50). Only show students who failed at least one subject. Order by the count of failed subjects descending.">Students with failed subjects.</li>
-                            <li data-sql="-- List subjects where the difference between the MAX and MIN score is more than 60 points.">Subjects with a large score range.</li>
-                            <li data-sql="-- Find classes where the lowest 'Physics' score is higher than 50.">Classes with no failing 'Physics' scores.</li>
+                            <li data-sql="-- List all students who do not take the 'ECON' exam. (Hint: NOT IN)">Find students who don't take 'ECON'.</li>
+                            
+                             <!-- Aggregates with Joins -->
+                            <li data-sql="-- Find the average exam score for each subject NAME (requires join). Order by average score descending.&#10;SELECT sub.subject_name, AVG(e.score) as avg_score&#10;FROM exams e&#10;JOIN subjects sub ON e.subject_code = sub.subject_code&#10;GROUP BY sub.subject_name&#10;ORDER BY avg_score DESC;">Avg score per Subject Name.</li>
+                            
+                             <!-- Having -->
+                            <li data-sql="-- List classes where the average 'MATH' score is above 72.">Classes with avg 'MATH' score > 72.</li>
+                            <li data-sql="-- List student IDs and their average scores, but only for students with an average score > 85.">Students with avg score > 85.</li>
                          </ol>
                     </details>
                 </div>
@@ -233,7 +198,7 @@
         // App State
         let db;
         let SQL;
-        const dbKey = 'sql_sandbox_local_db';
+        const dbKey = 'sql_sandbox_local_db_v2'; // Changed key to force fresh DB for new schema
 
         // --- Database Initialization ---
         async function main() {
@@ -301,7 +266,7 @@
             db = new SQL.Database();
             registerCustomFunctions(db); // Register functions on create
             createSampleTables(db);
-            displayMessage("success", "A new database with sample tables ('students', 'exams') has been created.");
+            displayMessage("success", "A new database with normalized tables ('students', 'subjects', 'exams') has been created.");
         }
 
         function createSampleTables(database) {
@@ -309,6 +274,7 @@
                 // Drop old tables if they exist for a clean reset
                 database.run(`DROP TABLE IF EXISTS students;`);
                 database.run(`DROP TABLE IF EXISTS exams;`);
+                database.run(`DROP TABLE IF EXISTS subjects;`);
 
                 // Create new students table
                 database.run(`
@@ -324,23 +290,33 @@
                     );
                 `);
 
-                // Create new exams table
+                // Create subjects table
+                database.run(`
+                    CREATE TABLE subjects (
+                        subject_code TEXT PRIMARY KEY,
+                        subject_name TEXT
+                    );
+                `);
+
+                // Create new exams table with Subject Code
                 database.run(`
                     CREATE TABLE exams (
                         student_id INTEGER,
-                        subject TEXT,
+                        subject_code TEXT,
                         score INTEGER,
-                        FOREIGN KEY(student_id) REFERENCES students(student_id)
+                        FOREIGN KEY(student_id) REFERENCES students(student_id),
+                        FOREIGN KEY(subject_code) REFERENCES subjects(subject_code)
                     );
                 `);
                 
-                // Data for generation
+                // Data Generation
                 const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Mak', 'Yip', 'Ng', 'Lam', 'Poon', 'Tang'];
                 const maleFirstNames = ['Ka-Chun', 'Lok-Hang', 'Chi-Kin', 'Siu-Ming', 'Wai-Ho', 'Tsz-Fung', 'Man-Hin', 'Pak-Hei', 'Chun-Kit', 'Yat-Long'];
                 const femaleFirstNames = ['Wing-Yan', 'Tsz-Ching', 'Hiu-Lam', 'Ka-Man', 'Pui-Sze', 'Lok-Yee', 'Sze-Wing', 'Ka-Po', 'Mei-Ling', 'Yee-Ting'];
                 const districts = ['Central & Western', 'Wan Chai', 'Eastern', 'Southern', 'Yau Tsim Mong', 'Sham Shui Po', 'Kowloon City', 'Wong Tai Sin', 'Kwun Tong', 'Kwai Tsing', 'Tsuen Wan', 'Tuen Mun', 'Yuen Long', 'North', 'Tai Po', 'Sha Tin', 'Sai Kung', 'Islands'];
                 const classes = ['4A', '4C', '4D', '5D'];
 
+                // Insert Students
                 let studentInserts = [];
                 const studentIds = [];
                 const usedStudentIds = new Set();
@@ -359,7 +335,7 @@
                         const firstName = gender === 'M' ? maleFirstNames[Math.floor(Math.random() * maleFirstNames.length)] : femaleFirstNames[Math.floor(Math.random() * femaleFirstNames.length)];
                         const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
                         
-                        // Randomly assign birth year: 2007, 2008, 2009 or 2010
+                        // Randomly assign birth year: 2007, 2008, 2009, or 2010
                         const years = [2007, 2008, 2009, 2010];
                         const year = years[Math.floor(Math.random() * years.length)];
                         
@@ -372,7 +348,21 @@
                 }
                 database.run(`INSERT INTO students (student_id, class, no, last_name, first_name, gender, dob, district) VALUES ${studentInserts.join(', ')};`);
                 
-                // Generate exam results for 120 students
+                // Insert Subjects
+                const subjectMap = {
+                    'Chinese': 'CHI',
+                    'English': 'ENG',
+                    'Math': 'MATH',
+                    'ICT': 'ICT',
+                    'Physics': 'PHY',
+                    'Bio': 'BIO',
+                    'Econ': 'ECON'
+                };
+                
+                const subjectInserts = Object.entries(subjectMap).map(([name, code]) => `('${code}', '${name}')`);
+                database.run(`INSERT INTO subjects (subject_code, subject_name) VALUES ${subjectInserts.join(', ')};`);
+
+                // Generate Exam Results
                 const mandatorySubjects = ['Chinese', 'English', 'Math'];
                 const electiveSubjects = ['ICT', 'Physics', 'Bio', 'Econ'];
                 let examInserts = [];
@@ -381,7 +371,8 @@
                     // Mandatory subjects
                     mandatorySubjects.forEach(subject => {
                         const score = Math.floor(Math.random() * 61) + 40; // 40-100
-                        examInserts.push(`(${sId}, '${subject}', ${score})`);
+                        const code = subjectMap[subject];
+                        examInserts.push(`(${sId}, '${code}', ${score})`);
                     });
 
                     // Elective subjects
@@ -391,10 +382,11 @@
                     
                     takenElectives.forEach(subject => {
                         const score = Math.floor(Math.random() * 61) + 40; // 40-100
-                        examInserts.push(`(${sId}, '${subject}', ${score})`);
+                        const code = subjectMap[subject];
+                        examInserts.push(`(${sId}, '${code}', ${score})`);
                     });
                 }
-                database.run(`INSERT INTO exams (student_id, subject, score) VALUES ${examInserts.join(', ')};`);
+                database.run(`INSERT INTO exams (student_id, subject_code, score) VALUES ${examInserts.join(', ')};`);
 
             } catch (err) {
                 console.error("Error creating sample tables:", err);
