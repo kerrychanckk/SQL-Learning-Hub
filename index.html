@@ -332,7 +332,11 @@
                         studentIds.push(studentId);
                         
                         const gender = Math.random() > 0.5 ? 'M' : 'F';
-                        const firstName = gender === 'M' ? maleFirstNames[Math.floor(Math.random() * maleFirstNames.length)] : femaleFirstNames[Math.floor(Math.random() * femaleFirstNames.length)];
+                        let firstName = gender === 'M' ? maleFirstNames[Math.floor(Math.random() * maleFirstNames.length)] : femaleFirstNames[Math.floor(Math.random() * femaleFirstNames.length)];
+                        
+                        // Replace hyphen with blank space
+                        firstName = firstName.replace(/-/g, ' ');
+
                         const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
                         
                         // Randomly assign birth year: 2007, 2008, 2009, or 2010
@@ -352,19 +356,19 @@
                 const subjectMap = {
                     'Chinese': 'CHI',
                     'English': 'ENG',
-                    'Math': 'MATH',
-                    'ICT': 'ICT',
+                    'Mathematics': 'MATH',
+                    'Information and Communication Technology': 'ICT',
                     'Physics': 'PHY',
-                    'Bio': 'BIO',
-                    'Econ': 'ECON'
+                    'Biology': 'BIO',
+                    'Economics': 'ECON'
                 };
                 
                 const subjectInserts = Object.entries(subjectMap).map(([name, code]) => `('${code}', '${name}')`);
                 database.run(`INSERT INTO subjects (subject_code, subject_name) VALUES ${subjectInserts.join(', ')};`);
 
                 // Generate Exam Results
-                const mandatorySubjects = ['Chinese', 'English', 'Math'];
-                const electiveSubjects = ['ICT', 'Physics', 'Bio', 'Econ'];
+                const mandatorySubjects = ['Chinese', 'English', 'Mathematics'];
+                const electiveSubjects = ['Information and Communication Technology', 'Physics', 'Biology', 'Economics'];
                 let examInserts = [];
                 
                 for (const sId of studentIds) {
