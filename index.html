@@ -137,9 +137,9 @@
                         <summary class="text-yellow-700 bg-yellow-100 hover:bg-yellow-200">Level 2: Intermediate</summary>
                          <ol class="question-list list-decimal list-inside">
                             <!-- Joins (Updated for new schema) -->
-                            <li data-sql="-- JOIN students and exams to show names and scores.&#10;SELECT s.first_name, s.last_name, e.score &#10;FROM students s &#10;JOIN exams e ON s.student_id = e.student_id;" data-answer="SELECT s.first_name, s.last_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id;" data-hint="Join 'students' and 'exams' on student_id." data-keywords="JOIN,ON,student_id">Show student scores (Basic Join).</li>
-                            <li data-sql="-- JOIN exams and subjects to show Subject Name instead of Code.&#10;SELECT sub.subject_name, e.score &#10;FROM exams e &#10;JOIN subjects sub ON e.subject_code = sub.subject_code;" data-answer="SELECT sub.subject_name, e.score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="Join 'exams' and 'subjects' on subject_code." data-keywords="JOIN,ON,subject_code">Show scores with Subject Names.</li>
-                            <li data-sql="-- Triple Join: Student Name, Subject Name, and Score.&#10;SELECT s.first_name, sub.subject_name, e.score&#10;FROM students s&#10;JOIN exams e ON s.student_id = e.student_id&#10;JOIN subjects sub ON e.subject_code = sub.subject_code;" data-answer="SELECT s.first_name, sub.subject_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="You need to join three tables: students, exams, and subjects." data-keywords="JOIN,students,exams,subjects">Full Report (Triple Join).</li>
+                            <li data-sql="-- JOIN students and exams to show names and scores." data-answer="SELECT s.first_name, s.last_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id;" data-hint="Join 'students' and 'exams' on student_id." data-keywords="JOIN,ON,student_id">Show student scores (Basic Join).</li>
+                            <li data-sql="-- JOIN exams and subjects to show Subject Name instead of Code." data-answer="SELECT sub.subject_name, e.score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="Join 'exams' and 'subjects' on subject_code." data-keywords="JOIN,ON,subject_code">Show scores with Subject Names.</li>
+                            <li data-sql="-- Triple Join: Student Name, Subject Name, and Score." data-answer="SELECT s.first_name, sub.subject_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="You need to join three tables: students, exams, and subjects." data-keywords="JOIN,students,exams,subjects">Full Report (Triple Join).</li>
                             
                             <!-- Where with AND/OR/NOT -->
                             <li data-sql="-- Find all students in class '4C' who are female ('F')." data-answer="SELECT * FROM students WHERE class = '4C' AND gender = 'F';" data-hint="WHERE class = '4C' AND gender = 'F'." data-keywords="WHERE,class,AND,gender">Find female students in '4C'.</li>
@@ -169,7 +169,7 @@
                             <li data-sql="-- List all students who do not take the 'ECON' exam. (Hint: NOT IN)" data-answer="SELECT * FROM students WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'ECON');" data-hint="WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'ECON')." data-keywords="NOT IN,SELECT">Find students who don't take 'ECON'.</li>
                             
                              <!-- Aggregates with Joins -->
-                            <li data-sql="-- Find the average exam score for each subject NAME (requires join). Order by average score descending.&#10;SELECT sub.subject_name, AVG(e.score) as avg_score&#10;FROM exams e&#10;JOIN subjects sub ON e.subject_code = sub.subject_code&#10;GROUP BY sub.subject_name&#10;ORDER BY avg_score DESC;" data-answer="SELECT sub.subject_name, AVG(e.score) as avg_score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code GROUP BY sub.subject_name ORDER BY avg_score DESC;" data-hint="Join exams and subjects, GROUP BY subject_name, and AVG(score)." data-keywords="JOIN,GROUP BY,AVG,ORDER BY">Avg score per Subject Name.</li>
+                            <li data-sql="-- Find the average exam score for each subject NAME (requires join). Order by average score descending." data-answer="SELECT sub.subject_name, AVG(e.score) as avg_score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code GROUP BY sub.subject_name ORDER BY avg_score DESC;" data-hint="Join exams and subjects, GROUP BY subject_name, and AVG(score)." data-keywords="JOIN,GROUP BY,AVG,ORDER BY">Avg score per Subject Name.</li>
                             
                              <!-- Having -->
                             <li data-sql="-- List classes where the average 'MATH' score is above 72." data-answer="SELECT s.class, AVG(e.score) FROM students s JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'MATH' GROUP BY s.class HAVING AVG(e.score) > 72;" data-hint="Join tables, GROUP BY class, then use HAVING AVG(score) > 72." data-keywords="GROUP BY,HAVING,AVG">Classes with avg 'MATH' score > 72.</li>
@@ -488,6 +488,14 @@
                         li.textContent = row[0];
                         li.className = 'px-3 py-2 bg-slate-100 rounded-md cursor-pointer hover:bg-sky-100';
                         li.onclick = () => { 
+                            // Deselect all questions
+                            document.querySelectorAll('.question-list li').forEach(q => q.classList.remove('active-question'));
+                            currentKeywords = [];
+                            currentAnswer = "";
+                            hintBtn.classList.add('hidden');
+                            answerBtn.classList.add('hidden');
+                            hintArea.classList.add('hidden');
+
                             // Auto-run select all for the clicked table
                             const tableName = row[0];
                             sqlEditor.value = `SELECT * FROM ${tableName};`;
