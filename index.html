@@ -557,6 +557,27 @@
             if (currentAnswer) {
                 hintArea.textContent = "Answer: " + currentAnswer;
                 hintArea.classList.remove('hidden');
+                
+                // Run the answer query to show results
+                // Temporarily store user's current input
+                const userQuery = sqlEditor.value;
+                
+                // Run the answer query silently to update results
+                try {
+                    clearResults();
+                    const statements = currentAnswer.split(';').filter(s => s.trim() !== '');
+                    statements.forEach(statement => {
+                         const results = db.exec(statement.trim());
+                         if (results.length === 0) {
+                             displayMessage("warning", "The answer query returned 0 rows.");
+                         } else {
+                             results.forEach((result) => displayTable(result));
+                             displayMessage("success", "Showing results for the correct answer.");
+                         }
+                    });
+                } catch (err) {
+                    displayMessage("error", `Error running answer: ${err.message}`);
+                }
             } else {
                 alert("Please select a challenge first!");
             }
