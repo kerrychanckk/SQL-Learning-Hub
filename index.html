@@ -50,150 +50,145 @@
             font-weight: 600;
             color: #0369a1;
         }
+        /* Active database item style */
+        .active-db-item {
+            background-color: #0ea5e9 !important;
+            color: #ffffff !important;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body class="text-slate-800">
-
     <!-- Main Application UI -->
     <div id="app-container" class="h-screen flex flex-col">
         <header class="bg-white border-b border-slate-200 p-3 flex justify-between items-center shadow-sm">
-            <h1 class="text-xl font-bold text-slate-800"><span class="text-sky-500">SQL</span> Sandbox for Students</h1>
-            <button id="reset-db-btn" class="bg-red-500 text-white font-semibold text-sm py-2 px-4 rounded-lg hover:bg-red-600 transition shadow">Reset Database</button>
+            <div class="flex items-center gap-3">
+                <h1 class="text-xl font-bold text-slate-800"><span class="text-sky-500">SQL</span> Sandbox for Students</h1>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full border border-slate-200">
+                    Active DB: <strong id="active-db-badge" class="text-sky-600">school_db</strong>
+                </span>
+            </div>
+            <div class="flex gap-2">
+                <button id="reset-db-btn" class="bg-red-500 text-white font-semibold text-sm py-2 px-4 rounded-lg hover:bg-red-600 transition shadow">Reset Database</button>
+            </div>
         </header>
-        
+
         <main class="flex-grow flex flex-col md:flex-row overflow-hidden">
             <aside class="w-full md:w-1/4 bg-white border-r border-slate-200 p-4 flex flex-col overflow-y-auto">
+                
+                <!-- Database Management Section -->
+                <div class="mb-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Databases</label>
+                        <button id="new-db-btn" title="Create a new database" class="text-xs bg-sky-500 hover:bg-sky-600 text-white font-semibold py-1 px-2.5 rounded shadow-sm flex items-center gap-1 transition">
+                            <span>+</span> New DB
+                        </button>
+                    </div>
+                    <ul id="databases-list" class="space-y-1 text-sm">
+                        <!-- Populated dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Database Schema Section -->
                 <div class="mb-4">
                     <details id="db-schema-details">
                         <summary>Database Schema</summary>
-                        <div class="text-xs mt-2 p-3 bg-slate-50 rounded-lg font-mono text-slate-600 space-y-3">
-                            <div>
-                                <p class="font-semibold text-slate-800">students</p>
-                                <ul class="list-disc list-inside pl-2">
-                                    <li><span class="font-semibold">student_id</span> INTEGER PRIMARY KEY</li>
-                                    <li><span class="font-semibold">class</span> TEXT</li>
-                                    <li><span class="font-semibold">no</span> INTEGER</li>
-                                    <li><span class="font-semibold">last_name</span> TEXT</li>
-                                    <li><span class="font-semibold">first_name</span> TEXT</li>
-                                    <li><span class="font-semibold">gender</span> TEXT</li>
-                                    <li><span class="font-semibold">dob</span> DATE</li>
-                                    <li><span class="font-semibold">district</span> TEXT</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-slate-800">subjects</p>
-                                <ul class="list-disc list-inside pl-2">
-                                    <li><span class="font-semibold">subject_code</span> TEXT PK</li>
-                                    <li><span class="font-semibold">subject_name</span> TEXT</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-slate-800">exams</p>
-                                <ul class="list-disc list-inside pl-2">
-                                    <li><span class="font-semibold">student_id</span> INTEGER</li>
-                                    <li><span class="font-semibold">subject_code</span> TEXT FK</li>
-                                    <li><span class="font-semibold">score</span> INTEGER</li>
-                                </ul>
-                            </div>
+                        <div id="schema-container" class="text-xs mt-2 p-3 bg-slate-50 rounded-lg font-mono text-slate-600 space-y-3">
+                            <!-- Populated dynamically based on the active database -->
                         </div>
                     </details>
                 </div>
+
+                <!-- Tables in Active Database -->
                 <div class="mb-4">
                     <details open id="db-tables-details">
-                        <summary>Tables in Database</summary>
-                        <ul id="tables-list" class="space-y-2 text-sm mt-2"></ul>
+                        <summary class="flex justify-between items-center">
+                            <span>Tables in Database</span>
+                            <span id="tables-count-badge" class="text-xs bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded-full font-normal">0</span>
+                        </summary>
+                        <ul id="tables-list" class="space-y-1.5 text-sm mt-2"></ul>
                     </details>
                 </div>
+
                 <div class="flex-grow">
                     <h2 class="text-lg font-semibold mb-2 border-b pb-2">SQL Challenges</h2>
-                    
-                    <!-- Instructions moved here -->
+
+                    <!-- Instructions -->
                     <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800 mb-4">
-                        <strong>Instructions:</strong> Click a question below to select it. The question will be highlighted.
+                        <strong>Instructions:</strong> Click a question below to select it. The question will be highlighted. Challenges run against the default <code>school_db</code>.
                     </div>
-                    
+
                     <!-- Level 1 -->
                     <details id="level-1" class="challenge-level">
                         <summary class="text-green-700 bg-green-100 hover:bg-green-200">Level 1: Beginner</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <!-- Select -->
                             <li data-sql="-- Show all columns and all records from the 'students' table." data-answer="SELECT * FROM students;" data-hint="Use SELECT * FROM table_name;" data-keywords="SELECT,*,FROM,students">List all students.</li>
                             <li data-sql="-- Show all subjects available." data-answer="SELECT * FROM subjects;" data-hint="Use SELECT * FROM subjects;" data-keywords="SELECT,*,FROM,subjects">List all subjects.</li>
                             <li data-sql="-- Display only the first name, last name, and class for every student." data-answer="SELECT first_name, last_name, class FROM students;" data-hint="SELECT column1, column2, column3 FROM students;" data-keywords="SELECT,first_name,last_name,class,FROM,students">Show student names and class.</li>
-                            <!-- Where -->
                             <li data-sql="-- Find all students who are in class '4A'." data-answer="SELECT * FROM students WHERE class = '4A';" data-hint="Use WHERE class = '4A'." data-keywords="WHERE,class,'4A'">Find all students in class '4A'.</li>
                             <li data-sql="-- List all exams with a score greater than 95." data-answer="SELECT * FROM exams WHERE score > 95;" data-hint="Use WHERE score > 95." data-keywords="WHERE,score,>,95">Find exams with scores > 95.</li>
                             <li data-sql="-- List all male students ('M')." data-answer="SELECT * FROM students WHERE gender = 'M';" data-hint="Use WHERE gender = 'M'." data-keywords="WHERE,gender,'M'">List all male students.</li>
                             <li data-sql="-- Find the student with class number 15 in class '4C'." data-answer="SELECT * FROM students WHERE no = 15 AND class = '4C';" data-hint="Use WHERE no = 15 AND class = '4C'." data-keywords="WHERE,no,15,AND,class,'4C'">Find student #15 in 4C.</li>
-                            <!-- Order By -->
                             <li data-sql="-- List all students ordered by their last name alphabetically (A-Z)." data-answer="SELECT * FROM students ORDER BY last_name ASC;" data-hint="Use ORDER BY last_name ASC;" data-keywords="ORDER BY,last_name">List students by last name.</li>
                             <li data-sql="-- Show all exam scores, from the highest to the lowest." data-answer="SELECT * FROM exams ORDER BY score DESC;" data-hint="Use ORDER BY score DESC;" data-keywords="ORDER BY,score,DESC">List scores from highest to lowest.</li>
-                            <li data-sql="-- List all students ordered by their date of birth (oldest first)." data-answer="SELECT * FROM students ORDER BY dob ASC;" data-hint="Use ORDER BY dob ASC." data-keywords="ORDER BY,dob">Order students by birthday.</li>
+                            <li data-sql="-- List all students ordered by their date of birth (oldest first)." data-answer="SELECT * FROM students ORDER BY dob ASC;" data-hint="Use ORDER BY dob ASC;" data-keywords="ORDER BY,dob">Order students by birthday.</li>
                         </ol>
                     </details>
 
                     <!-- Level 2 -->
                     <details id="level-2" class="challenge-level">
                         <summary class="text-yellow-700 bg-yellow-100 hover:bg-yellow-200">Level 2: Intermediate</summary>
-                         <ol class="question-list list-decimal list-inside">
-                            <!-- Joins (Updated for new schema) -->
+                        <ol class="question-list list-decimal list-inside">
                             <li data-sql="-- JOIN students and exams to show names and scores." data-answer="SELECT s.first_name, s.last_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id;" data-hint="Join 'students' and 'exams' on student_id." data-keywords="JOIN,ON,student_id">Show student scores (Basic Join).</li>
                             <li data-sql="-- JOIN exams and subjects to show Subject Name instead of Code." data-answer="SELECT sub.subject_name, e.score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="Join 'exams' and 'subjects' on subject_code." data-keywords="JOIN,ON,subject_code">Show scores with Subject Names.</li>
                             <li data-sql="-- Triple Join: Student Name, Subject Name, and Score." data-answer="SELECT s.first_name, sub.subject_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="You need to join three tables: students, exams, and subjects." data-keywords="JOIN,students,exams,subjects">Full Report (Triple Join).</li>
-                            
-                            <!-- Where with AND/OR/NOT -->
                             <li data-sql="-- Find all students in class '4C' who are female ('F')." data-answer="SELECT * FROM students WHERE class = '4C' AND gender = 'F';" data-hint="WHERE class = '4C' AND gender = 'F'." data-keywords="WHERE,class,AND,gender">Find female students in '4C'.</li>
                             <li data-sql="-- List all exams for Subject Code 'MATH' OR 'PHY'." data-answer="SELECT * FROM exams WHERE subject_code = 'MATH' OR subject_code = 'PHY';" data-hint="WHERE subject_code = 'MATH' OR subject_code = 'PHY'." data-keywords="WHERE,OR,'MATH'">Find 'MATH' or 'PHY' exams.</li>
                             <li data-sql="-- List exam scores between 80 and 85 (inclusive)." data-answer="SELECT * FROM exams WHERE score >= 80 AND score <= 85;" data-hint="WHERE score >= 80 AND score <= 85." data-keywords="WHERE,score,80,85">Find scores between 80 and 85.</li>
                             <li data-sql="-- Find all male students in class '4A' OR '4C'." data-answer="SELECT * FROM students WHERE gender = 'M' AND (class = '4A' OR class = '4C');" data-hint="WHERE gender = 'M' AND (class = '4A' OR class = '4C')." data-keywords="WHERE,gender,AND,OR">Find male students in '4A' or '4C'.</li>
-                            
-                            <!-- Group By -->
                             <li data-sql="-- Count the number of students in each class." data-answer="SELECT class, COUNT(*) FROM students GROUP BY class;" data-hint="SELECT class, COUNT(*) FROM students GROUP BY class;" data-keywords="COUNT,GROUP BY,class">Count students in each class.</li>
                             <li data-sql="-- Find the average score for each subject code." data-answer="SELECT subject_code, AVG(score) FROM exams GROUP BY subject_code;" data-hint="SELECT subject_code, AVG(score) FROM exams GROUP BY subject_code;" data-keywords="AVG,GROUP BY,subject_code">Find the avg score per subject code.</li>
                             <li data-sql="-- Find the highest score achieved in each subject code." data-answer="SELECT subject_code, MAX(score) FROM exams GROUP BY subject_code;" data-hint="SELECT subject_code, MAX(score) FROM exams GROUP BY subject_code;" data-keywords="MAX,GROUP BY,subject_code">Find the max score per subject.</li>
                         </ol>
                     </details>
-                    
+
                     <!-- Level 3 -->
                     <details id="level-3" class="challenge-level">
                         <summary class="text-red-700 bg-red-100 hover:bg-red-200">Level 3: Advanced</summary>
-                         <ol class="question-list list-decimal list-inside">
-                             <!-- Advanced Joins & Filtering -->
+                        <ol class="question-list list-decimal list-inside">
                             <li data-sql="-- List the full name and date of birth for all students taking the 'ICT' exam (Subject Code 'ICT')." data-answer="SELECT s.first_name, s.last_name, s.dob FROM students s JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'ICT';" data-hint="Join students and exams, then WHERE subject_code = 'ICT'." data-keywords="JOIN,WHERE,'ICT'">Find 'ICT' students' details.</li>
                             <li data-sql="-- Find male students from class '4A' born after June 1st, 2008." data-answer="SELECT * FROM students WHERE gender='M' AND class='4A' AND dob > '2008-06-01';" data-hint="WHERE gender='M' AND class='4A' AND dob > '2008-06-01'." data-keywords="WHERE,AND,dob">Find '4A' males born after 2008-06-01.</li>
                             <li data-sql="-- Find exam scores in 'MATH' or 'ENG' that are below 50 OR above 95." data-answer="SELECT * FROM exams WHERE (subject_code='MATH' OR subject_code='ENG') AND (score < 50 OR score > 95);" data-hint="WHERE (subject_code='MATH' OR subject_code='ENG') AND (score < 50 OR score > 95)." data-keywords="WHERE,OR,AND,<,>">Find extreme 'MATH'/'ENG' scores.</li>
                             <li data-sql="-- List students whose last name is 'Lee' or 'Chan' AND live in the 'Sha Tin' district." data-answer="SELECT * FROM students WHERE (last_name='Lee' OR last_name='Chan') AND district='Sha Tin';" data-hint="WHERE (last_name='Lee' OR last_name='Chan') AND district='Sha Tin'." data-keywords="WHERE,OR,AND,'Lee'"> 'Lee'/'Chan' students in 'Sha Tin'.</li>
-                            
-                            <!-- Subqueries -->
                             <li data-sql="-- Find students in class '4A', '4C', or '4D' using the IN operator." data-answer="SELECT * FROM students WHERE class IN ('4A', '4C', '4D');" data-hint="WHERE class IN ('4A', '4C', '4D')." data-keywords="WHERE,IN">Find students in 4A, 4C, or 4D.</li>
                             <li data-sql="-- List all students who do not take the 'ECON' exam. (Hint: NOT IN)" data-answer="SELECT * FROM students WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'ECON');" data-hint="WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'ECON')." data-keywords="NOT IN,SELECT">Find students who don't take 'ECON'.</li>
-                            
-                             <!-- Aggregates with Joins -->
                             <li data-sql="-- Find the average exam score for each subject NAME (requires join). Order by average score descending." data-answer="SELECT sub.subject_name, AVG(e.score) as avg_score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code GROUP BY sub.subject_name ORDER BY avg_score DESC;" data-hint="Join exams and subjects, GROUP BY subject_name, and AVG(score)." data-keywords="JOIN,GROUP BY,AVG,ORDER BY">Avg score per Subject Name.</li>
-                            
-                             <!-- Having -->
                             <li data-sql="-- List classes where the average 'MATH' score is above 72." data-answer="SELECT s.class, AVG(e.score) FROM students s JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'MATH' GROUP BY s.class HAVING AVG(e.score) > 72;" data-hint="Join tables, GROUP BY class, then use HAVING AVG(score) > 72." data-keywords="GROUP BY,HAVING,AVG">Classes with avg 'MATH' score > 72.</li>
                             <li data-sql="-- List student IDs and their average scores, but only for students with an average score > 85." data-answer="SELECT student_id, AVG(score) FROM exams GROUP BY student_id HAVING AVG(score) > 85;" data-hint="GROUP BY student_id HAVING AVG(score) > 85." data-keywords="GROUP BY,HAVING,AVG">Students with avg score > 85.</li>
-                         </ol>
+                        </ol>
                     </details>
                 </div>
             </aside>
+
             <div class="w-full md:w-3/4 flex flex-col p-4 gap-4 bg-slate-50 overflow-y-auto">
                 <div class="flex flex-col bg-white p-4 rounded-xl shadow-sm border border-slate-200">
                     <label for="sql-editor" class="text-lg font-semibold mb-2 text-slate-700">SQL Command Editor</label>
-                    <textarea id="sql-editor" class="sql-editor w-full h-32 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="-- Click a question from the 'SQL Challenges' list to get started!"></textarea>
-                    <div class="flex items-center justify-between mt-3">
+                    <textarea id="sql-editor" class="sql-editor w-full h-32 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="-- Type your SQL commands here or click a question from the challenges list! (Supports CREATE DATABASE, CREATE TABLE, INSERT, SELECT, etc.)"></textarea>
+                    
+                    <div class="flex items-center justify-between mt-3 flex-wrap gap-2">
                         <p class="text-xs text-slate-500">Tip: Use <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Ctrl+Enter</kbd> or <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Cmd+Enter</kbd> to run.</p>
                         <div class="flex gap-2">
                             <button id="hint-btn" class="bg-amber-400 text-white font-semibold py-2 px-5 rounded-lg hover:bg-amber-500 shadow-sm hidden">💡 Hint</button>
                             <button id="answer-btn" class="bg-purple-500 text-white font-semibold py-2 px-5 rounded-lg hover:bg-purple-600 shadow-sm hidden">🔑 Answer</button>
-                            <button id="save-db-btn" class="bg-emerald-500 text-white font-semibold py-2 px-5 rounded-lg hover:bg-emerald-600 shadow-sm">Save to Browser</button>
+                            <button id="save-db-btn" class="bg-emerald-500 text-white font-semibold py-2 px-5 rounded-lg hover:bg-emerald-600 shadow-sm">Save Session</button>
                             <button id="run-sql-btn" class="bg-sky-500 text-white font-bold py-2 px-8 rounded-lg hover:bg-sky-600 shadow-sm">Run SQL</button>
                         </div>
                     </div>
+
                     <!-- Hint Display Area -->
                     <div id="hint-area" class="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-800 hidden"></div>
                 </div>
+
                 <div class="flex-grow flex flex-col bg-white p-4 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                     <h2 class="text-lg font-semibold mb-2 text-slate-700">Results</h2>
                     <div id="message-area" class="mb-2 text-sm min-h-[1.25rem]"></div>
@@ -208,29 +203,59 @@
         const runSqlBtn = document.getElementById('run-sql-btn');
         const saveDbBtn = document.getElementById('save-db-btn');
         const resetDbBtn = document.getElementById('reset-db-btn');
+        const newDbBtn = document.getElementById('new-db-btn');
         const hintBtn = document.getElementById('hint-btn');
         const answerBtn = document.getElementById('answer-btn');
         const hintArea = document.getElementById('hint-area');
         const tablesList = document.getElementById('tables-list');
+        const databasesList = document.getElementById('databases-list');
+        const schemaContainer = document.getElementById('schema-container');
+        const activeDbBadge = document.getElementById('active-db-badge');
+        const tablesCountBadge = document.getElementById('tables-count-badge');
         const sqlEditor = document.getElementById('sql-editor');
         const messageArea = document.getElementById('message-area');
         const resultsContainer = document.getElementById('results-container');
-        
+
         // App State
-        let db;
         let SQL;
-        const dbKey = 'sql_sandbox_local_db_v2'; // Changed key to force fresh DB for new schema
+        let dbRegistry = {}; // Map of { [dbName]: SQL.Database }
+        let currentDbName = 'school_db';
+        let db; // Points to dbRegistry[currentDbName]
+        const sessionStorageKey = 'sql_sandbox_session_databases_v3';
+
         let currentHint = "";
         let currentAnswer = "";
-        let currentKeywords = []; // Store keywords for the currently selected question
+        let currentKeywords = [];
+
+        // Helper: Convert Uint8Array to/from Base64 for safe session storage
+        function uint8ToBase64(bytes) {
+            let binary = '';
+            const len = bytes.byteLength;
+            const chunkSize = 8192;
+            for (let i = 0; i < len; i += chunkSize) {
+                const chunk = bytes.subarray(i, Math.min(i + chunkSize, len));
+                binary += String.fromCharCode.apply(null, chunk);
+            }
+            return btoa(binary);
+        }
+
+        function base64ToUint8(base64) {
+            const binary = atob(base64);
+            const len = binary.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return bytes;
+        }
 
         // --- Database Initialization ---
         async function main() {
             try {
                 SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}` });
-                loadDatabase();
+                loadAllDatabasesFromSession();
                 setupQuestionListeners();
-                setupAccordionBehavior(); // <--- Initialize accordion logic
+                setupAccordionBehavior();
             } catch (err) {
                 console.error("Failed to initialize SQL.js:", err);
                 displayMessage("error", "Error: Could not load database engine. Check internet and refresh.");
@@ -238,21 +263,18 @@
         }
 
         function registerCustomFunctions(database) {
-            // Register YEAR(date_string)
             database.create_function("YEAR", (dateStr) => {
                 if (!dateStr) return null;
                 const d = new Date(dateStr);
                 return isNaN(d.getTime()) ? null : d.getFullYear();
             });
 
-            // Register MONTH(date_string)
             database.create_function("MONTH", (dateStr) => {
                 if (!dateStr) return null;
                 const d = new Date(dateStr);
                 return isNaN(d.getTime()) ? null : d.getMonth() + 1;
             });
 
-            // Register MONTHNAME(date_string)
             database.create_function("MONTHNAME", (dateStr) => {
                 if (!dateStr) return null;
                 const d = new Date(dateStr);
@@ -260,7 +282,6 @@
                 return d.toLocaleString('default', { month: 'long' });
             });
 
-            // Register WEEKDAY(date_string) - Returns 0=Sunday, 1=Monday...
             database.create_function("WEEKDAY", (dateStr) => {
                 if (!dateStr) return null;
                 const d = new Date(dateStr);
@@ -268,40 +289,170 @@
             });
         }
 
-        function loadDatabase() {
-            const savedDb = localStorage.getItem(dbKey);
-            if (savedDb) {
+        // --- Multi-Database and Session Management ---
+        function loadAllDatabasesFromSession() {
+            const raw = sessionStorage.getItem(sessionStorageKey);
+            let loaded = false;
+
+            if (raw) {
                 try {
-                    const dbArray = savedDb.split(',').map(Number);
-                    db = new SQL.Database(new Uint8Array(dbArray));
-                    registerCustomFunctions(db); // Register functions on load
-                    displayMessage("success", "Loaded saved database from your browser.");
+                    const parsed = JSON.parse(raw);
+                    const dbNames = Object.keys(parsed.databases || {});
+                    if (dbNames.length > 0) {
+                        dbRegistry = {};
+                        for (const name of dbNames) {
+                            const u8 = base64ToUint8(parsed.databases[name]);
+                            const newDb = new SQL.Database(u8);
+                            registerCustomFunctions(newDb);
+                            dbRegistry[name] = newDb;
+                        }
+                        currentDbName = parsed.activeDb && dbRegistry[parsed.activeDb] ? parsed.activeDb : dbNames[0];
+                        db = dbRegistry[currentDbName];
+                        loaded = true;
+                        displayMessage("success", "Restored your active databases and tables from this browser session.");
+                    }
                 } catch (e) {
-                    console.error("Error loading DB from localStorage:", e);
-                    localStorage.removeItem(dbKey); // Clear corrupted data
-                    createNewDatabase();
+                    console.error("Failed to restore session database:", e);
+                    sessionStorage.removeItem(sessionStorageKey);
                 }
-            } else {
-                createNewDatabase();
             }
-            updateTablesList();
+
+            if (!loaded) {
+                // Initial fresh session setup
+                dbRegistry = {};
+                const defaultDb = new SQL.Database();
+                registerCustomFunctions(defaultDb);
+                createSampleTables(defaultDb);
+                dbRegistry['school_db'] = defaultDb;
+                currentDbName = 'school_db';
+                db = defaultDb;
+                saveAllDatabasesToSession(false);
+                displayMessage("success", "A new database with normalized tables ('students', 'subjects', 'exams') has been created.");
+            }
+
+            updateDatabaseUI();
         }
-        
-        function createNewDatabase() {
-            db = new SQL.Database();
-            registerCustomFunctions(db); // Register functions on create
-            createSampleTables(db);
-            displayMessage("success", "A new database with normalized tables ('students', 'subjects', 'exams') has been created.");
+
+        function saveAllDatabasesToSession(showMessage = true) {
+            try {
+                const payload = {
+                    activeDb: currentDbName,
+                    databases: {}
+                };
+
+                for (const name of Object.keys(dbRegistry)) {
+                    const exported = dbRegistry[name].export();
+                    payload.databases[name] = uint8ToBase64(exported);
+                }
+
+                sessionStorage.setItem(sessionStorageKey, JSON.stringify(payload));
+                if (showMessage) {
+                    displayMessage("success", "Databases and tables saved for this browser session.");
+                }
+            } catch (err) {
+                console.error("Error saving databases to sessionStorage:", err);
+                if (showMessage) {
+                    displayMessage("error", "Failed to save session state: Storage limit exceeded.");
+                }
+            }
+        }
+
+        function createNewUserDatabase(dbName) {
+            const cleanName = dbName.trim().replace(/[^a-zA-Z0-9_]/g, '_');
+            if (!cleanName) {
+                displayMessage("warning", "Invalid database name. Use letters, numbers, and underscores.");
+                return;
+            }
+
+            if (dbRegistry[cleanName]) {
+                displayMessage("warning", `Database '${cleanName}' already exists. Switching to it.`);
+                switchDatabase(cleanName);
+                return;
+            }
+
+            const newDatabase = new SQL.Database();
+            registerCustomFunctions(newDatabase);
+            dbRegistry[cleanName] = newDatabase;
+            switchDatabase(cleanName);
+            saveAllDatabasesToSession(false);
+            displayMessage("success", `Database '${cleanName}' created successfully! You can now create tables in it.`);
+        }
+
+        function switchDatabase(dbName) {
+            if (!dbRegistry[dbName]) return;
+            currentDbName = dbName;
+            db = dbRegistry[dbName];
+            updateDatabaseUI();
+            saveAllDatabasesToSession(false);
+        }
+
+        function updateDatabaseUI() {
+            activeDbBadge.textContent = currentDbName;
+            updateDatabasesList();
+            updateTablesList();
+            updateSchemaView();
+        }
+
+        function updateDatabasesList() {
+            databasesList.innerHTML = '';
+            const names = Object.keys(dbRegistry);
+
+            names.forEach(name => {
+                const li = document.createElement('li');
+                const isActive = (name === currentDbName);
+
+                li.className = `px-3 py-2 rounded-md cursor-pointer transition flex justify-between items-center ${
+                    isActive ? 'active-db-item font-semibold shadow-sm' : 'bg-slate-100 hover:bg-sky-50 text-slate-700'
+                }`;
+
+                const labelSpan = document.createElement('span');
+                labelSpan.className = "flex items-center gap-2 truncate";
+                labelSpan.innerHTML = `<span>📁</span> <span>${name}</span>`;
+
+                li.appendChild(labelSpan);
+
+                // Add delete option for custom databases (keep school_db protected)
+                if (name !== 'school_db') {
+                    const delBtn = document.createElement('button');
+                    delBtn.innerHTML = "&times;";
+                    delBtn.title = `Delete ${name}`;
+                    delBtn.className = `text-xs px-1.5 py-0.5 rounded ${
+                        isActive ? 'text-white hover:bg-sky-700' : 'text-slate-400 hover:text-red-600'
+                    }`;
+                    delBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        if (confirm(`Are you sure you want to delete database '${name}'?`)) {
+                            delete dbRegistry[name];
+                            if (currentDbName === name) {
+                                currentDbName = 'school_db';
+                                db = dbRegistry['school_db'];
+                            }
+                            updateDatabaseUI();
+                            saveAllDatabasesToSession(false);
+                            displayMessage("warning", `Database '${name}' was deleted.`);
+                        }
+                    };
+                    li.appendChild(delBtn);
+                }
+
+                li.onclick = () => {
+                    if (currentDbName !== name) {
+                        switchDatabase(name);
+                        displayMessage("success", `Switched to database '${name}'.`);
+                    }
+                };
+
+                databasesList.appendChild(li);
+            });
         }
 
         function createSampleTables(database) {
             try {
-                // Drop old tables if they exist for a clean reset
                 database.run(`DROP TABLE IF EXISTS students;`);
                 database.run(`DROP TABLE IF EXISTS exams;`);
                 database.run(`DROP TABLE IF EXISTS subjects;`);
 
-                // Create new students table
+                // Create students table
                 database.run(`
                     CREATE TABLE students (
                         student_id INTEGER PRIMARY KEY,
@@ -323,7 +474,7 @@
                     );
                 `);
 
-                // Create new exams table with Subject Code
+                // Create exams table
                 database.run(`
                     CREATE TABLE exams (
                         student_id INTEGER,
@@ -333,7 +484,7 @@
                         FOREIGN KEY(subject_code) REFERENCES subjects(subject_code)
                     );
                 `);
-                
+
                 // Data Generation
                 const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Mak', 'Yip', 'Ng', 'Lam', 'Poon', 'Tang'];
                 const maleFirstNames = ['Ka-Chun', 'Lok-Hang', 'Chi-Kin', 'Siu-Ming', 'Wai-Ho', 'Tsz-Fung', 'Man-Hin', 'Pak-Hei', 'Chun-Kit', 'Yat-Long'];
@@ -341,12 +492,10 @@
                 const districts = ['Central & Western', 'Wan Chai', 'Eastern', 'Southern', 'Yau Tsim Mong', 'Sham Shui Po', 'Kowloon City', 'Wong Tai Sin', 'Kwun Tong', 'Kwai Tsing', 'Tsuen Wan', 'Tuen Mun', 'Yuen Long', 'North', 'Tai Po', 'Sha Tin', 'Sai Kung', 'Islands'];
                 const classes = ['4A', '4C', '4D', '5D'];
 
-                // Insert Students
                 let studentInserts = [];
                 const studentIds = [];
                 const usedStudentIds = new Set();
 
-                // Generate 120 students
                 for (const className of classes) {
                     for (let i = 1; i <= 30; i++) {
                         let studentId;
@@ -355,19 +504,13 @@
                         } while (usedStudentIds.has(studentId));
                         usedStudentIds.add(studentId);
                         studentIds.push(studentId);
-                        
+
                         const gender = Math.random() > 0.5 ? 'M' : 'F';
                         let firstName = gender === 'M' ? maleFirstNames[Math.floor(Math.random() * maleFirstNames.length)] : femaleFirstNames[Math.floor(Math.random() * femaleFirstNames.length)];
-                        
-                        // Replace hyphen with blank space
                         firstName = firstName.replace(/-/g, ' ');
-
                         const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-                        
-                        // Randomly assign birth year: 2007, 2008, 2009, or 2010
                         const years = [2007, 2008, 2009, 2010];
                         const year = years[Math.floor(Math.random() * years.length)];
-                        
                         const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
                         const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
                         const dob = `${year}-${month}-${day}`;
@@ -376,8 +519,7 @@
                     }
                 }
                 database.run(`INSERT INTO students (student_id, class, no, last_name, first_name, gender, dob, district) VALUES ${studentInserts.join(', ')};`);
-                
-                // Insert Subjects
+
                 const subjectMap = {
                     'Chinese': 'CHI',
                     'English': 'ENG',
@@ -387,108 +529,159 @@
                     'Biology': 'BIO',
                     'Economics': 'ECON'
                 };
-                
+
                 const subjectInserts = Object.entries(subjectMap).map(([name, code]) => `('${code}', '${name}')`);
                 database.run(`INSERT INTO subjects (subject_code, subject_name) VALUES ${subjectInserts.join(', ')};`);
 
-                // Generate Exam Results
                 const mandatorySubjects = ['Chinese', 'English', 'Mathematics'];
                 const electiveSubjects = ['Information and Communication Technology', 'Physics', 'Biology', 'Economics'];
                 let examInserts = [];
-                
+
                 for (const sId of studentIds) {
-                    // Mandatory subjects
                     mandatorySubjects.forEach(subject => {
-                        const score = Math.floor(Math.random() * 61) + 40; // 40-100
+                        const score = Math.floor(Math.random() * 61) + 40;
                         const code = subjectMap[subject];
                         examInserts.push(`(${sId}, '${code}', ${score})`);
                     });
 
-                    // Elective subjects
                     const numElectives = Math.random() > 0.5 ? 3 : 2;
                     const shuffledElectives = [...electiveSubjects].sort(() => 0.5 - Math.random());
                     const takenElectives = shuffledElectives.slice(0, numElectives);
-                    
+
                     takenElectives.forEach(subject => {
-                        const score = Math.floor(Math.random() * 61) + 40; // 40-100
+                        const score = Math.floor(Math.random() * 61) + 40;
                         const code = subjectMap[subject];
                         examInserts.push(`(${sId}, '${code}', ${score})`);
                     });
                 }
                 database.run(`INSERT INTO exams (student_id, subject_code, score) VALUES ${examInserts.join(', ')};`);
-
             } catch (err) {
                 console.error("Error creating sample tables:", err);
                 displayMessage("error", "Could not create the initial sample tables.");
             }
         }
 
-        function saveDatabase() {
-            if (!db) return;
-            try {
-                const data = db.export();
-                localStorage.setItem(dbKey, Array.from(data).toString());
-                displayMessage("success", "Database saved successfully to this browser.");
-            } catch (err) {
-                console.error("Error saving database:", err);
-                displayMessage("error", "Failed to save the database.");
-            }
-        }
-        
         function resetDatabase() {
-            // No confirmation for faster classroom use
-            localStorage.removeItem(dbKey);
-            createNewDatabase();
-            updateTablesList();
+            if (currentDbName === 'school_db') {
+                const defaultDb = new SQL.Database();
+                registerCustomFunctions(defaultDb);
+                createSampleTables(defaultDb);
+                dbRegistry['school_db'] = defaultDb;
+                db = defaultDb;
+            } else {
+                const blankDb = new SQL.Database();
+                registerCustomFunctions(blankDb);
+                dbRegistry[currentDbName] = blankDb;
+                db = blankDb;
+            }
+            saveAllDatabasesToSession(false);
+            updateDatabaseUI();
+            displayMessage("success", `Database '${currentDbName}' has been reset.`);
         }
 
         // --- SQL Execution & Display ---
         function runSql() {
             if (!db) { displayMessage("error", "Database not loaded."); return; }
             const sqlCode = sqlEditor.value.trim();
-            
-            // Keyword validation for current question
+            if (!sqlCode) { displayMessage("warning", "Please type an SQL query to execute."); return; }
+
+            // Support student CREATE DATABASE / USE syntax in SQL editor
+            const createDbMatch = sqlCode.match(/^CREATE\s+DATABASE\s+([a-zA-Z0-9_]+);?$/i);
+            if (createDbMatch) {
+                const targetDb = createDbMatch[1];
+                createNewUserDatabase(targetDb);
+                clearResults();
+                return;
+            }
+
+            const useDbMatch = sqlCode.match(/^USE\s+([a-zA-Z0-9_]+);?$/i);
+            if (useDbMatch) {
+                const targetDb = useDbMatch[1];
+                if (dbRegistry[targetDb]) {
+                    switchDatabase(targetDb);
+                    clearResults();
+                    displayMessage("success", `Switched to database '${targetDb}'.`);
+                } else {
+                    displayMessage("error", `Database '${targetDb}' does not exist.`);
+                }
+                return;
+            }
+
+            // Keyword validation for challenges (applies when solving selected questions)
             if (currentKeywords.length > 0) {
                 const upperSql = sqlCode.toUpperCase();
                 const missingKeywords = currentKeywords.filter(k => !upperSql.includes(k.toUpperCase()));
-                
                 if (missingKeywords.length > 0) {
                     displayMessage("warning", `Result incorrect. Your query is missing key concepts: ${missingKeywords.join(", ")}. Try again!`);
-                    return; // Stop execution if critical keywords missing
+                    return;
                 }
             }
 
             clearResults();
+            let isModifying = false;
+
             try {
                 const statements = sqlCode.split(';').filter(s => s.trim() !== '');
-                let hasError = false;
                 statements.forEach(statement => {
-                     const results = db.exec(statement.trim());
-                     if (results.length === 0) {
-                         // Query ran but no rows returned (and no error thrown yet)
-                         displayMessage("warning", "Query executed successfully but returned 0 rows. Your logic might be wrong. Try again!");
-                     } else {
-                         results.forEach((result) => displayTable(result));
-                         displayMessage("success", "Correct! Query executed successfully.");
-                     }
+                    const trimmed = statement.trim();
+                    const upper = trimmed.toUpperCase();
+
+                    if (upper.startsWith("CREATE") || upper.startsWith("INSERT") || upper.startsWith("UPDATE") ||
+                        upper.startsWith("DELETE") || upper.startsWith("DROP") || upper.startsWith("ALTER")) {
+                        isModifying = true;
+                    }
+
+                    const results = db.exec(trimmed);
+                    if (results.length === 0) {
+                        if (isModifying) {
+                            displayMessage("success", "Query executed successfully. Changes applied to database.");
+                        } else {
+                            displayMessage("warning", "Query executed successfully but returned 0 rows. Your logic might be wrong. Try again!");
+                        }
+                    } else {
+                        results.forEach((result) => displayTable(result));
+                        displayMessage("success", "Correct! Query executed successfully.");
+                    }
                 });
+
+                // Dynamically update UI and session if schema or tables changed
+                if (isModifying) {
+                    updateTablesList();
+                    updateSchemaView();
+                    saveAllDatabasesToSession(false);
+                }
             } catch (err) {
                 displayMessage("error", `Error: ${err.message}. Please fix your SQL and try again!`);
             }
         }
-        
+
         function updateTablesList() {
-             if (!db) return;
-             tablesList.innerHTML = '';
-             try {
-                const res = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';");
+            if (!db) return;
+            tablesList.innerHTML = '';
+            try {
+                const res = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name ASC;");
                 if (res.length > 0 && res[0].values.length > 0) {
-                    res[0].values.forEach(row => {
+                    const tableNames = res[0].values;
+                    tablesCountBadge.textContent = tableNames.length;
+
+                    tableNames.forEach(row => {
+                        const tableName = row[0];
                         const li = document.createElement('li');
-                        li.textContent = row[0];
-                        li.className = 'px-3 py-2 bg-slate-100 rounded-md cursor-pointer hover:bg-sky-100';
-                        li.onclick = () => { 
-                            // Deselect all questions
+                        li.className = 'px-3 py-2 bg-slate-100 rounded-md cursor-pointer hover:bg-sky-100 flex items-center justify-between transition group';
+                        
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'font-mono text-xs text-slate-700 font-medium truncate';
+                        nameSpan.innerHTML = `📄 ${tableName}`;
+
+                        const viewTag = document.createElement('span');
+                        viewTag.className = 'text-[10px] text-sky-600 bg-sky-50 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition';
+                        viewTag.textContent = 'View';
+
+                        li.appendChild(nameSpan);
+                        li.appendChild(viewTag);
+
+                        li.onclick = () => {
+                            // Deselect challenges
                             document.querySelectorAll('.question-list li').forEach(q => q.classList.remove('active-question'));
                             currentKeywords = [];
                             currentAnswer = "";
@@ -497,22 +690,72 @@
                             hintArea.classList.add('hidden');
 
                             // Auto-run select all for the clicked table
-                            const tableName = row[0];
                             sqlEditor.value = `SELECT * FROM ${tableName};`;
-                            runSql(); 
+                            runSql();
                         };
                         tablesList.appendChild(li);
                     });
                 } else {
-                    tablesList.innerHTML = '<li class="text-slate-500 italic">No tables found.</li>';
+                    tablesCountBadge.textContent = '0';
+                    tablesList.innerHTML = '<li class="text-slate-400 italic text-xs py-1">No tables in this database yet. Create one using CREATE TABLE!</li>';
                 }
-             } catch (e) { console.error(e); }
+            } catch (e) {
+                console.error("Error fetching tables:", e);
+            }
+        }
+
+        function updateSchemaView() {
+            if (!db) return;
+            schemaContainer.innerHTML = '';
+
+            try {
+                const res = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name ASC;");
+                if (res.length === 0 || res[0].values.length === 0) {
+                    schemaContainer.innerHTML = '<p class="text-slate-400 italic">No schema available. Create tables to view columns here.</p>';
+                    return;
+                }
+
+                res[0].values.forEach(row => {
+                    const tableName = row[0];
+                    const colRes = db.exec(`PRAGMA table_info(${tableName});`);
+
+                    const tableDiv = document.createElement('div');
+                    tableDiv.className = 'border-b border-slate-200 pb-2 last:border-b-0';
+
+                    const p = document.createElement('p');
+                    p.className = 'font-semibold text-slate-800 flex items-center gap-1.5 mb-1';
+                    p.innerHTML = `<span class="text-sky-600 font-mono text-xs">■</span> <span>${tableName}</span>`;
+                    tableDiv.appendChild(p);
+
+                    if (colRes.length > 0 && colRes[0].values.length > 0) {
+                        const ul = document.createElement('ul');
+                        ul.className = 'list-disc list-inside pl-2 space-y-0.5';
+
+                        colRes[0].values.forEach(col => {
+                            const colName = col[1];
+                            const colType = col[2] || 'ANY';
+                            const isPk = col[5] === 1;
+
+                            const li = document.createElement('li');
+                            li.innerHTML = `<span class="font-semibold text-slate-700">${colName}</span> <span class="text-[10px] text-slate-500 uppercase">${colType}</span> ${isPk ? '<span class="text-[10px] bg-amber-100 text-amber-800 px-1 py-0.2 rounded font-bold">PK</span>' : ''}`;
+                            ul.appendChild(li);
+                        });
+                        tableDiv.appendChild(ul);
+                    }
+
+                    schemaContainer.appendChild(tableDiv);
+                });
+            } catch (e) {
+                console.error("Error updating schema view:", e);
+                schemaContainer.innerHTML = '<p class="text-red-500 text-xs">Error loading schema.</p>';
+            }
         }
 
         function displayTable(result) {
             if (!result || (result.values.length === 0 && result.columns.length === 0)) return;
             const table = document.createElement('table');
             table.className = "w-full text-sm text-left text-slate-500 border-collapse mb-4";
+            
             const thead = document.createElement('thead');
             thead.className = "text-xs text-slate-700 uppercase bg-slate-100";
             const headerRow = document.createElement('tr');
@@ -521,9 +764,10 @@
                 th.className = "px-4 py-3 border border-slate-200";
                 th.textContent = colName;
                 headerRow.appendChild(th);
-});
+            });
             thead.appendChild(headerRow);
             table.appendChild(thead);
+
             const tbody = document.createElement('tbody');
             result.values.forEach(row => {
                 const tr = document.createElement('tr');
@@ -531,7 +775,7 @@
                 row.forEach(cell => {
                     const td = document.createElement('td');
                     td.className = "px-4 py-2 border border-slate-200";
-                    td.textContent = cell;
+                    td.textContent = (cell === null || cell === undefined) ? 'NULL' : cell;
                     tr.appendChild(td);
                 });
                 tbody.appendChild(tr);
@@ -542,14 +786,18 @@
 
         function displayMessage(type, text) {
             messageArea.textContent = text;
-            messageArea.className = 'mb-2 text-sm h-5 ';
+            messageArea.className = 'mb-2 text-sm min-h-[1.25rem] ';
             switch(type) {
                 case "success": messageArea.classList.add('text-green-600'); break;
                 case "error": messageArea.classList.add('text-red-600'); break;
                 case "warning": messageArea.classList.add('text-amber-600'); break;
             }
         }
-        function clearResults() { resultsContainer.innerHTML = ''; messageArea.innerHTML = ''; }
+
+        function clearResults() { 
+            resultsContainer.innerHTML = ''; 
+            messageArea.innerHTML = ''; 
+        }
 
         function showHint() {
             if (currentHint) {
@@ -565,23 +813,18 @@
             if (currentAnswer) {
                 hintArea.textContent = "Answer: " + currentAnswer;
                 hintArea.classList.remove('hidden');
-                
-                // Run the answer query to show results
-                // Temporarily store user's current input
-                const userQuery = sqlEditor.value;
-                
-                // Run the answer query silently to update results
+
                 try {
                     clearResults();
                     const statements = currentAnswer.split(';').filter(s => s.trim() !== '');
                     statements.forEach(statement => {
-                         const results = db.exec(statement.trim());
-                         if (results.length === 0) {
-                             displayMessage("warning", "The answer query returned 0 rows.");
-                         } else {
-                             results.forEach((result) => displayTable(result));
-                             displayMessage("success", "Showing results for the correct answer.");
-                         }
+                        const results = db.exec(statement.trim());
+                        if (results.length === 0) {
+                            displayMessage("warning", "The answer query returned 0 rows.");
+                        } else {
+                            results.forEach((result) => displayTable(result));
+                            displayMessage("success", "Showing results for the correct answer.");
+                        }
                     });
                 } catch (err) {
                     displayMessage("error", `Error running answer: ${err.message}`);
@@ -594,12 +837,9 @@
         // --- Accordion Behavior ---
         function setupAccordionBehavior() {
             const levels = document.querySelectorAll('.challenge-level');
-            
             levels.forEach(level => {
                 level.addEventListener('toggle', function() {
-                    // If this level is being opened
                     if (this.open) {
-                        // Close all other levels
                         levels.forEach(otherLevel => {
                             if (otherLevel !== this && otherLevel.open) {
                                 otherLevel.open = false;
@@ -614,39 +854,43 @@
         function setupQuestionListeners() {
             document.querySelectorAll('.question-list li').forEach(item => {
                 item.addEventListener('click', event => {
-                    // Visual highlight
                     document.querySelectorAll('.question-list li').forEach(li => li.classList.remove('active-question'));
-                    event.target.classList.add('active-question');
-
-                    const sql = event.target.getAttribute('data-sql');
-                    const hint = event.target.getAttribute('data-hint');
-                    const keywords = event.target.getAttribute('data-keywords');
-                    const answer = event.target.getAttribute('data-answer'); // Correct Answer
+                    event.currentTarget.classList.add('active-question');
                     
+                    const sql = event.currentTarget.getAttribute('data-sql');
+                    const hint = event.currentTarget.getAttribute('data-hint');
+                    const keywords = event.currentTarget.getAttribute('data-keywords');
+                    const answer = event.currentTarget.getAttribute('data-answer');
+
                     sqlEditor.value = `${sql}\n\n`;
                     sqlEditor.focus();
-                    
-                    // Update hint/check state
+
                     currentHint = hint || "No hint available for this challenge.";
                     currentKeywords = keywords ? keywords.split(',') : [];
                     currentAnswer = answer;
-                    
-                    hintArea.classList.add('hidden'); // Hide hint when switching questions
-                    hintBtn.classList.remove('hidden'); // Show button
-                    answerBtn.classList.remove('hidden'); // Show answer button
-                    
-                    // Clear previous messages
+
+                    hintArea.classList.add('hidden');
+                    hintBtn.classList.remove('hidden');
+                    answerBtn.classList.remove('hidden');
                     messageArea.textContent = "";
                 });
             });
         }
-        
+
+        // Button Listeners
         runSqlBtn.addEventListener('click', runSql);
-        saveDbBtn.addEventListener('click', saveDatabase);
+        saveDbBtn.addEventListener('click', () => saveAllDatabasesToSession(true));
         resetDbBtn.addEventListener('click', resetDatabase);
         hintBtn.addEventListener('click', showHint);
         answerBtn.addEventListener('click', showAnswer);
-        
+
+        newDbBtn.addEventListener('click', () => {
+            const dbName = prompt("Enter a name for the new database (e.g., library_db, school_store):");
+            if (dbName) {
+                createNewUserDatabase(dbName);
+            }
+        });
+
         sqlEditor.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                 e.preventDefault();
@@ -654,7 +898,7 @@
             }
         });
 
-        // Start the application
+        // Initialize application
         main();
     </script>
 </body>
