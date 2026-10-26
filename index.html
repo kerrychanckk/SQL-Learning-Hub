@@ -181,12 +181,36 @@
                     <textarea id="sql-editor" class="sql-editor w-full h-32 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="-- Type your SQL commands here or click a question from the challenges list! (Supports CREATE DATABASE, CREATE TABLE, INSERT, SELECT, etc.)"></textarea>
 
                     <div class="flex items-center justify-between mt-3 flex-wrap gap-2">
-                        <p class="text-xs text-slate-500">Tip: Use <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Ctrl+Enter</kbd> or <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Cmd+Enter</kbd> to run.</p>
-                        <div class="flex gap-2">
-                            <button id="hint-btn" class="bg-amber-400 text-white font-semibold py-2 px-5 rounded-lg hover:bg-amber-500 shadow-sm hidden">💡 Hint</button>
-                            <button id="answer-btn" class="bg-purple-500 text-white font-semibold py-2 px-5 rounded-lg hover:bg-purple-600 shadow-sm hidden">🔑 Answer</button>
-                            <button id="save-db-btn" class="bg-emerald-500 text-white font-semibold py-2 px-5 rounded-lg hover:bg-emerald-600 shadow-sm">Save Session</button>
-                            <button id="run-sql-btn" class="bg-sky-500 text-white font-bold py-2 px-8 rounded-lg hover:bg-sky-600 shadow-sm">Run SQL</button>
+                        <div class="flex items-center gap-3">
+                            <p class="text-xs text-slate-500">Tip: Use <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Ctrl+Enter</kbd> or <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Cmd+Enter</kbd> to run.</p>
+                            <!-- Live Auto-Save Status Indicator -->
+                            <span id="save-status-indicator" class="text-xs text-emerald-600 flex items-center gap-1 font-medium bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                Auto-saved to session
+                            </span>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <button id="hint-btn" class="bg-amber-400 text-white font-semibold py-2 px-4 rounded-lg hover:bg-amber-500 shadow-sm text-sm hidden">💡 Hint</button>
+                            <button id="answer-btn" class="bg-purple-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-600 shadow-sm text-sm hidden">🔑 Answer</button>
+
+                            <!-- Hidden file input for importing database files -->
+                            <input type="file" id="import-db-input" accept=".sqlite,.db" class="hidden">
+                            <button id="import-db-btn" title="Open an existing SQLite .db file" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold py-2 px-3 rounded-lg text-sm transition shadow-sm flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                </svg>
+                                Import
+                            </button>
+
+                            <!-- Export database button -->
+                            <button id="export-db-btn" title="Download the active database as a .sqlite file" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-3.5 rounded-lg text-sm shadow-sm transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Export DB (.sqlite)
+                            </button>
+
+                            <button id="run-sql-btn" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-sky-600 shadow-sm text-sm">Run SQL</button>
                         </div>
                     </div>
 
@@ -206,7 +230,9 @@
     <script>
         // DOM Elements
         const runSqlBtn = document.getElementById('run-sql-btn');
-        const saveDbBtn = document.getElementById('save-db-btn');
+        const exportDbBtn = document.getElementById('export-db-btn');
+        const importDbBtn = document.getElementById('import-db-btn');
+        const importDbInput = document.getElementById('import-db-input');
         const resetDbBtn = document.getElementById('reset-db-btn');
         const newDbBtn = document.getElementById('new-db-btn');
         const hintBtn = document.getElementById('hint-btn');
@@ -220,6 +246,7 @@
         const sqlEditor = document.getElementById('sql-editor');
         const messageArea = document.getElementById('message-area');
         const resultsContainer = document.getElementById('results-container');
+        const saveStatusIndicator = document.getElementById('save-status-indicator');
 
         // App State
         let SQL;
@@ -330,14 +357,14 @@
                 dbRegistry['school_db'] = defaultDb;
                 currentDbName = 'school_db';
                 db = defaultDb;
-                saveAllDatabasesToSession(false);
+                saveAllDatabasesToSession();
                 displayMessage("success", "A new database with normalized tables ('students', 'subjects', 'exams') has been created.");
             }
 
             updateDatabaseUI();
         }
 
-        function saveAllDatabasesToSession(showMessage = true) {
+        function saveAllDatabasesToSession() {
             try {
                 const payload = {
                     activeDb: currentDbName,
@@ -350,14 +377,14 @@
                 }
 
                 sessionStorage.setItem(sessionStorageKey, JSON.stringify(payload));
-                if (showMessage) {
-                    displayMessage("success", "Databases and tables saved for this browser session.");
+                
+                // Flash the auto-save indicator
+                if (saveStatusIndicator) {
+                    saveStatusIndicator.classList.add('bg-emerald-100');
+                    setTimeout(() => saveStatusIndicator.classList.remove('bg-emerald-100'), 500);
                 }
             } catch (err) {
                 console.error("Error saving databases to sessionStorage:", err);
-                if (showMessage) {
-                    displayMessage("error", "Failed to save session state: Storage limit exceeded.");
-                }
             }
         }
 
@@ -378,7 +405,7 @@
             registerCustomFunctions(newDatabase);
             dbRegistry[cleanName] = newDatabase;
             switchDatabase(cleanName);
-            saveAllDatabasesToSession(false);
+            saveAllDatabasesToSession();
             displayMessage("success", `Database '${cleanName}' created successfully! You can now create tables in it.`);
         }
 
@@ -387,7 +414,7 @@
             currentDbName = dbName;
             db = dbRegistry[dbName];
             updateDatabaseUI();
-            saveAllDatabasesToSession(false);
+            saveAllDatabasesToSession();
         }
 
         function updateDatabaseUI() {
@@ -437,7 +464,7 @@
                                 db = dbRegistry['school_db'];
                             }
                             updateDatabaseUI();
-                            saveAllDatabasesToSession(false);
+                            saveAllDatabasesToSession();
                             displayMessage("warning", `Database '${name}' was deleted.`);
                         }
                     };
@@ -583,9 +610,58 @@
                 dbRegistry[currentDbName] = blankDb;
                 db = blankDb;
             }
-            saveAllDatabasesToSession(false);
+            saveAllDatabasesToSession();
             updateDatabaseUI();
             displayMessage("success", `Database '${currentDbName}' has been reset.`);
+        }
+
+        // --- Export / Import Capabilities ---
+        function exportActiveDatabase() {
+            if (!db) { displayMessage("error", "Database not loaded."); return; }
+            try {
+                const exportedBytes = db.export();
+                const blob = new Blob([exportedBytes], { type: 'application/x-sqlite3' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentDbName}.sqlite`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                displayMessage("success", `Downloaded database file '${currentDbName}.sqlite'.`);
+            } catch (err) {
+                console.error("Export error:", err);
+                displayMessage("error", "Failed to export database file.");
+            }
+        }
+
+        function handleDatabaseImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function() {
+                try {
+                    const u8 = new Uint8Array(this.result);
+                    const importedDb = new SQL.Database(u8);
+                    registerCustomFunctions(importedDb);
+
+                    // Deduce database name from file name
+                    const rawName = file.name.replace(/\.[^/.]+$/, "");
+                    const cleanName = rawName.replace(/[^a-zA-Z0-9_]/g, '_') || 'imported_db';
+
+                    dbRegistry[cleanName] = importedDb;
+                    switchDatabase(cleanName);
+                    saveAllDatabasesToSession();
+                    displayMessage("success", `Imported database '${cleanName}' with all its tables.`);
+                } catch (err) {
+                    console.error("Error loading SQLite file:", err);
+                    displayMessage("error", "Could not import database. Please ensure it is a valid SQLite file.");
+                }
+            };
+            reader.readAsArrayBuffer(file);
+            event.target.value = ''; // reset so same file can be re-uploaded if needed
         }
 
         // --- SQL Execution & Display ---
@@ -656,14 +732,14 @@
                 if (isModifying) {
                     updateTablesList();
                     updateSchemaView();
-                    saveAllDatabasesToSession(false);
+                    saveAllDatabasesToSession();
                 }
             } catch (err) {
                 displayMessage("error", `Error: ${err.message}. Please fix your SQL and try again!`);
             }
         }
 
-        // Updated function using inline SVGs for guaranteed cross-platform rendering
+        // Cross-platform vector SVG table list
         function updateTablesList() {
             if (!db) return;
             tablesList.innerHTML = '';
@@ -680,8 +756,7 @@
 
                         const nameSpan = document.createElement('span');
                         nameSpan.className = 'flex items-center gap-2 text-xs text-slate-700 font-medium truncate';
-                        
-                        // Cross-browser vector SVG table grid icon
+
                         nameSpan.innerHTML = `
                             <svg class="w-4 h-4 text-sky-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="3" y="4" width="18" height="16" rx="2" stroke-width="2"></rect>
@@ -904,7 +979,9 @@
 
         // Button Listeners
         runSqlBtn.addEventListener('click', runSql);
-        saveDbBtn.addEventListener('click', () => saveAllDatabasesToSession(true));
+        exportDbBtn.addEventListener('click', exportActiveDatabase);
+        importDbBtn.addEventListener('click', () => importDbInput.click());
+        importDbInput.addEventListener('change', handleDatabaseImport);
         resetDbBtn.addEventListener('click', resetDatabase);
         hintBtn.addEventListener('click', showHint);
         answerBtn.addEventListener('click', showAnswer);
