@@ -21,7 +21,8 @@
             transition: background-color 0.2s ease-in-out;
             user-select: none;
         }
-        details > summary:hover, details[open] > summary { background-color: #e2e8f0; }
+        details > summary:hover { background-color: #e2e8f0; }
+        details[open] > summary { background-color: #e2e8f0; }
         .question-list { padding-left: 0.25rem; margin-top: 0.5rem; font-size: 0.8125rem; }
         .question-list li {
             padding: 0.45rem 0.5rem;
@@ -125,7 +126,7 @@
                     </details>
 
                     <!-- Tables in Database Accordion -->
-                    <details id="db-tables-details" class="sidebar-section" open>
+                    <details id="db-tables-details" class="sidebar-section">
                         <summary class="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-slate-600 bg-slate-100 hover:bg-slate-200 py-1.5 px-2.5 rounded">
                             <span class="flex items-center gap-1.5">
                                 <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -300,7 +301,7 @@
                         </ol>
                     </details>
 
-                    <!-- Level 4: School DB (Advanced - 31 Questions) -->
+                    <!-- Level 4: School DB (Advanced - 30 Questions) -->
                     <details id="level-sch-4" class="challenge-level">
                         <summary class="text-rose-800 bg-rose-100 hover:bg-rose-200 text-xs font-bold">Level 4: Advanced (DDL, DML, Joins & Subqueries)</summary>
                         <ol class="question-list list-decimal list-inside">
@@ -370,7 +371,7 @@
                                 <span class="truncate">Q15: [DML] Delete exam records below passing</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <!-- Category 7: JOIN two tables (9) -->
+                            <!-- Category 7: JOIN two tables (8) -->
                             <li data-qid="sch_l4_16" data-target-db="school_db" data-sql="-- Q16: [Equi-Join] List student_id, first_name, last_name, subject_code, and score for ICT exam by joining students and exams." data-answer="SELECT s.student_id, s.first_name, s.last_name, e.subject_code, e.score FROM students s INNER JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'ICT';" data-hint="JOIN students s ON s.student_id = e.student_id WHERE e.subject_code = 'ICT';" data-keywords="SELECT,JOIN,ON,WHERE,subject_code,'ICT'">
                                 <span class="truncate">Q16: [Join] Equi-Join students and exams</span>
                                 <span class="status-slot"></span>
@@ -391,49 +392,45 @@
                                 <span class="truncate">Q20: [Join] Left outer join subjects & exams</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_21" data-target-db="school_db" data-sql="-- Q21: [LEFT OUTER JOIN] Find student_id, last_name, first_name, and class for students who did NOT enrol in any events in 'Ameet' using a LEFT OUTER JOIN (WHERE Ameet.student_id IS NULL)." data-answer="SELECT students.student_id, students.last_name, students.first_name, students.class FROM students LEFT JOIN Ameet ON students.student_id = Ameet.student_id WHERE Ameet.student_id IS NULL;" data-hint="SELECT students.student_id, students.last_name, students.first_name, students.class FROM students LEFT JOIN Ameet ON students.student_id = Ameet.student_id WHERE Ameet.student_id IS NULL;" data-keywords="SELECT,FROM,students,LEFT,JOIN,Ameet,ON,WHERE,IS,NULL">
-                                <span class="truncate">Q21: [Join] Students not enrolled in Ameet (LEFT JOIN ... IS NULL)</span>
+                            <li data-qid="sch_l4_21" data-target-db="school_db" data-sql="-- Q21: [RIGHT JOIN] Display exams.student_id, subjects.subject_code, and subjects.subject_name using a RIGHT JOIN from exams to subjects." data-answer="SELECT exams.student_id, subjects.subject_code, subjects.subject_name FROM exams RIGHT JOIN subjects ON exams.subject_code = subjects.subject_code;" data-hint="SELECT ... FROM exams RIGHT JOIN subjects ON exams.subject_code = subjects.subject_code;" data-keywords="SELECT,FROM,exams,RIGHT,JOIN,subjects,ON">
+                                <span class="truncate">Q21: [Join] Right outer join exams & subjects</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_22" data-target-db="school_db" data-sql="-- Q22: [RIGHT JOIN] Display exams.student_id, subjects.subject_code, and subjects.subject_name using a RIGHT JOIN from exams to subjects." data-answer="SELECT exams.student_id, subjects.subject_code, subjects.subject_name FROM exams RIGHT JOIN subjects ON exams.subject_code = subjects.subject_code;" data-hint="SELECT ... FROM exams RIGHT JOIN subjects ON exams.subject_code = subjects.subject_code;" data-keywords="SELECT,FROM,exams,RIGHT,JOIN,subjects,ON">
-                                <span class="truncate">Q22: [Join] Right outer join exams & subjects</span>
+                            <li data-qid="sch_l4_22" data-target-db="school_db" data-sql="-- Q22: [FULL OUTER JOIN] Perform a FULL OUTER JOIN between students and exams on student_id. Show student_id, last_name, subject_code, score." data-answer="SELECT students.student_id, students.last_name, exams.subject_code, exams.score FROM students FULL OUTER JOIN exams ON students.student_id = exams.student_id;" data-hint="SELECT ... FROM students FULL OUTER JOIN exams ON students.student_id = exams.student_id;" data-keywords="SELECT,FULL,OUTER,JOIN,ON">
+                                <span class="truncate">Q22: [Join] Full outer join students & exams</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_23" data-target-db="school_db" data-sql="-- Q23: [FULL OUTER JOIN] Perform a FULL OUTER JOIN between students and exams on student_id. Show student_id, last_name, subject_code, score." data-answer="SELECT students.student_id, students.last_name, exams.subject_code, exams.score FROM students FULL OUTER JOIN exams ON students.student_id = exams.student_id;" data-hint="SELECT ... FROM students FULL OUTER JOIN exams ON students.student_id = exams.student_id;" data-keywords="SELECT,FULL,OUTER,JOIN,ON">
-                                <span class="truncate">Q23: [Join] Full outer join students & exams</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_l4_24" data-target-db="school_db" data-sql="-- Q24: [Join + L1-3 Skills] Join students and exams, group by student_id and last_name for class '4A', having average score >= 75, ordered by avg_score DESC." data-answer="SELECT s.student_id, s.last_name, AVG(e.score) AS avg_score FROM students s INNER JOIN exams e ON s.student_id = e.student_id WHERE s.class = '4A' GROUP BY s.student_id, s.last_name HAVING AVG(e.score) >= 75 ORDER BY avg_score DESC;" data-hint="Combine JOIN, WHERE class='4A', GROUP BY, HAVING AVG(e.score) >= 75, and ORDER BY." data-keywords="JOIN,WHERE,GROUP BY,HAVING,AVG,ORDER BY,DESC">
-                                <span class="truncate">Q24: [Join] Join + Aggregation + HAVING + ORDER BY</span>
+                            <li data-qid="sch_l4_23" data-target-db="school_db" data-sql="-- Q23: [Join + L1-3 Skills] Join students and exams, group by student_id and last_name for class '4A', having average score >= 75, ordered by avg_score DESC." data-answer="SELECT s.student_id, s.last_name, AVG(e.score) AS avg_score FROM students s INNER JOIN exams e ON s.student_id = e.student_id WHERE s.class = '4A' GROUP BY s.student_id, s.last_name HAVING AVG(e.score) >= 75 ORDER BY avg_score DESC;" data-hint="Combine JOIN, WHERE class='4A', GROUP BY, HAVING AVG(e.score) >= 75, and ORDER BY." data-keywords="JOIN,WHERE,GROUP BY,HAVING,AVG,ORDER BY,DESC">
+                                <span class="truncate">Q23: [Join] Join + Aggregation + HAVING + ORDER BY</span>
                                 <span class="status-slot"></span>
                             </li>
                             <!-- Category 8: SUBQUERIES (7) -->
-                            <li data-qid="sch_l4_25" data-target-db="school_db" data-sql="-- Q25: [Subquery IN] Find student_id, last_name, class for students who took the 'ICT' exam using an IN subquery." data-answer="SELECT student_id, last_name, class FROM students WHERE student_id IN (SELECT student_id FROM exams WHERE subject_code = 'ICT');" data-hint="WHERE student_id IN (SELECT student_id FROM exams WHERE subject_code = 'ICT');" data-keywords="SELECT,WHERE,student_id,IN,SELECT,exams">
-                                <span class="truncate">Q25: [Subquery] Students taking ICT (IN)</span>
+                            <li data-qid="sch_l4_24" data-target-db="school_db" data-sql="-- Q24: [Subquery IN] Find student_id, last_name, class for students who took the 'ICT' exam using an IN subquery." data-answer="SELECT student_id, last_name, class FROM students WHERE student_id IN (SELECT student_id FROM exams WHERE subject_code = 'ICT');" data-hint="WHERE student_id IN (SELECT student_id FROM exams WHERE subject_code = 'ICT');" data-keywords="SELECT,WHERE,student_id,IN,SELECT,exams">
+                                <span class="truncate">Q24: [Subquery] Students taking ICT (IN)</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_26" data-target-db="school_db" data-sql="-- Q26: [Subquery NOT IN] Find student_id, last_name, class for students who have NOT taken the 'BIO' exam using NOT IN." data-answer="SELECT student_id, last_name, class FROM students WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'BIO');" data-hint="WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'BIO');" data-keywords="SELECT,WHERE,student_id,NOT,IN,SELECT">
-                                <span class="truncate">Q26: [Subquery] Students not taking BIO (NOT IN)</span>
+                            <li data-qid="sch_l4_25" data-target-db="school_db" data-sql="-- Q25: [Subquery NOT IN] Find student_id, last_name, class for students who have NOT taken the 'BIO' exam using NOT IN." data-answer="SELECT student_id, last_name, class FROM students WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'BIO');" data-hint="WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'BIO');" data-keywords="SELECT,WHERE,student_id,NOT,IN,SELECT">
+                                <span class="truncate">Q25: [Subquery] Students not taking BIO (NOT IN)</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_27" data-target-db="school_db" data-sql="-- Q27: [Subquery EXISTS] Find student_id, first_name, last_name for students who scored strictly above 90 in at least one exam using EXISTS." data-answer="SELECT student_id, first_name, last_name FROM students WHERE EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score > 90);" data-hint="WHERE EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score > 90);" data-keywords="WHERE,EXISTS,SELECT,exams,score,>,90">
-                                <span class="truncate">Q27: [Subquery] Students with score > 90 (EXISTS)</span>
+                            <li data-qid="sch_l4_26" data-target-db="school_db" data-sql="-- Q26: [Subquery EXISTS] Find student_id, first_name, last_name for students who scored strictly above 90 in at least one exam using EXISTS." data-answer="SELECT student_id, first_name, last_name FROM students WHERE EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score > 90);" data-hint="WHERE EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score > 90);" data-keywords="WHERE,EXISTS,SELECT,exams,score,>,90">
+                                <span class="truncate">Q26: [Subquery] Students with score > 90 (EXISTS)</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_28" data-target-db="school_db" data-sql="-- Q28: [Subquery NOT EXISTS] Find student_id, first_name, last_name for students who have NO exam score below 60 using NOT EXISTS." data-answer="SELECT student_id, first_name, last_name FROM students WHERE NOT EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score < 60);" data-hint="WHERE NOT EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score < 60);" data-keywords="WHERE,NOT,EXISTS,SELECT,exams,score,<,60">
-                                <span class="truncate">Q28: [Subquery] No failing scores (NOT EXISTS)</span>
+                            <li data-qid="sch_l4_27" data-target-db="school_db" data-sql="-- Q27: [Subquery NOT EXISTS] Find student_id, first_name, last_name for students who have NO exam score below 60 using NOT EXISTS." data-answer="SELECT student_id, first_name, last_name FROM students WHERE NOT EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score < 60);" data-hint="WHERE NOT EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score < 60);" data-keywords="WHERE,NOT,EXISTS,SELECT,exams,score,<,60">
+                                <span class="truncate">Q27: [Subquery] No failing scores (NOT EXISTS)</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_29" data-target-db="school_db" data-sql="-- Q29: [Subquery > ALL] Find student_id, subject_code, score from exams where score is strictly greater than ALL scores in 'ENG' exam." data-answer="SELECT student_id, subject_code, score FROM exams WHERE score > (SELECT MAX(score) FROM exams WHERE subject_code = 'ENG');" data-hint="In standard SQL use score > ALL (...); in SQLite use score > (SELECT MAX(score) FROM exams WHERE subject_code = 'ENG');" data-keywords="SELECT,WHERE,score,>,SELECT,MAX,ENG">
-                                <span class="truncate">Q29: [Subquery] Scores greater than ALL ENG scores</span>
+                            <li data-qid="sch_l4_28" data-target-db="school_db" data-sql="-- Q28: [Subquery > ALL] Find student_id, subject_code, score from exams where score is strictly greater than ALL scores in 'ENG' exam." data-answer="SELECT student_id, subject_code, score FROM exams WHERE score > (SELECT MAX(score) FROM exams WHERE subject_code = 'ENG');" data-hint="In standard SQL use score > ALL (...); in SQLite use score > (SELECT MAX(score) FROM exams WHERE subject_code = 'ENG');" data-keywords="SELECT,WHERE,score,>,SELECT,MAX,ENG">
+                                <span class="truncate">Q28: [Subquery] Scores greater than ALL ENG scores</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_30" data-target-db="school_db" data-sql="-- Q30: [Subquery + Level 1-3 Skills] Find student_id, subject_code, and score from exams where score is strictly above the grand average score across all exams." data-answer="SELECT student_id, subject_code, score FROM exams WHERE score > (SELECT AVG(score) FROM exams);" data-hint="WHERE score > (SELECT AVG(score) FROM exams);" data-keywords="SELECT,WHERE,score,>,SELECT,AVG,exams">
-                                <span class="truncate">Q30: [Subquery] Exam scores above overall AVG</span>
+                            <li data-qid="sch_l4_29" data-target-db="school_db" data-sql="-- Q29: [Subquery + Level 1-3 Skills] Find student_id, subject_code, and score from exams where score is strictly above the grand average score across all exams." data-answer="SELECT student_id, subject_code, score FROM exams WHERE score > (SELECT AVG(score) FROM exams);" data-hint="WHERE score > (SELECT AVG(score) FROM exams);" data-keywords="SELECT,WHERE,score,>,SELECT,AVG,exams">
+                                <span class="truncate">Q29: [Subquery] Exam scores above overall AVG</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_l4_31" data-target-db="school_db" data-sql="-- Q31: [Correlated Subquery] Find exam records (student_id, subject_code, score) where score is higher than the average score for that specific subject." data-answer="SELECT student_id, subject_code, score FROM exams e1 WHERE score > (SELECT AVG(score) FROM exams e2 WHERE e2.subject_code = e1.subject_code);" data-hint="Correlated subquery: WHERE score > (SELECT AVG(score) FROM exams e2 WHERE e2.subject_code = e1.subject_code);" data-keywords="SELECT,WHERE,score,>,SELECT,AVG,subject_code">
-                                <span class="truncate">Q31: [Subquery] Above subject average (Correlated)</span>
+                            <li data-qid="sch_l4_30" data-target-db="school_db" data-sql="-- Q30: [Correlated Subquery] Find exam records (student_id, subject_code, score) where score is higher than the average score for that specific subject." data-answer="SELECT student_id, subject_code, score FROM exams e1 WHERE score > (SELECT AVG(score) FROM exams e2 WHERE e2.subject_code = e1.subject_code);" data-hint="Correlated subquery: WHERE score > (SELECT AVG(score) FROM exams e2 WHERE e2.subject_code = e1.subject_code);" data-keywords="SELECT,WHERE,score,>,SELECT,AVG,subject_code">
+                                <span class="truncate">Q30: [Subquery] Above subject average (Correlated)</span>
                                 <span class="status-slot"></span>
                             </li>
                         </ol>
@@ -488,6 +485,235 @@
                             </li>
                         </ol>
                     </details>
+
+                    <!-- Level 2: Chinook DB -->
+                    <details id="level-chk-2" class="challenge-level">
+                        <summary class="text-amber-700 bg-amber-100 hover:bg-amber-200 text-xs font-bold">Level 2: WHERE, Logic, Range, IN & Pattern Matching</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <li data-qid="chk_l2_1" data-target-db="chinook_db" data-sql="-- Q1: Find all customers located in 'Brazil'." data-answer="SELECT * FROM Customer WHERE Country = 'Brazil';" data-hint="WHERE Country = 'Brazil';" data-keywords="WHERE,Country,'Brazil'">
+                                <span class="truncate">Q1: Customers from Brazil</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_2" data-target-db="chinook_db" data-sql="-- Q2: Find all customers whose Country is NOT 'USA' using '<>'." data-answer="SELECT * FROM Customer WHERE Country <> 'USA';" data-hint="WHERE Country <> 'USA';" data-keywords="WHERE,Country,<>'USA'">
+                                <span class="truncate">Q2: Non-USA customers (<>)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_3" data-target-db="chinook_db" data-sql="-- Q3: Find all employees with job title 'Sales Support Agent' who were hired after '2002-12-31'." data-answer="SELECT * FROM Employee WHERE Title = 'Sales Support Agent' AND HireDate > '2002-12-31';" data-hint="WHERE Title = 'Sales Support Agent' AND HireDate > '2002-12-31';" data-keywords="WHERE,Title,AND,HireDate">
+                                <span class="truncate">Q3: Sales Support hired after 2002</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_4" data-target-db="chinook_db" data-sql="-- Q4: Find all invoices where the Total is strictly less than 2.00 OR greater than 10.00." data-answer="SELECT * FROM Invoice WHERE Total < 2.00 OR Total > 10.00;" data-hint="WHERE Total < 2.00 OR Total > 10.00;" data-keywords="WHERE,Total,<,OR,>">
+                                <span class="truncate">Q4: Invoices under $2 or over $10</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_5" data-target-db="chinook_db" data-sql="-- Q5: Find all customers who live in 'USA', 'Canada', or 'Brazil' using the IN operator." data-answer="SELECT * FROM Customer WHERE Country IN ('USA', 'Canada', 'Brazil');" data-hint="WHERE Country IN ('USA', 'Canada', 'Brazil');" data-keywords="WHERE,Country,IN">
+                                <span class="truncate">Q5: Customers IN USA, Canada, Brazil</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_6" data-target-db="chinook_db" data-sql="-- Q6: Find tracks whose duration is BETWEEN 200000 AND 300000 milliseconds." data-answer="SELECT * FROM Track WHERE Milliseconds BETWEEN 200000 AND 300000;" data-hint="WHERE Milliseconds BETWEEN 200000 AND 300000;" data-keywords="WHERE,Milliseconds,BETWEEN,AND">
+                                <span class="truncate">Q6: Tracks duration BETWEEN 200s and 300s</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_7" data-target-db="chinook_db" data-sql="-- Q7: Find all tracks whose Name begins with 'The ' using the LIKE operator." data-answer="SELECT * FROM Track WHERE Name LIKE 'The %';" data-hint="WHERE Name LIKE 'The %';" data-keywords="WHERE,Name,LIKE,'The %'">
+                                <span class="truncate">Q7: Tracks starting with 'The '</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_8" data-target-db="chinook_db" data-sql="-- Q8: Find all customers with an email ending in '.com' using LIKE." data-answer="SELECT * FROM Customer WHERE Email LIKE '%.com';" data-hint="WHERE Email LIKE '%.com';" data-keywords="WHERE,Email,LIKE,'%.com'">
+                                <span class="truncate">Q8: Customers with .com email addresses</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_9" data-target-db="chinook_db" data-sql="-- Q9: Find all tracks whose Composer contains 'Mercury' using LIKE." data-answer="SELECT * FROM Track WHERE Composer LIKE '%Mercury%';" data-hint="WHERE Composer LIKE '%Mercury%';" data-keywords="WHERE,Composer,LIKE,'%Mercury%'">
+                                <span class="truncate">Q9: Tracks composed by Mercury</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_10" data-target-db="chinook_db" data-sql="-- Q10: Find invoices billed to 'Germany' where Total > 3.00, ordered by InvoiceDate DESC." data-answer="SELECT * FROM Invoice WHERE BillingCountry = 'Germany' AND Total > 3.00 ORDER BY InvoiceDate DESC;" data-hint="WHERE BillingCountry = 'Germany' AND Total > 3.00 ORDER BY InvoiceDate DESC;" data-keywords="WHERE,BillingCountry,AND,Total,ORDER BY">
+                                <span class="truncate">Q10: Germany invoices with sorting</span>
+                                <span class="status-slot"></span>
+                            </li>
+                        </ol>
+                    </details>
+
+                    <!-- Level 3: Chinook DB -->
+                    <details id="level-chk-3" class="challenge-level">
+                        <summary class="text-indigo-800 bg-indigo-100 hover:bg-indigo-200 text-xs font-bold">Level 3: GROUP BY, HAVING & Aggregations</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <li data-qid="chk_l3_1" data-target-db="chinook_db" data-sql="-- Q1: Calculate the total number of customers in the Customer table." data-answer="SELECT COUNT(*) AS total_customers FROM Customer;" data-hint="SELECT COUNT(*) FROM Customer;" data-keywords="SELECT,COUNT(*),FROM,Customer">
+                                <span class="truncate">Q1: Total customer count (COUNT)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_2" data-target-db="chinook_db" data-sql="-- Q2: Find the grand total revenue (SUM) across all invoices." data-answer="SELECT SUM(Total) AS total_revenue FROM Invoice;" data-hint="SELECT SUM(Total) FROM Invoice;" data-keywords="SELECT,SUM,Total,FROM,Invoice">
+                                <span class="truncate">Q2: Grand total revenue (SUM)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_3" data-target-db="chinook_db" data-sql="-- Q3: Calculate the average (AVG), minimum (MIN), and maximum (MAX) track duration in milliseconds." data-answer="SELECT AVG(Milliseconds) AS avg_ms, MIN(Milliseconds) AS min_ms, MAX(Milliseconds) AS max_ms FROM Track;" data-hint="SELECT AVG(Milliseconds), MIN(Milliseconds), MAX(Milliseconds) FROM Track;" data-keywords="AVG,MIN,MAX,Milliseconds">
+                                <span class="truncate">Q3: Average, min, max track length</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_4" data-target-db="chinook_db" data-sql="-- Q4: Count the number of customers in each Country (GROUP BY Country)." data-answer="SELECT Country, COUNT(*) AS customer_count FROM Customer GROUP BY Country;" data-hint="SELECT Country, COUNT(*) FROM Customer GROUP BY Country;" data-keywords="SELECT,Country,COUNT,GROUP BY">
+                                <span class="truncate">Q4: Customer count per Country</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_5" data-target-db="chinook_db" data-sql="-- Q5: Calculate the total invoice revenue generated in each BillingCountry." data-answer="SELECT BillingCountry, SUM(Total) AS revenue FROM Invoice GROUP BY BillingCountry;" data-hint="SELECT BillingCountry, SUM(Total) FROM Invoice GROUP BY BillingCountry;" data-keywords="GROUP BY,BillingCountry,SUM,Total">
+                                <span class="truncate">Q5: Total revenue by BillingCountry</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_6" data-target-db="chinook_db" data-sql="-- Q6: Calculate the count of tracks and average duration for each AlbumId." data-answer="SELECT AlbumId, COUNT(*) AS track_count, AVG(Milliseconds) AS avg_duration FROM Track GROUP BY AlbumId;" data-hint="GROUP BY AlbumId;" data-keywords="GROUP BY,AlbumId,COUNT,AVG">
+                                <span class="truncate">Q6: Track count and AVG length per Album</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_7" data-target-db="chinook_db" data-sql="-- Q7: Find billing countries whose total invoice revenue is greater than 10.00 using HAVING." data-answer="SELECT BillingCountry, SUM(Total) AS total_sales FROM Invoice GROUP BY BillingCountry HAVING SUM(Total) > 10.00;" data-hint="GROUP BY BillingCountry HAVING SUM(Total) > 10.00;" data-keywords="GROUP BY,HAVING,SUM,>">
+                                <span class="truncate">Q7: Countries with revenue > $10 (HAVING)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_8" data-target-db="chinook_db" data-sql="-- Q8: Find albums (AlbumId) that contain more than 1 track using HAVING, ordered by track count descending." data-answer="SELECT AlbumId, COUNT(*) AS track_count FROM Track GROUP BY AlbumId HAVING COUNT(*) > 1 ORDER BY track_count DESC;" data-hint="GROUP BY AlbumId HAVING COUNT(*) > 1 ORDER BY track_count DESC;" data-keywords="GROUP BY,HAVING,COUNT,ORDER BY,DESC">
+                                <span class="truncate">Q8: Albums with > 1 track (HAVING & ORDER BY)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_9" data-target-db="chinook_db" data-sql="-- Q9: Count the number of invoices assigned to each CustomerId, but only show customers with at least 2 invoices." data-answer="SELECT CustomerId, COUNT(*) AS invoice_count FROM Invoice GROUP BY CustomerId HAVING COUNT(*) >= 2;" data-hint="GROUP BY CustomerId HAVING COUNT(*) >= 2;" data-keywords="GROUP BY,CustomerId,HAVING,COUNT,>=">
+                                <span class="truncate">Q9: Repeat customers (HAVING COUNT >= 2)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_10" data-target-db="chinook_db" data-sql="-- Q10: Considering only tracks in GenreId 1, find composers who wrote more than 1 track, ordered from most to fewest." data-answer="SELECT Composer, COUNT(*) AS track_count FROM Track WHERE GenreId = 1 AND Composer IS NOT NULL GROUP BY Composer HAVING COUNT(*) > 1 ORDER BY track_count DESC;" data-hint="Combine WHERE, GROUP BY Composer, and HAVING COUNT(*) > 1." data-keywords="WHERE,GenreId,GROUP BY,Composer,HAVING,COUNT,ORDER BY">
+                                <span class="truncate">Q10: Rock composers (WHERE + GROUP + HAVING)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                        </ol>
+                    </details>
+
+                    <!-- Level 4: Chinook DB (Advanced - 30 Questions) -->
+                    <details id="level-chk-4" class="challenge-level">
+                        <summary class="text-rose-800 bg-rose-100 hover:bg-rose-200 text-xs font-bold">Level 4: Advanced (DDL, DML, Joins & Subqueries)</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <!-- Category 1: CREATE DATABASE (1) -->
+                            <li data-qid="chk_l4_1" data-target-db="chinook_db" data-sql="-- Q1: Create a new database named 'streaming_db'." data-answer="CREATE DATABASE streaming_db;" data-hint="Syntax: CREATE DATABASE streaming_db;" data-keywords="CREATE,DATABASE,streaming_db">
+                                <span class="truncate">Q1: [DDL] Create database streaming_db</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 2: CREATE TABLE (2) -->
+                            <li data-qid="chk_l4_2" data-target-db="chinook_db" data-sql="-- Q2: Create a new table 'Playlists' with PlaylistId (INTEGER PRIMARY KEY AUTOINCREMENT) and Name (TEXT NOT NULL)." data-answer="CREATE TABLE Playlists (PlaylistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL);" data-hint="CREATE TABLE Playlists (PlaylistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL);" data-keywords="CREATE,TABLE,Playlists,PlaylistId,PRIMARY,KEY">
+                                <span class="truncate">Q2: [DDL] Create table Playlists</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_3" data-target-db="chinook_db" data-sql="-- Q3: Create table 'PlaylistTrack' with PlaylistId (INTEGER), TrackId (INTEGER), and composite PRIMARY KEY (PlaylistId, TrackId)." data-answer="CREATE TABLE PlaylistTrack (PlaylistId INTEGER, TrackId INTEGER, PRIMARY KEY (PlaylistId, TrackId));" data-hint="CREATE TABLE PlaylistTrack (PlaylistId INTEGER, TrackId INTEGER, PRIMARY KEY (PlaylistId, TrackId));" data-keywords="CREATE,TABLE,PlaylistTrack,PRIMARY,KEY">
+                                <span class="truncate">Q3: [DDL] Create table PlaylistTrack</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 3: INSERT records (2) -->
+                            <li data-qid="chk_l4_4" data-target-db="chinook_db" data-sql="-- Q4: Insert one record into 'Genre': GenreId 6, Name 'Electronic'." data-answer="INSERT INTO Genre (GenreId, Name) VALUES (6, 'Electronic');" data-hint="INSERT INTO Genre (GenreId, Name) VALUES (6, 'Electronic');" data-keywords="INSERT,INTO,Genre,VALUES,6,'Electronic'">
+                                <span class="truncate">Q4: [DML] Insert single genre record</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_5" data-target-db="chinook_db" data-sql="-- Q5: Insert two records into 'Artist': 'Pink Floyd' and 'Nirvana'." data-answer="INSERT INTO Artist (Name) VALUES ('Pink Floyd'), ('Nirvana');" data-hint="INSERT INTO Artist (Name) VALUES ('Pink Floyd'), ('Nirvana');" data-keywords="INSERT,INTO,Artist,VALUES,'Pink Floyd','Nirvana'">
+                                <span class="truncate">Q5: [DML] Insert multiple artist records</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 4: UPDATE records (3) -->
+                            <li data-qid="chk_l4_6" data-target-db="chinook_db" data-sql="-- Q6: Update UnitPrice to 1.29 for all tracks belonging to AlbumId = 1." data-answer="UPDATE Track SET UnitPrice = 1.29 WHERE AlbumId = 1;" data-hint="UPDATE Track SET UnitPrice = 1.29 WHERE AlbumId = 1;" data-keywords="UPDATE,Track,SET,UnitPrice,WHERE,AlbumId">
+                                <span class="truncate">Q6: [DML] Update track unit price</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_7" data-target-db="chinook_db" data-sql="-- Q7: Update customer 1 so that City becomes 'São Paulo' and PostalCode becomes '01000'." data-answer="UPDATE Customer SET City = 'São Paulo', PostalCode = '01000' WHERE CustomerId = 1;" data-hint="UPDATE Customer SET City = 'São Paulo', PostalCode = '01000' WHERE CustomerId = 1;" data-keywords="UPDATE,Customer,SET,City,PostalCode,WHERE,CustomerId">
+                                <span class="truncate">Q7: [DML] Update customer address</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_8" data-target-db="chinook_db" data-sql="-- Q8: Add 1.00 to Total for all invoices billed to 'Germany' where Total < 5.00." data-answer="UPDATE Invoice SET Total = Total + 1.00 WHERE BillingCountry = 'Germany' AND Total < 5.00;" data-hint="UPDATE Invoice SET Total = Total + 1.00 WHERE BillingCountry = 'Germany' AND Total < 5.00;" data-keywords="UPDATE,Invoice,SET,Total,WHERE,BillingCountry,AND">
+                                <span class="truncate">Q8: [DML] Update invoice total conditionally</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 5: ALTER TABLE (5) -->
+                            <li data-qid="chk_l4_9" data-target-db="chinook_db" data-sql="-- Q9: Add a new column 'Rating' of type INTEGER to table 'Track'." data-answer="ALTER TABLE Track ADD COLUMN Rating INTEGER;" data-hint="ALTER TABLE Track ADD COLUMN Rating INTEGER;" data-keywords="ALTER,TABLE,Track,ADD,COLUMN,Rating">
+                                <span class="truncate">Q9: [DDL] Add Rating column to Track</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_10" data-target-db="chinook_db" data-sql="-- Q10: Add a new column 'Discount' of type NUMERIC with DEFAULT 0.0 to table 'Invoice'." data-answer="ALTER TABLE Invoice ADD COLUMN Discount NUMERIC DEFAULT 0.0;" data-hint="ALTER TABLE Invoice ADD COLUMN Discount NUMERIC DEFAULT 0.0;" data-keywords="ALTER,TABLE,Invoice,ADD,COLUMN,Discount,DEFAULT">
+                                <span class="truncate">Q10: [DDL] Add Discount column with DEFAULT</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_11" data-target-db="chinook_db" data-sql="-- Q11: Rename column 'Phone' to 'PhoneNumber' in table 'Customer'." data-answer="ALTER TABLE Customer RENAME COLUMN Phone TO PhoneNumber;" data-hint="ALTER TABLE Customer RENAME COLUMN Phone TO PhoneNumber;" data-keywords="ALTER,TABLE,Customer,RENAME,COLUMN,PhoneNumber">
+                                <span class="truncate">Q11: [DDL] Rename Phone column in Customer</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_12" data-target-db="chinook_db" data-sql="-- Q12: Rename table 'MediaType' to 'MediaFormat'." data-answer="ALTER TABLE MediaType RENAME TO MediaFormat;" data-hint="ALTER TABLE MediaType RENAME TO MediaFormat;" data-keywords="ALTER,TABLE,MediaType,RENAME,TO,MediaFormat">
+                                <span class="truncate">Q12: [DDL] Rename table MediaType</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_13" data-target-db="chinook_db" data-sql="-- Q13: Drop column 'Company' from table 'Customer'." data-answer="ALTER TABLE Customer DROP COLUMN Company;" data-hint="ALTER TABLE Customer DROP COLUMN Company;" data-keywords="ALTER,TABLE,Customer,DROP,COLUMN,Company">
+                                <span class="truncate">Q13: [DDL] Drop Company column from Customer</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 6: DELETE record (2) -->
+                            <li data-qid="chk_l4_14" data-target-db="chinook_db" data-sql="-- Q14: Delete the track with TrackId = 20 from the 'Track' table." data-answer="DELETE FROM Track WHERE TrackId = 20;" data-hint="DELETE FROM Track WHERE TrackId = 20;" data-keywords="DELETE,FROM,Track,WHERE,TrackId,20">
+                                <span class="truncate">Q14: [DML] Delete track record</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_15" data-target-db="chinook_db" data-sql="-- Q15: Delete all invoices where Total is strictly less than 4.00." data-answer="DELETE FROM Invoice WHERE Total < 4.00;" data-hint="DELETE FROM Invoice WHERE Total < 4.00;" data-keywords="DELETE,FROM,Invoice,WHERE,Total,<,4.00">
+                                <span class="truncate">Q15: [DML] Delete low-value invoices</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 7: JOIN two tables (8) -->
+                            <li data-qid="chk_l4_16" data-target-db="chinook_db" data-sql="-- Q16: [Equi-Join] List Track.Name, Album.Title, and Track.UnitPrice by joining Track and Album on AlbumId." data-answer="SELECT Track.Name, Album.Title, Track.UnitPrice FROM Track INNER JOIN Album ON Track.AlbumId = Album.AlbumId;" data-hint="SELECT ... FROM Track INNER JOIN Album ON Track.AlbumId = Album.AlbumId;" data-keywords="SELECT,FROM,Track,INNER,JOIN,Album,ON">
+                                <span class="truncate">Q16: [Join] Equi-Join Track and Album</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_17" data-target-db="chinook_db" data-sql="-- Q17: [Non-Equi Join] Pair tracks in GenreId 1 where Track 1 is strictly longer in duration than Track 2 (t1.Milliseconds > t2.Milliseconds). Show t1.Name, t2.Name, t1.GenreId." data-answer="SELECT t1.Name AS track1, t2.Name AS track2, t1.GenreId FROM Track t1 INNER JOIN Track t2 ON t1.GenreId = t2.GenreId AND t1.Milliseconds > t2.Milliseconds;" data-hint="JOIN Track t2 ON t1.GenreId = t2.GenreId AND t1.Milliseconds > t2.Milliseconds;" data-keywords="JOIN,ON,t1.GenreId,AND,t1.Milliseconds,>,t2.Milliseconds">
+                                <span class="truncate">Q17: [Join] Non-equi join on duration</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_18" data-target-db="chinook_db" data-sql="-- Q18: [Self Join] Find employee full names alongside their manager's full names by joining Employee on ReportsTo = EmployeeId." data-answer="SELECT e.FirstName AS EmployeeName, e.LastName AS EmployeeLast, m.FirstName AS ManagerName, m.LastName AS ManagerLast FROM Employee e INNER JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-hint="FROM Employee e INNER JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-keywords="JOIN,Employee,ON,ReportsTo,EmployeeId">
+                                <span class="truncate">Q18: [Join] Self join Employee on manager hierarchy</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_19" data-target-db="chinook_db" data-sql="-- Q19: [UNION] Combine all distinct cities from Customer with all distinct cities from Employee using UNION." data-answer="SELECT City FROM Customer UNION SELECT City FROM Employee;" data-hint="SELECT City FROM Customer UNION SELECT City FROM Employee;" data-keywords="SELECT,City,FROM,Customer,UNION,SELECT,Employee">
+                                <span class="truncate">Q19: [Union] Combine distinct cities</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_20" data-target-db="chinook_db" data-sql="-- Q20: [LEFT JOIN] Display Artist.Name and Album.Title using a LEFT JOIN from Artist to Album so artists without albums are listed." data-answer="SELECT Artist.Name, Album.Title FROM Artist LEFT JOIN Album ON Artist.ArtistId = Album.ArtistId;" data-hint="SELECT Artist.Name, Album.Title FROM Artist LEFT JOIN Album ON Artist.ArtistId = Album.ArtistId;" data-keywords="SELECT,FROM,Artist,LEFT,JOIN,Album,ON">
+                                <span class="truncate">Q20: [Join] Left outer join Artist & Album</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_21" data-target-db="chinook_db" data-sql="-- Q21: [RIGHT JOIN] Display Album.Title and Artist.Name using a RIGHT JOIN from Album to Artist." data-answer="SELECT Album.Title, Artist.Name FROM Album RIGHT JOIN Artist ON Album.ArtistId = Artist.ArtistId;" data-hint="SELECT Album.Title, Artist.Name FROM Album RIGHT JOIN Artist ON Album.ArtistId = Artist.ArtistId;" data-keywords="SELECT,FROM,Album,RIGHT,JOIN,Artist,ON">
+                                <span class="truncate">Q21: [Join] Right outer join Album & Artist</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_22" data-target-db="chinook_db" data-sql="-- Q22: [FULL OUTER JOIN] Perform a FULL OUTER JOIN between Customer and Invoice on CustomerId. Show CustomerId, LastName, InvoiceId, Total." data-answer="SELECT Customer.CustomerId, Customer.LastName, Invoice.InvoiceId, Invoice.Total FROM Customer FULL OUTER JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId;" data-hint="SELECT ... FROM Customer FULL OUTER JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId;" data-keywords="SELECT,FULL,OUTER,JOIN,ON">
+                                <span class="truncate">Q22: [Join] Full outer join Customer & Invoice</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_23" data-target-db="chinook_db" data-sql="-- Q23: [Join + L1-3 Skills] Join Customer and Invoice to calculate total spending per customer. Include only customers who spent > $5.00, ordered by total spent DESC." data-answer="SELECT c.CustomerId, c.FirstName, c.LastName, SUM(i.Total) AS TotalSpent FROM Customer c INNER JOIN Invoice i ON c.CustomerId = i.CustomerId GROUP BY c.CustomerId, c.FirstName, c.LastName HAVING SUM(i.Total) > 5.00 ORDER BY TotalSpent DESC;" data-hint="Combine INNER JOIN, GROUP BY Customer, HAVING SUM(i.Total) > 5.00, and ORDER BY TotalSpent DESC." data-keywords="JOIN,GROUP BY,HAVING,SUM,ORDER BY,DESC">
+                                <span class="truncate">Q23: [Join] Customer spending with HAVING & ORDER BY</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 8: SUBQUERIES (7) -->
+                            <li data-qid="chk_l4_24" data-target-db="chinook_db" data-sql="-- Q24: [Subquery IN] Find TrackId and Name for tracks that have been purchased (appear in InvoiceLine) using an IN subquery." data-answer="SELECT TrackId, Name FROM Track WHERE TrackId IN (SELECT TrackId FROM InvoiceLine);" data-hint="WHERE TrackId IN (SELECT TrackId FROM InvoiceLine);" data-keywords="SELECT,WHERE,TrackId,IN,SELECT,InvoiceLine">
+                                <span class="truncate">Q24: [Subquery] Purchased tracks (IN)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_25" data-target-db="chinook_db" data-sql="-- Q25: [Subquery NOT IN] Find TrackId and Name for tracks that have NEVER been purchased (NOT IN InvoiceLine)." data-answer="SELECT TrackId, Name FROM Track WHERE TrackId NOT IN (SELECT TrackId FROM InvoiceLine);" data-hint="WHERE TrackId NOT IN (SELECT TrackId FROM InvoiceLine);" data-keywords="SELECT,WHERE,TrackId,NOT,IN,SELECT">
+                                <span class="truncate">Q25: [Subquery] Unpurchased tracks (NOT IN)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_26" data-target-db="chinook_db" data-sql="-- Q26: [Subquery EXISTS] Find CustomerId, FirstName, LastName for customers who have at least one invoice with Total > 10.00 using EXISTS." data-answer="SELECT CustomerId, FirstName, LastName FROM Customer WHERE EXISTS (SELECT 1 FROM Invoice WHERE Invoice.CustomerId = Customer.CustomerId AND Invoice.Total > 10.00);" data-hint="WHERE EXISTS (SELECT 1 FROM Invoice WHERE Invoice.CustomerId = Customer.CustomerId AND Invoice.Total > 10.00);" data-keywords="WHERE,EXISTS,SELECT,Invoice,Total,>,10.00">
+                                <span class="truncate">Q26: [Subquery] High-value customers (EXISTS)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_27" data-target-db="chinook_db" data-sql="-- Q27: [Subquery NOT EXISTS] Find CustomerId, FirstName, LastName for customers who have NO invoice with Total < 5.00 using NOT EXISTS." data-answer="SELECT CustomerId, FirstName, LastName FROM Customer WHERE NOT EXISTS (SELECT 1 FROM Invoice WHERE Invoice.CustomerId = Customer.CustomerId AND Invoice.Total < 5.00);" data-hint="WHERE NOT EXISTS (SELECT 1 FROM Invoice WHERE Invoice.CustomerId = Customer.CustomerId AND Invoice.Total < 5.00);" data-keywords="WHERE,NOT,EXISTS,SELECT,Invoice,Total,<,5.00">
+                                <span class="truncate">Q27: [Subquery] Customers without small orders (NOT EXISTS)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_28" data-target-db="chinook_db" data-sql="-- Q28: [Subquery > ALL] Find TrackId, Name, Milliseconds for tracks whose duration is strictly greater than ALL tracks in AlbumId = 1." data-answer="SELECT TrackId, Name, Milliseconds FROM Track WHERE Milliseconds > (SELECT MAX(Milliseconds) FROM Track WHERE AlbumId = 1);" data-hint="In standard SQL use Milliseconds > ALL (...); in SQLite use Milliseconds > (SELECT MAX(Milliseconds) FROM Track WHERE AlbumId = 1);" data-keywords="SELECT,WHERE,Milliseconds,>,SELECT,MAX,AlbumId">
+                                <span class="truncate">Q28: [Subquery] Tracks longer than ALL tracks in Album 1</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_29" data-target-db="chinook_db" data-sql="-- Q29: [Subquery + Level 1-3 Skills] Find TrackId, Name, and Milliseconds for tracks that are strictly longer than the overall average track duration." data-answer="SELECT TrackId, Name, Milliseconds FROM Track WHERE Milliseconds > (SELECT AVG(Milliseconds) FROM Track);" data-hint="WHERE Milliseconds > (SELECT AVG(Milliseconds) FROM Track);" data-keywords="SELECT,WHERE,Milliseconds,>,SELECT,AVG,Track">
+                                <span class="truncate">Q29: [Subquery] Tracks longer than overall AVG</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_30" data-target-db="chinook_db" data-sql="-- Q30: [Correlated Subquery] Find invoices (InvoiceId, CustomerId, Total) where Total is >= the average invoice total for that customer's billing country." data-answer="SELECT i.InvoiceId, i.CustomerId, i.Total FROM Invoice i WHERE i.Total >= (SELECT AVG(i2.Total) FROM Invoice i2 WHERE i2.BillingCountry = i.BillingCountry);" data-hint="Correlated subquery: WHERE i.Total >= (SELECT AVG(i2.Total) FROM Invoice i2 WHERE i2.BillingCountry = i.BillingCountry);" data-keywords="SELECT,WHERE,Total,>=,SELECT,AVG,BillingCountry">
+                                <span class="truncate">Q30: [Subquery] Above country average (Correlated)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                        </ol>
+                    </details>
                 </div>
             </aside>
 
@@ -515,4 +741,1050 @@
                             <input type="file" id="import-db-input" accept=".db,.sqlite,.sqlite3" class="hidden">
                             <button id="import-db-btn" title="Open an existing SQLite .db or .sqlite file" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold py-2 px-3 rounded-lg text-sm transition shadow-sm flex items-center gap-1.5">
                                 <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                </svg>
+                                Import (.db)
+                            </button>
+                            <button id="export-db-btn" title="Download the active database as a standard .db file" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-3.5 rounded-lg text-sm shadow-sm transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Export DB
+                            </button>
+                            <button id="run-sql-btn" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-sky-600 shadow-sm text-sm">Run SQL</button>
+                        </div>
+                    </div>
+                    <div id="hint-area" class="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-800 hidden"></div>
+                </div>
+
+                <div class="flex-grow flex flex-col bg-white p-4 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <h2 class="text-lg font-semibold mb-2 text-slate-700">Results</h2>
+                    <div id="message-area" class="mb-2 text-sm min-h-[1.25rem]"></div>
+                    <div id="results-container" class="flex-grow overflow-auto"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const runSqlBtn = document.getElementById('run-sql-btn');
+        const exportDbBtn = document.getElementById('export-db-btn');
+        const importDbBtn = document.getElementById('import-db-btn');
+        const importDbInput = document.getElementById('import-db-input');
+        const resetDbBtn = document.getElementById('reset-db-btn');
+        const newDbBtn = document.getElementById('new-db-btn');
+        const hintBtn = document.getElementById('hint-btn');
+        const answerBtn = document.getElementById('answer-btn');
+        const hintArea = document.getElementById('hint-area');
+        const tablesList = document.getElementById('tables-list');
+        const databasesList = document.getElementById('databases-list');
+        const schemaContainer = document.getElementById('schema-container');
+        const activeDbBadge = document.getElementById('active-db-badge');
+        const tablesCountBadge = document.getElementById('tables-count-badge');
+        const sqlEditor = document.getElementById('sql-editor');
+        const messageArea = document.getElementById('message-area');
+        const resultsContainer = document.getElementById('results-container');
+        const saveStatusIndicator = document.getElementById('save-status-indicator');
+        const scoreSummary = document.getElementById('score-summary');
+        const currentQuestionTag = document.getElementById('current-question-tag');
+
+        let SQL;
+        let dbRegistry = {};
+        let currentDbName = 'school_db';
+        let db;
+        const sessionStorageKey = 'sql_sandbox_session_databases_v9';
+        const challengeProgressKey = 'sql_sandbox_challenge_progress_v4';
+
+        let currentActiveQuestionLi = null;
+        let currentHint = "";
+        let currentAnswer = "";
+        let currentKeywords = [];
+        let challengeProgress = {};
+
+        function uint8ToBase64(bytes) {
+            let binary = '';
+            const len = bytes.byteLength;
+            const chunkSize = 8192;
+            for (let i = 0; i < len; i += chunkSize) {
+                const chunk = bytes.subarray(i, Math.min(i + chunkSize, len));
+                binary += String.fromCharCode.apply(null, chunk);
+            }
+            return btoa(binary);
+        }
+
+        function base64ToUint8(base64) {
+            const binary = atob(base64);
+            const len = binary.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return bytes;
+        }
+
+        async function main() {
+            try {
+                SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}` });
+                loadAllDatabasesFromSession();
+                loadChallengeProgress();
+                setupQuestionListeners();
+                setupAccordionBehavior();
+            } catch (err) {
+                console.error("Failed to initialize SQL.js:", err);
+                displayMessage("error", "Error: Could not load SQL engine. Please refresh.");
+            }
+        }
+
+        function registerCustomFunctions(database) {
+            database.create_function("YEAR", (dateStr) => {
+                if (!dateStr) return null;
+                const d = new Date(dateStr);
+                return isNaN(d.getTime()) ? null : d.getFullYear();
+            });
+            database.create_function("MONTH", (dateStr) => {
+                if (!dateStr) return null;
+                const d = new Date(dateStr);
+                return isNaN(d.getTime()) ? null : d.getMonth() + 1;
+            });
+        }
+
+        function loadAllDatabasesFromSession() {
+            const raw = sessionStorage.getItem(sessionStorageKey);
+            let loaded = false;
+            if (raw) {
+                try {
+                    const parsed = JSON.parse(raw);
+                    const dbNames = Object.keys(parsed.databases || {});
+                    if (dbNames.length > 0) {
+                        dbRegistry = {};
+                        for (const name of dbNames) {
+                            const u8 = base64ToUint8(parsed.databases[name]);
+                            const newDb = new SQL.Database(u8);
+                            registerCustomFunctions(newDb);
+                            dbRegistry[name] = newDb;
+                        }
+                        currentDbName = parsed.activeDb && dbRegistry[parsed.activeDb] ? parsed.activeDb : dbNames[0];
+                        db = dbRegistry[currentDbName];
+                        loaded = true;
+                    }
+                } catch (e) {
+                    console.error("Failed to restore session database:", e);
+                    sessionStorage.removeItem(sessionStorageKey);
+                }
+            }
+
+            if (!dbRegistry['school_db']) {
+                const defaultDb = new SQL.Database();
+                registerCustomFunctions(defaultDb);
+                createSchoolTables(defaultDb);
+                dbRegistry['school_db'] = defaultDb;
+            }
+
+            if (!dbRegistry['chinook_db']) {
+                const chinookDb = new SQL.Database();
+                registerCustomFunctions(chinookDb);
+                createChinookTables(chinookDb);
+                dbRegistry['chinook_db'] = chinookDb;
+            }
+
+            if (!dbRegistry['w3schools']) {
+                const w3schoolsDb = new SQL.Database();
+                registerCustomFunctions(w3schoolsDb);
+                createW3SchoolsTables(w3schoolsDb);
+                dbRegistry['w3schools'] = w3schoolsDb;
+            }
+
+            if (!loaded) {
+                currentDbName = 'school_db';
+                db = dbRegistry['school_db'];
+                displayMessage("success", "Loaded databases: 'school_db', 'chinook_db', and 'w3schools'.");
+            } else {
+                displayMessage("success", "Restored active databases and tables from session.");
+            }
+
+            saveAllDatabasesToSession();
+            updateDatabaseUI();
+        }
+
+        function saveAllDatabasesToSession() {
+            try {
+                const payload = { activeDb: currentDbName, databases: {} };
+                for (const name of Object.keys(dbRegistry)) {
+                    payload.databases[name] = uint8ToBase64(dbRegistry[name].export());
+                }
+                sessionStorage.setItem(sessionStorageKey, JSON.stringify(payload));
+                if (saveStatusIndicator) {
+                    saveStatusIndicator.classList.add('bg-emerald-100');
+                    setTimeout(() => saveStatusIndicator.classList.remove('bg-emerald-100'), 500);
+                }
+            } catch (err) {
+                console.error("Error saving databases to sessionStorage:", err);
+            }
+        }
+
+        function loadChallengeProgress() {
+            try {
+                const raw = sessionStorage.getItem(challengeProgressKey);
+                challengeProgress = raw ? JSON.parse(raw) : {};
+            } catch (e) {
+                challengeProgress = {};
+            }
+            renderAllChallengeStatuses();
+        }
+
+        function saveChallengeProgress() {
+            try {
+                sessionStorage.setItem(challengeProgressKey, JSON.stringify(challengeProgress));
+            } catch (e) {
+                console.error("Error saving challenge progress:", e);
+            }
+            renderAllChallengeStatuses();
+        }
+
+        function setQuestionStatus(qid, status) {
+            if (!qid) return;
+            challengeProgress[qid] = status;
+            saveChallengeProgress();
+        }
+
+        function renderAllChallengeStatuses() {
+            let correctCount = 0;
+            const allItems = document.querySelectorAll('.question-list li');
+            allItems.forEach(li => {
+                const qid = li.getAttribute('data-qid');
+                const slot = li.querySelector('.status-slot');
+                if (!slot) return;
+                const status = challengeProgress[qid];
+                if (status === 'correct') {
+                    correctCount++;
+                    slot.innerHTML = `<span class="status-badge correct" title="Correct! Query verified.">✓</span>`;
+                } else if (status === 'wrong') {
+                    slot.innerHTML = `<span class="status-badge wrong" title="Incorrect. Try again!">✗</span>`;
+                } else {
+                    slot.innerHTML = ``;
+                }
+            });
+            if (scoreSummary) {
+                scoreSummary.textContent = `${correctCount} / ${allItems.length} Solved`;
+            }
+        }
+
+        function createNewUserDatabase(dbName) {
+            const cleanName = dbName.trim().replace(/[^a-zA-Z0-9_]/g, '_');
+            if (!cleanName) {
+                displayMessage("warning", "Invalid database name. Use letters, numbers, and underscores.");
+                return;
+            }
+            if (dbRegistry[cleanName]) {
+                displayMessage("warning", `Database '${cleanName}' already exists. Switching to it.`);
+                switchDatabase(cleanName);
+                return;
+            }
+            const newDatabase = new SQL.Database();
+            registerCustomFunctions(newDatabase);
+            dbRegistry[cleanName] = newDatabase;
+            switchDatabase(cleanName);
+            saveAllDatabasesToSession();
+            displayMessage("success", `Database '${cleanName}' created successfully!`);
+        }
+
+        function switchDatabase(dbName) {
+            if (!dbRegistry[dbName]) return;
+            currentDbName = dbName;
+            db = dbRegistry[dbName];
+            updateDatabaseUI();
+            saveAllDatabasesToSession();
+        }
+
+        function updateDatabaseUI() {
+            activeDbBadge.textContent = currentDbName;
+            updateDatabasesList();
+            updateTablesList();
+            updateSchemaView();
+        }
+
+        function updateDatabasesList() {
+            databasesList.innerHTML = '';
+            Object.keys(dbRegistry).forEach(name => {
+                const li = document.createElement('li');
+                const isActive = (name === currentDbName);
+                li.className = `px-2.5 py-1.5 rounded cursor-pointer transition flex justify-between items-center text-xs ${
+                    isActive ? 'active-db-item font-semibold shadow-sm' : 'bg-slate-100 hover:bg-sky-50 text-slate-700'
+                }`;
+                const labelSpan = document.createElement('span');
+                labelSpan.className = "flex items-center gap-1.5 truncate";
+                labelSpan.innerHTML = `
+                    <svg class="w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-sky-500'} shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                    </svg>
+                    <span class="truncate">${name}</span>
+                `;
+                li.appendChild(labelSpan);
+
+                if (name !== 'school_db' && name !== 'chinook_db' && name !== 'w3schools') {
+                    const delBtn = document.createElement('button');
+                    delBtn.innerHTML = "&times;";
+                    delBtn.title = `Delete ${name}`;
+                    delBtn.className = `text-xs px-1 rounded ${isActive ? 'text-white hover:bg-sky-700' : 'text-slate-400 hover:text-red-600'}`;
+                    delBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        if (confirm(`Delete database '${name}'?`)) {
+                            delete dbRegistry[name];
+                            if (currentDbName === name) {
+                                currentDbName = 'school_db';
+                                db = dbRegistry['school_db'];
+                            }
+                            updateDatabaseUI();
+                            saveAllDatabasesToSession();
+                        }
+                    };
+                    li.appendChild(delBtn);
+                }
+
+                li.onclick = () => {
+                    if (currentDbName !== name) switchDatabase(name);
+                };
+                databasesList.appendChild(li);
+            });
+        }
+
+        function createSchoolTables(database) {
+            try {
+                database.run(`DROP TABLE IF EXISTS exams;`);
+                database.run(`DROP TABLE IF EXISTS students;`);
+                database.run(`DROP TABLE IF EXISTS subjects;`);
+                database.run(`CREATE TABLE students (
+                    student_id INTEGER PRIMARY KEY,
+                    class TEXT,
+                    no INTEGER,
+                    last_name TEXT,
+                    first_name TEXT,
+                    gender TEXT,
+                    dob DATE,
+                    district TEXT
+                );`);
+                database.run(`CREATE TABLE subjects (
+                    subject_code TEXT PRIMARY KEY,
+                    subject_name TEXT
+                );`);
+                database.run(`CREATE TABLE exams (
+                    student_id INTEGER,
+                    subject_code TEXT,
+                    score INTEGER,
+                    FOREIGN KEY(student_id) REFERENCES students(student_id),
+                    FOREIGN KEY(subject_code) REFERENCES subjects(subject_code)
+                );`);
+
+                const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Ng', 'Lam'];
+                const maleFirstNames = ['Ka Chun', 'Lok Hang', 'Chi Kin', 'Wai Ho', 'Pak Hei'];
+                const femaleFirstNames = ['Wing Yan', 'Tsz Ching', 'Ka Man', 'Pui Sze', 'Mei Ling'];
+                const districts = ['Wan Chai', 'Eastern', 'Kowloon City', 'Sha Tin', 'Central & Western'];
+                const classes = ['4A', '4C', '4D'];
+
+                let studentInserts = [];
+                const studentIds = [];
+                let sIdCounter = 1001;
+
+                for (const className of classes) {
+                    for (let i = 1; i <= 20; i++) {
+                        const studentId = sIdCounter++;
+                        studentIds.push(studentId);
+                        const gender = (i % 2 === 0) ? 'M' : 'F';
+                        const firstName = gender === 'M' ? maleFirstNames[i % maleFirstNames.length] : femaleFirstNames[i % femaleFirstNames.length];
+                        const lastName = lastNames[(i + className.charCodeAt(1)) % lastNames.length];
+                        const dob = `2008-0${(i % 9) + 1}-15`;
+                        const district = districts[(i * 3) % districts.length];
+                        studentInserts.push(`(${studentId}, '${className}', ${i}, '${lastName}', '${firstName}', '${gender}', '${dob}', '${district}')`);
+                    }
+                }
+                database.run(`INSERT INTO students VALUES ${studentInserts.join(', ')};`);
+
+                const subjectMap = {
+                    'CHI': 'Chinese', 'ENG': 'English', 'MATH': 'Mathematics',
+                    'ICT': 'Information and Communication Technology',
+                    'PHY': 'Physics', 'BIO': 'Biology', 'ECON': 'Economics'
+                };
+                const subSql = Object.entries(subjectMap).map(([c, n]) => `('${c}', '${n}')`).join(', ');
+                database.run(`INSERT INTO subjects VALUES ${subSql};`);
+
+                let examInserts = [];
+                for (const sId of studentIds) {
+                    ['CHI', 'ENG', 'MATH'].forEach((code, idx) => {
+                        const score = 55 + ((sId + idx * 7) % 43);
+                        examInserts.push(`(${sId}, '${code}', ${score})`);
+                    });
+                    const electives = ['ICT', 'PHY', 'BIO'];
+                    const chosen = electives[sId % 3];
+                    const score = 50 + (sId % 48);
+                    examInserts.push(`(${sId}, '${chosen}', ${score})`);
+                }
+                database.run(`INSERT INTO exams VALUES ${examInserts.join(', ')};`);
+            } catch (err) {
+                console.error("Error creating school tables:", err);
+            }
+        }
+
+        function createChinookTables(database) {
+            try {
+                const tables = ['InvoiceLine', 'Invoice', 'Customer', 'Employee', 'Track', 'MediaType', 'Genre', 'Album', 'Artist'];
+                tables.forEach(t => database.run(`DROP TABLE IF EXISTS ${t};`));
+
+                database.run(`CREATE TABLE Artist (ArtistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
+                database.run(`CREATE TABLE Album (AlbumId INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, ArtistId INTEGER, FOREIGN KEY (ArtistId) REFERENCES Artist(ArtistId));`);
+                database.run(`CREATE TABLE Genre (GenreId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
+                database.run(`CREATE TABLE MediaType (MediaTypeId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
+                database.run(`CREATE TABLE Track (
+                    TrackId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name TEXT,
+                    AlbumId INTEGER,
+                    MediaTypeId INTEGER,
+                    GenreId INTEGER,
+                    Composer TEXT,
+                    Milliseconds INTEGER,
+                    Bytes INTEGER,
+                    UnitPrice NUMERIC
+                );`);
+                database.run(`CREATE TABLE Employee (
+                    EmployeeId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    LastName TEXT,
+                    FirstName TEXT,
+                    Title TEXT,
+                    ReportsTo INTEGER,
+                    BirthDate DATE,
+                    HireDate DATE,
+                    Address TEXT,
+                    City TEXT,
+                    State TEXT,
+                    Country TEXT,
+                    PostalCode TEXT,
+                    Phone TEXT,
+                    Email TEXT
+                );`);
+                database.run(`CREATE TABLE Customer (
+                    CustomerId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    FirstName TEXT,
+                    LastName TEXT,
+                    Company TEXT,
+                    Address TEXT,
+                    City TEXT,
+                    State TEXT,
+                    Country TEXT,
+                    PostalCode TEXT,
+                    Phone TEXT,
+                    Email TEXT,
+                    SupportRepId INTEGER
+                );`);
+                database.run(`CREATE TABLE Invoice (
+                    InvoiceId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CustomerId INTEGER,
+                    InvoiceDate DATE,
+                    BillingAddress TEXT,
+                    BillingCity TEXT,
+                    BillingState TEXT,
+                    BillingCountry TEXT,
+                    BillingPostalCode TEXT,
+                    Total NUMERIC
+                );`);
+                database.run(`CREATE TABLE InvoiceLine (
+                    InvoiceLineId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    InvoiceId INTEGER,
+                    TrackId INTEGER,
+                    UnitPrice NUMERIC,
+                    Quantity INTEGER
+                );`);
+
+                database.run(`INSERT INTO Genre VALUES (1, 'Rock'), (2, 'Jazz'), (3, 'Metal'), (4, 'Alternative'), (5, 'Classical');`);
+                database.run(`INSERT INTO MediaType VALUES (1, 'MPEG audio file'), (2, 'Protected AAC');`);
+                database.run(`INSERT INTO Artist VALUES (1, 'AC/DC'), (2, 'Queen'), (3, 'Led Zeppelin'), (4, 'Miles Davis'), (5, 'Beyond'), (6, 'Chopin');`);
+                database.run(`INSERT INTO Album VALUES 
+                    (1, 'For Those About To Rock', 1),
+                    (2, 'A Night At The Opera', 2),
+                    (3, 'Led Zeppelin IV', 3),
+                    (4, 'Kind of Blue', 4),
+                    (5, 'Nocturnes', 6);`);
+                database.run(`INSERT INTO Track VALUES 
+                    (1, 'For Those About To Rock', 1, 1, 1, 'Angus Young', 343719, 11170334, 0.99),
+                    (2, 'Spellbound', 1, 1, 1, 'Angus Young', 270000, 8900000, 0.99),
+                    (13, 'Bohemian Rhapsody', 2, 1, 1, 'Freddie Mercury', 354320, 11500000, 0.99),
+                    (14, 'Love of My Life', 2, 1, 1, 'Freddie Mercury', 218000, 7100000, 0.99),
+                    (17, 'Stairway to Heaven', 3, 1, 1, 'Jimmy Page', 482830, 15760000, 0.99),
+                    (18, 'So What', 4, 1, 2, 'Miles Davis', 562000, 18340000, 0.99),
+                    (20, 'Battery', 2, 1, 3, 'Hetfield', 312000, 10180000, 0.99);`);
+                database.run(`INSERT INTO Employee VALUES 
+                    (1, 'Adams', 'Andrew', 'General Manager', NULL, '1962-02-18', '2002-08-14', '11120 Jasper Ave', 'Edmonton', 'AB', 'Canada', 'T5K 2N1', '+1 780', 'andrew@chinook.com'),
+                    (2, 'Edwards', 'Nancy', 'Sales Manager', 1, '1958-12-08', '2002-05-01', '825 8 Ave', 'Calgary', 'AB', 'Canada', 'T2P 2T3', '+1 403', 'nancy@chinook.com'),
+                    (3, 'Peacock', 'Jane', 'Sales Support Agent', 2, '1973-08-29', '2002-04-01', '1111 6 Ave', 'Calgary', 'AB', 'Canada', 'T2P 5M5', '+1 403', 'jane@chinook.com'),
+                    (5, 'Johnson', 'Steve', 'Sales Support Agent', 2, '1965-03-03', '2003-10-17', '7727B 41 Ave', 'Calgary', 'AB', 'Canada', 'T3B 1Y7', '+1 403', 'steve@chinook.com');`);
+                database.run(`INSERT INTO Customer VALUES 
+                    (1, 'Luís', 'Gonçalves', 'Embraer', 'Av. Brigadeiro', 'São José', 'SP', 'Brazil', '12227', '+55', 'luis@embraer.br', 3),
+                    (2, 'Leonie', 'Köhler', NULL, 'Theodor', 'Stuttgart', NULL, 'Germany', '70174', '+49', 'leonie@surfeu.de', 5),
+                    (16, 'Frank', 'Harris', 'Google Inc.', '1600 Amphitheatre', 'Mountain View', 'CA', 'USA', '94043', '+1 650', 'fharris@google.com', 3),
+                    (17, 'Jack', 'Smith', 'Microsoft', '1 Microsoft Way', 'Redmond', 'WA', 'USA', '98052', '+1 425', 'jack@microsoft.com', 5);`);
+                database.run(`INSERT INTO Invoice VALUES 
+                    (1, 2, '2023-01-01', 'Theodor', 'Stuttgart', NULL, 'Germany', '70174', 3.96),
+                    (5, 16, '2023-01-11', '1600 Amphitheatre', 'Mountain View', 'CA', 'USA', '94043', 13.86),
+                    (6, 17, '2023-01-19', '1 Microsoft Way', 'Redmond', 'WA', 'USA', '98052', 8.91),
+                    (8, 1, '2023-02-01', 'Av. Brigadeiro', 'São José', 'SP', 'Brazil', '12227', 3.96);`);
+                database.run(`INSERT INTO InvoiceLine VALUES 
+                    (1, 1, 1, 0.99, 1), (2, 1, 2, 0.99, 1), (3, 5, 13, 0.99, 1), (4, 5, 17, 0.99, 1);`);
+            } catch (err) {
+                console.error("Error creating Chinook tables:", err);
+            }
+        }
+
+        function createW3SchoolsTables(database) {
+            try {
+                const tables = ['OrderDetails', 'Orders', 'Products', 'Categories', 'Employees', 'Shippers', 'Suppliers', 'Customers'];
+                tables.forEach(t => database.run(`DROP TABLE IF EXISTS ${t};`));
+
+                database.run(`CREATE TABLE Categories (
+                    CategoryID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CategoryName TEXT,
+                    Description TEXT
+                );`);
+
+                database.run(`CREATE TABLE Customers (
+                    CustomerID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CustomerName TEXT,
+                    ContactName TEXT,
+                    Address TEXT,
+                    City TEXT,
+                    PostalCode TEXT,
+                    Country TEXT
+                );`);
+
+                database.run(`CREATE TABLE Employees (
+                    EmployeeID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    LastName TEXT,
+                    FirstName TEXT,
+                    BirthDate DATE,
+                    Photo TEXT,
+                    Notes TEXT
+                );`);
+
+                database.run(`CREATE TABLE Shippers (
+                    ShipperID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    ShipperName TEXT,
+                    Phone TEXT
+                );`);
+
+                database.run(`CREATE TABLE Suppliers (
+                    SupplierID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    SupplierName TEXT,
+                    ContactName TEXT,
+                    Address TEXT,
+                    City TEXT,
+                    PostalCode TEXT,
+                    Country TEXT,
+                    Phone TEXT
+                );`);
+
+                database.run(`CREATE TABLE Products (
+                    ProductID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    ProductName TEXT,
+                    SupplierID INTEGER,
+                    CategoryID INTEGER,
+                    Unit TEXT,
+                    Price NUMERIC,
+                    FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID),
+                    FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+                );`);
+
+                database.run(`CREATE TABLE Orders (
+                    OrderID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CustomerID INTEGER,
+                    EmployeeID INTEGER,
+                    OrderDate DATE,
+                    ShipperID INTEGER,
+                    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+                    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+                    FOREIGN KEY (ShipperID) REFERENCES Shippers(ShipperID)
+                );`);
+
+                database.run(`CREATE TABLE OrderDetails (
+                    OrderDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    OrderID INTEGER,
+                    ProductID INTEGER,
+                    Quantity INTEGER,
+                    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+                    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+                );`);
+
+                // Insert Categories
+                database.run(`INSERT INTO Categories (CategoryID, CategoryName, Description) VALUES
+                    (1, 'Beverages', 'Soft drinks, coffees, teas, beers, and ales'),
+                    (2, 'Condiments', 'Sweet and savory sauces, relishes, spreads, and seasonings'),
+                    (3, 'Confections', 'Desserts, candies, and sweet breads'),
+                    (4, 'Dairy Products', 'Cheeses'),
+                    (5, 'Grains/Cereals', 'Breads, crackers, pasta, and cereal'),
+                    (6, 'Meat/Poultry', 'Prepared meats'),
+                    (7, 'Produce', 'Dried fruit and bean curd'),
+                    (8, 'Seafood', 'Seaweed and fish');`);
+
+                // Insert Customers
+                database.run(`INSERT INTO Customers (CustomerID, CustomerName, ContactName, Address, City, PostalCode, Country) VALUES
+                    (1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany'),
+                    (2, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico'),
+                    (3, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico'),
+                    (4, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK'),
+                    (5, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden'),
+                    (6, 'Blauer See Delikatessen', 'Hanna Moos', 'Forsterstr. 57', 'Mannheim', '68306', 'Germany'),
+                    (7, 'Blondel père et fils', 'Frédérique Citeaux', '24, place Kléber', 'Strasbourg', '67000', 'France'),
+                    (8, 'Bólido Comidas preparadas', 'Martín Sommer', 'C/ Araquil, 67', 'Madrid', '28023', 'Spain'),
+                    (9, 'Bon app''', 'Laurence Lebihan', '12, rue des Bouchers', 'Marseille', '13008', 'France'),
+                    (10, 'Bottom-Dollar Marketse', 'Elizabeth Lincoln', '23 Tsawassen Blvd.', 'Tsawassen', 'T2F 8M4', 'Canada');`);
+
+                // Insert Employees
+                database.run(`INSERT INTO Employees (EmployeeID, LastName, FirstName, BirthDate, Photo, Notes) VALUES
+                    (1, 'Davolio', 'Nancy', '1968-12-08', 'EmpID1.pic', 'Education includes a BA in psychology from Colorado State University.'),
+                    (2, 'Fuller', 'Andrew', '1952-02-19', 'EmpID2.pic', 'Andrew received his Ph.D. in international marketing from the University of Dallas.'),
+                    (3, 'Leverling', 'Janet', '1963-08-30', 'EmpID3.pic', 'Janet has a BS degree in chemistry from Boston College.'),
+                    (4, 'Peacock', 'Margaret', '1958-09-19', 'EmpID4.pic', 'Margaret holds a BA in English literature from Concordia College.'),
+                    (5, 'Buchanan', 'Steven', '1955-03-04', 'EmpID5.pic', 'Steven graduated from St. Andrews University, Scotland, with a BSC degree.');`);
+
+                // Insert Shippers
+                database.run(`INSERT INTO Shippers (ShipperID, ShipperName, Phone) VALUES
+                    (1, 'Speedy Express', '(503) 555-9831'),
+                    (2, 'United Package', '(503) 555-3199'),
+                    (3, 'Federal Shipping', '(503) 555-9931');`);
+
+                // Insert Suppliers
+                database.run(`INSERT INTO Suppliers (SupplierID, SupplierName, ContactName, Address, City, PostalCode, Country, Phone) VALUES
+                    (1, 'Exotic Liquid', 'Charlotte Cooper', '49 Gilbert St.', 'London', 'EC1 4SD', 'UK', '(171) 555-2222'),
+                    (2, 'New Orleans Cajun Delights', 'Shelley Burke', 'P.O. Box 78934', 'New Orleans', '70117', 'USA', '(100) 555-4822'),
+                    (3, 'Grandma Kelly''s Homestead', 'Regina Murphy', '707 Oxford Rd.', 'Ann Arbor', '48104', 'USA', '(313) 555-5735'),
+                    (4, 'Tokyo Traders', 'Yoshi Nagase', '9-8 Sekimai Musashino-shi', 'Tokyo', '100', 'Japan', '(03) 3555-5011'),
+                    (5, 'Cooperativa de Quesos ''Las Cabras''', 'Antonio del Valle Saavedra', 'Calle del Rosal 4', 'Oviedo', '33007', 'Spain', '(98) 598 76 54');`);
+
+                // Insert Products
+                database.run(`INSERT INTO Products (ProductID, ProductName, SupplierID, CategoryID, Unit, Price) VALUES
+                    (1, 'Chais', 1, 1, '10 boxes x 20 bags', 18.00),
+                    (2, 'Chang', 1, 1, '24 - 12 oz bottles', 19.00),
+                    (3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles', 10.00),
+                    (4, 'Chef Anton''s Cajun Seasoning', 2, 2, '48 - 6 oz jars', 22.00),
+                    (5, 'Chef Anton''s Gumbo Mix', 2, 2, '36 boxes', 21.35),
+                    (6, 'Grandma''s Boysenberry Spread', 3, 2, '12 - 8 oz jars', 25.00),
+                    (7, 'Uncle Bob''s Organic Dried Pears', 3, 7, '12 - 1 lb pkgs.', 30.00),
+                    (8, 'Northwoods Cranberry Sauce', 3, 2, '12 - 12 oz jars', 40.00),
+                    (9, 'Mishi Kobe Niku', 4, 6, '18 - 500 g pkgs.', 97.00),
+                    (10, 'Ikura', 4, 8, '12 - 200 ml jars', 31.00);`);
+
+                // Insert Orders
+                database.run(`INSERT INTO Orders (OrderID, CustomerID, EmployeeID, OrderDate, ShipperID) VALUES
+                    (10248, 9, 5, '1996-07-04', 3),
+                    (10249, 2, 6, '1996-07-05', 1),
+                    (10250, 4, 4, '1996-07-08', 2),
+                    (10251, 6, 3, '1996-07-08', 1),
+                    (10252, 7, 4, '1996-07-09', 2),
+                    (10253, 3, 3, '1996-07-10', 2),
+                    (10254, 5, 5, '1996-07-11', 2);`);
+
+                // Insert OrderDetails
+                database.run(`INSERT INTO OrderDetails (OrderDetailID, OrderID, ProductID, Quantity) VALUES
+                    (1, 10248, 1, 12),
+                    (2, 10248, 2, 10),
+                    (3, 10248, 3, 5),
+                    (4, 10249, 4, 40),
+                    (5, 10250, 5, 35),
+                    (6, 10250, 6, 15),
+                    (7, 10251, 7, 6),
+                    (8, 10251, 8, 15),
+                    (9, 10252, 9, 40),
+                    (10, 10253, 10, 20);`);
+            } catch (err) {
+                console.error("Error creating W3Schools tables:", err);
+            }
+        }
+
+        function resetDatabase() {
+            if (currentDbName === 'school_db') {
+                const defaultDb = new SQL.Database();
+                registerCustomFunctions(defaultDb);
+                createSchoolTables(defaultDb);
+                dbRegistry['school_db'] = defaultDb;
+                db = defaultDb;
+            } else if (currentDbName === 'chinook_db') {
+                const chinookDb = new SQL.Database();
+                registerCustomFunctions(chinookDb);
+                createChinookTables(chinookDb);
+                dbRegistry['chinook_db'] = chinookDb;
+                db = chinookDb;
+            } else if (currentDbName === 'w3schools') {
+                const w3schoolsDb = new SQL.Database();
+                registerCustomFunctions(w3schoolsDb);
+                createW3SchoolsTables(w3schoolsDb);
+                dbRegistry['w3schools'] = w3schoolsDb;
+                db = w3schoolsDb;
+            } else {
+                const blankDb = new SQL.Database();
+                registerCustomFunctions(blankDb);
+                dbRegistry[currentDbName] = blankDb;
+                db = blankDb;
+            }
+            saveAllDatabasesToSession();
+            updateDatabaseUI();
+            displayMessage("success", `Database '${currentDbName}' reset to default schema and records.`);
+        }
+
+        function exportActiveDatabase() {
+            if (!db) { displayMessage("error", "Database not loaded."); return; }
+            try {
+                const exportedBytes = db.export();
+                const blob = new Blob([exportedBytes], { type: 'application/x-sqlite3' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentDbName}.db`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                displayMessage("success", `Exported '${currentDbName}.db'.`);
+            } catch (err) {
+                displayMessage("error", "Failed to export database.");
+            }
+        }
+
+        function handleDatabaseImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function() {
+                try {
+                    const u8 = new Uint8Array(this.result);
+                    const importedDb = new SQL.Database(u8);
+                    registerCustomFunctions(importedDb);
+                    const rawName = file.name.replace(/\.[^/.]+$/, "");
+                    const cleanName = rawName.replace(/[^a-zA-Z0-9_]/g, '_') || 'imported_db';
+                    dbRegistry[cleanName] = importedDb;
+                    switchDatabase(cleanName);
+                    saveAllDatabasesToSession();
+                    displayMessage("success", `Imported database '${cleanName}' successfully!`);
+                } catch (err) {
+                    displayMessage("error", "Could not import database. Invalid SQLite file.");
+                }
+            };
+            reader.readAsArrayBuffer(file);
+            event.target.value = '';
+        }
+
+        function checkQueryAccuracy(userResult, expectedResult) {
+            if (!userResult || !expectedResult) return false;
+            if (userResult.columns.length !== expectedResult.columns.length) return false;
+            if (userResult.values.length !== expectedResult.values.length) return false;
+
+            const userJson = JSON.stringify(userResult.values);
+            const expJson = JSON.stringify(expectedResult.values);
+            if (userJson === expJson) return true;
+
+            const userSorted = JSON.stringify([...userResult.values].map(r => JSON.stringify(r)).sort());
+            const expSorted = JSON.stringify([...expectedResult.values].map(r => JSON.stringify(r)).sort());
+            return userSorted === expSorted;
+        }
+
+        function runSql() {
+            if (!db) { displayMessage("error", "Database not loaded."); return; }
+            const sqlCode = sqlEditor.value.trim();
+            if (!sqlCode) { displayMessage("warning", "Please type an SQL query to execute."); return; }
+
+            const activeQid = currentActiveQuestionLi ? currentActiveQuestionLi.getAttribute('data-qid') : null;
+
+            // Handle CREATE DATABASE sandbox simulation
+            const createDbMatch = sqlCode.match(/^CREATE\s+DATABASE\s+([a-zA-Z0-9_]+);?$/i);
+            if (createDbMatch) {
+                const targetDb = createDbMatch[1];
+                createNewUserDatabase(targetDb);
+                clearResults();
+                if (activeQid) setQuestionStatus(activeQid, 'correct');
+                displayMessage("success", `Database '${targetDb}' created! ✓`);
+                return;
+            }
+
+            // Keyword validation
+            if (currentKeywords.length > 0) {
+                const upperSql = sqlCode.toUpperCase();
+                const missing = currentKeywords.filter(k => !upperSql.includes(k.toUpperCase().trim()));
+                if (missing.length > 0) {
+                    if (activeQid) setQuestionStatus(activeQid, 'wrong');
+                    displayMessage("warning", `Query missing key requirements: ${missing.join(", ")}. Please review.`);
+                    return;
+                }
+            }
+
+            clearResults();
+            let isModifying = false;
+
+            try {
+                const statements = sqlCode.split(';').filter(s => s.trim() !== '');
+                let lastResult = null;
+
+                statements.forEach(statement => {
+                    const trimmed = statement.trim();
+                    const upper = trimmed.toUpperCase();
+                    if (upper.startsWith("CREATE") || upper.startsWith("INSERT") || upper.startsWith("UPDATE") ||
+                        upper.startsWith("DELETE") || upper.startsWith("DROP") || upper.startsWith("ALTER")) {
+                        isModifying = true;
+                    }
+
+                    const results = db.exec(trimmed);
+                    if (results.length === 0) {
+                        if (isModifying) {
+                            displayMessage("success", "Query executed successfully. Changes applied to database.");
+                        } else {
+                            if (activeQid) setQuestionStatus(activeQid, 'wrong');
+                            displayMessage("warning", "Query returned 0 rows. Please verify your logic.");
+                        }
+                    } else {
+                        results.forEach((result) => {
+                            displayTable(result);
+                            lastResult = result;
+                        });
+                    }
+                });
+
+                if (isModifying) {
+                    updateTablesList();
+                    updateSchemaView();
+                    saveAllDatabasesToSession();
+                    if (activeQid) {
+                        setQuestionStatus(activeQid, 'correct');
+                        displayMessage("success", "Correct! ✓ Changes executed and verified.");
+                    }
+                }
+
+                if (activeQid && currentAnswer && lastResult && !isModifying) {
+                    try {
+                        const expectedResults = db.exec(currentAnswer.trim());
+                        if (expectedResults.length > 0) {
+                            const isCorrect = checkQueryAccuracy(lastResult, expectedResults[0]);
+                            if (isCorrect) {
+                                setQuestionStatus(activeQid, 'correct');
+                                displayMessage("success", "Correct! ✓ Outstanding work, query matches expected output.");
+                            } else {
+                                setQuestionStatus(activeQid, 'wrong');
+                                displayMessage("warning", "Incorrect ✗: Result rows or columns do not match expected answer.");
+                            }
+                        }
+                    } catch (ansErr) {
+                        console.error(ansErr);
+                    }
+                }
+
+            } catch (err) {
+                if (activeQid) setQuestionStatus(activeQid, 'wrong');
+                displayMessage("error", `Error: ${err.message}. Please fix your SQL syntax.`);
+            }
+        }
+
+        function updateTablesList() {
+            if (!db) return;
+            tablesList.innerHTML = '';
+            try {
+                const res = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name ASC;");
+                if (res.length > 0 && res[0].values.length > 0) {
+                    const tableNames = res[0].values;
+                    tablesCountBadge.textContent = tableNames.length;
+                    tableNames.forEach(row => {
+                        const tableName = row[0];
+                        const li = document.createElement('li');
+                        li.className = 'px-2.5 py-1.5 bg-slate-100 rounded cursor-pointer hover:bg-sky-100 flex items-center justify-between transition group text-xs';
+                        li.innerHTML = `
+                            <span class="flex items-center gap-1.5 text-xs text-slate-700 font-medium truncate">
+                                <svg class="w-3.5 h-3.5 text-sky-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="16" rx="2" stroke-width="2"></rect>
+                                    <path stroke-linecap="round" stroke-width="2" d="M3 10h18M10 10v10"></path>
+                                </svg>
+                                <span class="font-mono text-slate-800 truncate">${tableName}</span>
+                            </span>
+                            <span class="text-[9px] text-sky-600 bg-sky-50 px-1 py-0.2 rounded opacity-0 group-hover:opacity-100 transition">View</span>
+                        `;
+                        li.onclick = () => {
+                            document.querySelectorAll('.question-list li').forEach(q => q.classList.remove('active-question'));
+                            currentActiveQuestionLi = null;
+                            if (currentQuestionTag) currentQuestionTag.classList.add('hidden');
+                            currentKeywords = [];
+                            currentAnswer = "";
+                            hintBtn.classList.add('hidden');
+                            answerBtn.classList.add('hidden');
+                            hintArea.classList.add('hidden');
+                            sqlEditor.value = `SELECT * FROM ${tableName};`;
+                            runSql();
+                        };
+                        tablesList.appendChild(li);
+                    });
+                } else {
+                    tablesCountBadge.textContent = '0';
+                    tablesList.innerHTML = '<li class="text-slate-400 italic text-xs py-1">No tables in database.</li>';
+                }
+            } catch (e) {
+                console.error("Error fetching tables:", e);
+            }
+        }
+
+        function updateSchemaView() {
+            if (!db) return;
+            schemaContainer.innerHTML = '';
+            try {
+                const res = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name ASC;");
+                if (res.length === 0 || res[0].values.length === 0) {
+                    schemaContainer.innerHTML = '<p class="text-slate-400 italic">No tables created yet.</p>';
+                    return;
+                }
+                res[0].values.forEach(row => {
+                    const tableName = row[0];
+                    const colRes = db.exec(`PRAGMA table_info(${tableName});`);
+                    const tableDiv = document.createElement('div');
+                    tableDiv.className = 'border-b border-slate-200 pb-1.5 last:border-b-0';
+                    tableDiv.innerHTML = `<p class="font-semibold text-slate-800 flex items-center gap-1 mb-0.5"><span class="text-sky-600 font-mono">${tableName}</span></p>`;
+
+                    if (colRes.length > 0 && colRes[0].values.length > 0) {
+                        const ul = document.createElement('ul');
+                        ul.className = 'list-disc list-inside pl-1 space-y-0.5';
+                        colRes[0].values.forEach(col => {
+                            const isPk = col[5] === 1;
+                            const li = document.createElement('li');
+                            li.innerHTML = `<span class="font-semibold text-slate-700">${col[1]}</span> <span class="text-[9px] text-slate-500">${col[2] || 'ANY'}</span> ${isPk ? '<span class="text-[9px] bg-amber-100 text-amber-800 px-1 rounded font-bold">PK</span>' : ''}`;
+                            ul.appendChild(li);
+                        });
+                        tableDiv.appendChild(ul);
+                    }
+                    schemaContainer.appendChild(tableDiv);
+                });
+            } catch (e) {
+                schemaContainer.innerHTML = '<p class="text-red-500 text-xs">Error loading schema.</p>';
+            }
+        }
+
+        function displayTable(result) {
+            if (!result || (result.values.length === 0 && result.columns.length === 0)) return;
+            const table = document.createElement('table');
+            table.className = "w-full text-sm text-left text-slate-500 border-collapse mb-4";
+
+            const thead = document.createElement('thead');
+            thead.className = "text-xs text-slate-700 uppercase bg-slate-100";
+            const headerRow = document.createElement('tr');
+            result.columns.forEach(colName => {
+                const th = document.createElement('th');
+                th.className = "px-4 py-2 border border-slate-200 font-semibold";
+                th.textContent = colName;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            result.values.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = "bg-white border-b hover:bg-slate-50";
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.className = "px-4 py-1.5 border border-slate-200 font-mono text-xs";
+                    td.textContent = (cell === null || cell === undefined) ? 'NULL' : cell;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+            resultsContainer.appendChild(table);
+        }
+
+        function displayMessage(type, text) {
+            messageArea.textContent = text;
+            messageArea.className = 'mb-2 text-sm min-h-[1.25rem] font-medium ';
+            if (type === "success") messageArea.classList.add('text-green-600');
+            else if (type === "error") messageArea.classList.add('text-red-600');
+            else if (type === "warning") messageArea.classList.add('text-amber-600');
+        }
+
+        function clearResults() {
+            resultsContainer.innerHTML = '';
+            messageArea.innerHTML = '';
+        }
+
+        function showHint() {
+            hintArea.textContent = currentHint || "No hint available.";
+            hintArea.classList.remove('hidden');
+        }
+
+        function showAnswer() {
+            if (currentAnswer) {
+                hintArea.textContent = "Expected SQL: " + currentAnswer;
+                hintArea.classList.remove('hidden');
+                sqlEditor.value = currentAnswer;
+            }
+        }
+
+        function setupAccordionBehavior() {
+            const levels = document.querySelectorAll('.challenge-level');
+            levels.forEach(level => {
+                level.addEventListener('toggle', function() {
+                    if (this.open) {
+                        levels.forEach(other => { if (other !== this && other.open) other.open = false; });
+                    }
+                });
+            });
+
+            const sidebarSections = document.querySelectorAll('.sidebar-section');
+            sidebarSections.forEach(section => {
+                section.addEventListener('toggle', function() {
+                    if (this.open) {
+                        sidebarSections.forEach(other => { if (other !== this && other.open) other.open = false; });
+                    }
+                });
+            });
+        }
+
+        function setupQuestionListeners() {
+            document.querySelectorAll('.question-list li').forEach(item => {
+                item.addEventListener('click', event => {
+                    const li = event.currentTarget;
+                    document.querySelectorAll('.question-list li').forEach(q => q.classList.remove('active-question'));
+                    li.classList.add('active-question');
+                    currentActiveQuestionLi = li;
+
+                    const targetDb = li.getAttribute('data-target-db');
+                    if (targetDb && targetDb !== currentDbName && dbRegistry[targetDb]) {
+                        switchDatabase(targetDb);
+                    }
+
+                    const promptComment = li.getAttribute('data-sql');
+                    sqlEditor.value = `${promptComment}\n\n`;
+                    sqlEditor.focus();
+
+                    currentHint = li.getAttribute('data-hint') || "No hint available.";
+                    const kw = li.getAttribute('data-keywords');
+                    currentKeywords = kw ? kw.split(',') : [];
+                    currentAnswer = li.getAttribute('data-answer') || "";
+
+                    if (currentQuestionTag) currentQuestionTag.classList.remove('hidden');
+                    hintArea.classList.add('hidden');
+                    hintBtn.classList.remove('hidden');
+                    answerBtn.classList.remove('hidden');
+                    messageArea.textContent = "";
+                });
+            });
+        }
+
+        runSqlBtn.addEventListener('click', runSql);
+        exportDbBtn.addEventListener('click', exportActiveDatabase);
+        importDbBtn.addEventListener('click', () => importDbInput.click());
+        importDbInput.addEventListener('change', handleDatabaseImport);
+        resetDbBtn.addEventListener('click', resetDatabase);
+        hintBtn.addEventListener('click', showHint);
+        answerBtn.addEventListener('click', showAnswer);
+        newDbBtn.addEventListener('click', () => {
+            const dbName = prompt("Enter database name (e.g., library_db):");
+            if (dbName) createNewUserDatabase(dbName);
+        });
+
+        sqlEditor.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                runSql();
+            }
+        });
+
+        main();
+    </script>
+</body>
+</html>
