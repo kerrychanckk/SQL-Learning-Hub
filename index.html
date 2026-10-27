@@ -68,9 +68,9 @@
     <div id="app-container" class="h-screen flex flex-col">
         <header class="bg-white border-b border-slate-200 p-3 flex justify-between items-center shadow-sm">
             <div class="flex items-center gap-3">
-                <h1 class="text-xl font-bold text-slate-800"><span class="text-sky-500">HKDSE ICT</span> SQL Sandbox</h1>
+                <h1 class="text-xl font-bold text-slate-800"><span class="text-sky-500">HKDSE ICT</span> SQL Practice Sandbox</h1>
                 <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full border border-slate-200 flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <ellipse cx="12" cy="5" rx="9" ry="3" stroke-width="2"></ellipse>
                         <path stroke-width="2" d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
                         <path stroke-width="2" d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
@@ -91,7 +91,7 @@
                     <details id="db-manager-details" class="sidebar-section">
                         <summary class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-600 bg-slate-100 hover:bg-slate-200 py-1.5 px-2.5 rounded">
                             <span class="flex items-center gap-1.5">
-                                <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <ellipse cx="12" cy="5" rx="9" ry="3" stroke-width="2"></ellipse>
                                     <path stroke-width="2" d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
                                     <path stroke-width="2" d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
@@ -115,7 +115,7 @@
                     <details id="db-schema-details" class="sidebar-section">
                         <summary class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-600 bg-slate-100 hover:bg-slate-200 py-1.5 px-2.5 rounded">
                             <span class="flex items-center gap-1.5">
-                                <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                                 </svg>
                                 Database Schema
@@ -129,7 +129,7 @@
                     <details id="db-tables-details" class="sidebar-section">
                         <summary class="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-slate-600 bg-slate-100 hover:bg-slate-200 py-1.5 px-2.5 rounded">
                             <span class="flex items-center gap-1.5">
-                                <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <rect x="3" y="4" width="18" height="16" rx="2" stroke-width="2"></rect>
                                     <path stroke-linecap="round" stroke-width="2" d="M3 10h18M10 10v10"></path>
                                 </svg>
@@ -145,7 +145,7 @@
                 <div class="flex-grow flex flex-col pt-2 border-t border-slate-200">
                     <div class="flex items-center justify-between mb-2">
                         <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
-                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             HKDSE ICT Exam Practice
@@ -154,309 +154,294 @@
                     </div>
 
                     <div class="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-blue-800 mb-2">
-                        Includes full DDL, DML, multi-joins, and subquery questions aligned with the HKDSE ICT syllabus.
+                        Click a challenge to load the exam requirement. Write and execute your query to test your answer!
                     </div>
 
                     <!-- ==================== SCHOOL DB ==================== -->
                     <div class="text-[11px] font-bold uppercase text-slate-500 tracking-wider mb-1 mt-1">School Database (school_db)</div>
 
-                    <!-- School DB: Level 4 HKDSE Advanced (30 Questions) -->
-                    <details id="level-school-dse" class="challenge-level" open>
-                        <summary class="text-indigo-800 bg-indigo-100 hover:bg-indigo-200 text-xs font-bold">★ HKDSE Advanced Mastery (30 Questions)</summary>
+                    <!-- Level 1: School DB -->
+                    <details id="level-sch-1" class="challenge-level" open>
+                        <summary class="text-emerald-700 bg-emerald-100 hover:bg-emerald-200 text-xs font-bold">Level 1: SELECT, DISTINCT, Fields & Sorting</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <!-- 1. CREATE DATABASE -->
-                            <li data-qid="sch_adv_1" data-target-db="school_db" data-sql="CREATE DATABASE tskss_exam_db;" data-answer="CREATE DATABASE tskss_exam_db;" data-hint="Use CREATE DATABASE database_name;" data-keywords="CREATE,DATABASE,tskss_exam_db">
-                                <span class="truncate">Q1: [CREATE DB] Create 'tskss_exam_db'</span>
+                            <li data-qid="sch_l1_1" data-target-db="school_db" data-sql="-- Q1: Display all student details from the 'students' table." data-answer="SELECT * FROM students;" data-hint="Use SELECT * FROM students;" data-keywords="SELECT,*,FROM,students">
+                                <span class="truncate">Q1: Select all columns from students</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_adv_2" data-target-db="school_db" data-sql="CREATE DATABASE eclass_portal;" data-answer="CREATE DATABASE eclass_portal;" data-hint="Execute CREATE DATABASE eclass_portal;" data-keywords="CREATE,DATABASE,eclass_portal">
-                                <span class="truncate">Q2: [CREATE DB] Create 'eclass_portal'</span>
+                            <li data-qid="sch_l1_2" data-target-db="school_db" data-sql="-- Q2: Display only the subject_code and subject_name from 'subjects'." data-answer="SELECT subject_code, subject_name FROM subjects;" data-hint="Specify subject_code, subject_name in the SELECT clause." data-keywords="SELECT,subject_code,subject_name,FROM,subjects">
+                                <span class="truncate">Q2: Select specified columns from subjects</span>
                                 <span class="status-slot"></span>
                             </li>
-
-                            <!-- 2. CREATE TABLES -->
-                            <li data-qid="sch_adv_3" data-target-db="school_db" data-sql="-- Create table 'clubs' with club_id (CHAR(4) PK) and club_name (VARCHAR(50)).&#10;CREATE TABLE clubs (&#10;    club_id TEXT PRIMARY KEY,&#10;    club_name TEXT NOT NULL&#10;);" data-answer="CREATE TABLE clubs (club_id TEXT PRIMARY KEY, club_name TEXT NOT NULL);" data-hint="Use CREATE TABLE clubs (club_id TEXT PRIMARY KEY, club_name TEXT NOT NULL);" data-keywords="CREATE,TABLE,clubs,PRIMARY KEY">
-                                <span class="truncate">Q3: [CREATE TABLE] Define 'clubs' table</span>
+                            <li data-qid="sch_l1_3" data-target-db="school_db" data-sql="-- Q3: Show the first_name, last_name, and class of all students." data-answer="SELECT first_name, last_name, class FROM students;" data-hint="SELECT first_name, last_name, class FROM students;" data-keywords="SELECT,first_name,last_name,class,FROM,students">
+                                <span class="truncate">Q3: Display student names and class</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_adv_4" data-target-db="school_db" data-sql="-- Create table 'memberships' with student_id, club_id, and join_date. Composite PK on (student_id, club_id).&#10;CREATE TABLE memberships (&#10;    student_id INTEGER,&#10;    club_id TEXT,&#10;    join_date DATE,&#10;    PRIMARY KEY (student_id, club_id),&#10;    FOREIGN KEY (student_id) REFERENCES students(student_id),&#10;    FOREIGN KEY (club_id) REFERENCES clubs(club_id)&#10;);" data-answer="CREATE TABLE memberships (student_id INTEGER, club_id TEXT, join_date DATE, PRIMARY KEY (student_id, club_id));" data-hint="Define columns and PRIMARY KEY (student_id, club_id)." data-keywords="CREATE,TABLE,memberships,PRIMARY KEY">
-                                <span class="truncate">Q4: [CREATE TABLE] Composite PK table</span>
+                            <li data-qid="sch_l1_4" data-target-db="school_db" data-sql="-- Q4: List all unique districts where students live (remove duplicates using DISTINCT)." data-answer="SELECT DISTINCT district FROM students;" data-hint="Use SELECT DISTINCT district FROM students;" data-keywords="SELECT,DISTINCT,district,FROM,students">
+                                <span class="truncate">Q4: List distinct districts</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_adv_5" data-target-db="school_db" data-sql="-- Create table 'grade_thresholds' with grade (TEXT PRIMARY KEY), min_score (INTEGER), max_score (INTEGER).&#10;CREATE TABLE grade_thresholds (&#10;    grade TEXT PRIMARY KEY,&#10;    min_score INTEGER,&#10;    max_score INTEGER&#10;);" data-answer="CREATE TABLE grade_thresholds (grade TEXT PRIMARY KEY, min_score INTEGER, max_score INTEGER);" data-hint="CREATE TABLE grade_thresholds (grade TEXT PRIMARY KEY, min_score INTEGER, max_score INTEGER);" data-keywords="CREATE,TABLE,grade_thresholds,PRIMARY KEY">
-                                <span class="truncate">Q5: [CREATE TABLE] Lookup table 'grade_thresholds'</span>
+                            <li data-qid="sch_l1_5" data-target-db="school_db" data-sql="-- Q5: List all unique classes in the students table using DISTINCT." data-answer="SELECT DISTINCT class FROM students;" data-hint="Use SELECT DISTINCT class FROM students;" data-keywords="SELECT,DISTINCT,class,FROM,students">
+                                <span class="truncate">Q5: Distinct classes</span>
                                 <span class="status-slot"></span>
                             </li>
-
-                            <!-- 3. INSERT RECORDS -->
-                            <li data-qid="sch_adv_6" data-target-db="school_db" data-sql="-- Insert 3 clubs: ('C001', 'Cyber Team'), ('C002', 'Robotics Club'), ('C003', 'Debate Society').&#10;INSERT INTO clubs (club_id, club_name) VALUES &#10;('C001', 'Cyber Team'),&#10;('C002', 'Robotics Club'),&#10;('C003', 'Debate Society');" data-answer="INSERT INTO clubs (club_id, club_name) VALUES ('C001', 'Cyber Team'), ('C002', 'Robotics Club'), ('C003', 'Debate Society');" data-hint="INSERT INTO clubs VALUES (...);" data-keywords="INSERT,INTO,clubs,VALUES">
-                                <span class="truncate">Q6: [INSERT] Multi-row insert into clubs</span>
+                            <li data-qid="sch_l1_6" data-target-db="school_db" data-sql="-- Q6: Display all exam records ordered by score in descending order (highest score first)." data-answer="SELECT * FROM exams ORDER BY score DESC;" data-hint="Use ORDER BY score DESC;" data-keywords="SELECT,*,FROM,exams,ORDER BY,score,DESC">
+                                <span class="truncate">Q6: Sort exams by score descending</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_adv_7" data-target-db="school_db" data-sql="-- Insert grade ranges into grade_thresholds:&#10;-- ('5**', 90, 100), ('5*', 80, 89), ('5', 70, 79), ('4', 60, 69), ('Pass', 50, 59), ('Unclass', 0, 49).&#10;INSERT INTO grade_thresholds VALUES&#10;('5**', 90, 100),&#10;('5*', 80, 89),&#10;('5', 70, 79),&#10;('4', 60, 69),&#10;('Pass', 50, 59),&#10;('Unclass', 0, 49);" data-answer="INSERT INTO grade_thresholds VALUES ('5**', 90, 100), ('5*', 80, 89), ('5', 70, 79), ('4', 60, 69), ('Pass', 50, 59), ('Unclass', 0, 49);" data-hint="INSERT INTO grade_thresholds VALUES (...);" data-keywords="INSERT,INTO,grade_thresholds,VALUES">
-                                <span class="truncate">Q7: [INSERT] Populate grade boundaries</span>
+                            <li data-qid="sch_l1_7" data-target-db="school_db" data-sql="-- Q7: Display student_id, last_name, and first_name, ordered by last_name alphabetically (A to Z)." data-answer="SELECT student_id, last_name, first_name FROM students ORDER BY last_name ASC;" data-hint="SELECT student_id, last_name, first_name FROM students ORDER BY last_name ASC;" data-keywords="SELECT,student_id,last_name,first_name,ORDER BY,ASC">
+                                <span class="truncate">Q7: Sort students by last name ascending</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_adv_8" data-target-db="school_db" data-sql="-- Insert a new student record: student_id 9999, class '6A', no 31, last_name 'Wong', first_name 'Wing Sze', gender 'F', dob '2007-03-15', district 'Wan Chai'.&#10;INSERT INTO students (student_id, class, no, last_name, first_name, gender, dob, district)&#10;VALUES (9999, '6A', 31, 'Wong', 'Wing Sze', 'F', '2007-03-15', 'Wan Chai');" data-answer="INSERT INTO students (student_id, class, no, last_name, first_name, gender, dob, district) VALUES (9999, '6A', 31, 'Wong', 'Wing Sze', 'F', '2007-03-15', 'Wan Chai');" data-hint="Specify all column names and matching values." data-keywords="INSERT,INTO,students,VALUES,9999">
-                                <span class="truncate">Q8: [INSERT] Add student 9999</span>
+                            <li data-qid="sch_l1_8" data-target-db="school_db" data-sql="-- Q8: Display all students sorted by class ascending, and then by class number (no) ascending." data-answer="SELECT * FROM students ORDER BY class ASC, no ASC;" data-hint="Use ORDER BY class ASC, no ASC;" data-keywords="ORDER BY,class,no">
+                                <span class="truncate">Q8: Sort by 2 fields: class and no</span>
                                 <span class="status-slot"></span>
                             </li>
-
-                            <!-- 4. UPDATE RECORDS -->
-                            <li data-qid="sch_adv_9" data-target-db="school_db" data-sql="-- Due to class reorganization, update all students in class '4C' to '5C'.&#10;UPDATE students SET class = '5C' WHERE class = '4C';" data-answer="UPDATE students SET class = '5C' WHERE class = '4C';" data-hint="UPDATE students SET class = '5C' WHERE class = '4C';" data-keywords="UPDATE,students,SET,class,WHERE">
-                                <span class="truncate">Q9: [UPDATE] Promote class 4C to 5C</span>
+                            <li data-qid="sch_l1_9" data-target-db="school_db" data-sql="-- Q9: Display student_id, subject_code, and score from exams, ordered by subject_code ascending, then by score descending." data-answer="SELECT student_id, subject_code, score FROM exams ORDER BY subject_code ASC, score DESC;" data-hint="Use ORDER BY subject_code ASC, score DESC;" data-keywords="ORDER BY,subject_code,score,DESC">
+                                <span class="truncate">Q9: Sort exams by subject (ASC) & score (DESC)</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="sch_adv_10" data-target-db="school_db" data-sql="-- Standardize district names: change 'Central & Western' to 'Central and Western'.&#10;UPDATE students SET district = 'Central and Western' WHERE district = 'Central & Western';" data-answer="UPDATE students SET district = 'Central and Western' WHERE district = 'Central & Western';" data-hint="Use WHERE district = 'Central & Western'." data-keywords="UPDATE,students,SET,district">
-                                <span class="truncate">Q10: [UPDATE] Normalize district naming</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_11" data-target-db="school_db" data-sql="-- Award a bonus of 5 marks to all scores in 'ICT' exam, capped at maximum 100.&#10;UPDATE exams SET score = MIN(100, score + 5) WHERE subject_code = 'ICT';" data-answer="UPDATE exams SET score = MIN(100, score + 5) WHERE subject_code = 'ICT';" data-hint="UPDATE exams SET score = MIN(100, score + 5) WHERE subject_code = 'ICT';" data-keywords="UPDATE,exams,SET,score,WHERE,'ICT'">
-                                <span class="truncate">Q11: [UPDATE] Bonus score calculation</span>
-                                <span class="status-slot"></span>
-                            </li>
-
-                            <!-- 5. JOINS & SET OPERATIONS -->
-                            <li data-qid="sch_adv_12" data-target-db="school_db" data-sql="-- Equi-Join: Display student full name (first_name || ' ' || last_name), subject_name, and score for exams in class '4A'.&#10;SELECT s.first_name || ' ' || s.last_name AS full_name, sub.subject_name, e.score&#10;FROM students s&#10;JOIN exams e ON s.student_id = e.student_id&#10;JOIN subjects sub ON e.subject_code = sub.subject_code&#10;WHERE s.class = '4A';" data-answer="SELECT s.first_name || ' ' || s.last_name AS full_name, sub.subject_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id JOIN subjects sub ON e.subject_code = sub.subject_code WHERE s.class = '4A';" data-hint="Equi-join students, exams, and subjects on primary-foreign keys." data-keywords="JOIN,ON,WHERE,'4A'">
-                                <span class="truncate">Q12: [Equi-Join] Class 4A exam details</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_13" data-target-db="school_db" data-sql="-- Non Equi-Join: Join exams with grade_thresholds where score falls BETWEEN min_score AND max_score.&#10;-- Display student_id, subject_code, score, and the calculated grade.&#10;SELECT e.student_id, e.subject_code, e.score, g.grade&#10;FROM exams e&#10;JOIN grade_thresholds g ON e.score >= g.min_score AND e.score <= g.max_score;" data-answer="SELECT e.student_id, e.subject_code, e.score, g.grade FROM exams e JOIN grade_thresholds g ON e.score >= g.min_score AND e.score <= g.max_score;" data-hint="Join using ON e.score >= g.min_score AND e.score <= g.max_score (or BETWEEN)." data-keywords="JOIN,grade_thresholds,ON,>=">
-                                <span class="truncate">Q13: [Non Equi-Join] Grade conversion</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_14" data-target-db="school_db" data-sql="-- Self-Join: Find all distinct pairs of students who are in the SAME class AND share the SAME last name.&#10;-- Display class, last_name, and both student IDs where student 1 ID < student 2 ID.&#10;SELECT s1.class, s1.last_name, s1.student_id AS student_1, s2.student_id AS student_2&#10;FROM students s1&#10;JOIN students s2 ON s1.class = s2.class AND s1.last_name = s2.last_name AND s1.student_id < s2.student_id;" data-answer="SELECT s1.class, s1.last_name, s1.student_id AS student_1, s2.student_id AS student_2 FROM students s1 JOIN students s2 ON s1.class = s2.class AND s1.last_name = s2.last_name AND s1.student_id < s2.student_id;" data-hint="Self join students table as s1 and s2 with condition s1.student_id < s2.student_id." data-keywords="JOIN,students,s1,s2,<">
-                                <span class="truncate">Q14: [Self Join] Same class & surname pairs</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_15" data-target-db="school_db" data-sql="-- Self-Join: Compare two exams of the SAME student. Find students who scored higher in 'ICT' than in 'MATH'.&#10;-- Display student_id, ICT score, and MATH score.&#10;SELECT e1.student_id, e1.score AS ict_score, e2.score AS math_score&#10;FROM exams e1&#10;JOIN exams e2 ON e1.student_id = e2.student_id&#10;WHERE e1.subject_code = 'ICT' AND e2.subject_code = 'MATH' AND e1.score > e2.score;" data-answer="SELECT e1.student_id, e1.score AS ict_score, e2.score AS math_score FROM exams e1 JOIN exams e2 ON e1.student_id = e2.student_id WHERE e1.subject_code = 'ICT' AND e2.subject_code = 'MATH' AND e1.score > e2.score;" data-hint="Self join exams on student_id with e1.subject_code='ICT' and e2.subject_code='MATH'." data-keywords="JOIN,exams,e1,e2,'ICT','MATH'">
-                                <span class="truncate">Q15: [Self Join] ICT score > MATH score</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_16" data-target-db="school_db" data-sql="-- Outer Join: List all students and their ICT exam score if taken. Include students who did not take ICT (score will show NULL).&#10;-- Display student_id, first_name, last_name, and score.&#10;SELECT s.student_id, s.first_name, s.last_name, e.score&#10;FROM students s&#10;LEFT JOIN exams e ON s.student_id = e.student_id AND e.subject_code = 'ICT';" data-answer="SELECT s.student_id, s.first_name, s.last_name, e.score FROM students s LEFT JOIN exams e ON s.student_id = e.student_id AND e.subject_code = 'ICT';" data-hint="Use LEFT JOIN with condition on e.subject_code = 'ICT'." data-keywords="LEFT,JOIN,ON,exams">
-                                <span class="truncate">Q16: [Outer Join] All students with ICT score</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_17" data-target-db="school_db" data-sql="-- Outer Join: Find subjects that have NO exam records at all (untested subjects).&#10;SELECT sub.subject_code, sub.subject_name&#10;FROM subjects sub&#10;LEFT JOIN exams e ON sub.subject_code = e.subject_code&#10;WHERE e.student_id IS NULL;" data-answer="SELECT sub.subject_code, sub.subject_name FROM subjects sub LEFT JOIN exams e ON sub.subject_code = e.subject_code WHERE e.student_id IS NULL;" data-hint="Use LEFT JOIN and check WHERE e.student_id IS NULL." data-keywords="LEFT,JOIN,IS NULL">
-                                <span class="truncate">Q17: [Outer Join] Subjects without exam entries</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_18" data-target-db="school_db" data-sql="-- UNION: Create a combined contact directory showing 'Student' role from students table and 'Teacher' role.&#10;-- Display full name and category.&#10;SELECT first_name || ' ' || last_name AS name, 'Student' AS role FROM students WHERE class = '4A'&#10;UNION&#10;SELECT 'Kerry Chan' AS name, 'Teacher' AS role;" data-answer="SELECT first_name || ' ' || last_name AS name, 'Student' AS role FROM students WHERE class = '4A' UNION SELECT 'Kerry Chan' AS name, 'Teacher' AS role;" data-hint="Combine queries using the UNION operator." data-keywords="UNION,SELECT,'Student'">
-                                <span class="truncate">Q18: [UNION] Combine distinct rosters</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_19" data-target-db="school_db" data-sql="-- UNION: List all distinct districts where students live UNION districts of school branch campuses ('Wan Chai', 'Kowloon City').&#10;SELECT district FROM students&#10;UNION&#10;SELECT 'Wan Chai' AS district&#10;UNION&#10;SELECT 'Kowloon City' AS district;" data-answer="SELECT district FROM students UNION SELECT 'Wan Chai' AS district UNION SELECT 'Kowloon City' AS district;" data-hint="Use UNION to merge district lists." data-keywords="UNION,district">
-                                <span class="truncate">Q19: [UNION] Master district registry</span>
-                                <span class="status-slot"></span>
-                            </li>
-
-                            <!-- 6. SUB-QUERIES -->
-                            <li data-qid="sch_adv_20" data-target-db="school_db" data-sql="-- Sub-query with IN: Find student_id, first_name, last_name for students who scored 100 in ANY subject.&#10;SELECT student_id, first_name, last_name&#10;FROM students&#10;WHERE student_id IN (SELECT student_id FROM exams WHERE score = 100);" data-answer="SELECT student_id, first_name, last_name FROM students WHERE student_id IN (SELECT student_id FROM exams WHERE score = 100);" data-hint="WHERE student_id IN (SELECT student_id FROM exams WHERE score = 100);" data-keywords="WHERE,IN,SELECT,100">
-                                <span class="truncate">Q20: [Subquery IN] Perfect score achievers</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_21" data-target-db="school_db" data-sql="-- Sub-query with NOT IN: Find students who have NOT taken the 'PHY' exam.&#10;SELECT student_id, first_name, last_name, class&#10;FROM students&#10;WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'PHY');" data-answer="SELECT student_id, first_name, last_name, class FROM students WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'PHY');" data-hint="WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'PHY');" data-keywords="NOT IN,SELECT,'PHY'">
-                                <span class="truncate">Q21: [Subquery NOT IN] Non-Physics students</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_22" data-target-db="school_db" data-sql="-- Sub-query with scalar '=': Find the student details who scored the absolute highest mark in 'ICT'.&#10;SELECT s.student_id, s.first_name, s.last_name, e.score&#10;FROM students s&#10;JOIN exams e ON s.student_id = e.student_id&#10;WHERE e.subject_code = 'ICT' AND e.score = (SELECT MAX(score) FROM exams WHERE subject_code = 'ICT');" data-answer="SELECT s.student_id, s.first_name, s.last_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'ICT' AND e.score = (SELECT MAX(score) FROM exams WHERE subject_code = 'ICT');" data-hint="WHERE e.score = (SELECT MAX(score) FROM exams WHERE subject_code = 'ICT');" data-keywords="=,SELECT,MAX,'ICT'">
-                                <span class="truncate">Q22: [Subquery =] Top ranker in ICT</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_23" data-target-db="school_db" data-sql="-- Sub-query with scalar '>': Find exams whose score is greater than the overall average exam score of the entire school.&#10;SELECT student_id, subject_code, score&#10;FROM exams&#10;WHERE score > (SELECT AVG(score) FROM exams);" data-answer="SELECT student_id, subject_code, score FROM exams WHERE score > (SELECT AVG(score) FROM exams);" data-hint="WHERE score > (SELECT AVG(score) FROM exams);" data-keywords="WHERE,score,>,SELECT,AVG">
-                                <span class="truncate">Q23: [Subquery >] Scores above school average</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_24" data-target-db="school_db" data-sql="-- Sub-query with EXISTS: Find all subjects for which at least one student scored below 50.&#10;SELECT s.subject_code, s.subject_name&#10;FROM subjects s&#10;WHERE EXISTS (&#10;    SELECT 1 FROM exams e WHERE e.subject_code = s.subject_code AND e.score < 50&#10;);" data-answer="SELECT s.subject_code, s.subject_name FROM subjects s WHERE EXISTS (SELECT 1 FROM exams e WHERE e.subject_code = s.subject_code AND e.score < 50);" data-hint="Use WHERE EXISTS (SELECT 1 FROM exams ... AND e.score < 50);" data-keywords="WHERE,EXISTS,SELECT,<,50">
-                                <span class="truncate">Q24: [Subquery EXISTS] Subjects with failures</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_25" data-target-db="school_db" data-sql="-- Sub-query with NOT EXISTS: Find students who have NO exam score lower than 60 in any subject they took.&#10;SELECT s.student_id, s.first_name, s.last_name&#10;FROM students s&#10;WHERE NOT EXISTS (&#10;    SELECT 1 FROM exams e WHERE e.student_id = s.student_id AND e.score < 60&#10;);" data-answer="SELECT s.student_id, s.first_name, s.last_name FROM students s WHERE NOT EXISTS (SELECT 1 FROM exams e WHERE e.student_id = s.student_id AND e.score < 60);" data-hint="Use WHERE NOT EXISTS (SELECT 1 FROM exams e WHERE e.student_id = s.student_id AND e.score < 60);" data-keywords="NOT EXISTS,SELECT,60">
-                                <span class="truncate">Q25: [Subquery NOT EXISTS] Consistent passes</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_26" data-target-db="school_db" data-sql="-- Sub-query simulating '> ALL': Find exam records in 'ICT' whose score is greater than ALL scores in 'BIO' (i.e. score > MAX(BIO scores)).&#10;SELECT student_id, score&#10;FROM exams&#10;WHERE subject_code = 'ICT' AND score > (SELECT MAX(score) FROM exams WHERE subject_code = 'BIO');" data-answer="SELECT student_id, score FROM exams WHERE subject_code = 'ICT' AND score > (SELECT MAX(score) FROM exams WHERE subject_code = 'BIO');" data-hint="Use score > (SELECT MAX(score) FROM exams WHERE subject_code = 'BIO');" data-keywords="WHERE,>,SELECT,MAX,'BIO'">
-                                <span class="truncate">Q26: [Subquery ALL] ICT score > ALL Biology scores</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_27" data-target-db="school_db" data-sql="-- Correlated Subquery: Find students whose average score across their subjects is strictly higher than their class average.&#10;SELECT s.student_id, s.class&#10;FROM students s&#10;WHERE (SELECT AVG(e.score) FROM exams e WHERE e.student_id = s.student_id) >&#10;      (SELECT AVG(e2.score) FROM exams e2 JOIN students s2 ON e2.student_id = s2.student_id WHERE s2.class = s.class);" data-answer="SELECT s.student_id, s.class FROM students s WHERE (SELECT AVG(e.score) FROM exams e WHERE e.student_id = s.student_id) > (SELECT AVG(e2.score) FROM exams e2 JOIN students s2 ON e2.student_id = s2.student_id WHERE s2.class = s.class);" data-hint="Correlate student average with class average in the subquery." data-keywords="SELECT,AVG,exams,students,>">
-                                <span class="truncate">Q27: [Subquery] Student avg > Class avg</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_28" data-target-db="school_db" data-sql="-- Subquery in FROM clause: Calculate the maximum and minimum of class average scores.&#10;SELECT MAX(avg_score) AS highest_class_avg, MIN(avg_score) AS lowest_class_avg&#10;FROM (&#10;    SELECT s.class, AVG(e.score) AS avg_score&#10;    FROM students s JOIN exams e ON s.student_id = e.student_id&#10;    GROUP BY s.class&#10;) AS class_averages;" data-answer="SELECT MAX(avg_score) AS highest_class_avg, MIN(avg_score) AS lowest_class_avg FROM (SELECT s.class, AVG(e.score) AS avg_score FROM students s JOIN exams e ON s.student_id = e.student_id GROUP BY s.class) AS class_averages;" data-hint="Nest the class average calculation in the FROM clause." data-keywords="SELECT,MAX,MIN,FROM,GROUP BY">
-                                <span class="truncate">Q28: [Derived Table] Range of class averages</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_29" data-target-db="school_db" data-sql="-- Subquery with IN & Multiple Conditions: Find male students who take BOTH 'ICT' AND 'PHY'.&#10;SELECT student_id, first_name, last_name&#10;FROM students&#10;WHERE gender = 'M'&#10;  AND student_id IN (SELECT student_id FROM exams WHERE subject_code = 'ICT')&#10;  AND student_id IN (SELECT student_id FROM exams WHERE subject_code = 'PHY');" data-answer="SELECT student_id, first_name, last_name FROM students WHERE gender = 'M' AND student_id IN (SELECT student_id FROM exams WHERE subject_code = 'ICT') AND student_id IN (SELECT student_id FROM exams WHERE subject_code = 'PHY');" data-hint="Combine two IN subqueries with AND." data-keywords="WHERE,gender,IN,ICT,PHY">
-                                <span class="truncate">Q29: [Subquery IN] Double elective enrollment</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="sch_adv_30" data-target-db="school_db" data-sql="-- HKDSE Comprehensive: Identify the 'Top Scholar' (highest total exam score) in class '4A'.&#10;-- Display student_id, full name, and grand total score.&#10;SELECT s.student_id, s.first_name || ' ' || s.last_name AS full_name, SUM(e.score) AS total_score&#10;FROM students s&#10;JOIN exams e ON s.student_id = e.student_id&#10;WHERE s.class = '4A'&#10;GROUP BY s.student_id&#10;ORDER BY total_score DESC&#10;LIMIT 1;" data-answer="SELECT s.student_id, s.first_name || ' ' || s.last_name AS full_name, SUM(e.score) AS total_score FROM students s JOIN exams e ON s.student_id = e.student_id WHERE s.class = '4A' GROUP BY s.student_id ORDER BY total_score DESC LIMIT 1;" data-hint="JOIN, filter by class '4A', GROUP BY student_id, ORDER BY total DESC LIMIT 1." data-keywords="JOIN,GROUP BY,SUM,ORDER BY,DESC,LIMIT">
-                                <span class="truncate">Q30: [Exam Capstone] Top scholar of Class 4A</span>
+                            <li data-qid="sch_l1_10" data-target-db="school_db" data-sql="-- Q10: Display all distinct combinations of class and district in the students table." data-answer="SELECT DISTINCT class, district FROM students;" data-hint="Use SELECT DISTINCT class, district FROM students;" data-keywords="SELECT,DISTINCT,class,district,FROM,students">
+                                <span class="truncate">Q10: Distinct class and district pairs</span>
                                 <span class="status-slot"></span>
                             </li>
                         </ol>
                     </details>
 
-                    <!-- Original Levels (School DB) -->
-                    <details id="level-1" class="challenge-level">
-                        <summary class="text-green-700 bg-green-100 hover:bg-green-200 text-xs">Level 1: Beginner (school_db)</summary>
+                    <!-- Level 2: School DB -->
+                    <details id="level-sch-2" class="challenge-level">
+                        <summary class="text-amber-700 bg-amber-100 hover:bg-amber-200 text-xs font-bold">Level 2: WHERE, Logic, Range, IN & Pattern Matching</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <li data-qid="sch_l1_1" data-target-db="school_db" data-sql="SELECT * FROM students;" data-answer="SELECT * FROM students;" data-hint="Use SELECT * FROM table_name;" data-keywords="SELECT,*,FROM,students"><span class="truncate">List all students.</span><span class="status-slot"></span></li>
-                            <li data-qid="sch_l1_2" data-target-db="school_db" data-sql="SELECT * FROM subjects;" data-answer="SELECT * FROM subjects;" data-hint="Use SELECT * FROM subjects;" data-keywords="SELECT,*,FROM,subjects"><span class="truncate">List all subjects.</span><span class="status-slot"></span></li>
-                            <li data-qid="sch_l1_3" data-target-db="school_db" data-sql="SELECT first_name, last_name, class FROM students;" data-answer="SELECT first_name, last_name, class FROM students;" data-hint="SELECT column1, column2 FROM students;" data-keywords="SELECT,first_name,last_name,class,FROM,students"><span class="truncate">Show student names and class.</span><span class="status-slot"></span></li>
-                            <li data-qid="sch_l1_4" data-target-db="school_db" data-sql="SELECT * FROM students WHERE class = '4A';" data-answer="SELECT * FROM students WHERE class = '4A';" data-hint="Use WHERE class = '4A'." data-keywords="WHERE,class,'4A'"><span class="truncate">Find all students in class '4A'.</span><span class="status-slot"></span></li>
-                            <li data-qid="sch_l1_5" data-target-db="school_db" data-sql="SELECT * FROM exams WHERE score > 95;" data-answer="SELECT * FROM exams WHERE score > 95;" data-hint="Use WHERE score > 95." data-keywords="WHERE,score,>,95"><span class="truncate">Find exams with scores > 95.</span><span class="status-slot"></span></li>
+                            <li data-qid="sch_l2_1" data-target-db="school_db" data-sql="-- Q1: Find all students who belong to class '4A'." data-answer="SELECT * FROM students WHERE class = '4A';" data-hint="WHERE class = '4A'" data-keywords="WHERE,class,'4A'">
+                                <span class="truncate">Q1: Filter by class '4A'</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_2" data-target-db="school_db" data-sql="-- Q2: Find all students who do NOT belong to class '4A' using the '<>' operator." data-answer="SELECT * FROM students WHERE class <> '4A';" data-hint="Use WHERE class <> '4A';" data-keywords="WHERE,class,<>'4A'">
+                                <span class="truncate">Q2: Class not equal to '4A' (<>)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_3" data-target-db="school_db" data-sql="-- Q3: Find all female students ('F') in class '4C'." data-answer="SELECT * FROM students WHERE class = '4C' AND gender = 'F';" data-hint="WHERE class = '4C' AND gender = 'F';" data-keywords="WHERE,class,AND,gender">
+                                <span class="truncate">Q3: Female students in class 4C (AND)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_4" data-target-db="school_db" data-sql="-- Q4: List all students who live in 'Wan Chai' OR 'Sha Tin'." data-answer="SELECT * FROM students WHERE district = 'Wan Chai' OR district = 'Sha Tin';" data-hint="WHERE district = 'Wan Chai' OR district = 'Sha Tin';" data-keywords="WHERE,district,OR">
+                                <span class="truncate">Q4: District 'Wan Chai' OR 'Sha Tin'</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_5" data-target-db="school_db" data-sql="-- Q5: Find students whose class is IN ('4A', '4C', '4D') ordered by class number (no) ascending." data-answer="SELECT * FROM students WHERE class IN ('4A', '4C', '4D') ORDER BY no ASC;" data-hint="WHERE class IN ('4A', '4C', '4D') ORDER BY no ASC;" data-keywords="WHERE,class,IN,ORDER BY,no">
+                                <span class="truncate">Q5: Class IN ('4A', '4C', '4D') with sorting</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_6" data-target-db="school_db" data-sql="-- Q6: Find exam records where the score is BETWEEN 75 AND 85 (inclusive)." data-answer="SELECT * FROM exams WHERE score BETWEEN 75 AND 85;" data-hint="WHERE score BETWEEN 75 AND 85;" data-keywords="WHERE,score,BETWEEN,75,AND,85">
+                                <span class="truncate">Q6: Score BETWEEN 75 AND 85</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_7" data-target-db="school_db" data-sql="-- Q7: Find all students whose last_name starts with the letter 'C' using the LIKE operator." data-answer="SELECT * FROM students WHERE last_name LIKE 'C%';" data-hint="WHERE last_name LIKE 'C%';" data-keywords="WHERE,last_name,LIKE,'C%'">
+                                <span class="truncate">Q7: Surnames starting with 'C' (LIKE 'C%')</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_8" data-target-db="school_db" data-sql="-- Q8: Find students whose last_name has exactly 3 characters using LIKE and '_' wildcards." data-answer="SELECT * FROM students WHERE last_name LIKE '___';" data-hint="Use three underscores: LIKE '___';" data-keywords="WHERE,last_name,LIKE,'___'">
+                                <span class="truncate">Q8: 3-letter surnames (LIKE '___')</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_9" data-target-db="school_db" data-sql="-- Q9: Find all students whose first_name contains 'Kin' using the LIKE operator." data-answer="SELECT * FROM students WHERE first_name LIKE '%Kin%';" data-hint="WHERE first_name LIKE '%Kin%';" data-keywords="WHERE,first_name,LIKE,'%Kin%'">
+                                <span class="truncate">Q9: First names containing 'Kin'</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l2_10" data-target-db="school_db" data-sql="-- Q10: Find exam records for subject 'ICT' where score >= 80, ordered by score descending." data-answer="SELECT * FROM exams WHERE subject_code = 'ICT' AND score >= 80 ORDER BY score DESC;" data-hint="WHERE subject_code = 'ICT' AND score >= 80 ORDER BY score DESC;" data-keywords="WHERE,subject_code,'ICT',AND,score,ORDER BY,DESC">
+                                <span class="truncate">Q10: High ICT scores with ordering</span>
+                                <span class="status-slot"></span>
+                            </li>
+                        </ol>
+                    </details>
+
+                    <!-- Level 3: School DB -->
+                    <details id="level-sch-3" class="challenge-level">
+                        <summary class="text-indigo-800 bg-indigo-100 hover:bg-indigo-200 text-xs font-bold">Level 3: GROUP BY, HAVING & Aggregations</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <li data-qid="sch_l3_1" data-target-db="school_db" data-sql="-- Q1: Count the total number of students in the 'students' table." data-answer="SELECT COUNT(*) AS total_students FROM students;" data-hint="SELECT COUNT(*) FROM students;" data-keywords="SELECT,COUNT(*),FROM,students">
+                                <span class="truncate">Q1: Total student count (COUNT)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_2" data-target-db="school_db" data-sql="-- Q2: Find the highest (MAX) and lowest (MIN) score in the 'exams' table." data-answer="SELECT MAX(score) AS max_score, MIN(score) AS min_score FROM exams;" data-hint="SELECT MAX(score), MIN(score) FROM exams;" data-keywords="SELECT,MAX,MIN,score,FROM,exams">
+                                <span class="truncate">Q2: Highest and lowest score (MAX, MIN)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_3" data-target-db="school_db" data-sql="-- Q3: Calculate the average (AVG) score for the 'ICT' exam." data-answer="SELECT AVG(score) AS avg_score FROM exams WHERE subject_code = 'ICT';" data-hint="SELECT AVG(score) FROM exams WHERE subject_code = 'ICT';" data-keywords="SELECT,AVG,score,FROM,exams,WHERE">
+                                <span class="truncate">Q3: Average score in ICT</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_4" data-target-db="school_db" data-sql="-- Q4: Count the number of students in each class (GROUP BY class)." data-answer="SELECT class, COUNT(*) AS student_count FROM students GROUP BY class;" data-hint="SELECT class, COUNT(*) FROM students GROUP BY class;" data-keywords="SELECT,class,COUNT,GROUP BY,class">
+                                <span class="truncate">Q4: Count students per class</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_5" data-target-db="school_db" data-sql="-- Q5: Find the average score and total students tested for each subject_code." data-answer="SELECT subject_code, AVG(score) AS avg_score, COUNT(*) AS total_exams FROM exams GROUP BY subject_code;" data-hint="SELECT subject_code, AVG(score), COUNT(*) FROM exams GROUP BY subject_code;" data-keywords="SELECT,subject_code,AVG,COUNT,GROUP BY">
+                                <span class="truncate">Q5: Subject stats: AVG score and COUNT</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_6" data-target-db="school_db" data-sql="-- Q6: Count how many male ('M') and female ('F') students are in each class (GROUP BY class, gender)." data-answer="SELECT class, gender, COUNT(*) AS gender_count FROM students GROUP BY class, gender ORDER BY class ASC, gender ASC;" data-hint="GROUP BY class, gender ORDER BY class ASC, gender ASC;" data-keywords="GROUP BY,class,gender,ORDER BY">
+                                <span class="truncate">Q6: Group by class and gender</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_7" data-target-db="school_db" data-sql="-- Q7: Find subject_codes where the average exam score is strictly greater than 70 (use HAVING)." data-answer="SELECT subject_code, AVG(score) AS avg_score FROM exams GROUP BY subject_code HAVING AVG(score) > 70;" data-hint="GROUP BY subject_code HAVING AVG(score) > 70;" data-keywords="GROUP BY,HAVING,AVG,>">
+                                <span class="truncate">Q7: Subjects with AVG score > 70 (HAVING)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_8" data-target-db="school_db" data-sql="-- Q8: Find students (student_id) who have an average score across all their exams of at least 80." data-answer="SELECT student_id, AVG(score) AS avg_score FROM exams GROUP BY student_id HAVING AVG(score) >= 80;" data-hint="GROUP BY student_id HAVING AVG(score) >= 80;" data-keywords="GROUP BY,student_id,HAVING,AVG,>=">
+                                <span class="truncate">Q8: High-achieving students (AVG >= 80)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_9" data-target-db="school_db" data-sql="-- Q9: Count how many students live in each district, but only display districts having more than 10 students, ordered from most to least." data-answer="SELECT district, COUNT(*) AS student_count FROM students GROUP BY district HAVING COUNT(*) > 10 ORDER BY student_count DESC;" data-hint="GROUP BY district HAVING COUNT(*) > 10 ORDER BY student_count DESC;" data-keywords="GROUP BY,HAVING,COUNT,ORDER BY,DESC">
+                                <span class="truncate">Q9: Districts with > 10 students (HAVING & ORDER BY)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l3_10" data-target-db="school_db" data-sql="-- Q10: Considering only 'CHI' and 'ENG' exams, calculate the average score for each subject, and only show those with average score >= 65." data-answer="SELECT subject_code, AVG(score) AS avg_score FROM exams WHERE subject_code IN ('CHI', 'ENG') GROUP BY subject_code HAVING AVG(score) >= 65;" data-hint="Combine WHERE subject_code IN ('CHI', 'ENG'), GROUP BY, and HAVING." data-keywords="WHERE,IN,GROUP BY,HAVING,AVG">
+                                <span class="truncate">Q10: Languages average filter (WHERE + GROUP + HAVING)</span>
+                                <span class="status-slot"></span>
+                            </li>
                         </ol>
                     </details>
 
                     <!-- ==================== CHINOOK DB ==================== -->
                     <div class="text-[11px] font-bold uppercase text-slate-500 tracking-wider mb-1 mt-4">Chinook Media Database (chinook_db)</div>
 
-                    <!-- Chinook DB: Level 4 HKDSE Advanced (30 Questions) -->
-                    <details id="level-chinook-dse" class="challenge-level">
-                        <summary class="text-purple-800 bg-purple-100 hover:bg-purple-200 text-xs font-bold">★ HKDSE Advanced Mastery (30 Questions)</summary>
+                    <!-- Level 1: Chinook DB -->
+                    <details id="level-chk-1" class="challenge-level">
+                        <summary class="text-emerald-700 bg-emerald-100 hover:bg-emerald-200 text-xs font-bold">Level 1: SELECT, DISTINCT, Fields & Sorting</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <!-- 1. CREATE DATABASE -->
-                            <li data-qid="chk_adv_1" data-target-db="chinook_db" data-sql="CREATE DATABASE music_store_dw;" data-answer="CREATE DATABASE music_store_dw;" data-hint="Use CREATE DATABASE music_store_dw;" data-keywords="CREATE,DATABASE,music_store_dw">
-                                <span class="truncate">Q1: [CREATE DB] Create 'music_store_dw'</span>
+                            <li data-qid="chk_l1_1" data-target-db="chinook_db" data-sql="-- Q1: Display all columns and rows from the 'Artist' table." data-answer="SELECT * FROM Artist;" data-hint="SELECT * FROM Artist;" data-keywords="SELECT,*,FROM,Artist">
+                                <span class="truncate">Q1: Select all artists</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="chk_adv_2" data-target-db="chinook_db" data-sql="CREATE DATABASE digital_license_db;" data-answer="CREATE DATABASE digital_license_db;" data-hint="Use CREATE DATABASE digital_license_db;" data-keywords="CREATE,DATABASE,digital_license_db">
-                                <span class="truncate">Q2: [CREATE DB] Create 'digital_license_db'</span>
+                            <li data-qid="chk_l1_2" data-target-db="chinook_db" data-sql="-- Q2: Display only the AlbumId and Title columns from 'Album'." data-answer="SELECT AlbumId, Title FROM Album;" data-hint="SELECT AlbumId, Title FROM Album;" data-keywords="SELECT,AlbumId,Title,FROM,Album">
+                                <span class="truncate">Q2: Select Album ID and Title</span>
                                 <span class="status-slot"></span>
                             </li>
-
-                            <!-- 2. CREATE TABLES -->
-                            <li data-qid="chk_adv_3" data-target-db="chinook_db" data-sql="-- Create table 'Discounts' with discount_code (TEXT PK), description (TEXT), percentage (INTEGER).&#10;CREATE TABLE Discounts (&#10;    discount_code TEXT PRIMARY KEY,&#10;    description TEXT NOT NULL,&#10;    percentage INTEGER CHECK(percentage >= 0 AND percentage <= 100)&#10;);" data-answer="CREATE TABLE Discounts (discount_code TEXT PRIMARY KEY, description TEXT NOT NULL, percentage INTEGER);" data-hint="CREATE TABLE Discounts (discount_code TEXT PRIMARY KEY, description TEXT NOT NULL, percentage INTEGER);" data-keywords="CREATE,TABLE,Discounts,PRIMARY KEY">
-                                <span class="truncate">Q3: [CREATE TABLE] Create 'Discounts' table</span>
+                            <li data-qid="chk_l1_3" data-target-db="chinook_db" data-sql="-- Q3: Display the FirstName, LastName, and City of every customer." data-answer="SELECT FirstName, LastName, City FROM Customer;" data-hint="SELECT FirstName, LastName, City FROM Customer;" data-keywords="SELECT,FirstName,LastName,City,FROM,Customer">
+                                <span class="truncate">Q3: Customer names and city</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="chk_adv_4" data-target-db="chinook_db" data-sql="-- Create table 'TrackReviews' with review_id (INT PK), track_id (INT FK), customer_id (INT FK), rating (INT), comment (TEXT).&#10;CREATE TABLE TrackReviews (&#10;    review_id INTEGER PRIMARY KEY,&#10;    track_id INTEGER,&#10;    customer_id INTEGER,&#10;    rating INTEGER,&#10;    comment TEXT,&#10;    FOREIGN KEY (track_id) REFERENCES Track(TrackId),&#10;    FOREIGN KEY (customer_id) REFERENCES Customer(CustomerId)&#10;);" data-answer="CREATE TABLE TrackReviews (review_id INTEGER PRIMARY KEY, track_id INTEGER, customer_id INTEGER, rating INTEGER, comment TEXT);" data-hint="Define columns, PRIMARY KEY, and FOREIGN KEYs." data-keywords="CREATE,TABLE,TrackReviews,PRIMARY KEY">
-                                <span class="truncate">Q4: [CREATE TABLE] Multi-FK 'TrackReviews'</span>
+                            <li data-qid="chk_l1_4" data-target-db="chinook_db" data-sql="-- Q4: List all distinct countries where customers are located using DISTINCT." data-answer="SELECT DISTINCT Country FROM Customer;" data-hint="SELECT DISTINCT Country FROM Customer;" data-keywords="SELECT,DISTINCT,Country,FROM,Customer">
+                                <span class="truncate">Q4: Distinct customer countries</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="chk_adv_5" data-target-db="chinook_db" data-sql="-- Create table 'AuditLog' with log_id (INT PK AUTOINCREMENT), action_type (TEXT), timestamp (DATETIME).&#10;CREATE TABLE AuditLog (&#10;    log_id INTEGER PRIMARY KEY AUTOINCREMENT,&#10;    action_type TEXT NOT NULL,&#10;    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP&#10;);" data-answer="CREATE TABLE AuditLog (log_id INTEGER PRIMARY KEY AUTOINCREMENT, action_type TEXT NOT NULL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP);" data-hint="Use PRIMARY KEY AUTOINCREMENT for audit sequence." data-keywords="CREATE,TABLE,AuditLog,PRIMARY KEY">
-                                <span class="truncate">Q5: [CREATE TABLE] 'AuditLog' with AUTOINCREMENT</span>
+                            <li data-qid="chk_l1_5" data-target-db="chinook_db" data-sql="-- Q5: List all unique composers in the Track table, excluding NULLs." data-answer="SELECT DISTINCT Composer FROM Track WHERE Composer IS NOT NULL;" data-hint="SELECT DISTINCT Composer FROM Track WHERE Composer IS NOT NULL;" data-keywords="SELECT,DISTINCT,Composer,FROM,Track">
+                                <span class="truncate">Q5: Distinct track composers</span>
                                 <span class="status-slot"></span>
                             </li>
-
-                            <!-- 3. INSERT RECORDS -->
-                            <li data-qid="chk_adv_6" data-target-db="chinook_db" data-sql="-- Insert promotional discount codes: ('SUMMER10', '10% Summer Sale', 10), ('STUDENT20', '20% Student Offer', 20).&#10;INSERT INTO Discounts (discount_code, description, percentage) VALUES&#10;('SUMMER10', '10% Summer Sale', 10),&#10;('STUDENT20', '20% Student Offer', 20);" data-answer="INSERT INTO Discounts (discount_code, description, percentage) VALUES ('SUMMER10', '10% Summer Sale', 10), ('STUDENT20', '20% Student Offer', 20);" data-hint="INSERT INTO Discounts VALUES (...);" data-keywords="INSERT,INTO,Discounts,VALUES">
-                                <span class="truncate">Q6: [INSERT] Multi-row into Discounts</span>
+                            <li data-qid="chk_l1_6" data-target-db="chinook_db" data-sql="-- Q6: Display all artists sorted alphabetically by Name (A-Z)." data-answer="SELECT * FROM Artist ORDER BY Name ASC;" data-hint="ORDER BY Name ASC;" data-keywords="ORDER BY,Name,ASC">
+                                <span class="truncate">Q6: Sort artists by Name ascending</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="chk_adv_7" data-target-db="chinook_db" data-sql="-- Insert review into TrackReviews: review_id 1, track_id 13, customer_id 16, rating 5, comment 'Masterpiece Bohemian Rhapsody'.&#10;INSERT INTO TrackReviews (review_id, track_id, customer_id, rating, comment)&#10;VALUES (1, 13, 16, 5, 'Masterpiece Bohemian Rhapsody');" data-answer="INSERT INTO TrackReviews (review_id, track_id, customer_id, rating, comment) VALUES (1, 13, 16, 5, 'Masterpiece Bohemian Rhapsody');" data-hint="Specify columns and matching values." data-keywords="INSERT,INTO,TrackReviews,VALUES,13">
-                                <span class="truncate">Q7: [INSERT] Add review record</span>
+                            <li data-qid="chk_l1_7" data-target-db="chinook_db" data-sql="-- Q7: Display Name and Milliseconds for all tracks, ordered from longest to shortest duration." data-answer="SELECT Name, Milliseconds FROM Track ORDER BY Milliseconds DESC;" data-hint="ORDER BY Milliseconds DESC;" data-keywords="ORDER BY,Milliseconds,DESC">
+                                <span class="truncate">Q7: Sort tracks by duration descending</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="chk_adv_8" data-target-db="chinook_db" data-sql="-- Insert a new Artist ('Beyond') and its Album ('Secret Police', artist_id for Beyond).&#10;INSERT INTO Artist (ArtistId, Name) VALUES (101, 'Beyond');&#10;INSERT INTO Album (AlbumId, Title, ArtistId) VALUES (101, 'Secret Police', 101);" data-answer="INSERT INTO Artist (ArtistId, Name) VALUES (101, 'Beyond'); INSERT INTO Album (AlbumId, Title, ArtistId) VALUES (101, 'Secret Police', 101);" data-hint="Execute two INSERT statements for Artist and Album." data-keywords="INSERT,INTO,Artist,Album,'Beyond'">
-                                <span class="truncate">Q8: [INSERT] Relational pair insertion</span>
+                            <li data-qid="chk_l1_8" data-target-db="chinook_db" data-sql="-- Q8: Display InvoiceId, CustomerId, and Total from Invoice, ordered by CustomerId ascending, then Total descending." data-answer="SELECT InvoiceId, CustomerId, Total FROM Invoice ORDER BY CustomerId ASC, Total DESC;" data-hint="ORDER BY CustomerId ASC, Total DESC;" data-keywords="ORDER BY,CustomerId,Total,DESC">
+                                <span class="truncate">Q8: Sort invoices by CustomerId and Total</span>
                                 <span class="status-slot"></span>
                             </li>
-
-                            <!-- 4. UPDATE RECORDS -->
-                            <li data-qid="chk_adv_9" data-target-db="chinook_db" data-sql="-- Inflation adjustment: Increase UnitPrice by 0.10 for all tracks in GenreId = 1 ('Rock').&#10;UPDATE Track SET UnitPrice = UnitPrice + 0.10 WHERE GenreId = 1;" data-answer="UPDATE Track SET UnitPrice = UnitPrice + 0.10 WHERE GenreId = 1;" data-hint="UPDATE Track SET UnitPrice = UnitPrice + 0.10 WHERE GenreId = 1;" data-keywords="UPDATE,Track,SET,UnitPrice,WHERE">
-                                <span class="truncate">Q9: [UPDATE] Price adjustment for Rock genre</span>
+                            <li data-qid="chk_l1_9" data-target-db="chinook_db" data-sql="-- Q9: Display FirstName, LastName, and Title for all employees ordered by Title ASC, then LastName ASC." data-answer="SELECT FirstName, LastName, Title FROM Employee ORDER BY Title ASC, LastName ASC;" data-hint="ORDER BY Title ASC, LastName ASC;" data-keywords="ORDER BY,Title,LastName">
+                                <span class="truncate">Q9: Sort employees by Title and LastName</span>
                                 <span class="status-slot"></span>
                             </li>
-                            <li data-qid="chk_adv_10" data-target-db="chinook_db" data-sql="-- Reassign all customers whose SupportRepId is 3 to SupportRepId 5.&#10;UPDATE Customer SET SupportRepId = 5 WHERE SupportRepId = 3;" data-answer="UPDATE Customer SET SupportRepId = 5 WHERE SupportRepId = 3;" data-hint="UPDATE Customer SET SupportRepId = 5 WHERE SupportRepId = 3;" data-keywords="UPDATE,Customer,SET,SupportRepId">
-                                <span class="truncate">Q10: [UPDATE] Reassign sales representative</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_11" data-target-db="chinook_db" data-sql="-- Set missing Company values to 'Independent Individual' where Company IS NULL.&#10;UPDATE Customer SET Company = 'Independent Individual' WHERE Company IS NULL;" data-answer="UPDATE Customer SET Company = 'Independent Individual' WHERE Company IS NULL;" data-hint="UPDATE Customer SET Company = 'Independent Individual' WHERE Company IS NULL;" data-keywords="UPDATE,Customer,SET,Company,IS NULL">
-                                <span class="truncate">Q11: [UPDATE] Handle NULL company values</span>
-                                <span class="status-slot"></span>
-                            </li>
-
-                            <!-- 5. JOINS & SET OPERATIONS -->
-                            <li data-qid="chk_adv_12" data-target-db="chinook_db" data-sql="-- Equi-Join: Show Customer full name, InvoiceId, InvoiceDate, and Total for USA customers.&#10;SELECT c.FirstName || ' ' || c.LastName AS CustomerName, i.InvoiceId, i.InvoiceDate, i.Total&#10;FROM Customer c&#10;JOIN Invoice i ON c.CustomerId = i.CustomerId&#10;WHERE c.Country = 'USA';" data-answer="SELECT c.FirstName || ' ' || c.LastName AS CustomerName, i.InvoiceId, i.InvoiceDate, i.Total FROM Customer c JOIN Invoice i ON c.CustomerId = i.CustomerId WHERE c.Country = 'USA';" data-hint="Join Customer and Invoice ON c.CustomerId = i.CustomerId." data-keywords="JOIN,ON,WHERE,'USA'">
-                                <span class="truncate">Q12: [Equi-Join] USA Customer invoices</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_13" data-target-db="chinook_db" data-sql="-- Non Equi-Join: Find all distinct pairs of tracks within AlbumId = 1 where Track 1 is longer than Track 2.&#10;-- Display Track 1 name, Track 2 name, and difference in milliseconds.&#10;SELECT t1.Name AS LongTrack, t2.Name AS ShortTrack, (t1.Milliseconds - t2.Milliseconds) AS DiffMs&#10;FROM Track t1&#10;JOIN Track t2 ON t1.AlbumId = t2.AlbumId AND t1.Milliseconds > t2.Milliseconds&#10;WHERE t1.AlbumId = 1;" data-answer="SELECT t1.Name AS LongTrack, t2.Name AS ShortTrack, (t1.Milliseconds - t2.Milliseconds) AS DiffMs FROM Track t1 JOIN Track t2 ON t1.AlbumId = t2.AlbumId AND t1.Milliseconds > t2.Milliseconds WHERE t1.AlbumId = 1;" data-hint="Use ON t1.AlbumId = t2.AlbumId AND t1.Milliseconds > t2.Milliseconds." data-keywords="JOIN,Track,ON,>">
-                                <span class="truncate">Q13: [Non Equi-Join] Compare track lengths</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_14" data-target-db="chinook_db" data-sql="-- Self-Join: List employee's full name, title, and their direct manager's name and title.&#10;SELECT e.FirstName || ' ' || e.LastName AS Employee, e.Title AS EmpTitle,&#10;       m.FirstName || ' ' || m.LastName AS Manager, m.Title AS MgrTitle&#10;FROM Employee e&#10;JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-answer="SELECT e.FirstName || ' ' || e.LastName AS Employee, e.Title AS EmpTitle, m.FirstName || ' ' || m.LastName AS Manager, m.Title AS MgrTitle FROM Employee e JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-hint="Join Employee with itself on e.ReportsTo = m.EmployeeId." data-keywords="JOIN,Employee,ReportsTo,EmployeeId">
-                                <span class="truncate">Q14: [Self Join] Employee organizational chain</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_15" data-target-db="chinook_db" data-sql="-- Self-Join: Find pairs of customers living in the same city. Display Customer 1 ID, Customer 2 ID, and City.&#10;SELECT c1.CustomerId AS Cust1, c2.CustomerId AS Cust2, c1.City&#10;FROM Customer c1&#10;JOIN Customer c2 ON c1.City = c2.City AND c1.CustomerId < c2.CustomerId;" data-answer="SELECT c1.CustomerId AS Cust1, c2.CustomerId AS Cust2, c1.City FROM Customer c1 JOIN Customer c2 ON c1.City = c2.City AND c1.CustomerId < c2.CustomerId;" data-hint="Self join on City with c1.CustomerId < c2.CustomerId." data-keywords="JOIN,Customer,c1,c2,<">
-                                <span class="truncate">Q15: [Self Join] Customers in the same city</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_16" data-target-db="chinook_db" data-sql="-- Outer Join: Find artists who currently have NO albums registered in the catalog.&#10;SELECT ar.ArtistId, ar.Name&#10;FROM Artist ar&#10;LEFT JOIN Album al ON ar.ArtistId = al.ArtistId&#10;WHERE al.AlbumId IS NULL;" data-answer="SELECT ar.ArtistId, ar.Name FROM Artist ar LEFT JOIN Album al ON ar.ArtistId = al.ArtistId WHERE al.AlbumId IS NULL;" data-hint="LEFT JOIN Album and filter WHERE al.AlbumId IS NULL." data-keywords="LEFT,JOIN,Album,IS NULL">
-                                <span class="truncate">Q16: [Outer Join] Artists without albums</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_17" data-target-db="chinook_db" data-sql="-- Outer Join: List all Playlists and the count of tracks in each. Include empty playlists (showing 0).&#10;SELECT p.PlaylistId, p.Name, COUNT(pt.TrackId) AS TrackCount&#10;FROM Playlist p&#10;LEFT JOIN PlaylistTrack pt ON p.PlaylistId = pt.PlaylistId&#10;GROUP BY p.PlaylistId, p.Name;" data-answer="SELECT p.PlaylistId, p.Name, COUNT(pt.TrackId) AS TrackCount FROM Playlist p LEFT JOIN PlaylistTrack pt ON p.PlaylistId = pt.PlaylistId GROUP BY p.PlaylistId, p.Name;" data-hint="LEFT JOIN PlaylistTrack, GROUP BY PlaylistId, COUNT(pt.TrackId)." data-keywords="LEFT,JOIN,GROUP BY,COUNT">
-                                <span class="truncate">Q17: [Outer Join] Track count per playlist</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_18" data-target-db="chinook_db" data-sql="-- UNION: Combine cities where employees live and cities where customers live into one unified list.&#10;SELECT City, 'Employee Location' AS Type FROM Employee&#10;UNION&#10;SELECT City, 'Customer Location' AS Type FROM Customer;" data-answer="SELECT City, 'Employee Location' AS Type FROM Employee UNION SELECT City, 'Customer Location' AS Type FROM Customer;" data-hint="Use UNION to combine City selections." data-keywords="UNION,Employee,Customer">
-                                <span class="truncate">Q18: [UNION] Combined geographic cities</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_19" data-target-db="chinook_db" data-sql="-- UNION: List all distinct names of Artists UNION all Playlist names.&#10;SELECT Name, 'Artist' AS Category FROM Artist&#10;UNION&#10;SELECT Name, 'Playlist' AS Category FROM Playlist;" data-answer="SELECT Name, 'Artist' AS Category FROM Artist UNION SELECT Name, 'Playlist' AS Category FROM Playlist;" data-hint="UNION between Artist.Name and Playlist.Name." data-keywords="UNION,Artist,Playlist">
-                                <span class="truncate">Q19: [UNION] Unified media label catalog</span>
-                                <span class="status-slot"></span>
-                            </li>
-
-                            <!-- 6. SUB-QUERIES -->
-                            <li data-qid="chk_adv_20" data-target-db="chinook_db" data-sql="-- Sub-query with IN: Find customer names who have made an invoice purchase billed in 'Brazil'.&#10;SELECT CustomerId, FirstName, LastName&#10;FROM Customer&#10;WHERE CustomerId IN (SELECT CustomerId FROM Invoice WHERE BillingCountry = 'Brazil');" data-answer="SELECT CustomerId, FirstName, LastName FROM Customer WHERE CustomerId IN (SELECT CustomerId FROM Invoice WHERE BillingCountry = 'Brazil');" data-hint="WHERE CustomerId IN (SELECT CustomerId FROM Invoice WHERE BillingCountry = 'Brazil');" data-keywords="WHERE,IN,SELECT,Brazil">
-                                <span class="truncate">Q20: [Subquery IN] Customers buying in Brazil</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_21" data-target-db="chinook_db" data-sql="-- Sub-query with NOT IN: Find tracks that have never appeared in ANY playlist.&#10;SELECT TrackId, Name&#10;FROM Track&#10;WHERE TrackId NOT IN (SELECT TrackId FROM PlaylistTrack);" data-answer="SELECT TrackId, Name FROM Track WHERE TrackId NOT IN (SELECT TrackId FROM PlaylistTrack);" data-hint="WHERE TrackId NOT IN (SELECT TrackId FROM PlaylistTrack);" data-keywords="NOT IN,SELECT,PlaylistTrack">
-                                <span class="truncate">Q21: [Subquery NOT IN] Unlisted tracks</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_22" data-target-db="chinook_db" data-sql="-- Sub-query with scalar '=': Find the album title of the single longest track in the database.&#10;SELECT Title FROM Album&#10;WHERE AlbumId = (SELECT AlbumId FROM Track ORDER BY Milliseconds DESC LIMIT 1);" data-answer="SELECT Title FROM Album WHERE AlbumId = (SELECT AlbumId FROM Track ORDER BY Milliseconds DESC LIMIT 1);" data-hint="WHERE AlbumId = (SELECT AlbumId FROM Track ORDER BY Milliseconds DESC LIMIT 1);" data-keywords="WHERE,AlbumId,=,SELECT,LIMIT">
-                                <span class="truncate">Q22: [Subquery =] Album with longest track</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_23" data-target-db="chinook_db" data-sql="-- Sub-query with scalar '>': Find all tracks whose duration is greater than the average track duration in the library.&#10;SELECT Name, Milliseconds&#10;FROM Track&#10;WHERE Milliseconds > (SELECT AVG(Milliseconds) FROM Track);" data-answer="SELECT Name, Milliseconds FROM Track WHERE Milliseconds > (SELECT AVG(Milliseconds) FROM Track);" data-hint="WHERE Milliseconds > (SELECT AVG(Milliseconds) FROM Track);" data-keywords="WHERE,Milliseconds,>,SELECT,AVG">
-                                <span class="truncate">Q23: [Subquery >] Tracks longer than global avg</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_24" data-target-db="chinook_db" data-sql="-- Sub-query with EXISTS: Find customers who have at least one invoice with Total > 10.00.&#10;SELECT c.CustomerId, c.FirstName, c.LastName&#10;FROM Customer c&#10;WHERE EXISTS (&#10;    SELECT 1 FROM Invoice i WHERE i.CustomerId = c.CustomerId AND i.Total > 10.00&#10;);" data-answer="SELECT c.CustomerId, c.FirstName, c.LastName FROM Customer c WHERE EXISTS (SELECT 1 FROM Invoice i WHERE i.CustomerId = c.CustomerId AND i.Total > 10.00);" data-hint="WHERE EXISTS (SELECT 1 FROM Invoice i WHERE i.CustomerId = c.CustomerId AND i.Total > 10.00);" data-keywords="WHERE,EXISTS,SELECT,Invoice,>">
-                                <span class="truncate">Q24: [Subquery EXISTS] High-value customers</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_25" data-target-db="chinook_db" data-sql="-- Sub-query with NOT EXISTS: Find employees who manage NO other employees (individual contributors).&#10;SELECT e.EmployeeId, e.FirstName, e.LastName, e.Title&#10;FROM Employee e&#10;WHERE NOT EXISTS (&#10;    SELECT 1 FROM Employee sub WHERE sub.ReportsTo = e.EmployeeId&#10;);" data-answer="SELECT e.EmployeeId, e.FirstName, e.LastName, e.Title FROM Employee e WHERE NOT EXISTS (SELECT 1 FROM Employee sub WHERE sub.ReportsTo = e.EmployeeId);" data-hint="WHERE NOT EXISTS (SELECT 1 FROM Employee sub WHERE sub.ReportsTo = e.EmployeeId);" data-keywords="NOT EXISTS,ReportsTo">
-                                <span class="truncate">Q25: [Subquery NOT EXISTS] Non-manager staff</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_26" data-target-db="chinook_db" data-sql="-- Sub-query simulating '> ALL': Find invoices whose Total is greater than ALL invoice totals billed to Germany.&#10;SELECT InvoiceId, CustomerId, BillingCountry, Total&#10;FROM Invoice&#10;WHERE Total > (SELECT MAX(Total) FROM Invoice WHERE BillingCountry = 'Germany');" data-answer="SELECT InvoiceId, CustomerId, BillingCountry, Total FROM Invoice WHERE Total > (SELECT MAX(Total) FROM Invoice WHERE BillingCountry = 'Germany');" data-hint="WHERE Total > (SELECT MAX(Total) FROM Invoice WHERE BillingCountry = 'Germany');" data-keywords="WHERE,Total,>,SELECT,MAX,Germany">
-                                <span class="truncate">Q26: [Subquery ALL] Total > ALL Germany invoices</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_27" data-target-db="chinook_db" data-sql="-- Correlated Subquery: For each track, list its Name and show how many milliseconds it differs from its Album's average duration.&#10;SELECT t.Name, t.Milliseconds,&#10;       t.Milliseconds - (SELECT AVG(sub.Milliseconds) FROM Track sub WHERE sub.AlbumId = t.AlbumId) AS DiffFromAlbumAvg&#10;FROM Track t;" data-answer="SELECT t.Name, t.Milliseconds, t.Milliseconds - (SELECT AVG(sub.Milliseconds) FROM Track sub WHERE sub.AlbumId = t.AlbumId) AS DiffFromAlbumAvg FROM Track t;" data-hint="Compute scalar subquery inside SELECT clause matching AlbumId." data-keywords="SELECT,AVG,Track,AlbumId">
-                                <span class="truncate">Q27: [Correlated] Variance from album mean</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_28" data-target-db="chinook_db" data-sql="-- Derived Table: Find the country with the maximum total revenue.&#10;SELECT BillingCountry, MAX(CountryRevenue) AS TopRevenue&#10;FROM (&#10;    SELECT BillingCountry, SUM(Total) AS CountryRevenue&#10;    FROM Invoice&#10;    GROUP BY BillingCountry&#10;);" data-answer="SELECT BillingCountry, MAX(CountryRevenue) AS TopRevenue FROM (SELECT BillingCountry, SUM(Total) AS CountryRevenue FROM Invoice GROUP BY BillingCountry);" data-hint="Group in subquery then aggregate in outer query." data-keywords="SELECT,BillingCountry,MAX,SUM,GROUP BY">
-                                <span class="truncate">Q28: [Derived Table] Highest revenue territory</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_29" data-target-db="chinook_db" data-sql="-- Sub-query with IN: Find artists who have songs in BOTH GenreId 1 ('Rock') AND GenreId 3 ('Metal').&#10;SELECT DISTINCT ar.ArtistId, ar.Name&#10;FROM Artist ar&#10;JOIN Album al ON ar.ArtistId = al.ArtistId&#10;JOIN Track t ON al.AlbumId = t.AlbumId&#10;WHERE t.GenreId = 1&#10;  AND ar.ArtistId IN (&#10;      SELECT ar2.ArtistId&#10;      FROM Artist ar2&#10;      JOIN Album al2 ON ar2.ArtistId = al2.ArtistId&#10;      JOIN Track t2 ON al2.AlbumId = t2.AlbumId&#10;      WHERE t2.GenreId = 3&#10;  );" data-answer="SELECT DISTINCT ar.ArtistId, ar.Name FROM Artist ar JOIN Album al ON ar.ArtistId = al.ArtistId JOIN Track t ON al.AlbumId = t.AlbumId WHERE t.GenreId = 1 AND ar.ArtistId IN (SELECT ar2.ArtistId FROM Artist ar2 JOIN Album al2 ON ar2.ArtistId = al2.ArtistId JOIN Track t2 ON al2.AlbumId = t2.AlbumId WHERE t2.GenreId = 3);" data-hint="Combine joins with an IN subquery checking GenreId = 3." data-keywords="JOIN,WHERE,GenreId,IN">
-                                <span class="truncate">Q29: [Subquery IN] Multi-genre artists (Rock & Metal)</span>
-                                <span class="status-slot"></span>
-                            </li>
-                            <li data-qid="chk_adv_30" data-target-db="chinook_db" data-sql="-- HKDSE Comprehensive: Identify the highest-spending customer in 2023.&#10;-- Display CustomerId, full name, country, and total amount spent.&#10;SELECT c.CustomerId, c.FirstName || ' ' || c.LastName AS CustomerName, c.Country, SUM(i.Total) AS TotalSpent&#10;FROM Customer c&#10;JOIN Invoice i ON c.CustomerId = i.CustomerId&#10;WHERE i.InvoiceDate LIKE '2023%'&#10;GROUP BY c.CustomerId&#10;ORDER BY TotalSpent DESC&#10;LIMIT 1;" data-answer="SELECT c.CustomerId, c.FirstName || ' ' || c.LastName AS CustomerName, c.Country, SUM(i.Total) AS TotalSpent FROM Customer c JOIN Invoice i ON c.CustomerId = i.CustomerId WHERE i.InvoiceDate LIKE '2023%' GROUP BY c.CustomerId ORDER BY TotalSpent DESC LIMIT 1;" data-hint="Join Customer & Invoice, filter year 2023, GROUP BY CustomerId, ORDER BY SUM(Total) DESC LIMIT 1." data-keywords="JOIN,InvoiceDate,GROUP BY,SUM,ORDER BY,DESC,LIMIT">
-                                <span class="truncate">Q30: [Exam Capstone] Top spender of year 2023</span>
+                            <li data-qid="chk_l1_10" data-target-db="chinook_db" data-sql="-- Q10: Select all distinct BillingCountry values from the Invoice table, ordered alphabetically." data-answer="SELECT DISTINCT BillingCountry FROM Invoice ORDER BY BillingCountry ASC;" data-hint="SELECT DISTINCT BillingCountry FROM Invoice ORDER BY BillingCountry ASC;" data-keywords="SELECT,DISTINCT,BillingCountry,ORDER BY">
+                                <span class="truncate">Q10: Distinct billing countries sorted</span>
                                 <span class="status-slot"></span>
                             </li>
                         </ol>
                     </details>
 
-                    <!-- Original Levels (Chinook DB) -->
-                    <details id="level-chinook-1" class="challenge-level">
-                        <summary class="text-emerald-700 bg-emerald-100 hover:bg-emerald-200 text-xs">Level 1: Beginner (chinook_db)</summary>
+                    <!-- Level 2: Chinook DB -->
+                    <details id="level-chk-2" class="challenge-level">
+                        <summary class="text-amber-700 bg-amber-100 hover:bg-amber-200 text-xs font-bold">Level 2: WHERE, Logic, Range, IN & Pattern Matching</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <li data-qid="chk_l1_1" data-target-db="chinook_db" data-sql="SELECT * FROM Artist ORDER BY Name ASC;" data-answer="SELECT * FROM Artist ORDER BY Name ASC;" data-hint="SELECT * FROM Artist ORDER BY Name ASC;" data-keywords="SELECT,FROM,Artist,ORDER BY"><span class="truncate">List all Artists alphabetically.</span><span class="status-slot"></span></li>
-                            <li data-qid="chk_l1_2" data-target-db="chinook_db" data-sql="SELECT AlbumId, Title FROM Album;" data-answer="SELECT AlbumId, Title FROM Album;" data-hint="Select the specific columns." data-keywords="SELECT,AlbumId,Title,FROM,Album"><span class="truncate">Show Album Titles and IDs.</span><span class="status-slot"></span></li>
+                            <li data-qid="chk_l2_1" data-target-db="chinook_db" data-sql="-- Q1: Find all customers located in 'Brazil'." data-answer="SELECT * FROM Customer WHERE Country = 'Brazil';" data-hint="WHERE Country = 'Brazil';" data-keywords="WHERE,Country,'Brazil'">
+                                <span class="truncate">Q1: Customers from Brazil</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_2" data-target-db="chinook_db" data-sql="-- Q2: Find all customers whose Country is NOT 'USA' using '<>'." data-answer="SELECT * FROM Customer WHERE Country <> 'USA';" data-hint="WHERE Country <> 'USA';" data-keywords="WHERE,Country,<>'USA'">
+                                <span class="truncate">Q2: Non-USA customers (<>)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_3" data-target-db="chinook_db" data-sql="-- Q3: Find all employees with job title 'Sales Support Agent' who were hired after '2002-12-31'." data-answer="SELECT * FROM Employee WHERE Title = 'Sales Support Agent' AND HireDate > '2002-12-31';" data-hint="WHERE Title = 'Sales Support Agent' AND HireDate > '2002-12-31';" data-keywords="WHERE,Title,AND,HireDate">
+                                <span class="truncate">Q3: Sales Support hired after 2002</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_4" data-target-db="chinook_db" data-sql="-- Q4: Find all invoices where the Total is strictly less than 2.00 OR greater than 10.00." data-answer="SELECT * FROM Invoice WHERE Total < 2.00 OR Total > 10.00;" data-hint="WHERE Total < 2.00 OR Total > 10.00;" data-keywords="WHERE,Total,<,OR,>">
+                                <span class="truncate">Q4: Invoices under $2 or over $10</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_5" data-target-db="chinook_db" data-sql="-- Q5: Find all customers who live in 'USA', 'Canada', or 'Brazil' using the IN operator." data-answer="SELECT * FROM Customer WHERE Country IN ('USA', 'Canada', 'Brazil');" data-hint="WHERE Country IN ('USA', 'Canada', 'Brazil');" data-keywords="WHERE,Country,IN">
+                                <span class="truncate">Q5: Customers IN USA, Canada, Brazil</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_6" data-target-db="chinook_db" data-sql="-- Q6: Find tracks whose duration is BETWEEN 200000 AND 300000 milliseconds." data-answer="SELECT * FROM Track WHERE Milliseconds BETWEEN 200000 AND 300000;" data-hint="WHERE Milliseconds BETWEEN 200000 AND 300000;" data-keywords="WHERE,Milliseconds,BETWEEN,AND">
+                                <span class="truncate">Q6: Tracks duration BETWEEN 200s and 300s</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_7" data-target-db="chinook_db" data-sql="-- Q7: Find all tracks whose Name begins with 'The ' using the LIKE operator." data-answer="SELECT * FROM Track WHERE Name LIKE 'The %';" data-hint="WHERE Name LIKE 'The %';" data-keywords="WHERE,Name,LIKE,'The %'">
+                                <span class="truncate">Q7: Tracks starting with 'The '</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_8" data-target-db="chinook_db" data-sql="-- Q8: Find all customers with an email ending in '.com' using LIKE." data-answer="SELECT * FROM Customer WHERE Email LIKE '%.com';" data-hint="WHERE Email LIKE '%.com';" data-keywords="WHERE,Email,LIKE,'%.com'">
+                                <span class="truncate">Q8: Customers with .com email addresses</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_9" data-target-db="chinook_db" data-sql="-- Q9: Find all tracks whose Composer contains 'Mercury' using LIKE." data-answer="SELECT * FROM Track WHERE Composer LIKE '%Mercury%';" data-hint="WHERE Composer LIKE '%Mercury%';" data-keywords="WHERE,Composer,LIKE,'%Mercury%'">
+                                <span class="truncate">Q9: Tracks composed by Mercury</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l2_10" data-target-db="chinook_db" data-sql="-- Q10: Find invoices billed to 'Germany' where Total > 3.00, ordered by InvoiceDate DESC." data-answer="SELECT * FROM Invoice WHERE BillingCountry = 'Germany' AND Total > 3.00 ORDER BY InvoiceDate DESC;" data-hint="WHERE BillingCountry = 'Germany' AND Total > 3.00 ORDER BY InvoiceDate DESC;" data-keywords="WHERE,BillingCountry,AND,Total,ORDER BY">
+                                <span class="truncate">Q10: Germany invoices with sorting</span>
+                                <span class="status-slot"></span>
+                            </li>
+                        </ol>
+                    </details>
+
+                    <!-- Level 3: Chinook DB -->
+                    <details id="level-chk-3" class="challenge-level">
+                        <summary class="text-indigo-800 bg-indigo-100 hover:bg-indigo-200 text-xs font-bold">Level 3: GROUP BY, HAVING & Aggregations</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <li data-qid="chk_l3_1" data-target-db="chinook_db" data-sql="-- Q1: Calculate the total number of customers in the Customer table." data-answer="SELECT COUNT(*) AS total_customers FROM Customer;" data-hint="SELECT COUNT(*) FROM Customer;" data-keywords="SELECT,COUNT(*),FROM,Customer">
+                                <span class="truncate">Q1: Total customer count (COUNT)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_2" data-target-db="chinook_db" data-sql="-- Q2: Find the grand total revenue (SUM) across all invoices." data-answer="SELECT SUM(Total) AS total_revenue FROM Invoice;" data-hint="SELECT SUM(Total) FROM Invoice;" data-keywords="SELECT,SUM,Total,FROM,Invoice">
+                                <span class="truncate">Q2: Grand total revenue (SUM)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_3" data-target-db="chinook_db" data-sql="-- Q3: Calculate the average (AVG), minimum (MIN), and maximum (MAX) track duration in milliseconds." data-answer="SELECT AVG(Milliseconds) AS avg_ms, MIN(Milliseconds) AS min_ms, MAX(Milliseconds) AS max_ms FROM Track;" data-hint="SELECT AVG(Milliseconds), MIN(Milliseconds), MAX(Milliseconds) FROM Track;" data-keywords="AVG,MIN,MAX,Milliseconds">
+                                <span class="truncate">Q3: Average, min, max track length</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_4" data-target-db="chinook_db" data-sql="-- Q4: Count the number of customers in each Country (GROUP BY Country)." data-answer="SELECT Country, COUNT(*) AS customer_count FROM Customer GROUP BY Country;" data-hint="SELECT Country, COUNT(*) FROM Customer GROUP BY Country;" data-keywords="SELECT,Country,COUNT,GROUP BY">
+                                <span class="truncate">Q4: Customer count per Country</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_5" data-target-db="chinook_db" data-sql="-- Q5: Calculate the total invoice revenue generated in each BillingCountry." data-answer="SELECT BillingCountry, SUM(Total) AS revenue FROM Invoice GROUP BY BillingCountry;" data-hint="SELECT BillingCountry, SUM(Total) FROM Invoice GROUP BY BillingCountry;" data-keywords="GROUP BY,BillingCountry,SUM,Total">
+                                <span class="truncate">Q5: Total revenue by BillingCountry</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_6" data-target-db="chinook_db" data-sql="-- Q6: Calculate the count of tracks and average duration for each AlbumId." data-answer="SELECT AlbumId, COUNT(*) AS track_count, AVG(Milliseconds) AS avg_duration FROM Track GROUP BY AlbumId;" data-hint="GROUP BY AlbumId;" data-keywords="GROUP BY,AlbumId,COUNT,AVG">
+                                <span class="truncate">Q6: Track count and AVG length per Album</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_7" data-target-db="chinook_db" data-sql="-- Q7: Find billing countries whose total invoice revenue is greater than 10.00 using HAVING." data-answer="SELECT BillingCountry, SUM(Total) AS total_sales FROM Invoice GROUP BY BillingCountry HAVING SUM(Total) > 10.00;" data-hint="GROUP BY BillingCountry HAVING SUM(Total) > 10.00;" data-keywords="GROUP BY,HAVING,SUM,>">
+                                <span class="truncate">Q7: Countries with revenue > $10 (HAVING)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_8" data-target-db="chinook_db" data-sql="-- Q8: Find albums (AlbumId) that contain more than 1 track using HAVING, ordered by track count descending." data-answer="SELECT AlbumId, COUNT(*) AS track_count FROM Track GROUP BY AlbumId HAVING COUNT(*) > 1 ORDER BY track_count DESC;" data-hint="GROUP BY AlbumId HAVING COUNT(*) > 1 ORDER BY track_count DESC;" data-keywords="GROUP BY,HAVING,COUNT,ORDER BY,DESC">
+                                <span class="truncate">Q8: Albums with > 1 track (HAVING & ORDER BY)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_9" data-target-db="chinook_db" data-sql="-- Q9: Count the number of invoices assigned to each CustomerId, but only show customers with at least 2 invoices." data-answer="SELECT CustomerId, COUNT(*) AS invoice_count FROM Invoice GROUP BY CustomerId HAVING COUNT(*) >= 2;" data-hint="GROUP BY CustomerId HAVING COUNT(*) >= 2;" data-keywords="GROUP BY,CustomerId,HAVING,COUNT,>=">
+                                <span class="truncate">Q9: Repeat customers (HAVING COUNT >= 2)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l3_10" data-target-db="chinook_db" data-sql="-- Q10: Considering only tracks in GenreId 1, find composers who wrote more than 1 track, ordered from most to fewest." data-answer="SELECT Composer, COUNT(*) AS track_count FROM Track WHERE GenreId = 1 AND Composer IS NOT NULL GROUP BY Composer HAVING COUNT(*) > 1 ORDER BY track_count DESC;" data-hint="Combine WHERE, GROUP BY Composer, and HAVING COUNT(*) > 1." data-keywords="WHERE,GenreId,GROUP BY,Composer,HAVING,COUNT,ORDER BY">
+                                <span class="truncate">Q10: Rock composers (WHERE + GROUP + HAVING)</span>
+                                <span class="status-slot"></span>
+                            </li>
                         </ol>
                     </details>
                 </div>
@@ -468,11 +453,11 @@
                     <div class="flex justify-between items-center mb-2">
                         <label for="sql-editor" class="text-base font-semibold text-slate-700">SQL Command Editor</label>
                         <span id="current-question-tag" class="text-xs bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-0.5 rounded-full font-medium hidden">
-                            Active Question Loaded
+                            Exam Challenge Loaded
                         </span>
                     </div>
 
-                    <textarea id="sql-editor" class="sql-editor w-full h-36 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="-- Type your SQL commands here or click an HKDSE challenge on the left to start!"></textarea>
+                    <textarea id="sql-editor" class="sql-editor w-full h-36 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="-- Click an exam question on the left. Type your SQL solution here and click 'Run SQL' to verify!"></textarea>
 
                     <div class="flex items-center justify-between mt-3 flex-wrap gap-2">
                         <div class="flex items-center gap-3">
@@ -484,16 +469,16 @@
                         </div>
                         <div class="flex gap-2 items-center">
                             <button id="hint-btn" class="bg-amber-400 text-white font-semibold py-2 px-4 rounded-lg hover:bg-amber-500 shadow-sm text-sm hidden">💡 Hint</button>
-                            <button id="answer-btn" class="bg-purple-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-600 shadow-sm text-sm hidden">🔑 Answer</button>
+                            <button id="answer-btn" class="bg-purple-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-600 shadow-sm text-sm hidden">🔑 Show Answer</button>
                             <input type="file" id="import-db-input" accept=".db,.sqlite,.sqlite3" class="hidden">
                             <button id="import-db-btn" title="Open an existing SQLite .db or .sqlite file" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold py-2 px-3 rounded-lg text-sm transition shadow-sm flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                                 </svg>
                                 Import (.db)
                             </button>
                             <button id="export-db-btn" title="Download the active database as a standard .db file" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-3.5 rounded-lg text-sm shadow-sm transition flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                 </svg>
                                 Export DB
@@ -539,8 +524,8 @@
         let dbRegistry = {};
         let currentDbName = 'school_db';
         let db;
-        const sessionStorageKey = 'sql_sandbox_session_databases_v7';
-        const challengeProgressKey = 'sql_sandbox_challenge_progress_v2';
+        const sessionStorageKey = 'sql_sandbox_session_databases_v8';
+        const challengeProgressKey = 'sql_sandbox_challenge_progress_v3';
         let currentActiveQuestionLi = null;
         let currentHint = "";
         let currentAnswer = "";
@@ -751,7 +736,7 @@
                 const labelSpan = document.createElement('span');
                 labelSpan.className = "flex items-center gap-1.5 truncate";
                 labelSpan.innerHTML = `
-                    <svg class="w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-sky-500'} shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-sky-500'} shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
                     </svg>
                     <span class="truncate">${name}</span>
@@ -785,9 +770,6 @@
 
         function createSchoolTables(database) {
             try {
-                database.run(`DROP TABLE IF EXISTS memberships;`);
-                database.run(`DROP TABLE IF EXISTS clubs;`);
-                database.run(`DROP TABLE IF EXISTS grade_thresholds;`);
                 database.run(`DROP TABLE IF EXISTS exams;`);
                 database.run(`DROP TABLE IF EXISTS students;`);
                 database.run(`DROP TABLE IF EXISTS subjects;`);
@@ -850,12 +832,10 @@
 
                 let examInserts = [];
                 for (const sId of studentIds) {
-                    // Mandatory
                     ['CHI', 'ENG', 'MATH'].forEach((code, idx) => {
                         const score = 55 + ((sId + idx * 7) % 43);
                         examInserts.push(`(${sId}, '${code}', ${score})`);
                     });
-                    // Elective
                     const electives = ['ICT', 'PHY', 'BIO'];
                     const chosen = electives[sId % 3];
                     const score = 50 + (sId % 48);
@@ -869,7 +849,7 @@
 
         function createChinookTables(database) {
             try {
-                const tables = ['TrackReviews', 'Discounts', 'AuditLog', 'PlaylistTrack', 'Playlist', 'InvoiceLine', 'Invoice', 'Customer', 'Employee', 'Track', 'MediaType', 'Genre', 'Album', 'Artist'];
+                const tables = ['InvoiceLine', 'Invoice', 'Customer', 'Employee', 'Track', 'MediaType', 'Genre', 'Album', 'Artist'];
                 tables.forEach(t => database.run(`DROP TABLE IF EXISTS ${t};`));
 
                 database.run(`CREATE TABLE Artist (ArtistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
@@ -935,8 +915,6 @@
                     UnitPrice NUMERIC,
                     Quantity INTEGER
                 );`);
-                database.run(`CREATE TABLE Playlist (PlaylistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
-                database.run(`CREATE TABLE PlaylistTrack (PlaylistId INTEGER, TrackId INTEGER, PRIMARY KEY (PlaylistId, TrackId));`);
 
                 database.run(`INSERT INTO Genre VALUES (1, 'Rock'), (2, 'Jazz'), (3, 'Metal'), (4, 'Alternative'), (5, 'Classical');`);
                 database.run(`INSERT INTO MediaType VALUES (1, 'MPEG audio file'), (2, 'Protected AAC');`);
@@ -972,8 +950,6 @@
                     (8, 1, '2023-02-01', 'Av. Brigadeiro', 'São José', 'SP', 'Brazil', '12227', 3.96);`);
                 database.run(`INSERT INTO InvoiceLine VALUES 
                     (1, 1, 1, 0.99, 1), (2, 1, 2, 0.99, 1), (3, 5, 13, 0.99, 1), (4, 5, 17, 0.99, 1);`);
-                database.run(`INSERT INTO Playlist VALUES (1, 'Music'), (2, 'Rock Classics'), (3, 'Heavy Metal');`);
-                database.run(`INSERT INTO PlaylistTrack VALUES (1, 1), (1, 13), (2, 13), (2, 17);`);
             } catch (err) {
                 console.error("Error creating Chinook tables:", err);
             }
@@ -1125,7 +1101,7 @@
                     saveAllDatabasesToSession();
                     if (activeQid) {
                         setQuestionStatus(activeQid, 'correct');
-                        displayMessage("success", "Correct! ✓ DDL/DML executed and verified.");
+                        displayMessage("success", "Correct! ✓ Changes executed and verified.");
                     }
                 }
 
@@ -1321,7 +1297,9 @@
                         switchDatabase(targetDb);
                     }
 
-                    sqlEditor.value = li.getAttribute('data-sql') + "\n\n";
+                    // For exam practice: only insert the prompt comment line, leaving code area blank
+                    const promptComment = li.getAttribute('data-sql');
+                    sqlEditor.value = `${promptComment}\n\n`;
                     sqlEditor.focus();
 
                     currentHint = li.getAttribute('data-hint') || "No hint available.";
