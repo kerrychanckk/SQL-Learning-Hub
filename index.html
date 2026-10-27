@@ -152,7 +152,6 @@
                         </h2>
                         <span id="score-summary" class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">0 Solved</span>
                     </div>
-
                     <div class="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-blue-800 mb-2">
                         Click a challenge to load the exam requirement. Write and execute your query to test your answer!
                     </div>
@@ -301,6 +300,141 @@
                         </ol>
                     </details>
 
+                    <!-- Level 4: School DB (Advanced - 30 Questions) -->
+                    <details id="level-sch-4" class="challenge-level">
+                        <summary class="text-rose-800 bg-rose-100 hover:bg-rose-200 text-xs font-bold">Level 4: Advanced (DDL, DML, Joins & Subqueries)</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <!-- Category 1: CREATE DATABASE (1) -->
+                            <li data-qid="sch_l4_1" data-target-db="school_db" data-sql="-- Q1: Create a new database named 'alumni_db'." data-answer="CREATE DATABASE alumni_db;" data-hint="Syntax: CREATE DATABASE alumni_db;" data-keywords="CREATE,DATABASE,alumni_db">
+                                <span class="truncate">Q1: [DDL] Create database alumni_db</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 2: CREATE TABLE (2) -->
+                            <li data-qid="sch_l4_2" data-target-db="school_db" data-sql="-- Q2: Create a new table 'clubs' with club_id (INTEGER PRIMARY KEY), club_name (TEXT NOT NULL), and room_no (TEXT)." data-answer="CREATE TABLE clubs (club_id INTEGER PRIMARY KEY, club_name TEXT NOT NULL, room_no TEXT);" data-hint="CREATE TABLE clubs (club_id INTEGER PRIMARY KEY, club_name TEXT NOT NULL, room_no TEXT);" data-keywords="CREATE,TABLE,clubs,club_id,PRIMARY,KEY">
+                                <span class="truncate">Q2: [DDL] Create table clubs</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_3" data-target-db="school_db" data-sql="-- Q3: Create table 'student_clubs' with student_id (INTEGER), club_id (INTEGER), role (TEXT), join_date (DATE), and composite PRIMARY KEY (student_id, club_id)." data-answer="CREATE TABLE student_clubs (student_id INTEGER, club_id INTEGER, role TEXT, join_date DATE, PRIMARY KEY (student_id, club_id));" data-hint="Define columns then specify PRIMARY KEY (student_id, club_id)." data-keywords="CREATE,TABLE,student_clubs,PRIMARY,KEY">
+                                <span class="truncate">Q3: [DDL] Create table student_clubs</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 3: INSERT records (2) -->
+                            <li data-qid="sch_l4_4" data-target-db="school_db" data-sql="-- Q4: Insert one record into 'clubs': club_id 101, club_name 'Coding Club', room_no 'Room 302'." data-answer="INSERT INTO clubs (club_id, club_name, room_no) VALUES (101, 'Coding Club', 'Room 302');" data-hint="INSERT INTO clubs (club_id, club_name, room_no) VALUES (101, 'Coding Club', 'Room 302');" data-keywords="INSERT,INTO,clubs,VALUES,101">
+                                <span class="truncate">Q4: [DML] Insert single club record</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_5" data-target-db="school_db" data-sql="-- Q5: Insert two records into 'clubs': (102, 'Art Club', 'Room 105') and (103, 'Robotics Club', 'Room 401')." data-answer="INSERT INTO clubs (club_id, club_name, room_no) VALUES (102, 'Art Club', 'Room 105'), (103, 'Robotics Club', 'Room 401');" data-hint="Use comma-separated tuples in VALUES." data-keywords="INSERT,INTO,clubs,VALUES,102,103">
+                                <span class="truncate">Q5: [DML] Insert multiple club records</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 4: UPDATE records (3) -->
+                            <li data-qid="sch_l4_6" data-target-db="school_db" data-sql="-- Q6: Update student with student_id = 1001 so that their class becomes '4D' and class number (no) becomes 25." data-answer="UPDATE students SET class = '4D', no = 25 WHERE student_id = 1001;" data-hint="UPDATE students SET class = '4D', no = 25 WHERE student_id = 1001;" data-keywords="UPDATE,students,SET,class,no,WHERE,student_id">
+                                <span class="truncate">Q6: [DML] Update student class and number</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_7" data-target-db="school_db" data-sql="-- Q7: Increase the exam score by 5 for all records in 'exams' where subject_code = 'ICT' and score < 60." data-answer="UPDATE exams SET score = score + 5 WHERE subject_code = 'ICT' AND score < 60;" data-hint="UPDATE exams SET score = score + 5 WHERE subject_code = 'ICT' AND score < 60;" data-keywords="UPDATE,exams,SET,score,WHERE,subject_code">
+                                <span class="truncate">Q7: [DML] Conditionally increment exam scores</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_8" data-target-db="school_db" data-sql="-- Q8: Update district to 'Kowloon City' for students in class '4C' who currently live in 'Sha Tin'." data-answer="UPDATE students SET district = 'Kowloon City' WHERE class = '4C' AND district = 'Sha Tin';" data-hint="UPDATE students SET district = 'Kowloon City' WHERE class = '4C' AND district = 'Sha Tin';" data-keywords="UPDATE,students,SET,district,WHERE,class,AND">
+                                <span class="truncate">Q8: [DML] Update district with multi-condition</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 5: ALTER TABLE (5) -->
+                            <li data-qid="sch_l4_9" data-target-db="school_db" data-sql="-- Q9: Add a new column named 'email' of type TEXT to the 'students' table." data-answer="ALTER TABLE students ADD COLUMN email TEXT;" data-hint="ALTER TABLE students ADD COLUMN email TEXT;" data-keywords="ALTER,TABLE,students,ADD,COLUMN,email">
+                                <span class="truncate">Q9: [DDL] Add column email to students</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_10" data-target-db="school_db" data-sql="-- Q10: Add a new column 'passing_mark' of type INTEGER with default value 50 to 'subjects'." data-answer="ALTER TABLE subjects ADD COLUMN passing_mark INTEGER DEFAULT 50;" data-hint="ALTER TABLE subjects ADD COLUMN passing_mark INTEGER DEFAULT 50;" data-keywords="ALTER,TABLE,subjects,ADD,COLUMN,passing_mark,DEFAULT">
+                                <span class="truncate">Q10: [DDL] Add column with DEFAULT value</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_11" data-target-db="school_db" data-sql="-- Q11: Rename column 'district' to 'residential_district' in the 'students' table." data-answer="ALTER TABLE students RENAME COLUMN district TO residential_district;" data-hint="ALTER TABLE students RENAME COLUMN district TO residential_district;" data-keywords="ALTER,TABLE,students,RENAME,COLUMN,residential_district">
+                                <span class="truncate">Q11: [DDL] Rename column district</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_12" data-target-db="school_db" data-sql="-- Q12: Rename the table 'subjects' to 'school_subjects'." data-answer="ALTER TABLE subjects RENAME TO school_subjects;" data-hint="ALTER TABLE subjects RENAME TO school_subjects;" data-keywords="ALTER,TABLE,subjects,RENAME,TO,school_subjects">
+                                <span class="truncate">Q12: [DDL] Rename table subjects</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_13" data-target-db="school_db" data-sql="-- Q13: Drop the column 'dob' from the 'students' table." data-answer="ALTER TABLE students DROP COLUMN dob;" data-hint="ALTER TABLE students DROP COLUMN dob;" data-keywords="ALTER,TABLE,students,DROP,COLUMN,dob">
+                                <span class="truncate">Q13: [DDL] Drop column dob from students</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 6: DELETE record (2) -->
+                            <li data-qid="sch_l4_14" data-target-db="school_db" data-sql="-- Q14: Delete the exam record where student_id = 1001 and subject_code = 'BIO'." data-answer="DELETE FROM exams WHERE student_id = 1001 AND subject_code = 'BIO';" data-hint="DELETE FROM exams WHERE student_id = 1001 AND subject_code = 'BIO';" data-keywords="DELETE,FROM,exams,WHERE,student_id,AND">
+                                <span class="truncate">Q14: [DML] Delete specific exam record</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_15" data-target-db="school_db" data-sql="-- Q15: Delete all exam records where score is strictly less than 50." data-answer="DELETE FROM exams WHERE score < 50;" data-hint="DELETE FROM exams WHERE score < 50;" data-keywords="DELETE,FROM,exams,WHERE,score,<,50">
+                                <span class="truncate">Q15: [DML] Delete exam records below passing</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 7: JOIN two tables (8) -->
+                            <li data-qid="sch_l4_16" data-target-db="school_db" data-sql="-- Q16: [Equi-Join] List student_id, first_name, last_name, subject_code, and score for ICT exam by joining students and exams." data-answer="SELECT s.student_id, s.first_name, s.last_name, e.subject_code, e.score FROM students s INNER JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'ICT';" data-hint="JOIN students s ON s.student_id = e.student_id WHERE e.subject_code = 'ICT';" data-keywords="SELECT,JOIN,ON,WHERE,subject_code,'ICT'">
+                                <span class="truncate">Q16: [Join] Equi-Join students and exams</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_17" data-target-db="school_db" data-sql="-- Q17: [Non-Equi Join] Pair students in the same class where student 1 has a higher class number than student 2 (s1.no > s2.no). Show s1.student_id, s1.no, s2.student_id, s2.no, and class." data-answer="SELECT s1.student_id AS id1, s1.no AS no1, s2.student_id AS id2, s2.no AS no2, s1.class FROM students s1 INNER JOIN students s2 ON s1.class = s2.class AND s1.no > s2.no;" data-hint="JOIN students s2 ON s1.class = s2.class AND s1.no > s2.no;" data-keywords="JOIN,ON,s1.class,s2.class,AND,s1.no,>,s2.no">
+                                <span class="truncate">Q17: [Join] Non-equi join on class numbers</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_18" data-target-db="school_db" data-sql="-- Q18: [Self Join] Find pairs of students living in the same district with s1.student_id < s2.student_id. Show s1.last_name, s2.last_name, and district." data-answer="SELECT s1.last_name AS student1, s2.last_name AS student2, s1.district FROM students s1 INNER JOIN students s2 ON s1.district = s2.district AND s1.student_id < s2.student_id;" data-hint="Self join students s1 and students s2 ON s1.district = s2.district AND s1.student_id < s2.student_id." data-keywords="JOIN,ON,district,s1.student_id,<,s2.student_id">
+                                <span class="truncate">Q18: [Join] Self join on district</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_19" data-target-db="school_db" data-sql="-- Q19: [UNION] Combine all distinct student first names in class '4A' with distinct first names in class '4C'." data-answer="SELECT first_name FROM students WHERE class = '4A' UNION SELECT first_name FROM students WHERE class = '4C';" data-hint="SELECT first_name FROM students WHERE class = '4A' UNION SELECT first_name FROM students WHERE class = '4C';" data-keywords="SELECT,first_name,WHERE,UNION">
+                                <span class="truncate">Q19: [Union] Combine distinct names</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_20" data-target-db="school_db" data-sql="-- Q20: [LEFT JOIN] Display subject_code, subject_name from subjects and their exam scores from exams using a LEFT OUTER JOIN." data-answer="SELECT subjects.subject_code, subjects.subject_name, exams.score FROM subjects LEFT JOIN exams ON subjects.subject_code = exams.subject_code;" data-hint="SELECT ... FROM subjects LEFT JOIN exams ON subjects.subject_code = exams.subject_code;" data-keywords="SELECT,FROM,subjects,LEFT,JOIN,exams,ON">
+                                <span class="truncate">Q20: [Join] Left outer join subjects & exams</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_21" data-target-db="school_db" data-sql="-- Q21: [RIGHT JOIN] Display exams.student_id, subjects.subject_code, and subjects.subject_name using a RIGHT JOIN from exams to subjects." data-answer="SELECT exams.student_id, subjects.subject_code, subjects.subject_name FROM exams RIGHT JOIN subjects ON exams.subject_code = subjects.subject_code;" data-hint="SELECT ... FROM exams RIGHT JOIN subjects ON exams.subject_code = subjects.subject_code;" data-keywords="SELECT,FROM,exams,RIGHT,JOIN,subjects,ON">
+                                <span class="truncate">Q21: [Join] Right outer join exams & subjects</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_22" data-target-db="school_db" data-sql="-- Q22: [FULL OUTER JOIN] Perform a FULL OUTER JOIN between students and exams on student_id. Show student_id, last_name, subject_code, score." data-answer="SELECT students.student_id, students.last_name, exams.subject_code, exams.score FROM students FULL OUTER JOIN exams ON students.student_id = exams.student_id;" data-hint="SELECT ... FROM students FULL OUTER JOIN exams ON students.student_id = exams.student_id;" data-keywords="SELECT,FULL,OUTER,JOIN,ON">
+                                <span class="truncate">Q22: [Join] Full outer join students & exams</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_23" data-target-db="school_db" data-sql="-- Q23: [Join + L1-3 Skills] Join students and exams, group by student_id and last_name for class '4A', having average score >= 75, ordered by avg_score DESC." data-answer="SELECT s.student_id, s.last_name, AVG(e.score) AS avg_score FROM students s INNER JOIN exams e ON s.student_id = e.student_id WHERE s.class = '4A' GROUP BY s.student_id, s.last_name HAVING AVG(e.score) >= 75 ORDER BY avg_score DESC;" data-hint="Combine JOIN, WHERE class='4A', GROUP BY, HAVING AVG(e.score) >= 75, and ORDER BY." data-keywords="JOIN,WHERE,GROUP BY,HAVING,AVG,ORDER BY,DESC">
+                                <span class="truncate">Q23: [Join] Join + Aggregation + HAVING + ORDER BY</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 8: SUBQUERIES (7) -->
+                            <li data-qid="sch_l4_24" data-target-db="school_db" data-sql="-- Q24: [Subquery IN] Find student_id, last_name, class for students who took the 'ICT' exam using an IN subquery." data-answer="SELECT student_id, last_name, class FROM students WHERE student_id IN (SELECT student_id FROM exams WHERE subject_code = 'ICT');" data-hint="WHERE student_id IN (SELECT student_id FROM exams WHERE subject_code = 'ICT');" data-keywords="SELECT,WHERE,student_id,IN,SELECT,exams">
+                                <span class="truncate">Q24: [Subquery] Students taking ICT (IN)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_25" data-target-db="school_db" data-sql="-- Q25: [Subquery NOT IN] Find student_id, last_name, class for students who have NOT taken the 'BIO' exam using NOT IN." data-answer="SELECT student_id, last_name, class FROM students WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'BIO');" data-hint="WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'BIO');" data-keywords="SELECT,WHERE,student_id,NOT,IN,SELECT">
+                                <span class="truncate">Q25: [Subquery] Students not taking BIO (NOT IN)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_26" data-target-db="school_db" data-sql="-- Q26: [Subquery EXISTS] Find student_id, first_name, last_name for students who scored strictly above 90 in at least one exam using EXISTS." data-answer="SELECT student_id, first_name, last_name FROM students WHERE EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score > 90);" data-hint="WHERE EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score > 90);" data-keywords="WHERE,EXISTS,SELECT,exams,score,>,90">
+                                <span class="truncate">Q26: [Subquery] Students with score > 90 (EXISTS)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_27" data-target-db="school_db" data-sql="-- Q27: [Subquery NOT EXISTS] Find student_id, first_name, last_name for students who have NO exam score below 60 using NOT EXISTS." data-answer="SELECT student_id, first_name, last_name FROM students WHERE NOT EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score < 60);" data-hint="WHERE NOT EXISTS (SELECT 1 FROM exams WHERE exams.student_id = students.student_id AND exams.score < 60);" data-keywords="WHERE,NOT,EXISTS,SELECT,exams,score,<,60">
+                                <span class="truncate">Q27: [Subquery] No failing scores (NOT EXISTS)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_28" data-target-db="school_db" data-sql="-- Q28: [Subquery > ALL] Find student_id, subject_code, score from exams where score is strictly greater than ALL scores in 'ENG' exam." data-answer="SELECT student_id, subject_code, score FROM exams WHERE score > (SELECT MAX(score) FROM exams WHERE subject_code = 'ENG');" data-hint="In standard SQL use score > ALL (...); in SQLite use score > (SELECT MAX(score) FROM exams WHERE subject_code = 'ENG');" data-keywords="SELECT,WHERE,score,>,SELECT,MAX,ENG">
+                                <span class="truncate">Q28: [Subquery] Scores greater than ALL ENG scores</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_29" data-target-db="school_db" data-sql="-- Q29: [Subquery + Level 1-3 Skills] Find student_id, subject_code, and score from exams where score is strictly above the grand average score across all exams." data-answer="SELECT student_id, subject_code, score FROM exams WHERE score > (SELECT AVG(score) FROM exams);" data-hint="WHERE score > (SELECT AVG(score) FROM exams);" data-keywords="SELECT,WHERE,score,>,SELECT,AVG,exams">
+                                <span class="truncate">Q29: [Subquery] Exam scores above overall AVG</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="sch_l4_30" data-target-db="school_db" data-sql="-- Q30: [Correlated Subquery] Find exam records (student_id, subject_code, score) where score is higher than the average score for that specific subject." data-answer="SELECT student_id, subject_code, score FROM exams e1 WHERE score > (SELECT AVG(score) FROM exams e2 WHERE e2.subject_code = e1.subject_code);" data-hint="Correlated subquery: WHERE score > (SELECT AVG(score) FROM exams e2 WHERE e2.subject_code = e1.subject_code);" data-keywords="SELECT,WHERE,score,>,SELECT,AVG,subject_code">
+                                <span class="truncate">Q30: [Subquery] Above subject average (Correlated)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                        </ol>
+                    </details>
+
                     <!-- ==================== CHINOOK DB ==================== -->
                     <div class="text-[11px] font-bold uppercase text-slate-500 tracking-wider mb-1 mt-4">Chinook Media Database (chinook_db)</div>
 
@@ -444,6 +578,141 @@
                             </li>
                         </ol>
                     </details>
+
+                    <!-- Level 4: Chinook DB (Advanced - 30 Questions) -->
+                    <details id="level-chk-4" class="challenge-level">
+                        <summary class="text-rose-800 bg-rose-100 hover:bg-rose-200 text-xs font-bold">Level 4: Advanced (DDL, DML, Joins & Subqueries)</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <!-- Category 1: CREATE DATABASE (1) -->
+                            <li data-qid="chk_l4_1" data-target-db="chinook_db" data-sql="-- Q1: Create a new database named 'streaming_db'." data-answer="CREATE DATABASE streaming_db;" data-hint="Syntax: CREATE DATABASE streaming_db;" data-keywords="CREATE,DATABASE,streaming_db">
+                                <span class="truncate">Q1: [DDL] Create database streaming_db</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 2: CREATE TABLE (2) -->
+                            <li data-qid="chk_l4_2" data-target-db="chinook_db" data-sql="-- Q2: Create a new table 'Playlists' with PlaylistId (INTEGER PRIMARY KEY AUTOINCREMENT) and Name (TEXT NOT NULL)." data-answer="CREATE TABLE Playlists (PlaylistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL);" data-hint="CREATE TABLE Playlists (PlaylistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL);" data-keywords="CREATE,TABLE,Playlists,PlaylistId,PRIMARY,KEY">
+                                <span class="truncate">Q2: [DDL] Create table Playlists</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_3" data-target-db="chinook_db" data-sql="-- Q3: Create table 'PlaylistTrack' with PlaylistId (INTEGER), TrackId (INTEGER), and composite PRIMARY KEY (PlaylistId, TrackId)." data-answer="CREATE TABLE PlaylistTrack (PlaylistId INTEGER, TrackId INTEGER, PRIMARY KEY (PlaylistId, TrackId));" data-hint="CREATE TABLE PlaylistTrack (PlaylistId INTEGER, TrackId INTEGER, PRIMARY KEY (PlaylistId, TrackId));" data-keywords="CREATE,TABLE,PlaylistTrack,PRIMARY,KEY">
+                                <span class="truncate">Q3: [DDL] Create table PlaylistTrack</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 3: INSERT records (2) -->
+                            <li data-qid="chk_l4_4" data-target-db="chinook_db" data-sql="-- Q4: Insert one record into 'Genre': GenreId 6, Name 'Electronic'." data-answer="INSERT INTO Genre (GenreId, Name) VALUES (6, 'Electronic');" data-hint="INSERT INTO Genre (GenreId, Name) VALUES (6, 'Electronic');" data-keywords="INSERT,INTO,Genre,VALUES,6,'Electronic'">
+                                <span class="truncate">Q4: [DML] Insert single genre record</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_5" data-target-db="chinook_db" data-sql="-- Q5: Insert two records into 'Artist': 'Pink Floyd' and 'Nirvana'." data-answer="INSERT INTO Artist (Name) VALUES ('Pink Floyd'), ('Nirvana');" data-hint="INSERT INTO Artist (Name) VALUES ('Pink Floyd'), ('Nirvana');" data-keywords="INSERT,INTO,Artist,VALUES,'Pink Floyd','Nirvana'">
+                                <span class="truncate">Q5: [DML] Insert multiple artist records</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 4: UPDATE records (3) -->
+                            <li data-qid="chk_l4_6" data-target-db="chinook_db" data-sql="-- Q6: Update UnitPrice to 1.29 for all tracks belonging to AlbumId = 1." data-answer="UPDATE Track SET UnitPrice = 1.29 WHERE AlbumId = 1;" data-hint="UPDATE Track SET UnitPrice = 1.29 WHERE AlbumId = 1;" data-keywords="UPDATE,Track,SET,UnitPrice,WHERE,AlbumId">
+                                <span class="truncate">Q6: [DML] Update track unit price</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_7" data-target-db="chinook_db" data-sql="-- Q7: Update customer 1 so that City becomes 'São Paulo' and PostalCode becomes '01000'." data-answer="UPDATE Customer SET City = 'São Paulo', PostalCode = '01000' WHERE CustomerId = 1;" data-hint="UPDATE Customer SET City = 'São Paulo', PostalCode = '01000' WHERE CustomerId = 1;" data-keywords="UPDATE,Customer,SET,City,PostalCode,WHERE,CustomerId">
+                                <span class="truncate">Q7: [DML] Update customer address</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_8" data-target-db="chinook_db" data-sql="-- Q8: Add 1.00 to Total for all invoices billed to 'Germany' where Total < 5.00." data-answer="UPDATE Invoice SET Total = Total + 1.00 WHERE BillingCountry = 'Germany' AND Total < 5.00;" data-hint="UPDATE Invoice SET Total = Total + 1.00 WHERE BillingCountry = 'Germany' AND Total < 5.00;" data-keywords="UPDATE,Invoice,SET,Total,WHERE,BillingCountry,AND">
+                                <span class="truncate">Q8: [DML] Update invoice total conditionally</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 5: ALTER TABLE (5) -->
+                            <li data-qid="chk_l4_9" data-target-db="chinook_db" data-sql="-- Q9: Add a new column 'Rating' of type INTEGER to table 'Track'." data-answer="ALTER TABLE Track ADD COLUMN Rating INTEGER;" data-hint="ALTER TABLE Track ADD COLUMN Rating INTEGER;" data-keywords="ALTER,TABLE,Track,ADD,COLUMN,Rating">
+                                <span class="truncate">Q9: [DDL] Add Rating column to Track</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_10" data-target-db="chinook_db" data-sql="-- Q10: Add a new column 'Discount' of type NUMERIC with DEFAULT 0.0 to table 'Invoice'." data-answer="ALTER TABLE Invoice ADD COLUMN Discount NUMERIC DEFAULT 0.0;" data-hint="ALTER TABLE Invoice ADD COLUMN Discount NUMERIC DEFAULT 0.0;" data-keywords="ALTER,TABLE,Invoice,ADD,COLUMN,Discount,DEFAULT">
+                                <span class="truncate">Q10: [DDL] Add Discount column with DEFAULT</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_11" data-target-db="chinook_db" data-sql="-- Q11: Rename column 'Phone' to 'PhoneNumber' in table 'Customer'." data-answer="ALTER TABLE Customer RENAME COLUMN Phone TO PhoneNumber;" data-hint="ALTER TABLE Customer RENAME COLUMN Phone TO PhoneNumber;" data-keywords="ALTER,TABLE,Customer,RENAME,COLUMN,PhoneNumber">
+                                <span class="truncate">Q11: [DDL] Rename Phone column in Customer</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_12" data-target-db="chinook_db" data-sql="-- Q12: Rename table 'MediaType' to 'MediaFormat'." data-answer="ALTER TABLE MediaType RENAME TO MediaFormat;" data-hint="ALTER TABLE MediaType RENAME TO MediaFormat;" data-keywords="ALTER,TABLE,MediaType,RENAME,TO,MediaFormat">
+                                <span class="truncate">Q12: [DDL] Rename table MediaType</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_13" data-target-db="chinook_db" data-sql="-- Q13: Drop column 'Company' from table 'Customer'." data-answer="ALTER TABLE Customer DROP COLUMN Company;" data-hint="ALTER TABLE Customer DROP COLUMN Company;" data-keywords="ALTER,TABLE,Customer,DROP,COLUMN,Company">
+                                <span class="truncate">Q13: [DDL] Drop Company column from Customer</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 6: DELETE record (2) -->
+                            <li data-qid="chk_l4_14" data-target-db="chinook_db" data-sql="-- Q14: Delete the track with TrackId = 20 from the 'Track' table." data-answer="DELETE FROM Track WHERE TrackId = 20;" data-hint="DELETE FROM Track WHERE TrackId = 20;" data-keywords="DELETE,FROM,Track,WHERE,TrackId,20">
+                                <span class="truncate">Q14: [DML] Delete track record</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_15" data-target-db="chinook_db" data-sql="-- Q15: Delete all invoices where Total is strictly less than 4.00." data-answer="DELETE FROM Invoice WHERE Total < 4.00;" data-hint="DELETE FROM Invoice WHERE Total < 4.00;" data-keywords="DELETE,FROM,Invoice,WHERE,Total,<,4.00">
+                                <span class="truncate">Q15: [DML] Delete low-value invoices</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 7: JOIN two tables (8) -->
+                            <li data-qid="chk_l4_16" data-target-db="chinook_db" data-sql="-- Q16: [Equi-Join] List Track.Name, Album.Title, and Track.UnitPrice by joining Track and Album on AlbumId." data-answer="SELECT Track.Name, Album.Title, Track.UnitPrice FROM Track INNER JOIN Album ON Track.AlbumId = Album.AlbumId;" data-hint="SELECT ... FROM Track INNER JOIN Album ON Track.AlbumId = Album.AlbumId;" data-keywords="SELECT,FROM,Track,INNER,JOIN,Album,ON">
+                                <span class="truncate">Q16: [Join] Equi-Join Track and Album</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_17" data-target-db="chinook_db" data-sql="-- Q17: [Non-Equi Join] Pair tracks in GenreId 1 where Track 1 is strictly longer in duration than Track 2 (t1.Milliseconds > t2.Milliseconds). Show t1.Name, t2.Name, t1.GenreId." data-answer="SELECT t1.Name AS track1, t2.Name AS track2, t1.GenreId FROM Track t1 INNER JOIN Track t2 ON t1.GenreId = t2.GenreId AND t1.Milliseconds > t2.Milliseconds;" data-hint="JOIN Track t2 ON t1.GenreId = t2.GenreId AND t1.Milliseconds > t2.Milliseconds;" data-keywords="JOIN,ON,t1.GenreId,AND,t1.Milliseconds,>,t2.Milliseconds">
+                                <span class="truncate">Q17: [Join] Non-equi join on duration</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_18" data-target-db="chinook_db" data-sql="-- Q18: [Self Join] Find employee full names alongside their manager's full names by joining Employee on ReportsTo = EmployeeId." data-answer="SELECT e.FirstName AS EmployeeName, e.LastName AS EmployeeLast, m.FirstName AS ManagerName, m.LastName AS ManagerLast FROM Employee e INNER JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-hint="FROM Employee e INNER JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-keywords="JOIN,Employee,ON,ReportsTo,EmployeeId">
+                                <span class="truncate">Q18: [Join] Self join Employee on manager hierarchy</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_19" data-target-db="chinook_db" data-sql="-- Q19: [UNION] Combine all distinct cities from Customer with all distinct cities from Employee using UNION." data-answer="SELECT City FROM Customer UNION SELECT City FROM Employee;" data-hint="SELECT City FROM Customer UNION SELECT City FROM Employee;" data-keywords="SELECT,City,FROM,Customer,UNION,SELECT,Employee">
+                                <span class="truncate">Q19: [Union] Combine distinct cities</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_20" data-target-db="chinook_db" data-sql="-- Q20: [LEFT JOIN] Display Artist.Name and Album.Title using a LEFT JOIN from Artist to Album so artists without albums are listed." data-answer="SELECT Artist.Name, Album.Title FROM Artist LEFT JOIN Album ON Artist.ArtistId = Album.ArtistId;" data-hint="SELECT Artist.Name, Album.Title FROM Artist LEFT JOIN Album ON Artist.ArtistId = Album.ArtistId;" data-keywords="SELECT,FROM,Artist,LEFT,JOIN,Album,ON">
+                                <span class="truncate">Q20: [Join] Left outer join Artist & Album</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_21" data-target-db="chinook_db" data-sql="-- Q21: [RIGHT JOIN] Display Album.Title and Artist.Name using a RIGHT JOIN from Album to Artist." data-answer="SELECT Album.Title, Artist.Name FROM Album RIGHT JOIN Artist ON Album.ArtistId = Artist.ArtistId;" data-hint="SELECT Album.Title, Artist.Name FROM Album RIGHT JOIN Artist ON Album.ArtistId = Artist.ArtistId;" data-keywords="SELECT,FROM,Album,RIGHT,JOIN,Artist,ON">
+                                <span class="truncate">Q21: [Join] Right outer join Album & Artist</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_22" data-target-db="chinook_db" data-sql="-- Q22: [FULL OUTER JOIN] Perform a FULL OUTER JOIN between Customer and Invoice on CustomerId. Show CustomerId, LastName, InvoiceId, Total." data-answer="SELECT Customer.CustomerId, Customer.LastName, Invoice.InvoiceId, Invoice.Total FROM Customer FULL OUTER JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId;" data-hint="SELECT ... FROM Customer FULL OUTER JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId;" data-keywords="SELECT,FULL,OUTER,JOIN,ON">
+                                <span class="truncate">Q22: [Join] Full outer join Customer & Invoice</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_23" data-target-db="chinook_db" data-sql="-- Q23: [Join + L1-3 Skills] Join Customer and Invoice to calculate total spending per customer. Include only customers who spent > $5.00, ordered by total spent DESC." data-answer="SELECT c.CustomerId, c.FirstName, c.LastName, SUM(i.Total) AS TotalSpent FROM Customer c INNER JOIN Invoice i ON c.CustomerId = i.CustomerId GROUP BY c.CustomerId, c.FirstName, c.LastName HAVING SUM(i.Total) > 5.00 ORDER BY TotalSpent DESC;" data-hint="Combine INNER JOIN, GROUP BY Customer, HAVING SUM(i.Total) > 5.00, and ORDER BY TotalSpent DESC." data-keywords="JOIN,GROUP BY,HAVING,SUM,ORDER BY,DESC">
+                                <span class="truncate">Q23: [Join] Customer spending with HAVING & ORDER BY</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <!-- Category 8: SUBQUERIES (7) -->
+                            <li data-qid="chk_l4_24" data-target-db="chinook_db" data-sql="-- Q24: [Subquery IN] Find TrackId and Name for tracks that have been purchased (appear in InvoiceLine) using an IN subquery." data-answer="SELECT TrackId, Name FROM Track WHERE TrackId IN (SELECT TrackId FROM InvoiceLine);" data-hint="WHERE TrackId IN (SELECT TrackId FROM InvoiceLine);" data-keywords="SELECT,WHERE,TrackId,IN,SELECT,InvoiceLine">
+                                <span class="truncate">Q24: [Subquery] Purchased tracks (IN)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_25" data-target-db="chinook_db" data-sql="-- Q25: [Subquery NOT IN] Find TrackId and Name for tracks that have NEVER been purchased (NOT IN InvoiceLine)." data-answer="SELECT TrackId, Name FROM Track WHERE TrackId NOT IN (SELECT TrackId FROM InvoiceLine);" data-hint="WHERE TrackId NOT IN (SELECT TrackId FROM InvoiceLine);" data-keywords="SELECT,WHERE,TrackId,NOT,IN,SELECT">
+                                <span class="truncate">Q25: [Subquery] Unpurchased tracks (NOT IN)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_26" data-target-db="chinook_db" data-sql="-- Q26: [Subquery EXISTS] Find CustomerId, FirstName, LastName for customers who have at least one invoice with Total > 10.00 using EXISTS." data-answer="SELECT CustomerId, FirstName, LastName FROM Customer WHERE EXISTS (SELECT 1 FROM Invoice WHERE Invoice.CustomerId = Customer.CustomerId AND Invoice.Total > 10.00);" data-hint="WHERE EXISTS (SELECT 1 FROM Invoice WHERE Invoice.CustomerId = Customer.CustomerId AND Invoice.Total > 10.00);" data-keywords="WHERE,EXISTS,SELECT,Invoice,Total,>,10.00">
+                                <span class="truncate">Q26: [Subquery] High-value customers (EXISTS)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_27" data-target-db="chinook_db" data-sql="-- Q27: [Subquery NOT EXISTS] Find CustomerId, FirstName, LastName for customers who have NO invoice with Total < 5.00 using NOT EXISTS." data-answer="SELECT CustomerId, FirstName, LastName FROM Customer WHERE NOT EXISTS (SELECT 1 FROM Invoice WHERE Invoice.CustomerId = Customer.CustomerId AND Invoice.Total < 5.00);" data-hint="WHERE NOT EXISTS (SELECT 1 FROM Invoice WHERE Invoice.CustomerId = Customer.CustomerId AND Invoice.Total < 5.00);" data-keywords="WHERE,NOT,EXISTS,SELECT,Invoice,Total,<,5.00">
+                                <span class="truncate">Q27: [Subquery] Customers without small orders (NOT EXISTS)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_28" data-target-db="chinook_db" data-sql="-- Q28: [Subquery > ALL] Find TrackId, Name, Milliseconds for tracks whose duration is strictly greater than ALL tracks in AlbumId = 1." data-answer="SELECT TrackId, Name, Milliseconds FROM Track WHERE Milliseconds > (SELECT MAX(Milliseconds) FROM Track WHERE AlbumId = 1);" data-hint="In standard SQL use Milliseconds > ALL (...); in SQLite use Milliseconds > (SELECT MAX(Milliseconds) FROM Track WHERE AlbumId = 1);" data-keywords="SELECT,WHERE,Milliseconds,>,SELECT,MAX,AlbumId">
+                                <span class="truncate">Q28: [Subquery] Tracks longer than ALL tracks in Album 1</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_29" data-target-db="chinook_db" data-sql="-- Q29: [Subquery + Level 1-3 Skills] Find TrackId, Name, and Milliseconds for tracks that are strictly longer than the overall average track duration." data-answer="SELECT TrackId, Name, Milliseconds FROM Track WHERE Milliseconds > (SELECT AVG(Milliseconds) FROM Track);" data-hint="WHERE Milliseconds > (SELECT AVG(Milliseconds) FROM Track);" data-keywords="SELECT,WHERE,Milliseconds,>,SELECT,AVG,Track">
+                                <span class="truncate">Q29: [Subquery] Tracks longer than overall AVG</span>
+                                <span class="status-slot"></span>
+                            </li>
+                            <li data-qid="chk_l4_30" data-target-db="chinook_db" data-sql="-- Q30: [Correlated Subquery] Find invoices (InvoiceId, CustomerId, Total) where Total is >= the average invoice total for that customer's billing country." data-answer="SELECT i.InvoiceId, i.CustomerId, i.Total FROM Invoice i WHERE i.Total >= (SELECT AVG(i2.Total) FROM Invoice i2 WHERE i2.BillingCountry = i.BillingCountry);" data-hint="Correlated subquery: WHERE i.Total >= (SELECT AVG(i2.Total) FROM Invoice i2 WHERE i2.BillingCountry = i.BillingCountry);" data-keywords="SELECT,WHERE,Total,>=,SELECT,AVG,BillingCountry">
+                                <span class="truncate">Q30: [Subquery] Above country average (Correlated)</span>
+                                <span class="status-slot"></span>
+                            </li>
+                        </ol>
+                    </details>
                 </div>
             </aside>
 
@@ -456,9 +725,7 @@
                             Exam Challenge Loaded
                         </span>
                     </div>
-
                     <textarea id="sql-editor" class="sql-editor w-full h-36 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="-- Click an exam question on the left. Type your SQL solution here and click 'Run SQL' to verify!"></textarea>
-
                     <div class="flex items-center justify-between mt-3 flex-wrap gap-2">
                         <div class="flex items-center gap-3">
                             <p class="text-xs text-slate-500">Tip: Press <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Ctrl+Enter</kbd> or <kbd class="font-sans bg-slate-200 rounded px-1.5 py-0.5 border-b-2 border-slate-300">Cmd+Enter</kbd> to run.</p>
@@ -524,8 +791,9 @@
         let dbRegistry = {};
         let currentDbName = 'school_db';
         let db;
-        const sessionStorageKey = 'sql_sandbox_session_databases_v8';
-        const challengeProgressKey = 'sql_sandbox_challenge_progress_v3';
+        const sessionStorageKey = 'sql_sandbox_session_databases_v9';
+        const challengeProgressKey = 'sql_sandbox_challenge_progress_v4';
+
         let currentActiveQuestionLi = null;
         let currentHint = "";
         let currentAnswer = "";
@@ -603,7 +871,6 @@
                     sessionStorage.removeItem(sessionStorageKey);
                 }
             }
-
             if (!dbRegistry['school_db']) {
                 const defaultDb = new SQL.Database();
                 registerCustomFunctions(defaultDb);
@@ -616,7 +883,6 @@
                 createChinookTables(chinookDb);
                 dbRegistry['chinook_db'] = chinookDb;
             }
-
             if (!loaded) {
                 currentDbName = 'school_db';
                 db = dbRegistry['school_db'];
@@ -773,7 +1039,6 @@
                 database.run(`DROP TABLE IF EXISTS exams;`);
                 database.run(`DROP TABLE IF EXISTS students;`);
                 database.run(`DROP TABLE IF EXISTS subjects;`);
-
                 database.run(`CREATE TABLE students (
                     student_id INTEGER PRIMARY KEY,
                     class TEXT,
@@ -784,12 +1049,10 @@
                     dob DATE,
                     district TEXT
                 );`);
-
                 database.run(`CREATE TABLE subjects (
                     subject_code TEXT PRIMARY KEY,
                     subject_name TEXT
                 );`);
-
                 database.run(`CREATE TABLE exams (
                     student_id INTEGER,
                     subject_code TEXT,
@@ -797,17 +1060,14 @@
                     FOREIGN KEY(student_id) REFERENCES students(student_id),
                     FOREIGN KEY(subject_code) REFERENCES subjects(subject_code)
                 );`);
-
                 const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Ng', 'Lam'];
                 const maleFirstNames = ['Ka Chun', 'Lok Hang', 'Chi Kin', 'Wai Ho', 'Pak Hei'];
                 const femaleFirstNames = ['Wing Yan', 'Tsz Ching', 'Ka Man', 'Pui Sze', 'Mei Ling'];
                 const districts = ['Wan Chai', 'Eastern', 'Kowloon City', 'Sha Tin', 'Central & Western'];
                 const classes = ['4A', '4C', '4D'];
-
                 let studentInserts = [];
                 const studentIds = [];
                 let sIdCounter = 1001;
-
                 for (const className of classes) {
                     for (let i = 1; i <= 20; i++) {
                         const studentId = sIdCounter++;
@@ -821,7 +1081,6 @@
                     }
                 }
                 database.run(`INSERT INTO students VALUES ${studentInserts.join(', ')};`);
-
                 const subjectMap = {
                     'CHI': 'Chinese', 'ENG': 'English', 'MATH': 'Mathematics',
                     'ICT': 'Information and Communication Technology',
@@ -829,7 +1088,6 @@
                 };
                 const subSql = Object.entries(subjectMap).map(([c, n]) => `('${c}', '${n}')`).join(', ');
                 database.run(`INSERT INTO subjects VALUES ${subSql};`);
-
                 let examInserts = [];
                 for (const sId of studentIds) {
                     ['CHI', 'ENG', 'MATH'].forEach((code, idx) => {
@@ -851,7 +1109,6 @@
             try {
                 const tables = ['InvoiceLine', 'Invoice', 'Customer', 'Employee', 'Track', 'MediaType', 'Genre', 'Album', 'Artist'];
                 tables.forEach(t => database.run(`DROP TABLE IF EXISTS ${t};`));
-
                 database.run(`CREATE TABLE Artist (ArtistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
                 database.run(`CREATE TABLE Album (AlbumId INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, ArtistId INTEGER, FOREIGN KEY (ArtistId) REFERENCES Artist(ArtistId));`);
                 database.run(`CREATE TABLE Genre (GenreId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
@@ -915,7 +1172,6 @@
                     UnitPrice NUMERIC,
                     Quantity INTEGER
                 );`);
-
                 database.run(`INSERT INTO Genre VALUES (1, 'Rock'), (2, 'Jazz'), (3, 'Metal'), (4, 'Alternative'), (5, 'Classical');`);
                 database.run(`INSERT INTO MediaType VALUES (1, 'MPEG audio file'), (2, 'Protected AAC');`);
                 database.run(`INSERT INTO Artist VALUES (1, 'AC/DC'), (2, 'Queen'), (3, 'Led Zeppelin'), (4, 'Miles Davis'), (5, 'Beyond'), (6, 'Chopin');`);
@@ -1025,11 +1281,9 @@
             if (!userResult || !expectedResult) return false;
             if (userResult.columns.length !== expectedResult.columns.length) return false;
             if (userResult.values.length !== expectedResult.values.length) return false;
-
             const userJson = JSON.stringify(userResult.values);
             const expJson = JSON.stringify(expectedResult.values);
             if (userJson === expJson) return true;
-
             const userSorted = JSON.stringify([...userResult.values].map(r => JSON.stringify(r)).sort());
             const expSorted = JSON.stringify([...expectedResult.values].map(r => JSON.stringify(r)).sort());
             return userSorted === expSorted;
@@ -1039,10 +1293,9 @@
             if (!db) { displayMessage("error", "Database not loaded."); return; }
             const sqlCode = sqlEditor.value.trim();
             if (!sqlCode) { displayMessage("warning", "Please type an SQL query to execute."); return; }
-
             const activeQid = currentActiveQuestionLi ? currentActiveQuestionLi.getAttribute('data-qid') : null;
 
-            // Handle CREATE DATABASE syntax
+            // Handle CREATE DATABASE sandbox simulation
             const createDbMatch = sqlCode.match(/^CREATE\s+DATABASE\s+([a-zA-Z0-9_]+);?$/i);
             if (createDbMatch) {
                 const targetDb = createDbMatch[1];
@@ -1066,11 +1319,9 @@
 
             clearResults();
             let isModifying = false;
-
             try {
                 const statements = sqlCode.split(';').filter(s => s.trim() !== '');
                 let lastResult = null;
-
                 statements.forEach(statement => {
                     const trimmed = statement.trim();
                     const upper = trimmed.toUpperCase();
@@ -1078,7 +1329,6 @@
                         upper.startsWith("DELETE") || upper.startsWith("DROP") || upper.startsWith("ALTER")) {
                         isModifying = true;
                     }
-
                     const results = db.exec(trimmed);
                     if (results.length === 0) {
                         if (isModifying) {
@@ -1139,7 +1389,7 @@
                     tableNames.forEach(row => {
                         const tableName = row[0];
                         const li = document.createElement('li');
-                        li.className = 'px-2 py-1.5 bg-slate-100 rounded cursor-pointer hover:bg-sky-100 flex items-center justify-between transition group text-xs';
+                        li.className = 'px-2.5 py-1.5 bg-slate-100 rounded cursor-pointer hover:bg-sky-100 flex items-center justify-between transition group text-xs';
                         li.innerHTML = `
                             <span class="flex items-center gap-1.5 text-xs text-slate-700 font-medium truncate">
                                 <svg class="w-3.5 h-3.5 text-sky-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1221,7 +1471,6 @@
             });
             thead.appendChild(headerRow);
             table.appendChild(thead);
-
             const tbody = document.createElement('tbody');
             result.values.forEach(row => {
                 const tr = document.createElement('tr');
@@ -1273,7 +1522,6 @@
                     }
                 });
             });
-
             const sidebarSections = document.querySelectorAll('.sidebar-section');
             sidebarSections.forEach(section => {
                 section.addEventListener('toggle', function() {
@@ -1291,22 +1539,17 @@
                     document.querySelectorAll('.question-list li').forEach(q => q.classList.remove('active-question'));
                     li.classList.add('active-question');
                     currentActiveQuestionLi = li;
-
                     const targetDb = li.getAttribute('data-target-db');
                     if (targetDb && targetDb !== currentDbName && dbRegistry[targetDb]) {
                         switchDatabase(targetDb);
                     }
-
-                    // For exam practice: only insert the prompt comment line, leaving code area blank
                     const promptComment = li.getAttribute('data-sql');
                     sqlEditor.value = `${promptComment}\n\n`;
                     sqlEditor.focus();
-
                     currentHint = li.getAttribute('data-hint') || "No hint available.";
                     const kw = li.getAttribute('data-keywords');
                     currentKeywords = kw ? kw.split(',') : [];
                     currentAnswer = li.getAttribute('data-answer') || "";
-
                     if (currentQuestionTag) currentQuestionTag.classList.remove('hidden');
                     hintArea.classList.add('hidden');
                     hintBtn.classList.remove('hidden');
@@ -1327,7 +1570,6 @@
             const dbName = prompt("Enter database name (e.g., library_db):");
             if (dbName) createNewUserDatabase(dbName);
         });
-
         sqlEditor.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                 e.preventDefault();
