@@ -120,8 +120,11 @@
 
                     <!-- Instructions -->
                     <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800 mb-4">
-                        <strong>Instructions:</strong> Click a question below to select it. The question will be highlighted.
+                        <strong>Instructions:</strong> Click a challenge below. The sandbox will automatically activate the relevant database and prepare the query!
                     </div>
+
+                    <!-- School DB Category Header -->
+                    <div class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-1 mt-3">School Database</div>
 
                     <!-- Level 1 (School DB) -->
                     <details id="level-1" class="challenge-level">
@@ -173,16 +176,56 @@
                         </ol>
                     </details>
 
-                    <!-- Chinook Practice Challenges -->
-                    <details id="level-chinook" class="challenge-level">
-                        <summary class="text-indigo-700 bg-indigo-100 hover:bg-indigo-200">Chinook Media Challenges</summary>
+                    <!-- Chinook DB Category Header -->
+                    <div class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-1 mt-5">Chinook Media Database</div>
+
+                    <!-- Level 1 (Chinook DB) -->
+                    <details id="level-chinook-1" class="challenge-level">
+                        <summary class="text-emerald-700 bg-emerald-100 hover:bg-emerald-200">Level 1: Beginner (chinook_db)</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <li data-target-db="chinook_db" data-sql="-- List all artists and their names." data-answer="SELECT * FROM Artist ORDER BY Name ASC;" data-hint="SELECT * FROM Artist ORDER BY Name;" data-keywords="SELECT,FROM,Artist">List all Artists.</li>
-                            <li data-target-db="chinook_db" data-sql="-- Show Track names and their Album titles using an INNER JOIN." data-answer="SELECT t.Name AS TrackName, al.Title AS AlbumTitle FROM Track t JOIN Album al ON t.AlbumId = al.AlbumId;" data-hint="Join Track and Album on AlbumId." data-keywords="JOIN,Album,AlbumId">Tracks with Album Titles (Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- List all artists ordered by name alphabetically (A-Z)." data-answer="SELECT * FROM Artist ORDER BY Name ASC;" data-hint="Use SELECT * FROM Artist ORDER BY Name ASC;" data-keywords="SELECT,FROM,Artist,ORDER BY">List all Artists alphabetically.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Show only the Title and AlbumId from the Album table." data-answer="SELECT AlbumId, Title FROM Album;" data-hint="Select the specific columns from Album." data-keywords="SELECT,AlbumId,Title,FROM,Album">Show Album Titles and IDs.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find all customers who live in 'Brazil'." data-answer="SELECT * FROM Customer WHERE Country = 'Brazil';" data-hint="Use WHERE Country = 'Brazil'." data-keywords="WHERE,Country,'Brazil'">Find customers from Brazil.</li>
+                            <li data-target-db="chinook_db" data-sql="-- List all employees with the job title 'Sales Support Agent'." data-answer="SELECT * FROM Employee WHERE Title = 'Sales Support Agent';" data-hint="Use WHERE Title = 'Sales Support Agent'." data-keywords="WHERE,Title,'Sales Support Agent'">List Sales Support Agents.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find all invoices where the Total amount is greater than 5.00." data-answer="SELECT * FROM Invoice WHERE Total > 5.00;" data-hint="Use WHERE Total > 5.00." data-keywords="WHERE,Total,>,5">Invoices with Total > $5.00.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Show all tracks that have a composer listed (Composer IS NOT NULL)." data-answer="SELECT Name, Composer FROM Track WHERE Composer IS NOT NULL;" data-hint="Use WHERE Composer IS NOT NULL." data-keywords="WHERE,Composer,IS NOT NULL">Tracks with listed Composer.</li>
+                            <li data-target-db="chinook_db" data-sql="-- List all customers who represent a company (Company IS NOT NULL)." data-answer="SELECT FirstName, LastName, Company FROM Customer WHERE Company IS NOT NULL;" data-hint="Use WHERE Company IS NOT NULL." data-keywords="WHERE,Company,IS NOT NULL">Corporate customers.</li>
+                            <li data-target-db="chinook_db" data-sql="-- List all tracks ordered by duration (Milliseconds) from longest to shortest." data-answer="SELECT Name, Milliseconds FROM Track ORDER BY Milliseconds DESC;" data-hint="Use ORDER BY Milliseconds DESC." data-keywords="ORDER BY,Milliseconds,DESC">Tracks by longest duration.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find all invoices billed to 'USA' or 'Canada'." data-answer="SELECT * FROM Invoice WHERE BillingCountry = 'USA' OR BillingCountry = 'Canada';" data-hint="Use WHERE BillingCountry = 'USA' OR BillingCountry = 'Canada'." data-keywords="WHERE,BillingCountry,OR">Invoices in USA or Canada.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find tracks composed by 'Freddie Mercury'." data-answer="SELECT Name, Composer FROM Track WHERE Composer = 'Freddie Mercury';" data-hint="Use WHERE Composer = 'Freddie Mercury'." data-keywords="WHERE,Composer,'Freddie Mercury'">Tracks by Freddie Mercury.</li>
+                        </ol>
+                    </details>
+
+                    <!-- Level 2 (Chinook DB) -->
+                    <details id="level-chinook-2" class="challenge-level">
+                        <summary class="text-amber-700 bg-amber-100 hover:bg-amber-200">Level 2: Intermediate (chinook_db)</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <li data-target-db="chinook_db" data-sql="-- Inner Join: Show Track name and Album Title." data-answer="SELECT t.Name AS TrackName, al.Title AS AlbumTitle FROM Track t JOIN Album al ON t.AlbumId = al.AlbumId;" data-hint="Join Track and Album on AlbumId." data-keywords="JOIN,Album,AlbumId">Tracks with Album Titles (Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Join: Show Album Title and Artist Name." data-answer="SELECT al.Title AS Album, ar.Name AS Artist FROM Album al JOIN Artist ar ON al.ArtistId = ar.ArtistId;" data-hint="Join Album and Artist on ArtistId." data-keywords="JOIN,Artist,ArtistId">Albums with Artist Names (Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Count the total number of customers in each Country." data-answer="SELECT Country, COUNT(*) AS TotalCustomers FROM Customer GROUP BY Country ORDER BY TotalCustomers DESC;" data-hint="Use GROUP BY Country and COUNT(*)." data-keywords="COUNT,GROUP BY,Country">Customer count per Country.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Calculate the total invoice revenue for each Billing Country." data-answer="SELECT BillingCountry, SUM(Total) AS Revenue FROM Invoice GROUP BY BillingCountry ORDER BY Revenue DESC;" data-hint="Use GROUP BY BillingCountry and SUM(Total)." data-keywords="SUM,GROUP BY,BillingCountry">Revenue per Country.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find the average track duration (Milliseconds) per Album." data-answer="SELECT AlbumId, AVG(Milliseconds) AS AvgDuration FROM Track GROUP BY AlbumId;" data-hint="Use GROUP BY AlbumId and AVG(Milliseconds)." data-keywords="AVG,GROUP BY,AlbumId">Average track duration per Album.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Join Customer and Employee to show each Customer's full name and their Support Representative's name." data-answer="SELECT c.FirstName || ' ' || c.LastName AS Customer, e.FirstName || ' ' || e.LastName AS SupportRep FROM Customer c JOIN Employee e ON c.SupportRepId = e.EmployeeId;" data-hint="Join Customer and Employee on SupportRepId = EmployeeId." data-keywords="JOIN,Employee,SupportRepId">Customer & Support Rep (Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find tracks in Rock genre (GenreId = 1) that are longer than 300,000 milliseconds (5 mins)." data-answer="SELECT Name, Milliseconds FROM Track WHERE GenreId = 1 AND Milliseconds > 300000;" data-hint="Use WHERE GenreId = 1 AND Milliseconds > 300000." data-keywords="WHERE,GenreId,AND,Milliseconds">Long Rock tracks (> 5 mins).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find the highest and lowest invoice totals recorded." data-answer="SELECT MAX(Total) AS MaxInvoice, MIN(Total) AS MinInvoice FROM Invoice;" data-hint="Use MAX(Total) and MIN(Total)." data-keywords="MAX,MIN,Invoice">Highest and lowest Invoice total.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Count how many tracks belong to each GenreId." data-answer="SELECT GenreId, COUNT(*) AS TrackCount FROM Track GROUP BY GenreId;" data-hint="Use GROUP BY GenreId and COUNT(*)." data-keywords="COUNT,GROUP BY,GenreId">Track count per Genre ID.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Join Invoice and Customer to list invoice ID, customer name, and invoice date for all invoices in 2023." data-answer="SELECT i.InvoiceId, c.FirstName, c.LastName, i.InvoiceDate FROM Invoice i JOIN Customer c ON i.CustomerId = c.CustomerId WHERE i.InvoiceDate LIKE '2023%';" data-hint="Join Invoice and Customer on CustomerId, filter by InvoiceDate." data-keywords="JOIN,CustomerId,InvoiceDate">2023 Invoices with Customer Name.</li>
+                        </ol>
+                    </details>
+
+                    <!-- Level 3 (Chinook DB) -->
+                    <details id="level-chinook-3" class="challenge-level">
+                        <summary class="text-purple-700 bg-purple-100 hover:bg-purple-200">Level 3: Advanced (chinook_db)</summary>
+                        <ol class="question-list list-decimal list-inside">
                             <li data-target-db="chinook_db" data-sql="-- Triple Join: Show Track name, Album title, and Artist name." data-answer="SELECT t.Name AS Track, al.Title AS Album, ar.Name AS Artist FROM Track t JOIN Album al ON t.AlbumId = al.AlbumId JOIN Artist ar ON al.ArtistId = ar.ArtistId;" data-hint="Join Track -> Album -> Artist." data-keywords="JOIN,Album,Artist">Track, Album & Artist (Triple Join).</li>
-                            <li data-target-db="chinook_db" data-sql="-- Find all customers from 'USA' or 'Canada'." data-answer="SELECT CustomerId, FirstName, LastName, Country FROM Customer WHERE Country IN ('USA', 'Canada');" data-hint="WHERE Country IN ('USA', 'Canada');" data-keywords="WHERE,Country">Customers in USA or Canada.</li>
-                            <li data-target-db="chinook_db" data-sql="-- Find total invoice spending per customer, ordered from highest to lowest." data-answer="SELECT c.CustomerId, c.FirstName, c.LastName, SUM(i.Total) AS TotalSpent FROM Customer c JOIN Invoice i ON c.CustomerId = i.CustomerId GROUP BY c.CustomerId ORDER BY TotalSpent DESC;" data-hint="GROUP BY CustomerId and SUM(Total)." data-keywords="SUM,GROUP BY,ORDER BY">Top Spending Customers.</li>
-                            <li data-target-db="chinook_db" data-sql="-- Self Join: List each employee and their direct manager's name." data-answer="SELECT e.FirstName || ' ' || e.LastName AS Employee, m.FirstName || ' ' || m.LastName AS Manager FROM Employee e LEFT JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-hint="Join Employee with itself using ReportsTo = EmployeeId." data-keywords="JOIN,ReportsTo,EmployeeId">Employee Manager Hierarchy (Self-Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Self-Join: List each employee's full name and their direct manager's full name." data-answer="SELECT e.FirstName || ' ' || e.LastName AS Employee, m.FirstName || ' ' || m.LastName AS Manager FROM Employee e LEFT JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-hint="Use LEFT JOIN Employee m ON e.ReportsTo = m.EmployeeId." data-keywords="JOIN,ReportsTo,EmployeeId">Employee & Manager (Self-Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Aggregate Join: Find total spending per customer, ordered from highest to lowest." data-answer="SELECT c.CustomerId, c.FirstName, c.LastName, SUM(i.Total) AS TotalSpent FROM Customer c JOIN Invoice i ON c.CustomerId = i.CustomerId GROUP BY c.CustomerId ORDER BY TotalSpent DESC;" data-hint="GROUP BY CustomerId and SUM(Total)." data-keywords="JOIN,GROUP BY,SUM,ORDER BY">Top Spending Customers (Join + Aggregate).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Subquery: Find all tracks that have NEVER been purchased (not in InvoiceLine)." data-answer="SELECT TrackId, Name FROM Track WHERE TrackId NOT IN (SELECT DISTINCT TrackId FROM InvoiceLine);" data-hint="Use WHERE TrackId NOT IN (SELECT DISTINCT TrackId FROM InvoiceLine)." data-keywords="NOT IN,SELECT,InvoiceLine">Unsold Tracks (NOT IN Subquery).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Having: List billing countries where total sales revenue is greater than 10.00." data-answer="SELECT BillingCountry, SUM(Total) AS Revenue FROM Invoice GROUP BY BillingCountry HAVING SUM(Total) > 10.00;" data-hint="Use GROUP BY BillingCountry HAVING SUM(Total) > 10.00." data-keywords="GROUP BY,HAVING,SUM">Countries with sales > $10.00 (HAVING).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Junction Join: List track names included in the 'Rock Classics' playlist." data-answer="SELECT t.Name AS TrackName FROM Track t JOIN PlaylistTrack pt ON t.TrackId = pt.TrackId JOIN Playlist p ON pt.PlaylistId = p.PlaylistId WHERE p.Name = 'Rock Classics';" data-hint="Join Track -> PlaylistTrack -> Playlist WHERE p.Name = 'Rock Classics'." data-keywords="JOIN,PlaylistTrack,Playlist,'Rock Classics'">Tracks in 'Rock Classics' Playlist (M:N Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Having with Count: Find artists who have more than 1 album in the catalog." data-answer="SELECT ar.Name, COUNT(al.AlbumId) AS AlbumCount FROM Artist ar JOIN Album al ON ar.ArtistId = al.ArtistId GROUP BY ar.ArtistId HAVING COUNT(al.AlbumId) > 1;" data-hint="Join Artist and Album, GROUP BY ar.ArtistId HAVING COUNT(al.AlbumId) > 1." data-keywords="JOIN,GROUP BY,HAVING,COUNT">Artists with > 1 Album (HAVING).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Subquery: Find customer details who made the single largest invoice payment." data-answer="SELECT FirstName, LastName, Country FROM Customer WHERE CustomerId = (SELECT CustomerId FROM Invoice ORDER BY Total DESC LIMIT 1);" data-hint="Use WHERE CustomerId = (SELECT CustomerId FROM Invoice ORDER BY Total DESC LIMIT 1)." data-keywords="WHERE,CustomerId,SELECT,Invoice,LIMIT">Customer with Highest Single Invoice.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Complex Join & Aggregate: Find total sales generated by each sales support representative." data-answer="SELECT e.FirstName || ' ' || e.LastName AS SalesRep, SUM(i.Total) AS TotalSales FROM Employee e JOIN Customer c ON e.EmployeeId = c.SupportRepId JOIN Invoice i ON c.CustomerId = i.CustomerId GROUP BY e.EmployeeId ORDER BY TotalSales DESC;" data-hint="Join Employee -> Customer -> Invoice, GROUP BY EmployeeId." data-keywords="JOIN,Customer,Invoice,GROUP BY,SUM">Sales Rep Revenue Performance.</li>
                         </ol>
                     </details>
                 </div>
@@ -266,7 +309,7 @@
         let dbRegistry = {}; // Map of { [dbName]: SQL.Database }
         let currentDbName = 'school_db';
         let db; // Points to dbRegistry[currentDbName]
-        const sessionStorageKey = 'sql_sandbox_session_databases_v4';
+        const sessionStorageKey = 'sql_sandbox_session_databases_v5';
 
         let currentHint = "";
         let currentAnswer = "";
@@ -619,7 +662,6 @@
         // Chinook Sample Database Creator (11 Relational Tables)
         function createChinookTables(database) {
             try {
-                // Drop if exist
                 const tables = ['PlaylistTrack', 'Playlist', 'InvoiceLine', 'Invoice', 'Customer', 'Employee', 'Track', 'MediaType', 'Genre', 'Album', 'Artist'];
                 tables.forEach(t => database.run(`DROP TABLE IF EXISTS ${t};`));
 
