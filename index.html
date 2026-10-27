@@ -90,7 +90,7 @@
                         </button>
                     </div>
                     <ul id="databases-list" class="space-y-1 text-sm">
-                        <!-- Populated dynamically -->
+                        <!-- Populated dynamically with school_db, chinook_db, and student custom DBs -->
                     </ul>
                 </div>
 
@@ -120,56 +120,69 @@
 
                     <!-- Instructions -->
                     <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800 mb-4">
-                        <strong>Instructions:</strong> Click a question below to select it. The question will be highlighted. Challenges run against the default <code>school_db</code>.
+                        <strong>Instructions:</strong> Click a question below to select it. The question will be highlighted.
                     </div>
 
-                    <!-- Level 1 -->
+                    <!-- Level 1 (School DB) -->
                     <details id="level-1" class="challenge-level">
-                        <summary class="text-green-700 bg-green-100 hover:bg-green-200">Level 1: Beginner</summary>
+                        <summary class="text-green-700 bg-green-100 hover:bg-green-200">Level 1: Beginner (school_db)</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <li data-sql="-- Show all columns and all records from the 'students' table." data-answer="SELECT * FROM students;" data-hint="Use SELECT * FROM table_name;" data-keywords="SELECT,*,FROM,students">List all students.</li>
-                            <li data-sql="-- Show all subjects available." data-answer="SELECT * FROM subjects;" data-hint="Use SELECT * FROM subjects;" data-keywords="SELECT,*,FROM,subjects">List all subjects.</li>
-                            <li data-sql="-- Display only the first name, last name, and class for every student." data-answer="SELECT first_name, last_name, class FROM students;" data-hint="SELECT column1, column2, column3 FROM students;" data-keywords="SELECT,first_name,last_name,class,FROM,students">Show student names and class.</li>
-                            <li data-sql="-- Find all students who are in class '4A'." data-answer="SELECT * FROM students WHERE class = '4A';" data-hint="Use WHERE class = '4A'." data-keywords="WHERE,class,'4A'">Find all students in class '4A'.</li>
-                            <li data-sql="-- List all exams with a score greater than 95." data-answer="SELECT * FROM exams WHERE score > 95;" data-hint="Use WHERE score > 95." data-keywords="WHERE,score,>,95">Find exams with scores > 95.</li>
-                            <li data-sql="-- List all male students ('M')." data-answer="SELECT * FROM students WHERE gender = 'M';" data-hint="Use WHERE gender = 'M'." data-keywords="WHERE,gender,'M'">List all male students.</li>
-                            <li data-sql="-- Find the student with class number 15 in class '4C'." data-answer="SELECT * FROM students WHERE no = 15 AND class = '4C';" data-hint="Use WHERE no = 15 AND class = '4C'." data-keywords="WHERE,no,15,AND,class,'4C'">Find student #15 in 4C.</li>
-                            <li data-sql="-- List all students ordered by their last name alphabetically (A-Z)." data-answer="SELECT * FROM students ORDER BY last_name ASC;" data-hint="Use ORDER BY last_name ASC;" data-keywords="ORDER BY,last_name">List students by last name.</li>
-                            <li data-sql="-- Show all exam scores, from the highest to the lowest." data-answer="SELECT * FROM exams ORDER BY score DESC;" data-hint="Use ORDER BY score DESC;" data-keywords="ORDER BY,score,DESC">List scores from highest to lowest.</li>
-                            <li data-sql="-- List all students ordered by their date of birth (oldest first)." data-answer="SELECT * FROM students ORDER BY dob ASC;" data-hint="Use ORDER BY dob ASC;" data-keywords="ORDER BY,dob">Order students by birthday.</li>
+                            <li data-target-db="school_db" data-sql="-- Show all columns and all records from the 'students' table." data-answer="SELECT * FROM students;" data-hint="Use SELECT * FROM table_name;" data-keywords="SELECT,*,FROM,students">List all students.</li>
+                            <li data-target-db="school_db" data-sql="-- Show all subjects available." data-answer="SELECT * FROM subjects;" data-hint="Use SELECT * FROM subjects;" data-keywords="SELECT,*,FROM,subjects">List all subjects.</li>
+                            <li data-target-db="school_db" data-sql="-- Display only the first name, last name, and class for every student." data-answer="SELECT first_name, last_name, class FROM students;" data-hint="SELECT column1, column2, column3 FROM students;" data-keywords="SELECT,first_name,last_name,class,FROM,students">Show student names and class.</li>
+                            <li data-target-db="school_db" data-sql="-- Find all students who are in class '4A'." data-answer="SELECT * FROM students WHERE class = '4A';" data-hint="Use WHERE class = '4A'." data-keywords="WHERE,class,'4A'">Find all students in class '4A'.</li>
+                            <li data-target-db="school_db" data-sql="-- List all exams with a score greater than 95." data-answer="SELECT * FROM exams WHERE score > 95;" data-hint="Use WHERE score > 95." data-keywords="WHERE,score,>,95">Find exams with scores > 95.</li>
+                            <li data-target-db="school_db" data-sql="-- List all male students ('M')." data-answer="SELECT * FROM students WHERE gender = 'M';" data-hint="Use WHERE gender = 'M'." data-keywords="WHERE,gender,'M'">List all male students.</li>
+                            <li data-target-db="school_db" data-sql="-- Find the student with class number 15 in class '4C'." data-answer="SELECT * FROM students WHERE no = 15 AND class = '4C';" data-hint="Use WHERE no = 15 AND class = '4C'." data-keywords="WHERE,no,15,AND,class,'4C'">Find student #15 in 4C.</li>
+                            <li data-target-db="school_db" data-sql="-- List all students ordered by their last name alphabetically (A-Z)." data-answer="SELECT * FROM students ORDER BY last_name ASC;" data-hint="Use ORDER BY last_name ASC;" data-keywords="ORDER BY,last_name">List students by last name.</li>
+                            <li data-target-db="school_db" data-sql="-- Show all exam scores, from the highest to the lowest." data-answer="SELECT * FROM exams ORDER BY score DESC;" data-hint="Use ORDER BY score DESC;" data-keywords="ORDER BY,score,DESC">List scores from highest to lowest.</li>
+                            <li data-target-db="school_db" data-sql="-- List all students ordered by their date of birth (oldest first)." data-answer="SELECT * FROM students ORDER BY dob ASC;" data-hint="Use ORDER BY dob ASC;" data-keywords="ORDER BY,dob">Order students by birthday.</li>
                         </ol>
                     </details>
 
-                    <!-- Level 2 -->
+                    <!-- Level 2 (School DB) -->
                     <details id="level-2" class="challenge-level">
-                        <summary class="text-yellow-700 bg-yellow-100 hover:bg-yellow-200">Level 2: Intermediate</summary>
+                        <summary class="text-yellow-700 bg-yellow-100 hover:bg-yellow-200">Level 2: Intermediate (school_db)</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <li data-sql="-- JOIN students and exams to show names and scores." data-answer="SELECT s.first_name, s.last_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id;" data-hint="Join 'students' and 'exams' on student_id." data-keywords="JOIN,ON,student_id">Show student scores (Basic Join).</li>
-                            <li data-sql="-- JOIN exams and subjects to show Subject Name instead of Code." data-answer="SELECT sub.subject_name, e.score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="Join 'exams' and 'subjects' on subject_code." data-keywords="JOIN,ON,subject_code">Show scores with Subject Names.</li>
-                            <li data-sql="-- Triple Join: Student Name, Subject Name, and Score." data-answer="SELECT s.first_name, sub.subject_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="You need to join three tables: students, exams, and subjects." data-keywords="JOIN,students,exams,subjects">Full Report (Triple Join).</li>
-                            <li data-sql="-- Find all students in class '4C' who are female ('F')." data-answer="SELECT * FROM students WHERE class = '4C' AND gender = 'F';" data-hint="WHERE class = '4C' AND gender = 'F'." data-keywords="WHERE,class,AND,gender">Find female students in '4C'.</li>
-                            <li data-sql="-- List all exams for Subject Code 'MATH' OR 'PHY'." data-answer="SELECT * FROM exams WHERE subject_code = 'MATH' OR subject_code = 'PHY';" data-hint="WHERE subject_code = 'MATH' OR subject_code = 'PHY'." data-keywords="WHERE,OR,'MATH'">Find 'MATH' or 'PHY' exams.</li>
-                            <li data-sql="-- List exam scores between 80 and 85 (inclusive)." data-answer="SELECT * FROM exams WHERE score >= 80 AND score <= 85;" data-hint="WHERE score >= 80 AND score <= 85." data-keywords="WHERE,score,80,85">Find scores between 80 and 85.</li>
-                            <li data-sql="-- Find all male students in class '4A' OR '4C'." data-answer="SELECT * FROM students WHERE gender = 'M' AND (class = '4A' OR class = '4C');" data-hint="WHERE gender = 'M' AND (class = '4A' OR class = '4C')." data-keywords="WHERE,gender,AND,OR">Find male students in '4A' or '4C'.</li>
-                            <li data-sql="-- Count the number of students in each class." data-answer="SELECT class, COUNT(*) FROM students GROUP BY class;" data-hint="SELECT class, COUNT(*) FROM students GROUP BY class;" data-keywords="COUNT,GROUP BY,class">Count students in each class.</li>
-                            <li data-sql="-- Find the average score for each subject code." data-answer="SELECT subject_code, AVG(score) FROM exams GROUP BY subject_code;" data-hint="SELECT subject_code, AVG(score) FROM exams GROUP BY subject_code;" data-keywords="AVG,GROUP BY,subject_code">Find the avg score per subject code.</li>
-                            <li data-sql="-- Find the highest score achieved in each subject code." data-answer="SELECT subject_code, MAX(score) FROM exams GROUP BY subject_code;" data-hint="SELECT subject_code, MAX(score) FROM exams GROUP BY subject_code;" data-keywords="MAX,GROUP BY,subject_code">Find the max score per subject.</li>
+                            <li data-target-db="school_db" data-sql="-- JOIN students and exams to show names and scores." data-answer="SELECT s.first_name, s.last_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id;" data-hint="Join 'students' and 'exams' on student_id." data-keywords="JOIN,ON,student_id">Show student scores (Basic Join).</li>
+                            <li data-target-db="school_db" data-sql="-- JOIN exams and subjects to show Subject Name instead of Code." data-answer="SELECT sub.subject_name, e.score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="Join 'exams' and 'subjects' on subject_code." data-keywords="JOIN,ON,subject_code">Show scores with Subject Names.</li>
+                            <li data-target-db="school_db" data-sql="-- Triple Join: Student Name, Subject Name, and Score." data-answer="SELECT s.first_name, sub.subject_name, e.score FROM students s JOIN exams e ON s.student_id = e.student_id JOIN subjects sub ON e.subject_code = sub.subject_code;" data-hint="You need to join three tables: students, exams, and subjects." data-keywords="JOIN,students,exams,subjects">Full Report (Triple Join).</li>
+                            <li data-target-db="school_db" data-sql="-- Find all students in class '4C' who are female ('F')." data-answer="SELECT * FROM students WHERE class = '4C' AND gender = 'F';" data-hint="WHERE class = '4C' AND gender = 'F'." data-keywords="WHERE,class,AND,gender">Find female students in '4C'.</li>
+                            <li data-target-db="school_db" data-sql="-- List all exams for Subject Code 'MATH' OR 'PHY'." data-answer="SELECT * FROM exams WHERE subject_code = 'MATH' OR subject_code = 'PHY';" data-hint="WHERE subject_code = 'MATH' OR subject_code = 'PHY'." data-keywords="WHERE,OR,'MATH'">Find 'MATH' or 'PHY' exams.</li>
+                            <li data-target-db="school_db" data-sql="-- List exam scores between 80 and 85 (inclusive)." data-answer="SELECT * FROM exams WHERE score >= 80 AND score <= 85;" data-hint="WHERE score >= 80 AND score <= 85." data-keywords="WHERE,score,80,85">Find scores between 80 and 85.</li>
+                            <li data-target-db="school_db" data-sql="-- Find all male students in class '4A' OR '4C'." data-answer="SELECT * FROM students WHERE gender = 'M' AND (class = '4A' OR class = '4C');" data-hint="WHERE gender = 'M' AND (class = '4A' OR class = '4C')." data-keywords="WHERE,gender,AND,OR">Find male students in '4A' or '4C'.</li>
+                            <li data-target-db="school_db" data-sql="-- Count the number of students in each class." data-answer="SELECT class, COUNT(*) FROM students GROUP BY class;" data-hint="SELECT class, COUNT(*) FROM students GROUP BY class;" data-keywords="COUNT,GROUP BY,class">Count students in each class.</li>
+                            <li data-target-db="school_db" data-sql="-- Find the average score for each subject code." data-answer="SELECT subject_code, AVG(score) FROM exams GROUP BY subject_code;" data-hint="SELECT subject_code, AVG(score) FROM exams GROUP BY subject_code;" data-keywords="AVG,GROUP BY,subject_code">Find the avg score per subject code.</li>
+                            <li data-target-db="school_db" data-sql="-- Find the highest score achieved in each subject code." data-answer="SELECT subject_code, MAX(score) FROM exams GROUP BY subject_code;" data-hint="SELECT subject_code, MAX(score) FROM exams GROUP BY subject_code;" data-keywords="MAX,GROUP BY,subject_code">Find the max score per subject.</li>
                         </ol>
                     </details>
 
-                    <!-- Level 3 -->
+                    <!-- Level 3 (School DB) -->
                     <details id="level-3" class="challenge-level">
-                        <summary class="text-red-700 bg-red-100 hover:bg-red-200">Level 3: Advanced</summary>
+                        <summary class="text-red-700 bg-red-100 hover:bg-red-200">Level 3: Advanced (school_db)</summary>
                         <ol class="question-list list-decimal list-inside">
-                            <li data-sql="-- List the full name and date of birth for all students taking the 'ICT' exam (Subject Code 'ICT')." data-answer="SELECT s.first_name, s.last_name, s.dob FROM students s JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'ICT';" data-hint="Join students and exams, then WHERE subject_code = 'ICT'." data-keywords="JOIN,WHERE,'ICT'">Find 'ICT' students' details.</li>
-                            <li data-sql="-- Find male students from class '4A' born after June 1st, 2008." data-answer="SELECT * FROM students WHERE gender='M' AND class='4A' AND dob > '2008-06-01';" data-hint="WHERE gender='M' AND class='4A' AND dob > '2008-06-01'." data-keywords="WHERE,AND,dob">Find '4A' males born after 2008-06-01.</li>
-                            <li data-sql="-- Find exam scores in 'MATH' or 'ENG' that are below 50 OR above 95." data-answer="SELECT * FROM exams WHERE (subject_code='MATH' OR subject_code='ENG') AND (score < 50 OR score > 95);" data-hint="WHERE (subject_code='MATH' OR subject_code='ENG') AND (score < 50 OR score > 95)." data-keywords="WHERE,OR,AND,<,>">Find extreme 'MATH'/'ENG' scores.</li>
-                            <li data-sql="-- List students whose last name is 'Lee' or 'Chan' AND live in the 'Sha Tin' district." data-answer="SELECT * FROM students WHERE (last_name='Lee' OR last_name='Chan') AND district='Sha Tin';" data-hint="WHERE (last_name='Lee' OR last_name='Chan') AND district='Sha Tin'." data-keywords="WHERE,OR,AND,'Lee'"> 'Lee'/'Chan' students in 'Sha Tin'.</li>
-                            <li data-sql="-- Find students in class '4A', '4C', or '4D' using the IN operator." data-answer="SELECT * FROM students WHERE class IN ('4A', '4C', '4D');" data-hint="WHERE class IN ('4A', '4C', '4D')." data-keywords="WHERE,IN">Find students in 4A, 4C, or 4D.</li>
-                            <li data-sql="-- List all students who do not take the 'ECON' exam. (Hint: NOT IN)" data-answer="SELECT * FROM students WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'ECON');" data-hint="WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'ECON')." data-keywords="NOT IN,SELECT">Find students who don't take 'ECON'.</li>
-                            <li data-sql="-- Find the average exam score for each subject NAME (requires join). Order by average score descending." data-answer="SELECT sub.subject_name, AVG(e.score) as avg_score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code GROUP BY sub.subject_name ORDER BY avg_score DESC;" data-hint="Join exams and subjects, GROUP BY subject_name, and AVG(score)." data-keywords="JOIN,GROUP BY,AVG,ORDER BY">Avg score per Subject Name.</li>
-                            <li data-sql="-- List classes where the average 'MATH' score is above 72." data-answer="SELECT s.class, AVG(e.score) FROM students s JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'MATH' GROUP BY s.class HAVING AVG(e.score) > 72;" data-hint="Join tables, GROUP BY class, then use HAVING AVG(score) > 72." data-keywords="GROUP BY,HAVING,AVG">Classes with avg 'MATH' score > 72.</li>
-                            <li data-sql="-- List student IDs and their average scores, but only for students with an average score > 85." data-answer="SELECT student_id, AVG(score) FROM exams GROUP BY student_id HAVING AVG(score) > 85;" data-hint="GROUP BY student_id HAVING AVG(score) > 85." data-keywords="GROUP BY,HAVING,AVG">Students with avg score > 85.</li>
+                            <li data-target-db="school_db" data-sql="-- List the full name and date of birth for all students taking the 'ICT' exam (Subject Code 'ICT')." data-answer="SELECT s.first_name, s.last_name, s.dob FROM students s JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'ICT';" data-hint="Join students and exams, then WHERE subject_code = 'ICT'." data-keywords="JOIN,WHERE,'ICT'">Find 'ICT' students' details.</li>
+                            <li data-target-db="school_db" data-sql="-- Find male students from class '4A' born after June 1st, 2008." data-answer="SELECT * FROM students WHERE gender='M' AND class='4A' AND dob > '2008-06-01';" data-hint="WHERE gender='M' AND class='4A' AND dob > '2008-06-01'." data-keywords="WHERE,AND,dob">Find '4A' males born after 2008-06-01.</li>
+                            <li data-target-db="school_db" data-sql="-- Find exam scores in 'MATH' or 'ENG' that are below 50 OR above 95." data-answer="SELECT * FROM exams WHERE (subject_code='MATH' OR subject_code='ENG') AND (score < 50 OR score > 95);" data-hint="WHERE (subject_code='MATH' OR subject_code='ENG') AND (score < 50 OR score > 95)." data-keywords="WHERE,OR,AND,<,>">Find extreme 'MATH'/'ENG' scores.</li>
+                            <li data-target-db="school_db" data-sql="-- List students whose last name is 'Lee' or 'Chan' AND live in the 'Sha Tin' district." data-answer="SELECT * FROM students WHERE (last_name='Lee' OR last_name='Chan') AND district='Sha Tin';" data-hint="WHERE (last_name='Lee' OR last_name='Chan') AND district='Sha Tin'." data-keywords="WHERE,OR,AND,'Lee'"> 'Lee'/'Chan' students in 'Sha Tin'.</li>
+                            <li data-target-db="school_db" data-sql="-- Find students in class '4A', '4C', or '4D' using the IN operator." data-answer="SELECT * FROM students WHERE class IN ('4A', '4C', '4D');" data-hint="WHERE class IN ('4A', '4C', '4D')." data-keywords="WHERE,IN">Find students in 4A, 4C, or 4D.</li>
+                            <li data-target-db="school_db" data-sql="-- List all students who do not take the 'ECON' exam. (Hint: NOT IN)" data-answer="SELECT * FROM students WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'ECON');" data-hint="WHERE student_id NOT IN (SELECT student_id FROM exams WHERE subject_code = 'ECON')." data-keywords="NOT IN,SELECT">Find students who don't take 'ECON'.</li>
+                            <li data-target-db="school_db" data-sql="-- Find the average exam score for each subject NAME (requires join). Order by average score descending." data-answer="SELECT sub.subject_name, AVG(e.score) as avg_score FROM exams e JOIN subjects sub ON e.subject_code = sub.subject_code GROUP BY sub.subject_name ORDER BY avg_score DESC;" data-hint="Join exams and subjects, GROUP BY subject_name, and AVG(score)." data-keywords="JOIN,GROUP BY,AVG,ORDER BY">Avg score per Subject Name.</li>
+                            <li data-target-db="school_db" data-sql="-- List classes where the average 'MATH' score is above 72." data-answer="SELECT s.class, AVG(e.score) FROM students s JOIN exams e ON s.student_id = e.student_id WHERE e.subject_code = 'MATH' GROUP BY s.class HAVING AVG(e.score) > 72;" data-hint="Join tables, GROUP BY class, then use HAVING AVG(score) > 72." data-keywords="GROUP BY,HAVING,AVG">Classes with avg 'MATH' score > 72.</li>
+                            <li data-target-db="school_db" data-sql="-- List student IDs and their average scores, but only for students with an average score > 85." data-answer="SELECT student_id, AVG(score) FROM exams GROUP BY student_id HAVING AVG(score) > 85;" data-hint="GROUP BY student_id HAVING AVG(score) > 85." data-keywords="GROUP BY,HAVING,AVG">Students with avg score > 85.</li>
+                        </ol>
+                    </details>
+
+                    <!-- Chinook Practice Challenges -->
+                    <details id="level-chinook" class="challenge-level">
+                        <summary class="text-indigo-700 bg-indigo-100 hover:bg-indigo-200">Chinook Media Challenges</summary>
+                        <ol class="question-list list-decimal list-inside">
+                            <li data-target-db="chinook_db" data-sql="-- List all artists and their names." data-answer="SELECT * FROM Artist ORDER BY Name ASC;" data-hint="SELECT * FROM Artist ORDER BY Name;" data-keywords="SELECT,FROM,Artist">List all Artists.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Show Track names and their Album titles using an INNER JOIN." data-answer="SELECT t.Name AS TrackName, al.Title AS AlbumTitle FROM Track t JOIN Album al ON t.AlbumId = al.AlbumId;" data-hint="Join Track and Album on AlbumId." data-keywords="JOIN,Album,AlbumId">Tracks with Album Titles (Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Triple Join: Show Track name, Album title, and Artist name." data-answer="SELECT t.Name AS Track, al.Title AS Album, ar.Name AS Artist FROM Track t JOIN Album al ON t.AlbumId = al.AlbumId JOIN Artist ar ON al.ArtistId = ar.ArtistId;" data-hint="Join Track -> Album -> Artist." data-keywords="JOIN,Album,Artist">Track, Album & Artist (Triple Join).</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find all customers from 'USA' or 'Canada'." data-answer="SELECT CustomerId, FirstName, LastName, Country FROM Customer WHERE Country IN ('USA', 'Canada');" data-hint="WHERE Country IN ('USA', 'Canada');" data-keywords="WHERE,Country">Customers in USA or Canada.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Find total invoice spending per customer, ordered from highest to lowest." data-answer="SELECT c.CustomerId, c.FirstName, c.LastName, SUM(i.Total) AS TotalSpent FROM Customer c JOIN Invoice i ON c.CustomerId = i.CustomerId GROUP BY c.CustomerId ORDER BY TotalSpent DESC;" data-hint="GROUP BY CustomerId and SUM(Total)." data-keywords="SUM,GROUP BY,ORDER BY">Top Spending Customers.</li>
+                            <li data-target-db="chinook_db" data-sql="-- Self Join: List each employee and their direct manager's name." data-answer="SELECT e.FirstName || ' ' || e.LastName AS Employee, m.FirstName || ' ' || m.LastName AS Manager FROM Employee e LEFT JOIN Employee m ON e.ReportsTo = m.EmployeeId;" data-hint="Join Employee with itself using ReportsTo = EmployeeId." data-keywords="JOIN,ReportsTo,EmployeeId">Employee Manager Hierarchy (Self-Join).</li>
                         </ol>
                     </details>
                 </div>
@@ -253,7 +266,7 @@
         let dbRegistry = {}; // Map of { [dbName]: SQL.Database }
         let currentDbName = 'school_db';
         let db; // Points to dbRegistry[currentDbName]
-        const sessionStorageKey = 'sql_sandbox_session_databases_v3';
+        const sessionStorageKey = 'sql_sandbox_session_databases_v4';
 
         let currentHint = "";
         let currentAnswer = "";
@@ -341,7 +354,6 @@
                         currentDbName = parsed.activeDb && dbRegistry[parsed.activeDb] ? parsed.activeDb : dbNames[0];
                         db = dbRegistry[currentDbName];
                         loaded = true;
-                        displayMessage("success", "Restored your active databases and tables from this browser session.");
                     }
                 } catch (e) {
                     console.error("Failed to restore session database:", e);
@@ -349,18 +361,30 @@
                 }
             }
 
-            if (!loaded) {
-                dbRegistry = {};
+            // Ensure built-in databases always exist
+            if (!dbRegistry['school_db']) {
                 const defaultDb = new SQL.Database();
                 registerCustomFunctions(defaultDb);
-                createSampleTables(defaultDb);
+                createSchoolTables(defaultDb);
                 dbRegistry['school_db'] = defaultDb;
-                currentDbName = 'school_db';
-                db = defaultDb;
-                saveAllDatabasesToSession();
-                displayMessage("success", "A new database with normalized tables ('students', 'subjects', 'exams') has been created.");
             }
 
+            if (!dbRegistry['chinook_db']) {
+                const chinookDb = new SQL.Database();
+                registerCustomFunctions(chinookDb);
+                createChinookTables(chinookDb);
+                dbRegistry['chinook_db'] = chinookDb;
+            }
+
+            if (!loaded) {
+                currentDbName = 'school_db';
+                db = dbRegistry['school_db'];
+                displayMessage("success", "Loaded databases: 'school_db' and 'chinook_db'.");
+            } else {
+                displayMessage("success", "Restored your active databases and tables from this browser session.");
+            }
+
+            saveAllDatabasesToSession();
             updateDatabaseUI();
         }
 
@@ -447,8 +471,8 @@
 
                 li.appendChild(labelSpan);
 
-                // Add delete option for custom databases (keep school_db protected)
-                if (name !== 'school_db') {
+                // Add delete option only for custom databases (keep school_db and chinook_db protected)
+                if (name !== 'school_db' && name !== 'chinook_db') {
                     const delBtn = document.createElement('button');
                     delBtn.innerHTML = "&times;";
                     delBtn.title = `Delete ${name}`;
@@ -482,13 +506,13 @@
             });
         }
 
-        function createSampleTables(database) {
+        // --- Sample Database Creators ---
+        function createSchoolTables(database) {
             try {
-                database.run(`DROP TABLE IF EXISTS students;`);
                 database.run(`DROP TABLE IF EXISTS exams;`);
+                database.run(`DROP TABLE IF EXISTS students;`);
                 database.run(`DROP TABLE IF EXISTS subjects;`);
 
-                // Create students table
                 database.run(`
                     CREATE TABLE students (
                         student_id INTEGER PRIMARY KEY,
@@ -502,7 +526,6 @@
                     );
                 `);
 
-                // Create subjects table
                 database.run(`
                     CREATE TABLE subjects (
                         subject_code TEXT PRIMARY KEY,
@@ -510,7 +533,6 @@
                     );
                 `);
 
-                // Create exams table
                 database.run(`
                     CREATE TABLE exams (
                         student_id INTEGER,
@@ -521,7 +543,6 @@
                     );
                 `);
 
-                // Data Generation
                 const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Mak', 'Yip', 'Ng', 'Lam', 'Poon', 'Tang'];
                 const maleFirstNames = ['Ka-Chun', 'Lok-Hang', 'Chi-Kin', 'Siu-Ming', 'Wai-Ho', 'Tsz-Fung', 'Man-Hin', 'Pak-Hei', 'Chun-Kit', 'Yat-Long'];
                 const femaleFirstNames = ['Wing-Yan', 'Tsz-Ching', 'Hiu-Lam', 'Ka-Man', 'Pui-Sze', 'Lok-Yee', 'Sze-Wing', 'Ka-Po', 'Mei-Ling', 'Yee-Ting'];
@@ -565,7 +586,6 @@
                     'Biology': 'BIO',
                     'Economics': 'ECON'
                 };
-
                 const subjectInserts = Object.entries(subjectMap).map(([name, code]) => `('${code}', '${name}')`);
                 database.run(`INSERT INTO subjects (subject_code, subject_name) VALUES ${subjectInserts.join(', ')};`);
 
@@ -592,8 +612,255 @@
                 }
                 database.run(`INSERT INTO exams (student_id, subject_code, score) VALUES ${examInserts.join(', ')};`);
             } catch (err) {
-                console.error("Error creating sample tables:", err);
-                displayMessage("error", "Could not create the initial sample tables.");
+                console.error("Error creating school tables:", err);
+            }
+        }
+
+        // Chinook Sample Database Creator (11 Relational Tables)
+        function createChinookTables(database) {
+            try {
+                // Drop if exist
+                const tables = ['PlaylistTrack', 'Playlist', 'InvoiceLine', 'Invoice', 'Customer', 'Employee', 'Track', 'MediaType', 'Genre', 'Album', 'Artist'];
+                tables.forEach(t => database.run(`DROP TABLE IF EXISTS ${t};`));
+
+                // 1. Artist
+                database.run(`CREATE TABLE Artist (ArtistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
+
+                // 2. Album
+                database.run(`CREATE TABLE Album (AlbumId INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, ArtistId INTEGER, FOREIGN KEY (ArtistId) REFERENCES Artist(ArtistId));`);
+
+                // 3. Genre
+                database.run(`CREATE TABLE Genre (GenreId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
+
+                // 4. MediaType
+                database.run(`CREATE TABLE MediaType (MediaTypeId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
+
+                // 5. Track
+                database.run(`CREATE TABLE Track (
+                    TrackId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name TEXT,
+                    AlbumId INTEGER,
+                    MediaTypeId INTEGER,
+                    GenreId INTEGER,
+                    Composer TEXT,
+                    Milliseconds INTEGER,
+                    Bytes INTEGER,
+                    UnitPrice NUMERIC,
+                    FOREIGN KEY (AlbumId) REFERENCES Album(AlbumId),
+                    FOREIGN KEY (MediaTypeId) REFERENCES MediaType(MediaTypeId),
+                    FOREIGN KEY (GenreId) REFERENCES Genre(GenreId)
+                );`);
+
+                // 6. Employee (Self-referencing reportsTo)
+                database.run(`CREATE TABLE Employee (
+                    EmployeeId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    LastName TEXT,
+                    FirstName TEXT,
+                    Title TEXT,
+                    ReportsTo INTEGER,
+                    BirthDate DATE,
+                    HireDate DATE,
+                    Address TEXT,
+                    City TEXT,
+                    State TEXT,
+                    Country TEXT,
+                    PostalCode TEXT,
+                    Phone TEXT,
+                    Email TEXT,
+                    FOREIGN KEY (ReportsTo) REFERENCES Employee(EmployeeId)
+                );`);
+
+                // 7. Customer
+                database.run(`CREATE TABLE Customer (
+                    CustomerId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    FirstName TEXT,
+                    LastName TEXT,
+                    Company TEXT,
+                    Address TEXT,
+                    City TEXT,
+                    State TEXT,
+                    Country TEXT,
+                    PostalCode TEXT,
+                    Phone TEXT,
+                    Email TEXT,
+                    SupportRepId INTEGER,
+                    FOREIGN KEY (SupportRepId) REFERENCES Employee(EmployeeId)
+                );`);
+
+                // 8. Invoice
+                database.run(`CREATE TABLE Invoice (
+                    InvoiceId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CustomerId INTEGER,
+                    InvoiceDate DATE,
+                    BillingAddress TEXT,
+                    BillingCity TEXT,
+                    BillingState TEXT,
+                    BillingCountry TEXT,
+                    BillingPostalCode TEXT,
+                    Total NUMERIC,
+                    FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId)
+                );`);
+
+                // 9. InvoiceLine
+                database.run(`CREATE TABLE InvoiceLine (
+                    InvoiceLineId INTEGER PRIMARY KEY AUTOINCREMENT,
+                    InvoiceId INTEGER,
+                    TrackId INTEGER,
+                    UnitPrice NUMERIC,
+                    Quantity INTEGER,
+                    FOREIGN KEY (InvoiceId) REFERENCES Invoice(InvoiceId),
+                    FOREIGN KEY (TrackId) REFERENCES Track(TrackId)
+                );`);
+
+                // 10. Playlist
+                database.run(`CREATE TABLE Playlist (PlaylistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
+
+                // 11. PlaylistTrack
+                database.run(`CREATE TABLE PlaylistTrack (
+                    PlaylistId INTEGER,
+                    TrackId INTEGER,
+                    PRIMARY KEY (PlaylistId, TrackId),
+                    FOREIGN KEY (PlaylistId) REFERENCES Playlist(PlaylistId),
+                    FOREIGN KEY (TrackId) REFERENCES Track(TrackId)
+                );`);
+
+                // Insert Genres
+                database.run(`INSERT INTO Genre (GenreId, Name) VALUES 
+                    (1, 'Rock'), (2, 'Jazz'), (3, 'Metal'), (4, 'Alternative & Punk'),
+                    (5, 'Classical'), (6, 'Blues'), (7, 'Pop'), (8, 'R&B/Soul');`);
+
+                // Insert MediaTypes
+                database.run(`INSERT INTO MediaType (MediaTypeId, Name) VALUES 
+                    (1, 'MPEG audio file'), (2, 'Protected AAC audio file'), 
+                    (3, 'Protected MPEG-4 video file'), (4, 'Purchased AAC audio file');`);
+
+                // Insert Artists
+                database.run(`INSERT INTO Artist (ArtistId, Name) VALUES 
+                    (1, 'AC/DC'), (2, 'Accept'), (3, 'Aerosmith'), (4, 'Alanis Morissette'), 
+                    (5, 'Alice In Chains'), (6, 'Antônio Carlos Jobim'), (7, 'Audioslave'), 
+                    (8, 'Queen'), (9, 'Led Zeppelin'), (10, 'Miles Davis'), (11, 'Metallica'), 
+                    (12, 'U2'), (13, 'Deep Purple'), (14, 'Nirvana'), (15, 'Chopin');`);
+
+                // Insert Albums
+                database.run(`INSERT INTO Album (AlbumId, Title, ArtistId) VALUES 
+                    (1, 'For Those About To Rock We Salute You', 1),
+                    (2, 'Balls to the Wall', 2),
+                    (3, 'Restless and Wild', 2),
+                    (4, 'Let There Be Rock', 1),
+                    (5, 'Big Ones', 3),
+                    (6, 'Jagged Little Pill', 4),
+                    (7, 'Facelift', 5),
+                    (8, 'Warner 25 Anos', 6),
+                    (9, 'Audioslave', 7),
+                    (10, 'A Night At The Opera', 8),
+                    (11, 'Led Zeppelin I', 9),
+                    (12, 'Led Zeppelin II', 9),
+                    (13, 'Led Zeppelin IV', 9),
+                    (14, 'Kind of Blue', 10),
+                    (15, 'Master of Puppets', 11),
+                    (16, 'The Joshua Tree', 12),
+                    (17, 'Nevermind', 14),
+                    (18, 'Nocturnes', 15);`);
+
+                // Insert Tracks
+                database.run(`INSERT INTO Track (TrackId, Name, AlbumId, MediaTypeId, GenreId, Composer, Milliseconds, Bytes, UnitPrice) VALUES 
+                    (1, 'For Those About To Rock (We Salute You)', 1, 1, 1, 'Angus Young, Malcolm Young, Brian Johnson', 343719, 11170334, 0.99),
+                    (2, 'Balls to the Wall', 2, 2, 3, 'U. Dirkshneider, W. Hoffman, P. Baltes', 342562, 5510424, 0.99),
+                    (3, 'Fast As a Shark', 3, 2, 3, 'F. Baltes, S. Kaufman, U. Dirkscneider', 230619, 3990994, 0.99),
+                    (4, 'Restless and Wild', 3, 2, 3, 'F. Baltes, R.A. Smith-Diesel', 252051, 4331779, 0.99),
+                    (5, 'Walk On Water', 5, 1, 1, 'Steven Tyler, Joe Perry', 295680, 9719579, 0.99),
+                    (6, 'Love In An Elevator', 5, 1, 1, 'Steven Tyler, Joe Perry', 338181, 11053456, 0.99),
+                    (7, 'You Oughta Know', 6, 1, 4, 'Alanis Morissette & Glen Ballard', 249234, 8196916, 0.99),
+                    (8, 'Man In The Box', 7, 1, 1, 'Jerry Cantrell, Layne Staley', 286641, 9370272, 0.99),
+                    (9, 'Desafinado', 8, 1, 2, 'Antônio Carlos Jobim', 185338, 6084428, 0.99),
+                    (10, 'Garota De Ipanema', 8, 1, 2, 'Vinícius de Moraes', 211000, 6800000, 0.99),
+                    (11, 'Cochise', 9, 1, 1, 'Audioslave', 222380, 7291776, 0.99),
+                    (12, 'Show Me How to Live', 9, 1, 1, 'Audioslave', 277890, 9122345, 0.99),
+                    (13, 'Bohemian Rhapsody', 10, 1, 1, 'Freddie Mercury', 354320, 11500000, 0.99),
+                    (14, 'Love of My Life', 10, 1, 1, 'Freddie Mercury', 218000, 7100000, 0.99),
+                    (15, 'Good Times Bad Times', 11, 1, 1, 'Jimmy Page, John Paul Jones, John Bonham', 166060, 5450000, 0.99),
+                    (16, 'Whole Lotta Love', 12, 1, 1, 'Jimmy Page, Robert Plant', 333897, 10890000, 0.99),
+                    (17, 'Stairway to Heaven', 13, 1, 1, 'Jimmy Page, Robert Plant', 482830, 15760000, 0.99),
+                    (18, 'So What', 14, 1, 2, 'Miles Davis', 562000, 18340000, 0.99),
+                    (19, 'Freddie Freeloader', 14, 1, 2, 'Miles Davis', 589000, 19200000, 0.99),
+                    (20, 'Battery', 15, 1, 3, 'Hetfield, Ulrich', 312000, 10180000, 0.99),
+                    (21, 'Master of Puppets', 15, 1, 3, 'Hetfield, Ulrich, Burton, Hammett', 515000, 16800000, 0.99),
+                    (22, 'Where the Streets Have No Name', 16, 1, 1, 'U2', 337000, 11000000, 0.99),
+                    (23, 'With or Without You', 16, 1, 1, 'U2', 296000, 9680000, 0.99),
+                    (24, 'Smells Like Teen Spirit', 17, 1, 4, 'Kurt Cobain', 301000, 9840000, 0.99),
+                    (25, 'Come As You Are', 17, 1, 4, 'Kurt Cobain', 219000, 7150000, 0.99),
+                    (26, 'Nocturne in E-flat Major, Op. 9 No. 2', 18, 1, 5, 'Frédéric Chopin', 272000, 8900000, 0.99);`);
+
+                // Insert Employees (Hierarchy)
+                database.run(`INSERT INTO Employee (EmployeeId, LastName, FirstName, Title, ReportsTo, BirthDate, HireDate, Address, City, State, Country, PostalCode, Phone, Email) VALUES 
+                    (1, 'Adams', 'Andrew', 'General Manager', NULL, '1962-02-18', '2002-08-14', '11120 Jasper Ave NW', 'Edmonton', 'AB', 'Canada', 'T5K 2N1', '+1 (780) 428-9482', 'andrew@chinookcorp.com'),
+                    (2, 'Edwards', 'Nancy', 'Sales Manager', 1, '1958-12-08', '2002-05-01', '825 8 Ave SW', 'Calgary', 'AB', 'Canada', 'T2P 2T3', '+1 (403) 262-3443', 'nancy@chinookcorp.com'),
+                    (3, 'Peacock', 'Jane', 'Sales Support Agent', 2, '1973-08-29', '2002-04-01', '1111 6 Ave SW', 'Calgary', 'AB', 'Canada', 'T2P 5M5', '+1 (403) 262-3443', 'jane@chinookcorp.com'),
+                    (4, 'Park', 'Margaret', 'Sales Support Agent', 2, '1947-09-19', '2003-05-03', '683 10 Street SW', 'Calgary', 'AB', 'Canada', 'T2P 5G3', '+1 (403) 263-4423', 'margaret@chinookcorp.com'),
+                    (5, 'Johnson', 'Steve', 'Sales Support Agent', 2, '1965-03-03', '2003-10-17', '7727B 41 Ave', 'Calgary', 'AB', 'Canada', 'T3B 1Y7', '+1 (403) 246-9887', 'steve@chinookcorp.com'),
+                    (6, 'Mitchell', 'Michael', 'IT Manager', 1, '1973-07-01', '2003-10-17', '5827 Bowness Road NW', 'Calgary', 'AB', 'Canada', 'T3B 0C5', '+1 (403) 246-9887', 'michael@chinookcorp.com'),
+                    (7, 'King', 'Robert', 'IT Staff', 6, '1970-05-29', '2004-01-02', '590 Columbia Boulevard West', 'Lethbridge', 'AB', 'Canada', 'T1K 5N8', '+1 (403) 456-0086', 'robert@chinookcorp.com'),
+                    (8, 'Callahan', 'Laura', 'IT Staff', 6, '1968-01-09', '2004-03-04', '923 13 Ave SW', 'Calgary', 'AB', 'Canada', 'T2R 0T9', '+1 (403) 467-3351', 'laura@chinookcorp.com');`);
+
+                // Insert Customers
+                database.run(`INSERT INTO Customer (CustomerId, FirstName, LastName, Company, Address, City, State, Country, PostalCode, Phone, Email, SupportRepId) VALUES 
+                    (1, 'Luís', 'Gonçalves', 'Embraer - Empresa Brasileira de Aeronáutica S.A.', 'Av. Brigadeiro Faria Lima, 2170', 'São José dos Campos', 'SP', 'Brazil', '12227-000', '+55 (12) 3923-5555', 'luisg@embraer.com.br', 3),
+                    (2, 'Leonie', 'Köhler', NULL, 'Theodor-Heuss-Straße 34', 'Stuttgart', NULL, 'Germany', '70174', '+49 0711 2842222', 'leonekohler@surfeu.de', 5),
+                    (3, 'François', 'Tremblay', NULL, '1498 rue Bélanger', 'Montréal', 'QC', 'Canada', 'H2G 1A7', '+1 (514) 721-4711', 'ftremblay@gmail.com', 3),
+                    (4, 'Bjørn', 'Hansen', NULL, 'Ullevålsveien 14', 'Oslo', NULL, 'Norway', '0171', '+47 22 12 13 14', 'bjorn.hansen@yahoo.no', 4),
+                    (5, 'František', 'Wichterlová', 'České dráhy', 'Klanova 9/506', 'Prague', NULL, 'Czech Republic', '14700', '+420 2 4172 5555', 'frantisekw@seznam.cz', 4),
+                    (6, 'Helena', 'Holý', NULL, 'Rilská 3174/6', 'Prague', NULL, 'Czech Republic', '14300', '+420 2 4177 0449', 'hholy@gmail.com', 5),
+                    (7, 'Astrid', 'Gruber', NULL, 'Rotenturmstraße 4, 1010 Innere Stadt', 'Vienne', NULL, 'Austria', '1010', '+43 01 5134567', 'astrid.gruber@apple.at', 5),
+                    (8, 'Daan', 'Peeters', NULL, 'Grétrystraat 63', 'Brussels', NULL, 'Belgium', '1000', '+32 02 219 03 60', 'daan_peeters@apple.be', 4),
+                    (9, 'Kara', 'Nielsen', NULL, 'Sønder Boulevard 51', 'Copenhagen', NULL, 'Denmark', '1720', '+453 333 24 12', 'kara.nielsen@jubii.dk', 4),
+                    (10, 'Eduardo', 'Martins', 'Woodstock Discos', 'Rua Dr. Falcão Filho, 155', 'São Paulo', 'SP', 'Brazil', '01007-010', '+55 (11) 3033-5446', 'eduardo@woodstock.com.br', 4),
+                    (11, 'Alexandre', 'Rocha', 'Banco do Brasil S.A.', 'Av. Paulista, 2022', 'São Paulo', 'SP', 'Brazil', '01310-200', '+55 (11) 3055-3278', 'alero@uol.com.br', 5),
+                    (12, 'Roberto', 'Almeida', 'Riotur', 'Praça Pio X, 119', 'Rio de Janeiro', 'RJ', 'Brazil', '20040-020', '+55 (21) 2271-7000', 'roberto.almeida@riotur.gov.br', 3),
+                    (13, 'Fernanda', 'Ramos', NULL, 'QMS 6 Lote 52', 'Brasília', 'DF', 'Brazil', '71587-000', '+55 (61) 3363-5547', 'ferram@hotmail.com', 4),
+                    (14, 'Mark', 'Philips', 'Telus', '8210 111 ST NW', 'Edmonton', 'AB', 'Canada', 'T6G 2C7', '+1 (780) 434-4554', 'mphilips12@shaw.ca', 5),
+                    (15, 'Jennifer', 'Peterson', NULL, '700 W Pender Street', 'Vancouver', 'BC', 'Canada', 'V6C 1G8', '+1 (604) 688-2255', 'jenniferp@rogers.ca', 3),
+                    (16, 'Frank', 'Harris', 'Google Inc.', '1600 Amphitheatre Parkway', 'Mountain View', 'CA', 'USA', '94043-1351', '+1 (650) 253-0000', 'fharris@google.com', 3),
+                    (17, 'Jack', 'Smith', 'Microsoft Corporation', '1 Microsoft Way', 'Redmond', 'WA', 'USA', '98052-8300', '+1 (425) 882-8080', 'jacksmith@microsoft.com', 4),
+                    (18, 'Michelle', 'Brooks', NULL, '627 Broadway', 'New York', 'NY', 'USA', '10012-2612', '+1 (212) 221-3546', 'michelleb@aol.com', 3);`);
+
+                // Insert Invoices
+                database.run(`INSERT INTO Invoice (InvoiceId, CustomerId, InvoiceDate, BillingAddress, BillingCity, BillingState, BillingCountry, BillingPostalCode, Total) VALUES 
+                    (1, 2, '2023-01-01', 'Theodor-Heuss-Straße 34', 'Stuttgart', NULL, 'Germany', '70174', 3.96),
+                    (2, 4, '2023-01-02', 'Ullevålsveien 14', 'Oslo', NULL, 'Norway', '0171', 5.94),
+                    (3, 8, '2023-01-03', 'Grétrystraat 63', 'Brussels', NULL, 'Belgium', '1000', 8.91),
+                    (4, 14, '2023-01-06', '8210 111 ST NW', 'Edmonton', 'AB', 'Canada', 'T6G 2C7', 1.98),
+                    (5, 16, '2023-01-11', '1600 Amphitheatre Parkway', 'Mountain View', 'CA', 'USA', '94043-1351', 13.86),
+                    (6, 17, '2023-01-19', '1 Microsoft Way', 'Redmond', 'WA', 'USA', '98052-8300', 8.91),
+                    (7, 18, '2023-02-01', '627 Broadway', 'New York', 'NY', 'USA', '10012-2612', 1.98),
+                    (8, 1, '2023-02-01', 'Av. Brigadeiro Faria Lima, 2170', 'São José dos Campos', 'SP', 'Brazil', '12227-000', 3.96),
+                    (9, 3, '2023-02-02', '1498 rue Bélanger', 'Montréal', 'QC', 'Canada', 'H2G 1A7', 5.94),
+                    (10, 10, '2023-02-15', 'Rua Dr. Falcão Filho, 155', 'São Paulo', 'SP', 'Brazil', '01007-010', 9.90);`);
+
+                // Insert InvoiceLines
+                database.run(`INSERT INTO InvoiceLine (InvoiceLineId, InvoiceId, TrackId, UnitPrice, Quantity) VALUES 
+                    (1, 1, 1, 0.99, 1), (2, 1, 2, 0.99, 1), (3, 1, 3, 0.99, 1), (4, 1, 4, 0.99, 1),
+                    (5, 2, 5, 0.99, 1), (6, 2, 6, 0.99, 1), (7, 2, 7, 0.99, 1), (8, 2, 8, 0.99, 1), (9, 2, 9, 0.99, 1), (10, 2, 10, 0.99, 1),
+                    (11, 3, 11, 0.99, 1), (12, 3, 12, 0.99, 1), (13, 3, 13, 0.99, 1), (14, 3, 14, 0.99, 1), (15, 3, 15, 0.99, 1),
+                    (16, 4, 16, 0.99, 1), (17, 4, 17, 0.99, 1),
+                    (18, 5, 18, 0.99, 1), (19, 5, 19, 0.99, 1), (20, 5, 20, 0.99, 1), (21, 5, 21, 0.99, 1), (22, 5, 22, 0.99, 1),
+                    (23, 6, 23, 0.99, 1), (24, 6, 24, 0.99, 1), (25, 6, 25, 0.99, 1), (26, 6, 26, 0.99, 1),
+                    (27, 7, 1, 0.99, 1), (28, 7, 13, 0.99, 1),
+                    (29, 8, 9, 0.99, 1), (30, 8, 10, 0.99, 1), (31, 8, 14, 0.99, 1), (32, 8, 17, 0.99, 1);`);
+
+                // Insert Playlists
+                database.run(`INSERT INTO Playlist (PlaylistId, Name) VALUES 
+                    (1, 'Music'), (2, '90s Music'), (3, 'Rock Classics'), (4, 'Jazz & Bossa'), (5, 'Heavy Metal');`);
+
+                // Insert PlaylistTrack
+                database.run(`INSERT INTO PlaylistTrack (PlaylistId, TrackId) VALUES 
+                    (1, 1), (1, 5), (1, 13), (1, 17), (1, 24),
+                    (2, 7), (2, 8), (2, 24), (2, 25),
+                    (3, 1), (3, 5), (3, 6), (3, 13), (3, 15), (3, 16), (3, 17),
+                    (4, 9), (4, 10), (4, 18), (4, 19),
+                    (5, 2), (5, 3), (5, 4), (5, 20), (5, 21);`);
+
+            } catch (err) {
+                console.error("Error creating Chinook tables:", err);
             }
         }
 
@@ -601,9 +868,15 @@
             if (currentDbName === 'school_db') {
                 const defaultDb = new SQL.Database();
                 registerCustomFunctions(defaultDb);
-                createSampleTables(defaultDb);
+                createSchoolTables(defaultDb);
                 dbRegistry['school_db'] = defaultDb;
                 db = defaultDb;
+            } else if (currentDbName === 'chinook_db') {
+                const chinookDb = new SQL.Database();
+                registerCustomFunctions(chinookDb);
+                createChinookTables(chinookDb);
+                dbRegistry['chinook_db'] = chinookDb;
+                db = chinookDb;
             } else {
                 const blankDb = new SQL.Database();
                 registerCustomFunctions(blankDb);
@@ -612,7 +885,7 @@
             }
             saveAllDatabasesToSession();
             updateDatabaseUI();
-            displayMessage("success", `Database '${currentDbName}' has been reset.`);
+            displayMessage("success", `Database '${currentDbName}' has been reset to its default state.`);
         }
 
         // --- Export / Import Capabilities (.db, .sqlite, .sqlite3) ---
@@ -624,7 +897,6 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                // Standard .db extension directly compatible with DB Browser for SQLite and classroom exercises
                 a.download = `${currentDbName}.db`;
                 document.body.appendChild(a);
                 a.click();
@@ -648,7 +920,6 @@
                     const importedDb = new SQL.Database(u8);
                     registerCustomFunctions(importedDb);
 
-                    // Deduce database name from file name (strip .db, .sqlite, etc.)
                     const rawName = file.name.replace(/\.[^/.]+$/, "");
                     const cleanName = rawName.replace(/[^a-zA-Z0-9_]/g, '_') || 'imported_db';
 
@@ -662,7 +933,7 @@
                 }
             };
             reader.readAsArrayBuffer(file);
-            event.target.value = ''; // reset so same file can be re-uploaded if needed
+            event.target.value = '';
         }
 
         // --- SQL Execution & Display ---
@@ -957,6 +1228,12 @@
                 item.addEventListener('click', event => {
                     document.querySelectorAll('.question-list li').forEach(li => li.classList.remove('active-question'));
                     event.currentTarget.classList.add('active-question');
+
+                    // If question requires a specific database, auto-switch to it
+                    const targetDb = event.currentTarget.getAttribute('data-target-db');
+                    if (targetDb && targetDb !== currentDbName && dbRegistry[targetDb]) {
+                        switchDatabase(targetDb);
+                    }
 
                     const sql = event.currentTarget.getAttribute('data-sql');
                     const hint = event.currentTarget.getAttribute('data-hint');
