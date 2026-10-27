@@ -193,21 +193,21 @@
                             <button id="hint-btn" class="bg-amber-400 text-white font-semibold py-2 px-4 rounded-lg hover:bg-amber-500 shadow-sm text-sm hidden">💡 Hint</button>
                             <button id="answer-btn" class="bg-purple-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-600 shadow-sm text-sm hidden">🔑 Answer</button>
 
-                            <!-- Hidden file input for importing database files -->
-                            <input type="file" id="import-db-input" accept=".sqlite,.db" class="hidden">
-                            <button id="import-db-btn" title="Open an existing SQLite .db file" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold py-2 px-3 rounded-lg text-sm transition shadow-sm flex items-center gap-1.5">
+                            <!-- Hidden file input for importing database files (.db, .sqlite, .sqlite3) -->
+                            <input type="file" id="import-db-input" accept=".db,.sqlite,.sqlite3" class="hidden">
+                            <button id="import-db-btn" title="Open an existing SQLite .db or .sqlite file" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-semibold py-2 px-3 rounded-lg text-sm transition shadow-sm flex items-center gap-1.5">
                                 <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                                 </svg>
-                                Import
+                                Import (.db)
                             </button>
 
                             <!-- Export database button -->
-                            <button id="export-db-btn" title="Download the active database as a .sqlite file" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-3.5 rounded-lg text-sm shadow-sm transition flex items-center gap-1.5">
+                            <button id="export-db-btn" title="Download the active database as a standard .db file" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-3.5 rounded-lg text-sm shadow-sm transition flex items-center gap-1.5">
                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                 </svg>
-                                Export DB (.sqlite)
+                                Export DB (.db)
                             </button>
 
                             <button id="run-sql-btn" class="bg-sky-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-sky-600 shadow-sm text-sm">Run SQL</button>
@@ -377,7 +377,7 @@
                 }
 
                 sessionStorage.setItem(sessionStorageKey, JSON.stringify(payload));
-                
+
                 // Flash the auto-save indicator
                 if (saveStatusIndicator) {
                     saveStatusIndicator.classList.add('bg-emerald-100');
@@ -615,7 +615,7 @@
             displayMessage("success", `Database '${currentDbName}' has been reset.`);
         }
 
-        // --- Export / Import Capabilities ---
+        // --- Export / Import Capabilities (.db, .sqlite, .sqlite3) ---
         function exportActiveDatabase() {
             if (!db) { displayMessage("error", "Database not loaded."); return; }
             try {
@@ -624,12 +624,13 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `${currentDbName}.sqlite`;
+                // Standard .db extension directly compatible with DB Browser for SQLite and classroom exercises
+                a.download = `${currentDbName}.db`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-                displayMessage("success", `Downloaded database file '${currentDbName}.sqlite'.`);
+                displayMessage("success", `Downloaded database file '${currentDbName}.db'.`);
             } catch (err) {
                 console.error("Export error:", err);
                 displayMessage("error", "Failed to export database file.");
@@ -647,17 +648,17 @@
                     const importedDb = new SQL.Database(u8);
                     registerCustomFunctions(importedDb);
 
-                    // Deduce database name from file name
+                    // Deduce database name from file name (strip .db, .sqlite, etc.)
                     const rawName = file.name.replace(/\.[^/.]+$/, "");
                     const cleanName = rawName.replace(/[^a-zA-Z0-9_]/g, '_') || 'imported_db';
 
                     dbRegistry[cleanName] = importedDb;
                     switchDatabase(cleanName);
                     saveAllDatabasesToSession();
-                    displayMessage("success", `Imported database '${cleanName}' with all its tables.`);
+                    displayMessage("success", `Imported database '${cleanName}' from '${file.name}' successfully!`);
                 } catch (err) {
-                    console.error("Error loading SQLite file:", err);
-                    displayMessage("error", "Could not import database. Please ensure it is a valid SQLite file.");
+                    console.error("Error loading database file:", err);
+                    displayMessage("error", "Could not import database. Please ensure it is a valid SQLite (.db / .sqlite) file.");
                 }
             };
             reader.readAsArrayBuffer(file);
