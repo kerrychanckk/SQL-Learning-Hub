@@ -152,6 +152,7 @@
                         </h2>
                         <span id="score-summary" class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">0 Solved</span>
                     </div>
+
                     <div class="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-blue-800 mb-2">
                         Click a challenge to load the exam requirement. Write and execute your query to test your answer!
                     </div>
@@ -871,25 +872,36 @@
                     sessionStorage.removeItem(sessionStorageKey);
                 }
             }
+
             if (!dbRegistry['school_db']) {
                 const defaultDb = new SQL.Database();
                 registerCustomFunctions(defaultDb);
                 createSchoolTables(defaultDb);
                 dbRegistry['school_db'] = defaultDb;
             }
+
             if (!dbRegistry['chinook_db']) {
                 const chinookDb = new SQL.Database();
                 registerCustomFunctions(chinookDb);
                 createChinookTables(chinookDb);
                 dbRegistry['chinook_db'] = chinookDb;
             }
+
+            if (!dbRegistry['w3schools']) {
+                const w3schoolsDb = new SQL.Database();
+                registerCustomFunctions(w3schoolsDb);
+                createW3SchoolsTables(w3schoolsDb);
+                dbRegistry['w3schools'] = w3schoolsDb;
+            }
+
             if (!loaded) {
                 currentDbName = 'school_db';
                 db = dbRegistry['school_db'];
-                displayMessage("success", "Loaded HKDSE databases: 'school_db' and 'chinook_db'.");
+                displayMessage("success", "Loaded databases: 'school_db', 'chinook_db', and 'w3schools'.");
             } else {
                 displayMessage("success", "Restored active databases and tables from session.");
             }
+
             saveAllDatabasesToSession();
             updateDatabaseUI();
         }
@@ -1008,7 +1020,8 @@
                     <span class="truncate">${name}</span>
                 `;
                 li.appendChild(labelSpan);
-                if (name !== 'school_db' && name !== 'chinook_db') {
+
+                if (name !== 'school_db' && name !== 'chinook_db' && name !== 'w3schools') {
                     const delBtn = document.createElement('button');
                     delBtn.innerHTML = "&times;";
                     delBtn.title = `Delete ${name}`;
@@ -1027,6 +1040,7 @@
                     };
                     li.appendChild(delBtn);
                 }
+
                 li.onclick = () => {
                     if (currentDbName !== name) switchDatabase(name);
                 };
@@ -1060,14 +1074,17 @@
                     FOREIGN KEY(student_id) REFERENCES students(student_id),
                     FOREIGN KEY(subject_code) REFERENCES subjects(subject_code)
                 );`);
+
                 const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Ng', 'Lam'];
                 const maleFirstNames = ['Ka Chun', 'Lok Hang', 'Chi Kin', 'Wai Ho', 'Pak Hei'];
                 const femaleFirstNames = ['Wing Yan', 'Tsz Ching', 'Ka Man', 'Pui Sze', 'Mei Ling'];
                 const districts = ['Wan Chai', 'Eastern', 'Kowloon City', 'Sha Tin', 'Central & Western'];
                 const classes = ['4A', '4C', '4D'];
+
                 let studentInserts = [];
                 const studentIds = [];
                 let sIdCounter = 1001;
+
                 for (const className of classes) {
                     for (let i = 1; i <= 20; i++) {
                         const studentId = sIdCounter++;
@@ -1081,6 +1098,7 @@
                     }
                 }
                 database.run(`INSERT INTO students VALUES ${studentInserts.join(', ')};`);
+
                 const subjectMap = {
                     'CHI': 'Chinese', 'ENG': 'English', 'MATH': 'Mathematics',
                     'ICT': 'Information and Communication Technology',
@@ -1088,6 +1106,7 @@
                 };
                 const subSql = Object.entries(subjectMap).map(([c, n]) => `('${c}', '${n}')`).join(', ');
                 database.run(`INSERT INTO subjects VALUES ${subSql};`);
+
                 let examInserts = [];
                 for (const sId of studentIds) {
                     ['CHI', 'ENG', 'MATH'].forEach((code, idx) => {
@@ -1109,6 +1128,7 @@
             try {
                 const tables = ['InvoiceLine', 'Invoice', 'Customer', 'Employee', 'Track', 'MediaType', 'Genre', 'Album', 'Artist'];
                 tables.forEach(t => database.run(`DROP TABLE IF EXISTS ${t};`));
+
                 database.run(`CREATE TABLE Artist (ArtistId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
                 database.run(`CREATE TABLE Album (AlbumId INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, ArtistId INTEGER, FOREIGN KEY (ArtistId) REFERENCES Artist(ArtistId));`);
                 database.run(`CREATE TABLE Genre (GenreId INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);`);
@@ -1172,6 +1192,7 @@
                     UnitPrice NUMERIC,
                     Quantity INTEGER
                 );`);
+
                 database.run(`INSERT INTO Genre VALUES (1, 'Rock'), (2, 'Jazz'), (3, 'Metal'), (4, 'Alternative'), (5, 'Classical');`);
                 database.run(`INSERT INTO MediaType VALUES (1, 'MPEG audio file'), (2, 'Protected AAC');`);
                 database.run(`INSERT INTO Artist VALUES (1, 'AC/DC'), (2, 'Queen'), (3, 'Led Zeppelin'), (4, 'Miles Davis'), (5, 'Beyond'), (6, 'Chopin');`);
@@ -1211,6 +1232,170 @@
             }
         }
 
+        function createW3SchoolsTables(database) {
+            try {
+                const tables = ['OrderDetails', 'Orders', 'Products', 'Categories', 'Employees', 'Shippers', 'Suppliers', 'Customers'];
+                tables.forEach(t => database.run(`DROP TABLE IF EXISTS ${t};`));
+
+                database.run(`CREATE TABLE Categories (
+                    CategoryID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CategoryName TEXT,
+                    Description TEXT
+                );`);
+
+                database.run(`CREATE TABLE Customers (
+                    CustomerID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CustomerName TEXT,
+                    ContactName TEXT,
+                    Address TEXT,
+                    City TEXT,
+                    PostalCode TEXT,
+                    Country TEXT
+                );`);
+
+                database.run(`CREATE TABLE Employees (
+                    EmployeeID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    LastName TEXT,
+                    FirstName TEXT,
+                    BirthDate DATE,
+                    Photo TEXT,
+                    Notes TEXT
+                );`);
+
+                database.run(`CREATE TABLE Shippers (
+                    ShipperID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    ShipperName TEXT,
+                    Phone TEXT
+                );`);
+
+                database.run(`CREATE TABLE Suppliers (
+                    SupplierID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    SupplierName TEXT,
+                    ContactName TEXT,
+                    Address TEXT,
+                    City TEXT,
+                    PostalCode TEXT,
+                    Country TEXT,
+                    Phone TEXT
+                );`);
+
+                database.run(`CREATE TABLE Products (
+                    ProductID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    ProductName TEXT,
+                    SupplierID INTEGER,
+                    CategoryID INTEGER,
+                    Unit TEXT,
+                    Price NUMERIC,
+                    FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID),
+                    FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+                );`);
+
+                database.run(`CREATE TABLE Orders (
+                    OrderID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    CustomerID INTEGER,
+                    EmployeeID INTEGER,
+                    OrderDate DATE,
+                    ShipperID INTEGER,
+                    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+                    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+                    FOREIGN KEY (ShipperID) REFERENCES Shippers(ShipperID)
+                );`);
+
+                database.run(`CREATE TABLE OrderDetails (
+                    OrderDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    OrderID INTEGER,
+                    ProductID INTEGER,
+                    Quantity INTEGER,
+                    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+                    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+                );`);
+
+                // Insert Categories
+                database.run(`INSERT INTO Categories (CategoryID, CategoryName, Description) VALUES
+                    (1, 'Beverages', 'Soft drinks, coffees, teas, beers, and ales'),
+                    (2, 'Condiments', 'Sweet and savory sauces, relishes, spreads, and seasonings'),
+                    (3, 'Confections', 'Desserts, candies, and sweet breads'),
+                    (4, 'Dairy Products', 'Cheeses'),
+                    (5, 'Grains/Cereals', 'Breads, crackers, pasta, and cereal'),
+                    (6, 'Meat/Poultry', 'Prepared meats'),
+                    (7, 'Produce', 'Dried fruit and bean curd'),
+                    (8, 'Seafood', 'Seaweed and fish');`);
+
+                // Insert Customers
+                database.run(`INSERT INTO Customers (CustomerID, CustomerName, ContactName, Address, City, PostalCode, Country) VALUES
+                    (1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany'),
+                    (2, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico'),
+                    (3, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico'),
+                    (4, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK'),
+                    (5, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden'),
+                    (6, 'Blauer See Delikatessen', 'Hanna Moos', 'Forsterstr. 57', 'Mannheim', '68306', 'Germany'),
+                    (7, 'Blondel père et fils', 'Frédérique Citeaux', '24, place Kléber', 'Strasbourg', '67000', 'France'),
+                    (8, 'Bólido Comidas preparadas', 'Martín Sommer', 'C/ Araquil, 67', 'Madrid', '28023', 'Spain'),
+                    (9, 'Bon app''', 'Laurence Lebihan', '12, rue des Bouchers', 'Marseille', '13008', 'France'),
+                    (10, 'Bottom-Dollar Marketse', 'Elizabeth Lincoln', '23 Tsawassen Blvd.', 'Tsawassen', 'T2F 8M4', 'Canada');`);
+
+                // Insert Employees
+                database.run(`INSERT INTO Employees (EmployeeID, LastName, FirstName, BirthDate, Photo, Notes) VALUES
+                    (1, 'Davolio', 'Nancy', '1968-12-08', 'EmpID1.pic', 'Education includes a BA in psychology from Colorado State University.'),
+                    (2, 'Fuller', 'Andrew', '1952-02-19', 'EmpID2.pic', 'Andrew received his Ph.D. in international marketing from the University of Dallas.'),
+                    (3, 'Leverling', 'Janet', '1963-08-30', 'EmpID3.pic', 'Janet has a BS degree in chemistry from Boston College.'),
+                    (4, 'Peacock', 'Margaret', '1958-09-19', 'EmpID4.pic', 'Margaret holds a BA in English literature from Concordia College.'),
+                    (5, 'Buchanan', 'Steven', '1955-03-04', 'EmpID5.pic', 'Steven graduated from St. Andrews University, Scotland, with a BSC degree.');`);
+
+                // Insert Shippers
+                database.run(`INSERT INTO Shippers (ShipperID, ShipperName, Phone) VALUES
+                    (1, 'Speedy Express', '(503) 555-9831'),
+                    (2, 'United Package', '(503) 555-3199'),
+                    (3, 'Federal Shipping', '(503) 555-9931');`);
+
+                // Insert Suppliers
+                database.run(`INSERT INTO Suppliers (SupplierID, SupplierName, ContactName, Address, City, PostalCode, Country, Phone) VALUES
+                    (1, 'Exotic Liquid', 'Charlotte Cooper', '49 Gilbert St.', 'London', 'EC1 4SD', 'UK', '(171) 555-2222'),
+                    (2, 'New Orleans Cajun Delights', 'Shelley Burke', 'P.O. Box 78934', 'New Orleans', '70117', 'USA', '(100) 555-4822'),
+                    (3, 'Grandma Kelly''s Homestead', 'Regina Murphy', '707 Oxford Rd.', 'Ann Arbor', '48104', 'USA', '(313) 555-5735'),
+                    (4, 'Tokyo Traders', 'Yoshi Nagase', '9-8 Sekimai Musashino-shi', 'Tokyo', '100', 'Japan', '(03) 3555-5011'),
+                    (5, 'Cooperativa de Quesos ''Las Cabras''', 'Antonio del Valle Saavedra', 'Calle del Rosal 4', 'Oviedo', '33007', 'Spain', '(98) 598 76 54');`);
+
+                // Insert Products
+                database.run(`INSERT INTO Products (ProductID, ProductName, SupplierID, CategoryID, Unit, Price) VALUES
+                    (1, 'Chais', 1, 1, '10 boxes x 20 bags', 18.00),
+                    (2, 'Chang', 1, 1, '24 - 12 oz bottles', 19.00),
+                    (3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles', 10.00),
+                    (4, 'Chef Anton''s Cajun Seasoning', 2, 2, '48 - 6 oz jars', 22.00),
+                    (5, 'Chef Anton''s Gumbo Mix', 2, 2, '36 boxes', 21.35),
+                    (6, 'Grandma''s Boysenberry Spread', 3, 2, '12 - 8 oz jars', 25.00),
+                    (7, 'Uncle Bob''s Organic Dried Pears', 3, 7, '12 - 1 lb pkgs.', 30.00),
+                    (8, 'Northwoods Cranberry Sauce', 3, 2, '12 - 12 oz jars', 40.00),
+                    (9, 'Mishi Kobe Niku', 4, 6, '18 - 500 g pkgs.', 97.00),
+                    (10, 'Ikura', 4, 8, '12 - 200 ml jars', 31.00);`);
+
+                // Insert Orders
+                database.run(`INSERT INTO Orders (OrderID, CustomerID, EmployeeID, OrderDate, ShipperID) VALUES
+                    (10248, 9, 5, '1996-07-04', 3),
+                    (10249, 2, 6, '1996-07-05', 1),
+                    (10250, 4, 4, '1996-07-08', 2),
+                    (10251, 6, 3, '1996-07-08', 1),
+                    (10252, 7, 4, '1996-07-09', 2),
+                    (10253, 3, 3, '1996-07-10', 2),
+                    (10254, 5, 5, '1996-07-11', 2);`);
+
+                // Insert OrderDetails
+                database.run(`INSERT INTO OrderDetails (OrderDetailID, OrderID, ProductID, Quantity) VALUES
+                    (1, 10248, 1, 12),
+                    (2, 10248, 2, 10),
+                    (3, 10248, 3, 5),
+                    (4, 10249, 4, 40),
+                    (5, 10250, 5, 35),
+                    (6, 10250, 6, 15),
+                    (7, 10251, 7, 6),
+                    (8, 10251, 8, 15),
+                    (9, 10252, 9, 40),
+                    (10, 10253, 10, 20);`);
+            } catch (err) {
+                console.error("Error creating W3Schools tables:", err);
+            }
+        }
+
         function resetDatabase() {
             if (currentDbName === 'school_db') {
                 const defaultDb = new SQL.Database();
@@ -1224,6 +1409,12 @@
                 createChinookTables(chinookDb);
                 dbRegistry['chinook_db'] = chinookDb;
                 db = chinookDb;
+            } else if (currentDbName === 'w3schools') {
+                const w3schoolsDb = new SQL.Database();
+                registerCustomFunctions(w3schoolsDb);
+                createW3SchoolsTables(w3schoolsDb);
+                dbRegistry['w3schools'] = w3schoolsDb;
+                db = w3schoolsDb;
             } else {
                 const blankDb = new SQL.Database();
                 registerCustomFunctions(blankDb);
@@ -1281,9 +1472,11 @@
             if (!userResult || !expectedResult) return false;
             if (userResult.columns.length !== expectedResult.columns.length) return false;
             if (userResult.values.length !== expectedResult.values.length) return false;
+
             const userJson = JSON.stringify(userResult.values);
             const expJson = JSON.stringify(expectedResult.values);
             if (userJson === expJson) return true;
+
             const userSorted = JSON.stringify([...userResult.values].map(r => JSON.stringify(r)).sort());
             const expSorted = JSON.stringify([...expectedResult.values].map(r => JSON.stringify(r)).sort());
             return userSorted === expSorted;
@@ -1293,6 +1486,7 @@
             if (!db) { displayMessage("error", "Database not loaded."); return; }
             const sqlCode = sqlEditor.value.trim();
             if (!sqlCode) { displayMessage("warning", "Please type an SQL query to execute."); return; }
+
             const activeQid = currentActiveQuestionLi ? currentActiveQuestionLi.getAttribute('data-qid') : null;
 
             // Handle CREATE DATABASE sandbox simulation
@@ -1319,9 +1513,11 @@
 
             clearResults();
             let isModifying = false;
+
             try {
                 const statements = sqlCode.split(';').filter(s => s.trim() !== '');
                 let lastResult = null;
+
                 statements.forEach(statement => {
                     const trimmed = statement.trim();
                     const upper = trimmed.toUpperCase();
@@ -1329,6 +1525,7 @@
                         upper.startsWith("DELETE") || upper.startsWith("DROP") || upper.startsWith("ALTER")) {
                         isModifying = true;
                     }
+
                     const results = db.exec(trimmed);
                     if (results.length === 0) {
                         if (isModifying) {
@@ -1372,6 +1569,7 @@
                         console.error(ansErr);
                     }
                 }
+
             } catch (err) {
                 if (activeQid) setQuestionStatus(activeQid, 'wrong');
                 displayMessage("error", `Error: ${err.message}. Please fix your SQL syntax.`);
@@ -1438,6 +1636,7 @@
                     const tableDiv = document.createElement('div');
                     tableDiv.className = 'border-b border-slate-200 pb-1.5 last:border-b-0';
                     tableDiv.innerHTML = `<p class="font-semibold text-slate-800 flex items-center gap-1 mb-0.5"><span class="text-sky-600 font-mono">${tableName}</span></p>`;
+
                     if (colRes.length > 0 && colRes[0].values.length > 0) {
                         const ul = document.createElement('ul');
                         ul.className = 'list-disc list-inside pl-1 space-y-0.5';
@@ -1460,6 +1659,7 @@
             if (!result || (result.values.length === 0 && result.columns.length === 0)) return;
             const table = document.createElement('table');
             table.className = "w-full text-sm text-left text-slate-500 border-collapse mb-4";
+
             const thead = document.createElement('thead');
             thead.className = "text-xs text-slate-700 uppercase bg-slate-100";
             const headerRow = document.createElement('tr');
@@ -1471,6 +1671,7 @@
             });
             thead.appendChild(headerRow);
             table.appendChild(thead);
+
             const tbody = document.createElement('tbody');
             result.values.forEach(row => {
                 const tr = document.createElement('tr');
@@ -1522,6 +1723,7 @@
                     }
                 });
             });
+
             const sidebarSections = document.querySelectorAll('.sidebar-section');
             sidebarSections.forEach(section => {
                 section.addEventListener('toggle', function() {
@@ -1539,17 +1741,21 @@
                     document.querySelectorAll('.question-list li').forEach(q => q.classList.remove('active-question'));
                     li.classList.add('active-question');
                     currentActiveQuestionLi = li;
+
                     const targetDb = li.getAttribute('data-target-db');
                     if (targetDb && targetDb !== currentDbName && dbRegistry[targetDb]) {
                         switchDatabase(targetDb);
                     }
+
                     const promptComment = li.getAttribute('data-sql');
                     sqlEditor.value = `${promptComment}\n\n`;
                     sqlEditor.focus();
+
                     currentHint = li.getAttribute('data-hint') || "No hint available.";
                     const kw = li.getAttribute('data-keywords');
                     currentKeywords = kw ? kw.split(',') : [];
                     currentAnswer = li.getAttribute('data-answer') || "";
+
                     if (currentQuestionTag) currentQuestionTag.classList.remove('hidden');
                     hintArea.classList.add('hidden');
                     hintBtn.classList.remove('hidden');
@@ -1570,6 +1776,7 @@
             const dbName = prompt("Enter database name (e.g., library_db):");
             if (dbName) createNewUserDatabase(dbName);
         });
+
         sqlEditor.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                 e.preventDefault();
