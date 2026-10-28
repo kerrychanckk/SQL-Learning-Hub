@@ -1050,8 +1050,9 @@
 
 function createSchoolTables(database) {
     try {
-        // Drop existing tables in reverse order of foreign keys
+        // Drop existing tables in reverse order of foreign key dependencies
         database.run(`DROP TABLE IF EXISTS Ameet;`);
+        database.run(`DROP TABLE IF EXISTS Event;`);
         database.run(`DROP TABLE IF EXISTS exams;`);
         database.run(`DROP TABLE IF EXISTS students;`);
         database.run(`DROP TABLE IF EXISTS subjects;`);
@@ -1083,11 +1084,18 @@ function createSchoolTables(database) {
             FOREIGN KEY(subject_code) REFERENCES subjects(subject_code)
         );`);
 
-        // 4. Ameet Table (Athletic Meet Enrolment)
+        // 4. Event Table (Athletic Meet Events)
+        database.run(`CREATE TABLE Event (
+            eventid TEXT PRIMARY KEY,
+            event_name TEXT NOT NULL
+        );`);
+
+        // 5. Ameet Table (Athletic Meet Enrolment)
         database.run(`CREATE TABLE Ameet (
             EventID TEXT,
             STUDENT_ID INTEGER,
             PRIMARY KEY (EventID, STUDENT_ID),
+            FOREIGN KEY (EventID) REFERENCES Event(eventid),
             FOREIGN KEY (STUDENT_ID) REFERENCES students(student_id)
         );`);
 
@@ -1139,30 +1147,46 @@ function createSchoolTables(database) {
         }
         database.run(`INSERT INTO exams VALUES ${examInserts.join(', ')};`);
 
-        // Insert Athletic Meet (Ameet) Data
-        // Selective enrolment: only ~30 of the 60 students are enrolled, some in multiple events
+        // Insert Event Master Data
+        const eventRecords = [
+            "('100M', '100m Sprint')",
+            "('200M', '200m Sprint')",
+            "('400M', '400m Run')",
+            "('800M', '800m Run')",
+            "('LJ', 'Long Jump')",
+            "('HJ', 'High Jump')",
+            "('SP', 'Shot Put')"
+        ];
+        database.run(`INSERT INTO Event (eventid, event_name) VALUES ${eventRecords.join(', ')};`);
+
+        // Insert Athletic Meet (Ameet) Enrolment Data
+        // Selective enrolment: only ~33 of the 60 students are enrolled; SP and 800M have fewer or zero entries
         const ameetRecords = [
-            // 100m Sprint (Event: '100M')
+            // 100m Sprint ('100M')
             "('100M', 1001)", "('100M', 1003)", "('100M', 1007)", "('100M', 1012)",
             "('100M', 1021)", "('100M', 1025)", "('100M', 1033)", "('100M', 1042)",
-            
-            // 200m Sprint (Event: '200M')
+
+            // 200m Sprint ('200M')
             "('200M', 1001)", "('200M', 1004)", "('200M', 1015)", "('200M', 1022)",
             "('200M', 1030)", "('200M', 1045)", "('200M', 1051)",
 
-            // 400m Run (Event: '400M')
+            // 400m Run ('400M')
             "('400M', 1005)", "('400M', 1011)", "('400M', 1023)", "('400M', 1034)",
             "('400M', 1048)", "('400M', 1055)",
 
-            // Long Jump (Event: 'LJ')
+            // 800m Run ('800M')
+            "('800M', 1006)", "('800M', 1019)", "('800M', 1038)",
+
+            // Long Jump ('LJ')
             "('LJ', 1002)", "('LJ', 1007)", "('LJ', 1016)", "('LJ', 1024)",
             "('LJ', 1031)", "('LJ', 1044)", "('LJ', 1052)",
 
-            // High Jump (Event: 'HJ')
+            // High Jump ('HJ')
             "('HJ', 1003)", "('HJ', 1008)", "('HJ', 1018)", "('HJ', 1029)",
             "('HJ', 1037)", "('HJ', 1049)", "('HJ', 1058)"
-        ];
 
+            // Note: 'SP' (Shot Put) deliberately has 0 registrations to enable classic HKDSE LEFT JOIN / NOT IN practice
+        ];
         database.run(`INSERT INTO Ameet (EventID, STUDENT_ID) VALUES ${ameetRecords.join(', ')};`);
 
     } catch (err) {
