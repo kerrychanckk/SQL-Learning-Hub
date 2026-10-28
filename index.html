@@ -1048,81 +1048,127 @@
             });
         }
 
-        function createSchoolTables(database) {
-            try {
-                database.run(`DROP TABLE IF EXISTS exams;`);
-                database.run(`DROP TABLE IF EXISTS students;`);
-                database.run(`DROP TABLE IF EXISTS subjects;`);
-                database.run(`CREATE TABLE students (
-                    student_id INTEGER PRIMARY KEY,
-                    class TEXT,
-                    no INTEGER,
-                    last_name TEXT,
-                    first_name TEXT,
-                    gender TEXT,
-                    dob DATE,
-                    district TEXT
-                );`);
-                database.run(`CREATE TABLE subjects (
-                    subject_code TEXT PRIMARY KEY,
-                    subject_name TEXT
-                );`);
-                database.run(`CREATE TABLE exams (
-                    student_id INTEGER,
-                    subject_code TEXT,
-                    score INTEGER,
-                    FOREIGN KEY(student_id) REFERENCES students(student_id),
-                    FOREIGN KEY(subject_code) REFERENCES subjects(subject_code)
-                );`);
+function createSchoolTables(database) {
+    try {
+        // Drop existing tables in reverse order of foreign keys
+        database.run(`DROP TABLE IF EXISTS Ameet;`);
+        database.run(`DROP TABLE IF EXISTS exams;`);
+        database.run(`DROP TABLE IF EXISTS students;`);
+        database.run(`DROP TABLE IF EXISTS subjects;`);
 
-                const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Ng', 'Lam'];
-                const maleFirstNames = ['Ka Chun', 'Lok Hang', 'Chi Kin', 'Wai Ho', 'Pak Hei'];
-                const femaleFirstNames = ['Wing Yan', 'Tsz Ching', 'Ka Man', 'Pui Sze', 'Mei Ling'];
-                const districts = ['Wan Chai', 'Eastern', 'Kowloon City', 'Sha Tin', 'Central & Western'];
-                const classes = ['4A', '4C', '4D'];
+        // 1. Students Table
+        database.run(`CREATE TABLE students (
+            student_id INTEGER PRIMARY KEY,
+            class TEXT,
+            no INTEGER,
+            last_name TEXT,
+            first_name TEXT,
+            gender TEXT,
+            dob DATE,
+            district TEXT
+        );`);
 
-                let studentInserts = [];
-                const studentIds = [];
-                let sIdCounter = 1001;
+        // 2. Subjects Table
+        database.run(`CREATE TABLE subjects (
+            subject_code TEXT PRIMARY KEY,
+            subject_name TEXT
+        );`);
 
-                for (const className of classes) {
-                    for (let i = 1; i <= 20; i++) {
-                        const studentId = sIdCounter++;
-                        studentIds.push(studentId);
-                        const gender = (i % 2 === 0) ? 'M' : 'F';
-                        const firstName = gender === 'M' ? maleFirstNames[i % maleFirstNames.length] : femaleFirstNames[i % femaleFirstNames.length];
-                        const lastName = lastNames[(i + className.charCodeAt(1)) % lastNames.length];
-                        const dob = `2008-0${(i % 9) + 1}-15`;
-                        const district = districts[(i * 3) % districts.length];
-                        studentInserts.push(`(${studentId}, '${className}', ${i}, '${lastName}', '${firstName}', '${gender}', '${dob}', '${district}')`);
-                    }
-                }
-                database.run(`INSERT INTO students VALUES ${studentInserts.join(', ')};`);
+        // 3. Exams Table
+        database.run(`CREATE TABLE exams (
+            student_id INTEGER,
+            subject_code TEXT,
+            score INTEGER,
+            FOREIGN KEY(student_id) REFERENCES students(student_id),
+            FOREIGN KEY(subject_code) REFERENCES subjects(subject_code)
+        );`);
 
-                const subjectMap = {
-                    'CHI': 'Chinese', 'ENG': 'English', 'MATH': 'Mathematics',
-                    'ICT': 'Information and Communication Technology',
-                    'PHY': 'Physics', 'BIO': 'Biology', 'ECON': 'Economics'
-                };
-                const subSql = Object.entries(subjectMap).map(([c, n]) => `('${c}', '${n}')`).join(', ');
-                database.run(`INSERT INTO subjects VALUES ${subSql};`);
+        // 4. Ameet Table (Athletic Meet Enrolment)
+        database.run(`CREATE TABLE Ameet (
+            EventID TEXT,
+            STUDENT_ID INTEGER,
+            PRIMARY KEY (EventID, STUDENT_ID),
+            FOREIGN KEY (STUDENT_ID) REFERENCES students(student_id)
+        );`);
 
-                let examInserts = [];
-                for (const sId of studentIds) {
-                    ['CHI', 'ENG', 'MATH'].forEach((code, idx) => {
-                        const score = 55 + ((sId + idx * 7) % 43);
-                        examInserts.push(`(${sId}, '${code}', ${score})`);
-                    });
-                    const electives = ['ICT', 'PHY', 'BIO'];
-                    const chosen = electives[sId % 3];
-                    const score = 50 + (sId % 48);
-                    examInserts.push(`(${sId}, '${chosen}', ${score})`);
-                }
-                database.run(`INSERT INTO exams VALUES ${examInserts.join(', ')};`);
-            } catch (err) {
-                console.error("Error creating school tables:", err);
+        // Insert Students Data (60 students: 1001 to 1060 across 4A, 4C, 4D)
+        const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Ng', 'Lam'];
+        const maleFirstNames = ['Ka Chun', 'Lok Hang', 'Chi Kin', 'Wai Ho', 'Pak Hei'];
+        const femaleFirstNames = ['Wing Yan', 'Tsz Ching', 'Ka Man', 'Pui Sze', 'Mei Ling'];
+        const districts = ['Wan Chai', 'Eastern', 'Kowloon City', 'Sha Tin', 'Central & Western'];
+        const classes = ['4A', '4C', '4D'];
+
+        let studentInserts = [];
+        const studentIds = [];
+        let sIdCounter = 1001;
+
+        for (const className of classes) {
+            for (let i = 1; i <= 20; i++) {
+                const studentId = sIdCounter++;
+                studentIds.push(studentId);
+                const gender = (i % 2 === 0) ? 'M' : 'F';
+                const firstName = gender === 'M' ? maleFirstNames[i % maleFirstNames.length] : femaleFirstNames[i % femaleFirstNames.length];
+                const lastName = lastNames[(i + className.charCodeAt(1)) % lastNames.length];
+                const dob = `2008-0${(i % 9) + 1}-15`;
+                const district = districts[(i * 3) % districts.length];
+                studentInserts.push(`(${studentId}, '${className}', ${i}, '${lastName}', '${firstName}', '${gender}', '${dob}', '${district}')`);
             }
         }
+        database.run(`INSERT INTO students VALUES ${studentInserts.join(', ')};`);
+
+        // Insert Subjects Data
+        const subjectMap = {
+            'CHI': 'Chinese', 'ENG': 'English', 'MATH': 'Mathematics',
+            'ICT': 'Information and Communication Technology',
+            'PHY': 'Physics', 'BIO': 'Biology', 'ECON': 'Economics'
+        };
+        const subSql = Object.entries(subjectMap).map(([c, n]) => `('${c}', '${n}')`).join(', ');
+        database.run(`INSERT INTO subjects VALUES ${subSql};`);
+
+        // Insert Exams Data
+        let examInserts = [];
+        for (const sId of studentIds) {
+            ['CHI', 'ENG', 'MATH'].forEach((code, idx) => {
+                const score = 55 + ((sId + idx * 7) % 43);
+                examInserts.push(`(${sId}, '${code}', ${score})`);
+            });
+            const electives = ['ICT', 'PHY', 'BIO'];
+            const chosen = electives[sId % 3];
+            const score = 50 + (sId % 48);
+            examInserts.push(`(${sId}, '${chosen}', ${score})`);
+        }
+        database.run(`INSERT INTO exams VALUES ${examInserts.join(', ')};`);
+
+        // Insert Athletic Meet (Ameet) Data
+        // Selective enrolment: only ~30 of the 60 students are enrolled, some in multiple events
+        const ameetRecords = [
+            // 100m Sprint (Event: '100M')
+            "('100M', 1001)", "('100M', 1003)", "('100M', 1007)", "('100M', 1012)",
+            "('100M', 1021)", "('100M', 1025)", "('100M', 1033)", "('100M', 1042)",
+            
+            // 200m Sprint (Event: '200M')
+            "('200M', 1001)", "('200M', 1004)", "('200M', 1015)", "('200M', 1022)",
+            "('200M', 1030)", "('200M', 1045)", "('200M', 1051)",
+
+            // 400m Run (Event: '400M')
+            "('400M', 1005)", "('400M', 1011)", "('400M', 1023)", "('400M', 1034)",
+            "('400M', 1048)", "('400M', 1055)",
+
+            // Long Jump (Event: 'LJ')
+            "('LJ', 1002)", "('LJ', 1007)", "('LJ', 1016)", "('LJ', 1024)",
+            "('LJ', 1031)", "('LJ', 1044)", "('LJ', 1052)",
+
+            // High Jump (Event: 'HJ')
+            "('HJ', 1003)", "('HJ', 1008)", "('HJ', 1018)", "('HJ', 1029)",
+            "('HJ', 1037)", "('HJ', 1049)", "('HJ', 1058)"
+        ];
+
+        database.run(`INSERT INTO Ameet (EventID, STUDENT_ID) VALUES ${ameetRecords.join(', ')};`);
+
+    } catch (err) {
+        console.error("Error creating school tables:", err);
+    }
+}
 
         function createChinookTables(database) {
             try {
