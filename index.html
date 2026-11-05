@@ -837,6 +837,8 @@
 
                       function registerCustomFunctions(database) {
             // Helper function to safely parse and validate date strings (YYYY-MM-DD)
+                  function registerCustomFunctions(database) {
+            // Helper function to safely parse and validate date strings (YYYY-MM-DD)
             function parseValidDate(dateStr) {
                 if (!dateStr || typeof dateStr !== 'string') return null;
                 
@@ -853,8 +855,8 @@
                 // Verify calendar accuracy (e.g. prevent rollover of invalid dates like 2026-02-31)
                 const parts = dateStr.split('-');
                 const year = parseInt(parts[0], 10);
-                const month = parseInt(parts[1], 10);
-                const day = parseInt(parts[2], 10);
+                const month = parseInt(parts, 10);
+                const day = parseInt(parts, 10);
                 
                 // JS Dates are 0-indexed for months
                 if (d.getFullYear() !== year || (d.getMonth() + 1) !== month || d.getDate() !== day) {
@@ -875,12 +877,13 @@
                 return d ? d.getMonth() + 1 : null;
             };
 
-            // Register both UPPERCASE and lowercase variants to prevent SQLite syntax errors
+            // Register both UPPERCASE and lowercase variants to satisfy all SQL queries
             database.create_function("YEAR", yearFn);
             database.create_function("year", yearFn);
             database.create_function("MONTH", monthFn);
             database.create_function("month", monthFn);
         }
+
 
 
         function loadAllDatabasesFromSession() {
@@ -1004,8 +1007,8 @@
             }
         }
 
-        function createNewUserDatabase(dbName) {
-            const cleanName = dbName.trim().replace(/[^a-zA-Z0-9_]/g, '_');
+              function createNewUserDatabase(dbName) {
+            const cleanName = dbName.trim().replace(/[^a-zA-Z0-9\_]/g, '\_');
             if (!cleanName) {
                 displayMessage("warning", "Invalid database name. Use letters, numbers, and underscores.");
                 return;
@@ -1016,12 +1019,16 @@
                 return;
             }
             const newDatabase = new SQL.Database();
+            
+            // FIX: Register custom functions immediately on the new database!
             registerCustomFunctions(newDatabase);
+            
             dbRegistry[cleanName] = newDatabase;
             switchDatabase(cleanName);
             saveAllDatabasesToSession();
             displayMessage("success", `Database '${cleanName}' created successfully!`);
         }
+
 
         function switchDatabase(dbName) {
             if (!dbRegistry[dbName]) return;
@@ -1550,7 +1557,7 @@ function createSchoolTables(database) {
             }
         }
 
-        function handleDatabaseImport(event) {
+            function handleDatabaseImport(event) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
@@ -1558,9 +1565,12 @@ function createSchoolTables(database) {
                 try {
                     const u8 = new Uint8Array(this.result);
                     const importedDb = new SQL.Database(u8);
+                    
+                    // FIX: Register custom functions immediately on imported SQLite database!
                     registerCustomFunctions(importedDb);
+                    
                     const rawName = file.name.replace(/\.[^/.]+$/, "");
-                    const cleanName = rawName.replace(/[^a-zA-Z0-9_]/g, '_') || 'imported_db';
+                    const cleanName = rawName.replace(/[^a-zA-Z0-9\_]/g, '\_') || 'imported_db';
                     dbRegistry[cleanName] = importedDb;
                     switchDatabase(cleanName);
                     saveAllDatabasesToSession();
@@ -1572,6 +1582,7 @@ function createSchoolTables(database) {
             reader.readAsArrayBuffer(file);
             event.target.value = '';
         }
+
 
         function checkQueryAccuracy(userResult, expectedResult) {
             if (!userResult || !expectedResult) return false;
