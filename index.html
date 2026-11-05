@@ -835,18 +835,85 @@
             }
         }
 
-        function registerCustomFunctions(database) {
-            database.create_function("YEAR", (dateStr) => {
-                if (!dateStr) return null;
-                const d = new Date(dateStr);
-                return isNaN(d.getTime()) ? null : d.getFullYear();
-            });
-            database.create_function("MONTH", (dateStr) => {
-                if (!dateStr) return null;
-                const d = new Date(dateStr);
-                return isNaN(d.getTime()) ? null : d.getMonth() + 1;
-            });
-        }
+       const customDateFunctionsRegistered = new WeakSet();
+function registerCustomFunctions(database) {
+    if (!database || customDateFunctionsRegistered.has(database)) return;
+    function makeUtcDate(year, month, day, hour = 0, minute = 0, second = 0) {
+        const date = new Date(0);
+        date.setUTCFullYear(year, month - 1, day);
+        date.setUTCHours(hour, minute, second, 0);
+        return date;
+    function partsFromDate(date) {
+        if (Number.isNaN(date.getTime())) return null;
+        const year = date.getUTCFullYear();
+        const month = date.getUTCMonth() + 1;
+        const day = date.getUTCDate();
+        return {
+            year,
+            month,
+            day,
+            hour: date.getUTCHours(),
+            minute: date.getUTCMinutes(),
+            second: date.getUTCSeconds(),
+            weekday: date.getUTCDay(), // Sunday = 0
+            dayOfYear: Math.floor(
+                (makeUtcDate(year, month, day) - makeUtcDate(year, 1, 1)) / 86400000
+            ) + 1
+    function parseSqlDate(value) {
+        if (value == null || String(value).trim() === "") return null;
+        const text = String(value).trim();
+        const iso = text.match(
+            /^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?)?(Z|[+-]\d{2}:?\d{2})?$/i
+        if (iso) {
+            // If a timezone is supplied, return the UTC date/time.
+            if (iso[7]) {
+                return partsFromDate(new Date(text));
+            // Otherwise, use the date/time exactly as stored.
+            const year = Number(iso[1]);
+            const month = Number(iso[2]);
+            const day = Number(iso[3]);
+            const hour = Number(iso[4] || 0);
+            const minute = Number(iso[5] || 0);
+            const second = Number(iso[6] || 0);
+            const date = makeUtcDate(year, month, day, hour, minute, second);
+            // Reject invalid values such as 2026-02-31 or 25:00:00.
+            if (
+                date.getUTCFullYear() !== year ||
+                date.getUTCMonth() + 1 !== month ||
+                date.getUTCDate() !== day ||
+                hour > 23 || minute > 59 || second > 59
+                return null;
+            return partsFromDate(date);
+        // Fallback for other date strings JavaScript can parse.
+        return partsFromDate(new Date(text));
+    const extract = field => value => {
+        const parts = parseSqlDate(value);
+        return parts ? parts[field] : null;
+    database.create_function("YEAR", extract("year"));
+    database.create_function("MONTH", extract("month"));
+    database.create_function("DAY", extract("day"));
+    database.create_function("DAYOFMONTH", extract("day"));
+    database.create_function("HOUR", extract("hour"));
+    database.create_function("MINUTE", extract("minute"));
+    database.create_function("SECOND", extract("second"));
+    database.create_function("QUARTER", value => {
+        const parts = parseSqlDate(value);
+        return parts ? Math.floor((parts.month - 1) / 3) + 1 : null;
+    database.create_function("DAYOFYEAR", extract("dayOfYear"));
+    database.create_function("DAYOFWEEK", value => {
+        const parts = parseSqlDate(value);
+        return parts ? parts.weekday + 1 : null; // Sunday = 1
+    database.create_function("WEEKDAY", value => {
+        const parts = parseSqlDate(value);
+        return parts ? (parts.weekday + 6) % 7 : null; // Monday = 0
+    database.create_function("DATEDIFF", (date1, date2) => {
+        const a = parseSqlDate(date1);
+        const b = parseSqlDate(date2);
+        if (!a || !b) return null;
+        return Math.trunc(
+            (makeUtcDate(a.year, a.month, a.day) -
+             makeUtcDate(b.year, b.month, b.day)) / 86400000
+    customDateFunctionsRegistered.add(database);
 
         function loadAllDatabasesFromSession() {
             const raw = sessionStorage.getItem(sessionStorageKey);
@@ -1552,6 +1619,11 @@ function createSchoolTables(database) {
             return userSorted === expSorted;
         }
 
+        try {
+    registerCustomFunctions(db);
+} catch (err) {
+    displayMessage("error", `Could not register date functions: ${err.message}`);
+    return;
         function runSql() {
             if (!db) { displayMessage("error", "Database not loaded."); return; }
             const sqlCode = sqlEditor.value.trim();
