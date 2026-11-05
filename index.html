@@ -835,56 +835,18 @@
             }
         }
 
-                      function registerCustomFunctions(database) {
-            // Helper function to safely parse and validate date strings (YYYY-MM-DD)
-                  function registerCustomFunctions(database) {
-            // Helper function to safely parse and validate date strings (YYYY-MM-DD)
-            function parseValidDate(dateStr) {
-                if (!dateStr || typeof dateStr !== 'string') return null;
-                
-                // Match standard ISO/SQL formats: YYYY-MM-DD
-                const regEx = /^\d{4}-\d{2}-\d{2}/;
-                if (!dateStr.match(regEx)) return null;
-                
+        function registerCustomFunctions(database) {
+            database.create_function("YEAR", (dateStr) => {
+                if (!dateStr) return null;
                 const d = new Date(dateStr);
-                const time = d.getTime();
-                
-                // Check if Date object is valid (not NaN)
-                if (isNaN(time)) return null;
-                
-                // Verify calendar accuracy (e.g. prevent rollover of invalid dates like 2026-02-31)
-                const parts = dateStr.split('-');
-                const year = parseInt(parts[0], 10);
-                const month = parseInt(parts, 10);
-                const day = parseInt(parts, 10);
-                
-                // JS Dates are 0-indexed for months
-                if (d.getFullYear() !== year || (d.getMonth() + 1) !== month || d.getDate() !== day) {
-                    return null;
-                }
-                
-                return d;
-            }
-
-            const yearFn = (dateStr) => {
-                const d = parseValidDate(dateStr);
-                return d ? d.getFullYear() : null;
-            };
-
-            const monthFn = (dateStr) => {
-                const d = parseValidDate(dateStr);
-                // getMonth() is 0-indexed, so we add 1 to get the correct 1-12 range
-                return d ? d.getMonth() + 1 : null;
-            };
-
-            // Register both UPPERCASE and lowercase variants to satisfy all SQL queries
-            database.create_function("YEAR", yearFn);
-            database.create_function("year", yearFn);
-            database.create_function("MONTH", monthFn);
-            database.create_function("month", monthFn);
+                return isNaN(d.getTime()) ? null : d.getFullYear();
+            });
+            database.create_function("MONTH", (dateStr) => {
+                if (!dateStr) return null;
+                const d = new Date(dateStr);
+                return isNaN(d.getTime()) ? null : d.getMonth() + 1;
+            });
         }
-
-
 
         function loadAllDatabasesFromSession() {
             const raw = sessionStorage.getItem(sessionStorageKey);
@@ -1007,8 +969,8 @@
             }
         }
 
-              function createNewUserDatabase(dbName) {
-            const cleanName = dbName.trim().replace(/[^a-zA-Z0-9\_]/g, '\_');
+        function createNewUserDatabase(dbName) {
+            const cleanName = dbName.trim().replace(/[^a-zA-Z0-9_]/g, '_');
             if (!cleanName) {
                 displayMessage("warning", "Invalid database name. Use letters, numbers, and underscores.");
                 return;
@@ -1019,16 +981,12 @@
                 return;
             }
             const newDatabase = new SQL.Database();
-            
-            // FIX: Register custom functions immediately on the new database!
             registerCustomFunctions(newDatabase);
-            
             dbRegistry[cleanName] = newDatabase;
             switchDatabase(cleanName);
             saveAllDatabasesToSession();
             displayMessage("success", `Database '${cleanName}' created successfully!`);
         }
-
 
         function switchDatabase(dbName) {
             if (!dbRegistry[dbName]) return;
@@ -1557,7 +1515,7 @@ function createSchoolTables(database) {
             }
         }
 
-            function handleDatabaseImport(event) {
+        function handleDatabaseImport(event) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
@@ -1565,12 +1523,9 @@ function createSchoolTables(database) {
                 try {
                     const u8 = new Uint8Array(this.result);
                     const importedDb = new SQL.Database(u8);
-                    
-                    // FIX: Register custom functions immediately on imported SQLite database!
                     registerCustomFunctions(importedDb);
-                    
                     const rawName = file.name.replace(/\.[^/.]+$/, "");
-                    const cleanName = rawName.replace(/[^a-zA-Z0-9\_]/g, '\_') || 'imported_db';
+                    const cleanName = rawName.replace(/[^a-zA-Z0-9_]/g, '_') || 'imported_db';
                     dbRegistry[cleanName] = importedDb;
                     switchDatabase(cleanName);
                     saveAllDatabasesToSession();
@@ -1582,7 +1537,6 @@ function createSchoolTables(database) {
             reader.readAsArrayBuffer(file);
             event.target.value = '';
         }
-
 
         function checkQueryAccuracy(userResult, expectedResult) {
             if (!userResult || !expectedResult) return false;
