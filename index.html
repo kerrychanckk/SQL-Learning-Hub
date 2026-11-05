@@ -835,18 +835,47 @@
             }
         }
 
-        function registerCustomFunctions(database) {
+               function registerCustomFunctions(database) {
+            // Helper function to safely parse and validate date strings (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)
+            function parseValidDate(dateStr) {
+                if (!dateStr || typeof dateStr !== 'string') return null;
+                
+                // Match standard ISO/SQL formats: YYYY-MM-DD
+                const regEx = /^\d{4}-\d{2}-\d{2}/;
+                if (!dateStr.match(regEx)) return null;
+                
+                const d = new Date(dateStr);
+                const time = d.getTime();
+                
+                // Check if Date object is valid (not NaN)
+                if (isNaN(time)) return null;
+                
+                // Verify calendar accuracy (e.g. prevent rollover of invalid dates like 2026-02-31)
+                const parts = dateStr.split('-');
+                const year = parseInt(parts[0], 10);
+                const month = parseInt(parts[1], 10);
+                const day = parseInt(parts[2], 10);
+                
+                // JS Dates are 0-indexed for months
+                if (d.getFullYear() !== year || (d.getMonth() + 1) !== month || d.getDate() !== day) {
+                    return null;
+                }
+                
+                return d;
+            }
+
             database.create_function("YEAR", (dateStr) => {
-                if (!dateStr) return null;
-                const d = new Date(dateStr);
-                return isNaN(d.getTime()) ? null : d.getFullYear();
+                const d = parseValidDate(dateStr);
+                return d ? d.getFullYear() : null;
             });
+
             database.create_function("MONTH", (dateStr) => {
-                if (!dateStr) return null;
-                const d = new Date(dateStr);
-                return isNaN(d.getTime()) ? null : d.getMonth() + 1;
+                const d = parseValidDate(dateStr);
+                // getMonth() is 0-indexed, so we add 1 to get the correct 1-12 range
+                return d ? d.getMonth() + 1 : null;
             });
         }
+
 
         function loadAllDatabasesFromSession() {
             const raw = sessionStorage.getItem(sessionStorageKey);
