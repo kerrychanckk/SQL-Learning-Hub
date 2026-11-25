@@ -1179,7 +1179,8 @@ function createSchoolTables(database) {
         database.run(`DROP TABLE IF EXISTS exams;`);
         database.run(`DROP TABLE IF EXISTS students;`);
         database.run(`DROP TABLE IF EXISTS subjects;`);
-
+        database.run(`DROP TABLE IF EXISTS class;`);
+        
         // 1. Students Table
         database.run(`CREATE TABLE students (
             student_id INTEGER PRIMARY KEY,
@@ -1221,7 +1222,13 @@ function createSchoolTables(database) {
             FOREIGN KEY (EventID) REFERENCES Event(eventid),
             FOREIGN KEY (STUDENT_ID) REFERENCES students(student_id)
         );`);
-
+        
+          // . Class Table (Class Information)
+        database.run(`CREATE TABLE Class (
+            ClassName TEXT PRIMARY KEY,
+            RoomNo INTEGER,
+            
+        );`);
   
     
         // Insert Students Data (60 students: 1001 to 1060 across 4A, 4C, 4D)
