@@ -1222,12 +1222,7 @@ function createSchoolTables(database) {
             FOREIGN KEY (STUDENT_ID) REFERENCES students(student_id)
         );`);
 
-        // 6. Class Table        
-        database.run('CREATE TABLE class (
-    classname TEXT PRIMARY KEY,
-    roomno TEXT,
-    FOREIGN KEY(classname) REFERENCES students(class)
-);');
+  
     
         // Insert Students Data (60 students: 1001 to 1060 across 4A, 4C, 4D)
         const lastNames = ['Chan', 'Lee', 'Wong', 'Cheung', 'Lau', 'Leung', 'Ho', 'Fung', 'Ng', 'Lam'];
